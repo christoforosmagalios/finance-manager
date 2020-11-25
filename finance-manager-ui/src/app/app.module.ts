@@ -11,13 +11,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpInterceptorService } from './shared/interceptor/http-interceptor.service';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeaderComponent } from './layout/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfirmationModalComponent,
     LoaderComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
