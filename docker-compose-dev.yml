@@ -1,0 +1,16 @@
+version: '3'
+
+networks:
+  finance-manager-dev:
+
+services:
+  db:
+    image: mariadb:10.5.4-focal
+    container_name: finance-manager-dev-db
+    restart: unless-stopped
+    ports:
+      - "${DB_PORT}:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    networks:
+      - finance-manager-dev

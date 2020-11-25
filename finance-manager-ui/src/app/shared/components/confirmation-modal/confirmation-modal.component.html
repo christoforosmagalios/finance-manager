@@ -1,0 +1,13 @@
+<div class="modal-header text-dark">
+    <h4 class="modal-title" id="modal-title">{{ title }}</h4>
+    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.close(false)">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body text-dark">
+    {{ description }}
+</div>
+<div class="modal-footer text-dark">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.close(false)">Cancel</button>
+    <button type="button" ngbAutofocus class="btn btn-danger" (click)="modal.close(true)">Ok</button>
+</div>

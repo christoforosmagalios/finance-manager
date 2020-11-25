@@ -1,0 +1,29 @@
+html, body {
+	height: 100%;
+}
+
+body {
+    font-size: 14px;
+}
+
+/** Table Sort Directive CSS Start **/
+[sortable]:hover {
+    cursor: pointer;
+}
+
+[sortable].asc::after {
+    content: '\f0de';
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    margin-left: 5px;
+}
+
+[sortable].desc::after {
+    content: '\f0dd';
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    margin-left: 5px;
+}
+/** Table Sort Directive CSS End **/

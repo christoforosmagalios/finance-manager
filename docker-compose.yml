@@ -1,0 +1,36 @@
+version: '3'
+
+networks:
+  finance-manager:
+
+services:
+  db:
+    image: mariadb:10.5.4-focal
+    container_name: finance-manager-db
+    restart: unless-stopped
+    ports:
+      - "${DB_PORT}:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    networks:
+      - finance-manager
+  server:
+    build:
+      context: .
+      dockerfile: finance-manager-server/Dockerfile
+    container_name: finance-manager-server
+    restart: unless-stopped
+    environment:
+      spring.datasource.password: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      - finance-manager
+  ui:
+    build: finance-manager-ui
+    container_name: finance-manager-ui
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - finance-manager
