@@ -19,7 +19,7 @@
 
 	<properties>
 		<sonar.organization>christoforosmagalios</sonar.organization>
-		<sonar.projectKey>Finance Manager</sonar.projectKey>
+		<sonar.projectKey>finance-manager</sonar.projectKey>
 		<sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.coverage.exclusions>
