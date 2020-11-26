@@ -10,3 +10,8 @@
     font-size: 1.5rem;
     padding-top: 0;
 }
+
+.nav-item {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}

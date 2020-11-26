@@ -11,6 +11,74 @@ body {
     font-family: "Nunito-Regular";
 }
 
+.text-gray {
+  color: #5a5c69;
+}
+
+.text-xs {
+  font-size: .7rem;
+}
+
+.text-primary {
+  color: #4e73df !important;
+}
+
+.text-danger {
+  color: #e74a3b;
+}
+
+.text-warning {
+  color: #f6c23e;
+}
+
+.text-success {
+  color: #1cc88a;
+}
+
+.text-lightgray {
+  color: #dddfeb;
+}
+
+.bl-primary {
+  border-left: .25rem solid #4e73df;
+}
+
+.bl-danger {
+  border-left: .25rem solid #e74a3b;
+}
+
+.bl-warning {
+  border-left: .25rem solid #f6c23e;
+}
+
+.bl-success {
+  border-left: .25rem solid #1cc88a;
+}
+
+.card-header {
+  background-color: #f8f9fc;
+  border-bottom: 1px solid #e3e6f0;
+}
+
+.no-arrow .dropdown-toggle::after {
+  display:none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.dropdown .dropdown-menu .dropdown-header {
+  font-weight: 800;
+  font-size: .65rem;
+  color: #b7b9cc;
+  text-transform: uppercase;
+}
+
+.dropdown-item {
+  font-size: .85rem;
+}
+
 /** Table Sort Directive CSS Start **/
 [sortable]:hover {
     cursor: pointer;
