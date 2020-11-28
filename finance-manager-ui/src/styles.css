@@ -8,7 +8,19 @@ body {
     line-height: 1.5;
     color: #858796;
     font-weight: 400;
-    font-family: "Nunito-Regular";
+    font-family: "Nunito-Regular", sans-serif;
+}
+
+textarea {
+  resize: none;
+}
+
+label {
+  font-family: "Nunito-SemiBold", sans-serif;
+}
+
+.form-footer {
+  margin: 1rem 0;
 }
 
 .text-gray {
@@ -78,6 +90,49 @@ body {
 .dropdown-item {
   font-size: .85rem;
 }
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #4e73df;
+  background-color: #4e73df;
+}
+
+/** Bootstrap buttons start **/
+.btn-min-width {
+  min-width: 5rem;
+}
+
+.btn-outline-secondary {
+  border-color: #ced4da;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #4e73df;
+  border-color: #4e73df;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+  color: #fff;
+  background-color: #2e59d9 !important;
+  border-color: #2653d4 !important;
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #858796;
+  border-color: #858796;
+}
+
+.btn-secondary:hover,
+.btn-secondary:active,
+.btn-secondary:focus {
+  color: #fff;
+  background-color: #717384 !important;
+  border-color: #6b6d7d !important;
+}
+/** Bootstrap Buttons end **/
 
 /** Table Sort Directive CSS Start **/
 [sortable]:hover {

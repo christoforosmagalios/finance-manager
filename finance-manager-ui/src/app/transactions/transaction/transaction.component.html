@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray">Transaction</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <!-- Card Body -->
+                <div class="card-body">
+                    <form #tForm="ngForm" (ngSubmit)="onSubmit(tForm)">
+                        <div class="row">
+                            <!-- Transaction Type -->
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div><label for="name">Type</label></div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="typeIncome" name="typeIncome" 
+                                        [value]="0" [(ngModel)]="transaction.type" mdbInput>
+                                        <label class="custom-control-label" for="typeIncome">Income</label>
+                                    </div>
+                                    
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="typeExpense" name="typeExpense" 
+                                        [value]="1" [(ngModel)]="transaction.type" mdbInput>
+                                        <label class="custom-control-label" for="typeExpense">Expense</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Transaction Category -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="category">Category</label>
+                                    <select class="form-control" id="category" name="category" [(ngModel)]="transaction.category">
+                                    <option></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Transaction Date -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="date">Date</label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="date" name="date" [(ngModel)]="transaction.date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Transaction Description -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <input class="form-control" id="description" name="description" [(ngModel)]="transaction.description"/>
+                                </div>
+                            </div>
+                            <!-- Transaction Amount -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="amount">Amount</label>
+                                    <input class="form-control" id="amount" name="amount" [(ngModel)]="transaction.amount"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Transaction Notes -->
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="notes">Notes</label>
+                                    <textarea class="form-control" id="notes" name="notes" [(ngModel)]="transaction.notes"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form footer -->
+                        <div class="row form-footer">
+                            <div class="col-12 text-right pr-0">
+                                <button class="btn btn-secondary btn-min-width" (click)="onCancel()">Cancel</button>
+                                <button class="btn btn-primary ml-2 btn-min-width" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

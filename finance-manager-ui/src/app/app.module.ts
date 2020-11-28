@@ -12,6 +12,8 @@ import { HttpInterceptorService } from './shared/interceptor/http-interceptor.se
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './layout/header/header.component';
+import { TransactionsModule } from './transactions/transactions.module';
+import { TransactionsRoutingModule } from './transactions/transactions.routing.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { HeaderComponent } from './layout/header/header.component';
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    TransactionsRoutingModule,
+    ToastrModule.forRoot(),
+    TransactionsModule
   ],
   providers: [
     {
