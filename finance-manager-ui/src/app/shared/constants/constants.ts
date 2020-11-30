@@ -6,5 +6,11 @@ export const Constants = {
     ORDER: {
         ASC: "asc",
         DESC: "desc"
+    },
+
+    // Entities.
+    ENTITY: {
+        TRANSACTION: "transaction",
+        CATEGORY: "category"
     }
 };

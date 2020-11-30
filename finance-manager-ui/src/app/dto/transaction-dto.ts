@@ -2,7 +2,7 @@ import { BaseDTO } from './base-dto';
 
 export class TransactionDTO extends BaseDTO {
 
-    public type: number;
+    public type: boolean;
     public category: string;
     public date: Date;
     public description: string;
@@ -11,7 +11,7 @@ export class TransactionDTO extends BaseDTO {
 
     constructor() {
         super();
-        this.type = 0;
-        this.date = new Date();
+        // Default type Expense.
+        this.type = true;        
     }
 }

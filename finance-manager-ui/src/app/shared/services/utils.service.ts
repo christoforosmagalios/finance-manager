@@ -65,4 +65,14 @@ export class UtilsService {
         this.toastr.info(text, Messages.INFO);
     }
 
+    /**
+     * Compare the given object by their ids.
+     * 
+     * @param obj1 Object to be compared.
+     * @param obj2 Object to be compared.
+     */
+    compareById(obj1, obj2) {
+        return obj1 && obj2 && obj1.id == obj2.id;
+    }
+
 }
