@@ -138,6 +138,13 @@ label {
 }
 /** Bootstrap Buttons end **/
 
+/** Bootstrap pagination start **/
+.page-item.active .page-link {
+  background-color: #2e59d9;
+  border-color: #2e59d9;
+}
+/** Bootstrap pagination end **/
+
 /** Table Sort Directive CSS Start **/
 [sortable]:hover {
     cursor: pointer;

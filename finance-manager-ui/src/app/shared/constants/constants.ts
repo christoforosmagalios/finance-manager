@@ -12,5 +12,8 @@ export const Constants = {
     ENTITY: {
         TRANSACTION: "transaction",
         CATEGORY: "category"
-    }
+    },
+
+    // Items per page for tables.
+    ITEMS_PER_PAGE: [5, 10, 20, 50, 100]
 };

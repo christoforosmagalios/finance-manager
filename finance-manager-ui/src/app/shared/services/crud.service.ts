@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { BaseDTO } from 'src/app/dto/base-dto';
+import { PageDTO } from 'src/app/dto/page-dto';
 import { Constants } from 'src/app/shared/constants/constants';
 
 @Injectable({providedIn: 'root'})
@@ -14,7 +15,7 @@ export class CRUDService {
      * @return entity The entity name.
      */
     findAll(entity: string) {
-        return this.http.get<Array<BaseDTO>>(Constants.API + '/' + entity +'/');
+        return this.http.get<Array<BaseDTO>>(Constants.API + '/' + entity);
     }
 
     /**
@@ -37,4 +38,26 @@ export class CRUDService {
         return this.http.get<BaseDTO>(Constants.API + '/' + entity + '/' + id);
     }
 
+    /**
+     * Find entities based on the given pagination parameters.
+     * 
+     * @param entity The entity name.
+     * @param size Page size.
+     * @param page The number of the page.
+     * @param sort Sort column.
+     * @param direction Sort direction. 
+     */
+    findAllPaginated(entity: string, size: number, page: number, sort: string, direction: string) {
+        return this.http.get<PageDTO<BaseDTO>>(Constants.API + '/' + entity + '/paginated?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+    }
+
+    /**
+     * Delete the entity with the given id.
+     * 
+     * @return entity The entity name.
+     * @param id The id of the entity.
+     */
+    delete(entity:string, id:string) {
+        return this.http.delete<BaseDTO>(Constants.API + '/' + entity + '/' + id);
+    }
 }

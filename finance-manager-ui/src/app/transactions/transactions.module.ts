@@ -4,6 +4,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TransactionComponent } from './transaction/transaction.component';
 import { FormsModule } from '@angular/forms';
+import { TransactionsRoutingModule } from './transactions.routing.module';
+import { DirectivesModule } from '../shared/directives/directives.module';
 
 
 
@@ -12,7 +14,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    TransactionsRoutingModule,
+    DirectivesModule
   ]
 })
 export class TransactionsModule { }
