@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray">
-            <span *ngIf="id">Transaction</span>
-            <span *ngIf="!id"> New Transaction</span>
+            <span *ngIf="id">{{ 'transaction' | translate }}</span>
+            <span *ngIf="!id"> {{ 'new.transaction' | translate }}</span>
         </h1>
     </div>
 
@@ -16,16 +16,16 @@
                             <!-- Transaction Type -->
                             <div class="col-12">
                                 <div class="form-group">
-                                    <div><label for="name">Type</label></div>
+                                    <div><label for="name">{{ 'type' | translate }}</label></div>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" class="custom-control-input" id="typeExpense" name="typeExpense" 
                                         [value]="true" [(ngModel)]="transaction.type" mdbInput [disabled]="!editMode">
-                                        <label class="custom-control-label" for="typeExpense">Expense</label>
+                                        <label class="custom-control-label" for="typeExpense">{{ 'expense' | translate }}</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" class="custom-control-input" id="typeIncome" name="typeIncome" 
                                         [value]="false" [(ngModel)]="transaction.type" mdbInput [disabled]="!editMode">
-                                        <label class="custom-control-label" for="typeIncome">Income</label>
+                                        <label class="custom-control-label" for="typeIncome">{{ 'income' | translate }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -34,11 +34,11 @@
                             <!-- Transaction Category -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="category">Category</label>
+                                    <label for="category">{{ 'category' | translate }}</label>
                                     <select class="form-control" id="category" name="category" [(ngModel)]="transaction.category"
                                     [compareWith]="utils.compareById" [disabled]="!editMode">
                                         <option *ngFor="let category of categories;" [ngValue]="category">
-                                            {{ category.name }}
+                                            {{ category.name | translate }}
                                         </option>
                                     </select>
                                 </div>
@@ -46,7 +46,7 @@
                             <!-- Transaction Date -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="date">Date</label>
+                                    <label for="date">{{ 'date' | translate }}</label>
                                     <div class="input-group">
                                         <input class="form-control" placeholder="DD/MM/YYYY" [value]="formatter.format(date)"
                                         id="date" name="date"  ngbDatepicker #d="ngbDatepicker" (dateSelect)="onDateSelection($event)" 
@@ -64,14 +64,14 @@
                             <!-- Transaction Description -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="description">{{ 'description' | translate }}</label>
                                     <input class="form-control" id="description" name="description" [(ngModel)]="transaction.description" [disabled]="!editMode"/>
                                 </div>
                             </div>
                             <!-- Transaction Amount -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="amount">Amount</label>
+                                    <label for="amount">{{ 'amount' | translate }}</label>
                                     <input class="form-control" id="amount" name="amount" [(ngModel)]="transaction.amount" [disabled]="!editMode"/>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                             <!-- Transaction Notes -->
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="notes">Notes</label>
+                                    <label for="notes">{{ 'notes' | translate }}</label>
                                     <textarea class="form-control" id="notes" name="notes" [(ngModel)]="transaction.notes" [disabled]="!editMode"></textarea>
                                 </div>
                             </div>
@@ -89,9 +89,12 @@
                         <!-- Form footer -->
                         <div class="row form-footer">
                             <div class="col-12 text-right pr-0">
-                                <button class="btn btn-secondary btn-min-width" (click)="onCancel()" type="button">Cancel</button>
-                                <button class="btn btn-primary ml-2 btn-min-width" *ngIf="!editMode" (click)="editMode = true">Edit</button>
-                                <button class="btn btn-primary ml-2 btn-min-width" *ngIf="editMode" type="submit">Save</button>
+                                <button class="btn btn-secondary btn-min-width" (click)="onCancel()" type="button">
+                                    <span *ngIf="!editMode"> {{ 'cancel' | translate }} </span>
+                                    <span *ngIf="editMode"> {{ 'abort' | translate }} </span>
+                                </button>
+                                <button class="btn btn-primary ml-2 btn-min-width" *ngIf="!editMode" (click)="editMode = true">{{ 'edit' | translate }}</button>
+                                <button class="btn btn-primary ml-2 btn-min-width" *ngIf="editMode" type="submit">{{ 'save' | translate }}</button>
                             </div>
                         </div>
                     </form>

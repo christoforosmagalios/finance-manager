@@ -14,3 +14,17 @@
     margin-left: 0.5rem;
     margin-right: 0.5rem;
 }
+
+.languageKey {
+    padding: 0px 5px;
+}
+
+.languageKey.active {
+    font-weight: 600;
+    color: #4e73df;
+}
+
+.languageKey:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

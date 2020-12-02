@@ -13,14 +13,22 @@
     <div class="collapse navbar-collapse" id="navbarCollapse" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active"><span class="fas fa-th-large"></span> Dashboard</a>
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active"><span class="fas fa-th-large"></span> {{ 'dashboard' | translate }}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/transactions" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
-            true}"><span class="fas fa-exchange-alt"></span> Transactions</a>
+            true}"><span class="fas fa-exchange-alt"></span> {{ 'transactions' | translate }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><span class="far fa-folder-open"></span> Bills</a>
+          <a class="nav-link" href="#"><span class="far fa-folder-open"></span> {{ 'bills' | translate }}</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <span *ngFor="let l of languages | keyvalue; let isLast = last;">
+            <span class="languageKey" [ngClass]="{'active' : l.value == activeLanguage}" (click)="setLanguage(l.value)">{{ l.key }}</span>
+            <span *ngIf="!isLast">|</span>
+          </span>
         </li>
       </ul>
     </div>

@@ -136,6 +136,10 @@ label {
   background-color: #717384 !important;
   border-color: #6b6d7d !important;
 }
+
+.btn-square {
+  min-width: 32px;
+}
 /** Bootstrap Buttons end **/
 
 /** Bootstrap pagination start **/

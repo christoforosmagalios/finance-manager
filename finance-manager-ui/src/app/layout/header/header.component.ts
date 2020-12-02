@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Constants } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   isCollapsed = true;
+  languages = Constants.LANGUAGES;
+  activeLanguage = Constants.DEFAULT_LANGUAGE;
 
-  constructor() { }
+  constructor(private translate: TranslateService) { }
 
   ngOnInit(): void {
+    this.activeLanguage = this.translate.currentLang;
   }
 
+  setLanguage(language: string) {
+    this.translate.use(language);
+    this.activeLanguage = language;
+  }
 }

@@ -15,5 +15,13 @@ export const Constants = {
     },
 
     // Items per page for tables.
-    ITEMS_PER_PAGE: [5, 10, 20, 50, 100]
+    ITEMS_PER_PAGE: [5, 10, 20, 50, 100],
+
+    // Languages.
+    LANGUAGES: {
+        EN: "en",
+        EL: "el"
+    },
+    // Default Language.
+    DEFAULT_LANGUAGE: "en"
 };

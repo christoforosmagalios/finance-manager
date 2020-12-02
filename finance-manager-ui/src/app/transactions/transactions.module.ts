@@ -6,6 +6,7 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { FormsModule } from '@angular/forms';
 import { TransactionsRoutingModule } from './transactions.routing.module';
 import { DirectivesModule } from '../shared/directives/directives.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -16,7 +17,10 @@ import { DirectivesModule } from '../shared/directives/directives.module';
     NgbModule,
     FormsModule,
     TransactionsRoutingModule,
-    DirectivesModule
+    DirectivesModule,
+    TranslateModule.forChild({
+      extend: true
+    })
   ]
 })
 export class TransactionsModule { }

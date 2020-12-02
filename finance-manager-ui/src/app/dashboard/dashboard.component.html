@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray">Dashboard</h1>
+        <h1 class="h3 mb-0 text-gray">{{ 'dashboard' | translate }}</h1>
     </div>
 
     <div class="row">
@@ -11,7 +11,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Balance (Annual)</div>
+                                {{ 'balance' | translate }} ({{ 'annual' | translate }})</div>
                             <div class="h5 mb-0 font-weight-bold text-gray">€51,200</div>
                         </div>
                         <div class="col-auto">
@@ -28,7 +28,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Earnings (Monthly)</div>
+                                {{ 'earnings' | translate }} ({{ 'monthly' | translate }})</div>
                             <div class="h5 mb-0 font-weight-bold text-gray">€40,000</div>
                         </div>
                         <div class="col-auto">
@@ -45,7 +45,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Pending (Monthly)</div>
+                                {{ 'pending' | translate }} ({{ 'monthly' | translate }})</div>
                             <div class="h5 mb-0 font-weight-bold text-gray">€580</div>
                         </div>
                         <div class="col-auto">
@@ -62,7 +62,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                Spendings (Monthly)</div>
+                                {{ 'spendings' | translate }} ({{ 'monthly' | translate }})</div>
                             <div class="h5 mb-0 font-weight-bold text-gray">€1,200</div>
                         </div>
                         <div class="col-auto">
@@ -79,7 +79,7 @@
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Monthly Overview</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ 'monthly.overview' | translate }}</h6>
                     <div class="dropdown no-arrow">
                         <div ngbDropdown class="d-inline-block">
                             <a class="cursor-pointer" id="dropdownBasic1" ngbDropdownToggle>
@@ -104,7 +104,7 @@
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Expenditure Sources</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ 'expenditure.sources' | translate }}</h6>
                     <div class="dropdown no-arrow">
                         <div ngbDropdown class="d-inline-block">
                             <a class="cursor-pointer" id="dropdownBasic1" ngbDropdownToggle>
