@@ -17,6 +17,40 @@
 				  PRIMARY KEY (`ID`),
 				  UNIQUE KEY `CODE` (`CODE`)
 				) DEFAULT CHARSET=utf8 COMMENT='The Transaction category.';
+
+				DROP TABLE IF EXISTS `bill_category`;
+				CREATE TABLE IF NOT EXISTS `bill_category` (
+				`ID` varchar(36) NOT NULL COMMENT 'The Bill Category Id',
+				`NAME` varchar(255) NOT NULL COMMENT 'The Bill Category name (Translation key)',
+				`CODE` varchar(255) NOT NULL COMMENT 'The Bill Category code',
+				`ORDER` int(11) NOT NULL DEFAULT 0 COMMENT 'The Bill Category order',
+				`CREATED_ON` datetime NOT NULL COMMENT 'Created on',
+				`UPDATED_ON` datetime NOT NULL COMMENT 'Updated on',
+				PRIMARY KEY (`ID`),
+				UNIQUE KEY `CODE` (`CODE`)
+				) DEFAULT CHARSET=utf8 COMMENT='The Bill Category.';
+
+				DROP TABLE IF EXISTS `bill`;
+				CREATE TABLE IF NOT EXISTS `bill` (
+				`ID` varchar(36) NOT NULL COMMENT 'The Bill Id',
+				`FK_BILL_CATEGORY_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the Bill table',
+				`ISSUED_ON` date NOT NULL COMMENT 'The Bill issue date',
+				`DUE_DATE` date NOT NULL COMMENT 'The Bill due date',
+				`PAID_ON` date COMMENT 'The date Bill was paid',
+				`CONSUMPTION_FROM` date NOT NULL COMMENT 'The Bill comsumption from date',
+				`CONSUMPTION_TO` date NOT NULL COMMENT 'The Bill comsumption to date',
+				`DESCRIPTION` varchar(255) NOT NULL COMMENT 'The Bill description',
+				`NOTES` varchar(512) DEFAULT NULL COMMENT 'The Bill notes',
+				`UNPAID_AMOUNT` decimal(14,5) NOT NULL COMMENT 'The unpaid amount from the previous bill',
+				`AMOUNT` decimal(14,5) NOT NULL COMMENT 'The Bill amount',
+				`PAID` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 stands for not paid, 1 stands for paid',
+				`ACTUAL_BILL` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 stands for not actual, 1 stands for actual',
+				`CREATED_ON` datetime NOT NULL COMMENT 'Created on',
+				`UPDATED_ON` datetime NOT NULL COMMENT 'Updated on',
+				PRIMARY KEY (`ID`),
+				KEY `FK_BILL_CATEGORY` (`FK_BILL_CATEGORY_ID`),
+				CONSTRAINT `FK_BILL_CATEGORY` FOREIGN KEY (`FK_BILL_CATEGORY_ID`) REFERENCES `bill_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+				) DEFAULT CHARSET=utf8 COMMENT='Information about a Bill.';
 				
 				DROP TABLE IF EXISTS `transaction`;
 				CREATE TABLE IF NOT EXISTS `transaction` (

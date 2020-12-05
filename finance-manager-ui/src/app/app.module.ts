@@ -16,6 +16,8 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { TransactionsRoutingModule } from './transactions/transactions.routing.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BillsModule } from './bills/bills.module';
+import { BillsRoutingModule } from './bills/bills.routing.module';
 
 @NgModule({
   declarations: [
@@ -32,8 +34,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     HttpClientModule,
     BrowserAnimationsModule,
     TransactionsRoutingModule,
+    BillsRoutingModule,
     ToastrModule.forRoot(),
     TransactionsModule,
+    BillsModule,
     TranslateModule.forRoot({
       loader: {
       provide: TranslateLoader,

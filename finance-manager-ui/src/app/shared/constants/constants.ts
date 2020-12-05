@@ -11,7 +11,9 @@ export const Constants = {
     // Entities.
     ENTITY: {
         TRANSACTION: "transaction",
-        CATEGORY: "category"
+        CATEGORY: "category",
+        BILL: "bill",
+        BILL_CATEGORY: "billCategory"
     },
 
     // Items per page for tables.

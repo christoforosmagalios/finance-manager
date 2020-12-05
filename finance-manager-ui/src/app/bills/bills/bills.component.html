@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray">{{ 'transactions' | translate }} ({{ collectionSize }})</h1>
+        <h1 class="h3 mb-0 text-gray">{{ 'bills' | translate }} ({{ collectionSize }})</h1>
     </div>
 
     <div class="row">
@@ -12,7 +12,7 @@
 
                     </div>
                     <div class="col-6 text-right">
-                        <button class="btn btn-primary" routerLink="/transaction"><i class="fas fa-plus"></i> {{ 'transaction' | translate }}</button>
+                        <button class="btn btn-primary" routerLink="/bill"><i class="fas fa-plus"></i> {{ 'bill' | translate }}</button>
                     </div>
                 </div>
             </div>
@@ -22,38 +22,39 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th class="t-type">{{ 'type' | translate }}</th>
-                                    <th [columnName]="'category'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'category' | translate }}</th>
+                                    <th [columnName]="'billCategory'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'category' | translate }}</th>
+                                    <th [columnName]="'paid'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'paid' | translate }}</th>
                                     <th [columnName]="'description'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'description' | translate }}</th>
                                     <th [columnName]="'amount'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'amount' | translate }}</th>
-                                    <th [columnName]="'date'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'date' | translate }}</th>
+                                    <th [columnName]="'issuedOn'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'issued.on' | translate }}</th>
+                                    <th [columnName]="'dueDate'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'due.date' | translate }}</th>
                                     <th class="t-actions"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let t of transactions; index as i;">
-                                    <td>
-                                        <div class="fm-dot fm-income-dot" *ngIf="!t.type" ngbTooltip="{{ 'income' | translate }}"></div>
-                                        <div class="fm-dot fm-expense-dot" *ngIf="t.type" ngbTooltip="{{ 'expense' | translate }}"></div>
+                                <tr *ngFor="let b of bills; index as i;">
+                                    <td> {{ b.billCategory.name | translate }}</td>
+                                    <td> 
+                                        <span class="fas fa-check" *ngIf="b.paid"></span>
                                     </td>
-                                    <td> {{ t.category.name | translate }}</td>
-                                    <td> {{ t.description }}</td>
+                                    <td> {{ b.description }}</td>
                                     <td>
-                                        {{ t.amount | currency:'EUR' }}
+                                        {{ b.amount | currency:'EUR' }}
                                     </td>
-                                    <td> {{ t.date | date:'dd/MM/yyyy' }}</td>
+                                    <td> {{ b.issuedOn | date:'dd/MM/yyyy' }}</td>
+                                    <td> {{ b.dueDate | date:'dd/MM/yyyy' }}</td>
                                     <td class="text-right">
-                                        <button class="btn btn-sm btn-primary btn-square" routerLink="/transaction/{{ t.id }}" *ngIf="!t.enableDelete" ngbTooltip="{{ 'show' | translate }}">
+                                        <button class="btn btn-sm btn-primary btn-square" routerLink="/bill/{{ b.id }}" *ngIf="!b.enableDelete" ngbTooltip="{{ 'show' | translate }}">
                                             <span class="fas fa-search"></span>
                                         </button>
-                                        <button class="btn btn-sm btn-danger btn-square ml-2" (click)="t.enableDelete=true" *ngIf="!t.enableDelete" ngbTooltip="{{ 'delete' | translate }}">
+                                        <button class="btn btn-sm btn-danger btn-square ml-2" (click)="b.enableDelete=true" *ngIf="!b.enableDelete" ngbTooltip="{{ 'delete' | translate }}">
                                             <span class="fas fa-trash"></span>
                                         </button>
 
-                                        <button class="btn btn-sm btn-success btn-square ml-2" *ngIf="t.enableDelete" (click)="delete(t.id)" ngbTooltip="{{ 'yes' | translate }}">
+                                        <button class="btn btn-sm btn-success btn-square ml-2" *ngIf="b.enableDelete" (click)="delete(b.id)" ngbTooltip="{{ 'yes' | translate }}">
                                             <span class="fas fa-check"></span>
                                         </button>
-                                        <button class="btn btn-sm btn-secondary btn-square ml-2" *ngIf="t.enableDelete" (click)="t.enableDelete=false" ngbTooltip="{{ 'no' | translate }}">
+                                        <button class="btn btn-sm btn-secondary btn-square ml-2" *ngIf="b.enableDelete" (click)="b.enableDelete=false" ngbTooltip="{{ 'no' | translate }}">
                                             <span class="fas fa-times"></span>
                                         </button>
                                     </td>
@@ -70,7 +71,7 @@
                             </select>
                         </div>
                         <div class="col-md-6 col-12">
-                            <div class="d-flex justify-content-center" *ngIf="transactions.length > 0">
+                            <div class="d-flex justify-content-center" *ngIf="bills.length > 0">
                                 <ngb-pagination
                                 [collectionSize]="collectionSize"
                                 [(page)]="page"

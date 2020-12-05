@@ -14,22 +14,6 @@
     background: #e74a3b;
 }
 
-.t-actions {
-    width: 8rem;
-    min-width: 8rem;
-}
-
 .t-type {
     width: 5rem;
 }
-
-.items-per-page {
-    width: 6rem;
-}
-
-@media only screen and (max-width: 780px) {
-    .items-per-page-container {
-        text-align: center;
-        padding: 20px 0px;
-    }
-  }

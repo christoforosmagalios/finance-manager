@@ -1,0 +1,221 @@
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray">
+            <span *ngIf="id">{{ 'bill' | translate }}</span>
+            <span *ngIf="!id"> {{ 'new.bill' | translate }}</span>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <!-- Card Body -->
+                <div class="card-body">
+                    <form #tForm="ngForm" (ngSubmit)="onSubmit(tForm)">
+
+                        <div class="row">
+                            <div class="col-md-7 col-12 order-2">
+
+                                <div class="row">
+                                    <!-- Paid -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <div><label for="name">{{ 'paid' | translate }}</label></div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input" id="billPaidNo" name="billPaidNo" 
+                                                [value]="false" [(ngModel)]="bill.paid" mdbInput [disabled]="!editMode" (change)="handleIsPaid()">
+                                                <label class="custom-control-label" for="billPaidNo">{{ 'no' | translate }}</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input" id="billPaidYes" name="billPaidYes" 
+                                                [value]="true" [(ngModel)]="bill.paid" mdbInput [disabled]="!editMode" (change)="handleIsPaid()">
+                                                <label class="custom-control-label" for="billPaidYes">{{ 'yes' | translate }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Paid on Date -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="paidOn">{{ 'paid.on' | translate }}</label>
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="DD/MM/YYYY" [value]="formatter.format(dates.paidOn)"
+                                                id="paidOn" name="paidOn"  ngbDatepicker #paidOn="ngbDatepicker" (dateSelect)="onDateSelection('paidOn', $event)" 
+                                                [disabled]="!editMode || !bill.paid" [readonly]="true" [ngClass]="{'fm-datepicker-readonly': editMode}">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" (click)="paidOn.toggle()" type="button" [disabled]="!editMode || !bill.paid">
+                                                        <span class="far fa-calendar-alt"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- Bill Category -->
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="category">{{ 'category' | translate }}</label>
+                                            <select class="form-control" id="category" name="category" [(ngModel)]="bill.billCategory"
+                                            [compareWith]="utils.compareById" [disabled]="!editMode">
+                                                <option *ngFor="let category of billCategories;" [ngValue]="category">
+                                                    {{ category.name | translate }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    
+                                    <!-- Issue Date -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="issuedOn">{{ 'issued.on' | translate }}</label>
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="DD/MM/YYYY" [value]="formatter.format(dates.issuedOn)"
+                                                id="issuedOn" name="issuedOn"  ngbDatepicker #issuedOn="ngbDatepicker" (dateSelect)="onDateSelection('issuedOn', $event)" 
+                                                [disabled]="!editMode" [readonly]="true" [ngClass]="{'fm-datepicker-readonly': editMode}">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" (click)="issuedOn.toggle()" type="button" [disabled]="!editMode">
+                                                        <span class="far fa-calendar-alt"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Due Date -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="dueDate">{{ 'due.date' | translate }}</label>
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="DD/MM/YYYY" [value]="formatter.format(dates.dueDate)"
+                                                id="dueDate" name="dueDate"  ngbDatepicker #dueDate="ngbDatepicker" (dateSelect)="onDateSelection('dueDate', $event)" 
+                                                [disabled]="!editMode" [readonly]="true" [ngClass]="{'fm-datepicker-readonly': editMode}">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" (click)="dueDate.toggle()" type="button" [disabled]="!editMode">
+                                                        <span class="far fa-calendar-alt"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Bill Description -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="description">{{ 'description' | translate }}</label>
+                                            <input class="form-control" id="description" name="description" [(ngModel)]="bill.description" [disabled]="!editMode"/>
+                                        </div>
+                                    </div>
+                                    <!-- Actual Bill -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <div><label for="name">{{ 'actual.bill' | translate }}</label></div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input" id="actualBillNo" name="actualBillNo" 
+                                                [value]="false" [(ngModel)]="bill.actualBill" mdbInput [disabled]="!editMode">
+                                                <label class="custom-control-label" for="actualBillNo">{{ 'no' | translate }}</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input" id="actualBillYes" name="actualBillYes" 
+                                                [value]="true" [(ngModel)]="bill.actualBill" mdbInput [disabled]="!editMode">
+                                                <label class="custom-control-label" for="actualBillYes">{{ 'yes' | translate }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    
+                                    <!-- Consumption From Date -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="consumptionFrom">{{ 'consumption.from' | translate }}</label>
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="DD/MM/YYYY" [value]="formatter.format(dates.consumptionFrom)"
+                                                id="consumptionFrom" name="consumptionFrom"  ngbDatepicker #consumptionFrom="ngbDatepicker" (dateSelect)="onDateSelection('consumptionFrom', $event)" 
+                                                [disabled]="!editMode" [readonly]="true" [ngClass]="{'fm-datepicker-readonly': editMode}">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" (click)="consumptionFrom.toggle()" type="button" [disabled]="!editMode">
+                                                        <span class="far fa-calendar-alt"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Consumption To Date -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="consumptionTo">{{ 'consumption.to' | translate }}</label>
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="DD/MM/YYYY" [value]="formatter.format(dates.consumptionTo)"
+                                                id="consumptionTo" name="consumptionTo"  ngbDatepicker #consumptionTo="ngbDatepicker" (dateSelect)="onDateSelection('consumptionTo', $event)" 
+                                                [disabled]="!editMode" [readonly]="true" [ngClass]="{'fm-datepicker-readonly': editMode}">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" (click)="consumptionTo.toggle()" type="button" [disabled]="!editMode">
+                                                        <span class="far fa-calendar-alt"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Bill unpaid amount -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="unpaidAmount">{{ 'unpaidAmount' | translate }}</label>
+                                            <input class="form-control" id="unpaidAmount" name="unpaidAmount" [(ngModel)]="bill.unpaidAmount" [disabled]="!editMode"/>
+                                        </div>
+                                    </div>
+                                    <!-- Bill Amount -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="amount">{{ 'amount' | translate }}</label>
+                                            <input class="form-control" id="amount" name="amount" [(ngModel)]="bill.amount" [disabled]="!editMode"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Bill Notes -->
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="notes">{{ 'notes' | translate }}</label>
+                                            <textarea class="form-control" id="notes" name="notes" [(ngModel)]="bill.notes" [disabled]="!editMode"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-12  order-1 order-md-12">
+                                <div class="bill-image">
+                                    <div class="bill-image-placeholder">
+                                        <span class="far fa-file-image"></span>
+                                        <div class="upload-text">{{ 'upload.image' | translate }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Form footer -->
+                        <div class="row form-footer">
+                            <div class="col-12 text-right pr-0">
+                                <button class="btn btn-secondary btn-min-width" (click)="onCancel()" type="button">
+                                    <span *ngIf="!editMode"> {{ 'cancel' | translate }} </span>
+                                    <span *ngIf="editMode"> {{ 'abort' | translate }} </span>
+                                </button>
+                                <button class="btn btn-primary ml-2 btn-min-width" *ngIf="!editMode" (click)="editMode = true">{{ 'edit' | translate }}</button>
+                                <button class="btn btn-primary ml-2 btn-min-width" *ngIf="editMode" type="submit">{{ 'save' | translate }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

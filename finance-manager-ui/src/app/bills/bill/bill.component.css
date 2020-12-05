@@ -1,0 +1,18 @@
+.bill-image {
+    border: 1px solid lightgray;
+    height: 100%;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.bill-image-placeholder {
+    margin: 25%;
+}
+
+.bill-image-placeholder > span {
+    font-size: 3rem;
+}
+
+.bill-image-placeholder > .upload-text {
+    font-size: 1.5rem;
+}
