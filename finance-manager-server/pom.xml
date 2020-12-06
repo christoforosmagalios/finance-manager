@@ -24,6 +24,7 @@
     <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
     <springfox-swagger-ui.version>3.0.0</springfox-swagger-ui.version>
     <jacoco.version>0.8.6</jacoco.version>
+		<guava.version>14.0</guava.version>
 	</properties>
 
 	<dependencies>
@@ -93,6 +94,11 @@
       <artifactId>springfox-swagger-ui</artifactId>
       <version>${springfox-swagger-ui.version}</version>
     </dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { UtilsService } from "../services/utils.service";
 import { catchError } from 'rxjs/operators';
 import { throwError } from "rxjs";
-import { Messages } from "../constants/messages";
 import { LoaderService } from "../components/loader/loader.service";
 
 @Injectable({providedIn: 'root'})
@@ -19,7 +18,7 @@ export class HttpInterceptorService implements HttpInterceptor {
                 // Hide loader.
                 this.loader.hide();
                 // Display error toaster.
-                this.utilsService.showError(Messages.GENERIC_ERROR);
+                this.utilsService.showError(error.error.message);
                 return throwError(error.error.message);
             })
         );

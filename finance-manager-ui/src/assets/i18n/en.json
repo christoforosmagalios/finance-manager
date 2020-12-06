@@ -40,6 +40,16 @@
     "actual.bill": "Actual bill",
     "unpaidAmount": "Previous unpaid amount",
     "upload.image": "Upload image",
+    "clear.image": "Clear image",
+    "no.image": "No image available",
+    "invalid.file.size": "The image must not be larger than 3 MB.",
+    "invalid.file.type": "Allowed image types are jpg, jpeg and png.",
+
+    "success": "Success",
+    "info": "Info",
+    "wanring": "Wanring",
+    "error": "Error",
+    "generic.error": "Oops, something went wrong.",
 
     "paycheck": "Paycheck",
     "supermarket": "Supermarket",

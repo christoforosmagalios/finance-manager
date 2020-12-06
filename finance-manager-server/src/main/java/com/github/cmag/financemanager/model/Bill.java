@@ -53,4 +53,10 @@ public class Bill extends BaseEntity {
 
   @Column(name = "actual_bill")
   private boolean actualBill;
+
+  @Column(name = "img_path")
+  private String imgPath;
+
+  @Column(name = "img_type")
+  private String imgType;
 }

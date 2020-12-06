@@ -40,6 +40,16 @@
     "actual.bill": "Εκκαθαριστικός λογαριασμός",
     "unpaidAmount": "Προηγούμενο ανεξόφλητο ποσό ",
     "upload.image": "Προσθήκη εικόνας",
+    "clear.image": "Αφαίρεση εικόνας",
+    "no.image": "Δεν υπάρχει διαθέσιμη εικόνα",
+    "invalid.file.size": "Η εικόνα δεν πρέπει να είναι μεγαλύτερη από 3 MB.",
+    "invalid.file.type": "Οι επιτρεπόμενοι τύποι εικόνων είναι jpg, jpeg και png.",
+
+    "success": "Επιτυχία",
+    "info": "Info",
+    "warning": "Προειδοποίηση",
+    "error": "Σφάλμα",
+    "generic.error": "Ωχ! Κάτι πήγε στραβά.",
 
     "paycheck": "Μισθός",
     "supermarket": "Super Market",

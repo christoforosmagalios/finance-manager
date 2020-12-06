@@ -5,7 +5,7 @@
 
 .navbar-brand {
     color: #4e73df;
-    font-family: "Nunito-Bold";
+    font-family: "Nunito-Bold", sans-serif;;
     font-size: 1.5rem;
     padding-top: 0;
 }

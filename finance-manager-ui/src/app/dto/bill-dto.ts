@@ -15,6 +15,9 @@ export class BillDTO extends BaseDTO {
     public unpaidAmount: number;
     public paid: boolean;
     public actualBill: boolean;
+    public imgPath: string;
+    public imgType: string;
+    public base64: string;
 
     // To be used only in UI.
     public enableDelete: boolean;

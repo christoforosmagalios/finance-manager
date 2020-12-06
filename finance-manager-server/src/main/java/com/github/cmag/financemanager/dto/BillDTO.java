@@ -22,4 +22,7 @@ public class BillDTO extends BaseDTO {
   private double unpaidAmount;
   private boolean paid;
   private boolean actualBill;
+  private String imgPath;
+  private String imgType;
+  private String base64;
 }
