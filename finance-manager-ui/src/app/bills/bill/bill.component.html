@@ -202,7 +202,7 @@
                                     <input hidden id="image" type="file" (change)="upload($event.target.files)" #uploader accept="image/x-png,image/jpeg" />
                                     <!-- The Image. -->
                                     <div class="img-container" *ngIf="bill.base64">
-                                        <img src="{{bill.base64}}" />
+                                        <img src="{{bill.base64}}" alt="{{ 'bill.image' | translate}}"/>
                                     </div>
                                     <!-- Image placeholder for view mode. -->
                                     <div class="bill-image-placeholder" *ngIf="!bill.base64 && !editMode">

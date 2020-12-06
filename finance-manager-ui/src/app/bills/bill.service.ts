@@ -27,6 +27,5 @@ export class BillService {
         const formData: FormData = new FormData();
         formData.append('file', file, file.name);
         return this.http.post(Constants.API + '/' + this.endpoint + '/upload', formData);
-    };
-
+    }
 }

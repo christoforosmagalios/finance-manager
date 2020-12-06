@@ -55,9 +55,9 @@ export class SortableDirective implements OnInit {
      */
     update(addClass: string, removeClass: string, direction: string, name: string) {
         // Remove the given CSS class.
-        removeClass ? this.renderer.removeClass(this.element.nativeElement, removeClass) : null;
+        removeClass && this.renderer.removeClass(this.element.nativeElement, removeClass);
         // Add the given CSS class.
-        addClass ? this.renderer.addClass(this.element.nativeElement, addClass) : null;
+        addClass && this.renderer.addClass(this.element.nativeElement, addClass);
         // Emit the event.
         this.ngModelChange.emit({direction: direction, name: name});
     }

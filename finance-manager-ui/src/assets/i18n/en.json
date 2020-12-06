@@ -44,6 +44,9 @@
     "no.image": "No image available",
     "invalid.file.size": "The image must not be larger than 3 MB.",
     "invalid.file.type": "Allowed image types are jpg, jpeg and png.",
+    "bill.image": "Bill image",
+    "transactions.table": "Transactions table",
+    "bills.table": "Bills table",
 
     "success": "Success",
     "info": "Info",

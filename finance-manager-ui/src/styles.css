@@ -15,6 +15,10 @@ textarea {
   resize: none;
 }
 
+caption {
+  display: none;
+}
+
 label {
   font-family: "Nunito-SemiBold", sans-serif;
 }

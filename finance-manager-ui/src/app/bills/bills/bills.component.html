@@ -20,6 +20,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped">
+                            <caption>{{ 'bills.table' | translate }}</caption>
                             <thead>
                                 <tr>
                                     <th scope="col" [columnName]="'billCategory'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'category' | translate }}</th>
