@@ -4,6 +4,7 @@ import { PageDTO } from 'src/app/dto/page-dto';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { Constants } from 'src/app/shared/constants/constants';
 import { CRUDService } from 'src/app/shared/services/crud.service';
+import { BillService } from '../bill.service';
 
 @Component({
   selector: 'app-bills',
@@ -30,7 +31,8 @@ export class BillsComponent implements OnInit {
 
   constructor(
     private loader: LoaderService,
-    private crudService: CRUDService
+    private crudService: CRUDService,
+    private billService: BillService
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +45,7 @@ export class BillsComponent implements OnInit {
     // Show loader.
     this.loader.show();
     // Find the Bills.
-    this.crudService.findAllPaginated(Constants.ENTITY.BILL, this.size, (this.page - 1), this.sort.name, this.sort.direction)
+    this.billService.findAllPaginated(this.size, (this.page - 1), this.sort.name, this.sort.direction)
     .subscribe((page: PageDTO<BillDTO>) => {
       this.bills = page.content;
       this.collectionSize = page.totalElements;

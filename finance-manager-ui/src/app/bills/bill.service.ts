@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
+import { BaseDTO } from '../dto/base-dto';
 import { BillDTO } from '../dto/bill-dto';
+import { PageDTO } from '../dto/page-dto';
 import { Constants } from '../shared/constants/constants';
 
 @Injectable({providedIn: 'root'})
@@ -16,6 +18,18 @@ export class BillService {
      */
     saveBill(billDTO: BillDTO) {
         return this.http.post<BillDTO>(Constants.API + '/' + this.endpoint + '/save', billDTO);
+    }
+
+    /**
+     * Find bills based on the given pagination parameters.
+     * 
+     * @param size Page size.
+     * @param page The number of the page.
+     * @param sort Sort column.
+     * @param direction Sort direction. 
+     */
+    findAllPaginated(size: number, page: number, sort: string, direction: string) {
+        return this.http.get<PageDTO<BaseDTO>>(Constants.API + '/bill/paginatedBills?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
     }
 
     /**
