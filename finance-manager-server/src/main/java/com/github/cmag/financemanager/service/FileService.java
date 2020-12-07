@@ -86,7 +86,7 @@ public class FileService {
     // If the new and the old path are the same do not proceed.
     if ((StringUtils.isNotEmpty(newPath) && StringUtils.isNotEmpty(oldPath)
         && newPath.equals(oldPath))) {
-      return null;
+      return newPath;
     }
 
     // Delete the old file.

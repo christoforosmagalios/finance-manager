@@ -47,12 +47,10 @@ public class BillService extends BaseService<BillDTO, Bill> {
     String existingImg = null;
     if (StringUtils.isNotEmpty(billDTO.getId())) {
       existingImg = billRepository.getImgUrl(billDTO.getId());
+      billDTO.setCode(RandomStringUtils.randomAlphanumeric(6).toUpperCase());
     }
     // Replace the new image with the old one.
     billDTO.setImgPath(fileService.copy(billDTO.getImgPath(), existingImg, imagesPath));
-    if (billDTO.getId() == null) {
-      billDTO.setCode(RandomStringUtils.randomAlphanumeric(6).toUpperCase());
-    }
 
     return super.save(billDTO);
   }
