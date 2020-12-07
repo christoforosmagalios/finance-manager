@@ -11,6 +11,7 @@ import lombok.Data;
 public class BillDTO extends BaseDTO {
 
   private BillCategoryDTO billCategory;
+  private String code;
   private Date issuedOn;
   private Date dueDate;
   private Date paidOn;

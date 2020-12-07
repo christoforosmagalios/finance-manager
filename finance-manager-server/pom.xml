@@ -25,6 +25,7 @@
     <springfox-swagger-ui.version>3.0.0</springfox-swagger-ui.version>
     <jacoco.version>0.8.6</jacoco.version>
 		<guava.version>14.0</guava.version>
+		<commons-lang3.version>3.11</commons-lang3.version>
 	</properties>
 
 	<dependencies>
@@ -68,36 +69,41 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-    <dependency>
-      <artifactId>liquibase-core</artifactId>
-      <groupId>org.liquibase</groupId>
-      <version>${org.liquibase.version}</version>
-    </dependency>
-    <dependency>
-      <artifactId>mapstruct</artifactId>
-      <groupId>org.mapstruct</groupId>
-      <version>${org.mapstruct.version}</version>
-    </dependency>
+		<dependency>
+			<artifactId>liquibase-core</artifactId>
+			<groupId>org.liquibase</groupId>
+			<version>${org.liquibase.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>mapstruct</artifactId>
+			<groupId>org.mapstruct</groupId>
+			<version>${org.mapstruct.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate-validator.version}</version>
 		</dependency>
 
-    <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-boot-starter</artifactId>
-      <version>${springfox-boot-starter.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-swagger-ui</artifactId>
-      <version>${springfox-swagger-ui.version}</version>
-    </dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>${springfox-boot-starter.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox-swagger-ui.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -108,55 +114,55 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven-compiler-plugin.version}</version>
-        <configuration>
-          <annotationProcessorPaths>
-            <annotationProcessorPath>
-              <groupId>org.mapstruct</groupId>
-              <artifactId>mapstruct-processor</artifactId>
-              <version>${org.mapstruct.version}</version>
-            </annotationProcessorPath>
-            <annotationProcessorPath>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-              <version>${lombok.version}</version>
-            </annotationProcessorPath>
-          </annotationProcessorPaths>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco.version}</version>
-        <configuration>
-          <excludes>
-            <exclude>com/github/cmag/financemanager/dto/**</exclude>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<annotationProcessorPaths>
+						<annotationProcessorPath>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${org.mapstruct.version}</version>
+						</annotationProcessorPath>
+						<annotationProcessorPath>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</annotationProcessorPath>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>com/github/cmag/financemanager/dto/**</exclude>
 						<exclude>com/github/cmag/financemanager/model/**</exclude>
 						<exclude>com/github/cmag/financemanager/mapper/**</exclude>
 						<exclude>com/github/cmag/financemanager/config/**</exclude>
 						<exclude>com/github/cmag/financemanager/App.class</exclude>
-          </excludes>
-        </configuration>
-        <executions>
-          <execution>
-            <id>jacoco-initialize</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-            <phase>test-compile</phase>
-          </execution>
-          <execution>
-            <id>jacoco-site</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>jacoco-initialize</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<phase>test-compile</phase>
+					</execution>
+					<execution>
+						<id>jacoco-site</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 

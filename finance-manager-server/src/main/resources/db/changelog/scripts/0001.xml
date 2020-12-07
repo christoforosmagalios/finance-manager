@@ -34,6 +34,7 @@
 				CREATE TABLE IF NOT EXISTS `bill` (
 				`ID` varchar(36) NOT NULL COMMENT 'The Bill Id',
 				`FK_BILL_CATEGORY_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the Bill table',
+				`CODE` varchar(10) NOT NULL COMMENT 'The Bill auto generated alphanumeric code.',
 				`ISSUED_ON` date NOT NULL COMMENT 'The Bill issue date',
 				`DUE_DATE` date NOT NULL COMMENT 'The Bill due date',
 				`PAID_ON` date COMMENT 'The date Bill was paid',
@@ -50,6 +51,7 @@
 				`CREATED_ON` datetime NOT NULL COMMENT 'Created on',
 				`UPDATED_ON` datetime NOT NULL COMMENT 'Updated on',
 				PRIMARY KEY (`ID`),
+				UNIQUE KEY `CODE` (`CODE`),
 				KEY `FK_BILL_CATEGORY` (`FK_BILL_CATEGORY_ID`),
 				CONSTRAINT `FK_BILL_CATEGORY` FOREIGN KEY (`FK_BILL_CATEGORY_ID`) REFERENCES `bill_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 				) DEFAULT CHARSET=utf8 COMMENT='Information about a Bill.';

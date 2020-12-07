@@ -21,6 +21,9 @@ public class Bill extends BaseEntity {
   @JoinColumn(name = "fk_bill_category_id", nullable = false)
   private BillCategory billCategory;
 
+  @Column(name = "code")
+  private String code;
+
   @Column(name = "issued_on")
   private Date issuedOn;
 

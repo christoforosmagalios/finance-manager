@@ -8,6 +8,7 @@ import com.github.cmag.financemanager.model.Bill;
 import com.github.cmag.financemanager.repository.BillRepository;
 import java.io.IOException;
 import liquibase.util.StringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -49,6 +50,9 @@ public class BillService extends BaseService<BillDTO, Bill> {
     }
     // Replace the new image with the old one.
     billDTO.setImgPath(fileService.copy(billDTO.getImgPath(), existingImg, imagesPath));
+    if (billDTO.getId() == null) {
+      billDTO.setCode(RandomStringUtils.randomAlphanumeric(6).toUpperCase());
+    }
 
     return super.save(billDTO);
   }
@@ -56,8 +60,8 @@ public class BillService extends BaseService<BillDTO, Bill> {
   /**
    * Find all the bills based on the given Pageable.
    *
-   * @return A Page that contains the bills as well as the total number of bills and
-   * other information.
+   * @return A Page that contains the bills as well as the total number of bills and other
+   * information.
    */
   public Page<BillInfoDTO> findAllPaginated(Pageable pageable) {
     // If unsorted, set default sorting.

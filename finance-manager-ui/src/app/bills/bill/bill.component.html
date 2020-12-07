@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray">
-            <span *ngIf="id">{{ 'bill' | translate }}</span>
+            <span *ngIf="id">{{ 'bill' | translate }} - {{ bill.code }}</span>
             <span *ngIf="!id"> {{ 'new.bill' | translate }}</span>
         </h1>
     </div>

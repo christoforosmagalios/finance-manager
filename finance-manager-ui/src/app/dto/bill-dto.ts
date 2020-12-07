@@ -4,6 +4,7 @@ import { BillCategoryDTO } from './bill-category-dto';
 export class BillDTO extends BaseDTO {
 
     public billCategory: BillCategoryDTO;
+    public code: string;
     public issuedOn: Date;
     public dueDate: Date;
     public paidOn: Date;
