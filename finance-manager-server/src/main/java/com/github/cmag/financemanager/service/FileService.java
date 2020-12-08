@@ -101,7 +101,6 @@ public class FileService {
         String newFilePath = directory + File.separator + source.getName();
         File dest = new File(newFilePath);
         Files.copy(source, dest);
-        delete(newPath);
         return newFilePath;
       } catch (IOException e) {
         log.error(e.getMessage());
