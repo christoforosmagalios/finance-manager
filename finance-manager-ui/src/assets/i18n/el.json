@@ -48,6 +48,8 @@
     "transactions.table": "Λίστα συναλλαγών",
     "bills.table": "Λίστα λογαριασμών",
     "code": "Κωδικός",
+    "bill.code": "Κωδικός λογαριασμού",
+    "bill.description": "Περιγραφή λογαριασμού",
 
     "success": "Επιτυχία",
     "info": "Info",

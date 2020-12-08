@@ -4,6 +4,8 @@ import { BaseDTO } from '../dto/base-dto';
 import { BillDTO } from '../dto/bill-dto';
 import { PageDTO } from '../dto/page-dto';
 import { Constants } from '../shared/constants/constants';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class BillService {
@@ -30,6 +32,15 @@ export class BillService {
      */
     findAllPaginated(size: number, page: number, sort: string, direction: string) {
         return this.http.get<PageDTO<BaseDTO>>(Constants.API + '/bill/paginatedBills?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+    }
+
+    /**
+     * Find bills whose password starts with the given text.
+     * 
+     * @param text Text to search with. 
+     */
+    findByCode(text: string) {
+        return this.http.get(Constants.API + '/bill/findByCode/' + text);
     }
 
     /**

@@ -23,6 +23,10 @@ public class Transaction extends BaseEntity {
   @JoinColumn(name = "fk_category_id", nullable = false)
   private Category category;
 
+  @ManyToOne
+  @JoinColumn(name = "fk_bill_id")
+  private Bill bill;
+
   @Column(name = "date")
   private Date date;
 

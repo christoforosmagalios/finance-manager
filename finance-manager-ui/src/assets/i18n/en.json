@@ -48,6 +48,8 @@
     "transactions.table": "Transactions table",
     "bills.table": "Bills table",
     "code": "Code",
+    "bill.code": "Bill code",
+    "bill.description": "Bill description",
 
     "success": "Success",
     "info": "Info",

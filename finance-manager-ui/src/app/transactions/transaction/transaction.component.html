@@ -77,6 +77,24 @@
                             </div>
                         </div>
                         <div class="row">
+                            <!-- Bill code linked to this transaction -->
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="bill-code">{{ 'bill.code' | translate }}</label>
+                                    <input id="bill-code" type="text" class="form-control" 
+                                    [(ngModel)]="bill" [ngbTypeahead]="search" name="bill" (change)="onBillChange()"
+                                    [resultFormatter]="billSearchFormatter" [inputFormatter]="billInputFormatter" [disabled]="!editMode"/>
+                                </div>
+                            </div>
+                            <!-- Bill description linked to this transaction -->
+                            <div class="col-12 col-md-8">
+                                <div class="form-group">
+                                    <label for="bill-description">{{ 'bill.description' | translate }}</label>
+                                    <input id="bill-description" type="text" class="form-control" [(ngModel)]="bill.description" name="billCode" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <!-- Transaction Notes -->
                             <div class="col-12">
                                 <div class="form-group">

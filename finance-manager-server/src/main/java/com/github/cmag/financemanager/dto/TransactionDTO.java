@@ -15,4 +15,5 @@ public class TransactionDTO extends BaseDTO {
   private String description;
   private double amount;
   private Date date;
+  private BillInfoDTO bill;
 }

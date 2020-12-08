@@ -1,5 +1,6 @@
 import { BaseDTO } from './base-dto';
 import { CategoryDTO } from './category-dto';
+import { BillDTO } from './bill-dto';
 
 export class TransactionDTO extends BaseDTO {
 
@@ -9,6 +10,7 @@ export class TransactionDTO extends BaseDTO {
     public description: string;
     public notes: string;
     public amount: number;
+    public bill: BillDTO;
 
     // To be used only in UI.
     public enableDelete: boolean;
@@ -18,6 +20,7 @@ export class TransactionDTO extends BaseDTO {
         // Default values.
         this.type = true;
         this.amount = 0;
-        this.enableDelete = false;      
+        this.enableDelete = false;  
+        this.bill = new BillDTO();    
     }
 }

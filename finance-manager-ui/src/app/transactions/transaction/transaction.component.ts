@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { TransactionDTO } from 'src/app/dto/transaction-dto';
+import { TransactionDTO } from '../../dto/transaction-dto';
 import { Location } from '@angular/common';
 import { NgbDateParserFormatter, NgbDate } from '@ng-bootstrap/ng-bootstrap';
-import { NgbDateFRParserFormatter } from 'src/app/shared/services/datepicker.formatter.service';
-import { CRUDService } from 'src/app/shared/services/crud.service';
-import { CategoryDTO } from 'src/app/dto/category-dto';
-import { UtilsService } from 'src/app/shared/services/utils.service';
-import { Constants } from 'src/app/shared/constants/constants';
+import { NgbDateFRParserFormatter } from '../../shared/services/datepicker.formatter.service';
+import { CRUDService } from '../../shared/services/crud.service';
+import { CategoryDTO } from '../..//dto/category-dto';
+import { UtilsService } from '../../shared/services/utils.service';
+import { Constants } from '../../shared/constants/constants';
+import { Observable, of } from 'rxjs';
+import { BillService } from '../../bills/bill.service';
+import { tap, debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
+import { BillDTO } from '../../dto/bill-dto';
 
 @Component({
   selector: 'app-transaction',
@@ -29,6 +33,16 @@ export class TransactionComponent implements OnInit {
   date: NgbDate;
   // List of transaction categories.
   categories: Array<CategoryDTO>;
+  // Is currently searching for bill.
+  searching = false;
+  // Bill search failed.
+  searchFailed = false;
+  // A ngbTypeahead Formatter for the result list.
+  billSearchFormatter = (result: BillDTO) => result.code + " - " + result.description;
+  // A ngbTypeahead Formatter for the input display.
+  billInputFormatter = (result: BillDTO) => result.code;
+  // A bill object used as a model for the ngbTypeahead.
+  bill = new BillDTO();;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +50,8 @@ export class TransactionComponent implements OnInit {
     public formatter: NgbDateParserFormatter,
     private crudService: CRUDService,
     public utils: UtilsService,
-    private router: Router
+    private router: Router,
+    private billService: BillService
   ) { }
 
   ngOnInit(): void {
@@ -68,6 +83,7 @@ export class TransactionComponent implements OnInit {
       .subscribe((transaction: TransactionDTO) => {
         this.transaction = transaction;
         this.setDate(new Date(this.transaction.date));
+        this.transaction.bill && (this.bill = {...this.transaction.bill});
         this.originalTransaction = {...this.transaction};
       });
     }
@@ -97,6 +113,11 @@ export class TransactionComponent implements OnInit {
    * @param form The Form.
    */
   onSubmit(form: NgForm) {
+
+    this.transaction.bill = null;
+    if (this.bill && this.bill.id) {
+      this.transaction.bill = this.bill;
+    }
     this.crudService.save(Constants.ENTITY.TRANSACTION, this.transaction)
     .subscribe(result => {
       this.utils.showSuccess("Saved successfully.");
@@ -115,5 +136,37 @@ export class TransactionComponent implements OnInit {
       this.location.back();
     }
   }
+
+  /**
+   * When the selected bill value changes to empty,
+   * assign to the bill object a new BillDTO instead of an empty string.
+   */
+  onBillChange() {
+    if (!this.bill) {
+      this.bill = new BillDTO();
+    }
+  }
+
+  /**
+   * If the length of the given text is greater than 2, 
+   * search for bills whose code starts with the given text. 
+   * 
+   * @param text$ The text to search with.
+   */
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      tap(() => this.searching = true),
+      switchMap(term =>
+        term.length < 3 ? [] : this.billService.findByCode(term).pipe(
+          tap(() => this.searchFailed = false),
+          catchError(() => {
+            this.searchFailed = true;
+            return of([]);
+          }))
+      ),
+      tap(() => this.searching = false)
+    )
 
 }
