@@ -83,7 +83,7 @@
                                     <label for="bill-code">{{ 'bill.code' | translate }}</label>
                                     <input id="bill-code" type="text" class="form-control" 
                                     [(ngModel)]="bill" [ngbTypeahead]="search" name="bill" (change)="onBillChange()"
-                                    [resultFormatter]="billSearchFormatter" [inputFormatter]="billInputFormatter" [disabled]="!editMode"/>
+                                    [resultFormatter]="billSearchFormatter" [inputFormatter]="billInputFormatter" [disabled]="!editMode" (ngModelChange)="onModelBillChange()"/>
                                 </div>
                             </div>
                             <!-- Bill description linked to this transaction -->

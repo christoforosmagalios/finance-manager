@@ -148,6 +148,16 @@ export class TransactionComponent implements OnInit {
   }
 
   /**
+   * Listens to the bill model change.
+   * If the bill exists and has an id, then set the transaction amount equal to the bill amount.
+   */
+  onModelBillChange() {
+    if (this.bill && this.bill.id) {
+      this.transaction.amount = this.bill.amount;
+    }
+  }
+
+  /**
    * If the length of the given text is greater than 2, 
    * search for bills whose code starts with the given text. 
    * 
