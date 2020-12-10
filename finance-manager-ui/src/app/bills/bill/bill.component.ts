@@ -35,6 +35,19 @@ export class BillComponent implements OnInit {
   dates = new BillDates();
   // List of bill categories.
   billCategories: Array<BillCategoryDTO>;
+  // Error object.
+  errors = {
+    consumptionFrom: null,
+    consumptionTo: null,
+    notes: null,
+    description: null,
+    amount: null,
+    billCategory: null,
+    issuedOn: null,
+    dueDate: null,
+    paid: null,
+    actualBill: null
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -126,10 +139,27 @@ export class BillComponent implements OnInit {
    * @param form The Form.
    */
   onSubmit(form: NgForm) {
+    this.clearErrors();
+
     this.billService.saveBill(this.bill).subscribe(result => {
       this.utils.showSuccess("Saved successfully.");
       this.router.navigate(['/bills']);
+    }, error => {
+      if (error && error.errors instanceof Array) {
+        for (let e of error.errors) {
+          this.errors[e.field] = e.defaultMessage;
+        }
+      }
     });
+  }
+
+  /**
+   * Clear any previous validation errors.
+   */
+  private clearErrors() {
+    for (let property in this.errors) {
+      this.errors[property] = null;
+    }
   }
 
   /**
@@ -139,6 +169,7 @@ export class BillComponent implements OnInit {
     if(this.editMode && this.id) {
       this.bill = {...this.originalBill};
       this.editMode = false;
+      this.clearErrors();
     } else {
       this.location.back();
     }

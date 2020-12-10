@@ -6,6 +6,7 @@ import com.github.cmag.financemanager.dto.UploadDTO;
 import com.github.cmag.financemanager.model.Bill;
 import com.github.cmag.financemanager.service.BillService;
 import com.github.cmag.financemanager.service.FileService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -52,7 +53,7 @@ public class BillController extends BaseController<BillDTO, Bill> {
      * @return The saved bill.
      */
     @PostMapping(path = "/save")
-    public BillDTO saveBill(@RequestBody BillDTO billDTO) throws IOException {
+    public BillDTO saveBill(@Valid @RequestBody BillDTO billDTO) throws IOException {
         return billService.saveBill(billDTO);
     }
 

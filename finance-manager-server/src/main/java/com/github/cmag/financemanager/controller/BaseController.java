@@ -4,6 +4,7 @@ import com.github.cmag.financemanager.dto.BaseDTO;
 import com.github.cmag.financemanager.model.BaseEntity;
 import com.github.cmag.financemanager.service.BaseService;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,7 +40,7 @@ public class BaseController<D extends BaseDTO, E extends BaseEntity> {
    * @return The saved DTO.
    */
   @PostMapping
-  public D save(@RequestBody D dto) {
+  public D save(@RequestBody @Valid D dto) {
     return baseService.save(dto);
   }
 

@@ -41,6 +41,7 @@
                                             {{ category.name | translate }}
                                         </option>
                                     </select>
+                                    <span class="help-block text-danger" *ngIf="errors.category" [innerHTML]="errors.category | translate"></span>
                                 </div>
                             </div>
                             <!-- Transaction Date -->
@@ -56,6 +57,7 @@
                                                 <span class="far fa-calendar-alt"></span>
                                             </button>
                                         </div>
+                                        <span class="help-block text-danger" *ngIf="errors.date" [innerHTML]="errors.date | translate"></span>
                                     </div>
                                 </div>
                             </div>
@@ -66,13 +68,16 @@
                                 <div class="form-group">
                                     <label for="description">{{ 'description' | translate }}</label>
                                     <input class="form-control" id="description" name="description" [(ngModel)]="transaction.description" [disabled]="!editMode"/>
+                                    <span class="help-block text-danger" *ngIf="errors.description" [innerHTML]="errors.description | translate"></span>
                                 </div>
                             </div>
                             <!-- Transaction Amount -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="amount">{{ 'amount' | translate }}</label>
-                                    <input class="form-control" id="amount" name="amount" [(ngModel)]="transaction.amount" [disabled]="!editMode"/>
+                                    <input class="form-control" id="amount" name="amount" [ngModel]="transaction.amount | number:'1.2-2'" [disabled]="!editMode" 
+                                    (change)="utils.setTwoNumberDecimal($event)" (ngModelChange)="transaction.amount=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
+                                    <span class="help-block text-danger" *ngIf="errors.amount" [innerHTML]="errors.amount | translate"></span>
                                 </div>
                             </div>
                         </div>
@@ -100,6 +105,7 @@
                                 <div class="form-group">
                                     <label for="notes">{{ 'notes' | translate }}</label>
                                     <textarea class="form-control" id="notes" name="notes" [(ngModel)]="transaction.notes" [disabled]="!editMode"></textarea>
+                                    <span class="help-block text-danger" *ngIf="errors.notes" [innerHTML]="errors.notes | translate"></span>
                                 </div>
                             </div>
                         </div>

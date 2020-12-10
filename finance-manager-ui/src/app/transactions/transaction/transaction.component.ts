@@ -42,7 +42,16 @@ export class TransactionComponent implements OnInit {
   // A ngbTypeahead Formatter for the input display.
   billInputFormatter = (result: BillDTO) => result.code;
   // A bill object used as a model for the ngbTypeahead.
-  bill = new BillDTO();;
+  bill = new BillDTO();
+  // Error object.
+  errors = {
+    category: null,
+    type: null,
+    notes: null,
+    description: null,
+    amount: null,
+    date: null
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -118,11 +127,29 @@ export class TransactionComponent implements OnInit {
     if (this.bill && this.bill.id) {
       this.transaction.bill = this.bill;
     }
+
+    this.clearErrors();
+
     this.crudService.save(Constants.ENTITY.TRANSACTION, this.transaction)
     .subscribe(result => {
       this.utils.showSuccess("Saved successfully.");
       this.router.navigate(['/transactions']);
+    }, error => {
+      if (error && error.errors instanceof Array) {
+        for (let e of error.errors) {
+          this.errors[e.field] = e.defaultMessage;
+        }
+      }
     });
+  }
+
+  /**
+   * Clear any previous validation errors.
+   */
+  private clearErrors() {
+    for (let property in this.errors) {
+      this.errors[property] = null;
+    }
   }
 
   /**
@@ -132,6 +159,7 @@ export class TransactionComponent implements OnInit {
     if(this.editMode && this.id) {
       this.transaction = {...this.originalTransaction};
       this.editMode = false;
+      this.clearErrors();
     } else {
       this.location.back();
     }

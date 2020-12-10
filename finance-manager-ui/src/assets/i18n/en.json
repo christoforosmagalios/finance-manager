@@ -57,6 +57,10 @@
     "error": "Error",
     "generic.error": "Oops, something went wrong.",
 
+    "error.not.null": "Please fill in the field.",
+    "error.size.max.250": "The allowed number of characters is 250.",
+    "error.size.max.500": "The allowed number of characters is 500.",
+
     "paycheck": "Paycheck",
     "supermarket": "Supermarket",
     "education": "Education",

@@ -32,6 +32,7 @@
                                                 <label class="custom-control-label" for="billPaidYes">{{ 'yes' | translate }}</label>
                                             </div>
                                         </div>
+                                        <span class="help-block text-danger" *ngIf="errors.paid" [innerHTML]="errors.paid | translate"></span>
                                     </div>
 
                                     <!-- Paid on Date -->
@@ -62,11 +63,11 @@
                                                     {{ category.name | translate }}
                                                 </option>
                                             </select>
+                                            <span class="help-block text-danger" *ngIf="errors.billCategory" [innerHTML]="errors.billCategory | translate"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    
                                     <!-- Issue Date -->
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
@@ -81,6 +82,7 @@
                                                     </button>
                                                 </div>
                                             </div>
+                                            <span class="help-block text-danger" *ngIf="errors.issuedOn" [innerHTML]="errors.issuedOn | translate"></span>
                                         </div>
                                     </div>
 
@@ -98,6 +100,7 @@
                                                     </button>
                                                 </div>
                                             </div>
+                                            <span class="help-block text-danger" *ngIf="errors.dueDate" [innerHTML]="errors.dueDate | translate"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -108,6 +111,7 @@
                                         <div class="form-group">
                                             <label for="description">{{ 'description' | translate }}</label>
                                             <input class="form-control" id="description" name="description" [(ngModel)]="bill.description" [disabled]="!editMode"/>
+                                            <span class="help-block text-danger" *ngIf="errors.description" [innerHTML]="errors.description | translate"></span>
                                         </div>
                                     </div>
                                     <!-- Actual Bill -->
@@ -125,6 +129,7 @@
                                                 <label class="custom-control-label" for="actualBillYes">{{ 'yes' | translate }}</label>
                                             </div>
                                         </div>
+                                        <span class="help-block text-danger" *ngIf="errors.actualBill" [innerHTML]="errors.actualBill | translate"></span>
                                     </div>
                                 </div>
 
@@ -144,6 +149,7 @@
                                                     </button>
                                                 </div>
                                             </div>
+                                            <span class="help-block text-danger" *ngIf="errors.consumptionFrom" [innerHTML]="errors.consumptionFrom | translate"></span>
                                         </div>
                                     </div>
 
@@ -161,6 +167,7 @@
                                                     </button>
                                                 </div>
                                             </div>
+                                            <span class="help-block text-danger" *ngIf="errors.consumptionTo" [innerHTML]="errors.consumptionTo | translate"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -170,14 +177,17 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="unpaidAmount">{{ 'unpaidAmount' | translate }}</label>
-                                            <input class="form-control" id="unpaidAmount" name="unpaidAmount" [(ngModel)]="bill.unpaidAmount" [disabled]="!editMode"/>
+                                            <input class="form-control" id="unpaidAmount" name="unpaidAmount" [ngModel]="bill.unpaidAmount | number:'1.2-2'" [disabled]="!editMode"
+                                            (change)="utils.setTwoNumberDecimal($event)" (ngModelChange)="bill.unpaidAmount=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
                                         </div>
                                     </div>
                                     <!-- Bill Amount -->
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="amount">{{ 'amount' | translate }}</label>
-                                            <input class="form-control" id="amount" name="amount" [(ngModel)]="bill.amount" [disabled]="!editMode"/>
+                                            <input class="form-control" id="amount" name="amount" [ngModel]="bill.amount | number:'1.2-2'" [disabled]="!editMode"
+                                            (change)="utils.setTwoNumberDecimal($event)" (ngModelChange)="bill.amount=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
+                                            <span class="help-block text-danger" *ngIf="errors.amount" [innerHTML]="errors.amount | translate"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -188,6 +198,7 @@
                                         <div class="form-group">
                                             <label for="notes">{{ 'notes' | translate }}</label>
                                             <textarea class="form-control" id="notes" name="notes" [(ngModel)]="bill.notes" [disabled]="!editMode"></textarea>
+                                            <span class="help-block text-danger" *ngIf="errors.notes" [innerHTML]="errors.notes | translate"></span>
                                         </div>
                                     </div>
                                 </div>

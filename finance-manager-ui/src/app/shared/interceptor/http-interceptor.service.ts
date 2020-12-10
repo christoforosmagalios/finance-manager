@@ -19,7 +19,7 @@ export class HttpInterceptorService implements HttpInterceptor {
                 this.loader.hide();
                 // Display error toaster.
                 this.utilsService.showError(error.error.message);
-                return throwError(error.error.message);
+                return throwError(error.error);
             })
         );
   }

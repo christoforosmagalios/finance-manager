@@ -108,4 +108,13 @@ export class UtilsService {
         return obj1 && obj2 && obj1.id == obj2.id;
     }
 
+    /**
+     * Set two decimals to the given target.
+     * 
+     * @param $event The number to be parsed.
+     */
+    setTwoNumberDecimal($event) {
+        $event.target.value = parseFloat($event.target.value).toFixed(2);
+    }
+
 }
