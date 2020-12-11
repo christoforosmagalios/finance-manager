@@ -60,6 +60,7 @@
     "error.not.null": "Please fill in the field.",
     "error.size.max.250": "The allowed number of characters is 250.",
     "error.size.max.500": "The allowed number of characters is 500.",
+    "error.bill.is.already.link": "This Bill is already linked to another transaction.",
 
     "paycheck": "Paycheck",
     "supermarket": "Supermarket",

@@ -34,4 +34,5 @@ public class BillInfoDTO extends BaseDTO {
 
   @NotNull(message = AppConstants.NOT_NULL)
   private boolean paid;
+  private Date paidOn;
 }

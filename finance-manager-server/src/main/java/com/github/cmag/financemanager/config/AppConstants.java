@@ -20,8 +20,10 @@ public class AppConstants {
   public static final String GENERIC_ERROR = "generic.error";
   // Not null error message key.
   public static final String NOT_NULL = "error.not.null";
-  // MAx size 250 error message key.
+  // Max size 250 error message key.
   public static final String MAX_SIZE_250 = "error.size.max.250";
-  // MAx size 500 error message key.
+  // Max size 500 error message key.
   public static final String MAX_SIZE_500 = "error.size.max.500";
+  // Bill already linked with another transaction error message key.
+  public static final String BILL_ALREADY_LINNKED = "error.bill.is.already.link";
 }

@@ -12,8 +12,6 @@ import lombok.Data;
 @Data
 public class BillDTO extends BillInfoDTO {
 
-  private Date paidOn;
-
   @NotNull(message = AppConstants.NOT_NULL)
   private Date consumptionFrom;
 

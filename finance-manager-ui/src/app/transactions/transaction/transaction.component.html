@@ -89,6 +89,7 @@
                                     <input id="bill-code" type="text" class="form-control" 
                                     [(ngModel)]="bill" [ngbTypeahead]="search" name="bill" (change)="onBillChange()"
                                     [resultFormatter]="billSearchFormatter" [inputFormatter]="billInputFormatter" [disabled]="!editMode" (ngModelChange)="onModelBillChange()"/>
+                                    <span class="help-block text-danger" *ngIf="errors.bill" [innerHTML]="errors.bill | translate"></span>
                                 </div>
                             </div>
                             <!-- Bill description linked to this transaction -->

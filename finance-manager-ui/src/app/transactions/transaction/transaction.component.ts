@@ -50,7 +50,8 @@ export class TransactionComponent implements OnInit {
     notes: null,
     description: null,
     amount: null,
-    date: null
+    date: null,
+    bill: null
   };
 
   constructor(

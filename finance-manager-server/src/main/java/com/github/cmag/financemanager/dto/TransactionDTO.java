@@ -1,6 +1,7 @@
 package com.github.cmag.financemanager.dto;
 
 import com.github.cmag.financemanager.config.AppConstants;
+import com.github.cmag.financemanager.util.validation.NotAlreadyLinked;
 import java.util.Date;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import lombok.Data;
  * DTO representation of a Transaction.
  */
 @Data
+@NotAlreadyLinked
 public class TransactionDTO extends BaseDTO {
 
   @NotNull(message = AppConstants.NOT_NULL)

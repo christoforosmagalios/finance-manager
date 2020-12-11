@@ -31,7 +31,6 @@ export class BillDTO extends BaseDTO {
         this.enableDelete = false;
         this.issuedOn = new Date();
         this.dueDate = new Date();
-        this.paidOn = new Date();
         this.consumptionFrom = new Date();
         this.consumptionTo = new Date();
         this.amount = 0;
