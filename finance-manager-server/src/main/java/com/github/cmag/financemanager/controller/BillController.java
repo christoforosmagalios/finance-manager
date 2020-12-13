@@ -1,7 +1,6 @@
 package com.github.cmag.financemanager.controller;
 
 import com.github.cmag.financemanager.dto.BillDTO;
-import com.github.cmag.financemanager.dto.BillInfoDTO;
 import com.github.cmag.financemanager.dto.UploadDTO;
 import com.github.cmag.financemanager.model.Bill;
 import com.github.cmag.financemanager.service.BillService;
@@ -58,13 +57,13 @@ public class BillController extends BaseController<BillDTO, Bill> {
     }
 
     /**
-     * Find all the entities by taking into account the given Pageable.
+     * Find all the bills by taking into account the given Pageable.
      *
      * @param pageable Contains pagination info.
      * @return The Page result.
      */
-    @GetMapping("/paginatedBills")
-    public Page<BillInfoDTO> findAllPaginated(Pageable pageable) {
+    @GetMapping("/paginated")
+    public Page<BillDTO> findAll(Pageable pageable) {
         return billService.findAllPaginated(pageable);
     }
 
@@ -72,10 +71,10 @@ public class BillController extends BaseController<BillDTO, Bill> {
      * Find the bills whose code start with the given text.
      *
      * @param text The text to search with.
-     * @return A List of BillInfoDTO.
+     * @return A List of BillDTO.
      */
     @GetMapping("/findByCode/{text}")
-    public List<BillInfoDTO> findByCode(@PathVariable String text) {
+    public List<BillDTO> findByCode(@PathVariable String text) {
         return billService.filterByCode(text);
     }
 }

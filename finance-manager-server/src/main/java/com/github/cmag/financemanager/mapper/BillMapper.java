@@ -1,12 +1,13 @@
 package com.github.cmag.financemanager.mapper;
 
 import com.github.cmag.financemanager.dto.BillDTO;
-import com.github.cmag.financemanager.dto.BillInfoDTO;
+import com.github.cmag.financemanager.es.index.BillIndex;
 import com.github.cmag.financemanager.model.Bill;
 import com.github.cmag.financemanager.service.FileService;
 import liquibase.util.StringUtils;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,12 +18,31 @@ public abstract class BillMapper extends BaseMapper<BillDTO, Bill> {
   private FileService fileService;
 
   /**
-   * Map a Bill to a BillInfoDTO.
+   * Map a BillIndex to a BillDTO.
    *
-   * @param bill The Bill to be mapped.
-   * @return A BillInfoDTO.
+   * @param billIndex The BillIndex.
+   * @return The mapped BillDTO.
    */
-  public abstract BillInfoDTO mapToInfo(Bill bill);
+  @Mapping(source = "billCategoryName", target = "billCategory.name")
+  public abstract BillDTO mapToDTO(BillIndex billIndex);
+
+  /**
+   * Map a Bill to a BillIndex.
+   *
+   * @param bill The Bill.
+   * @return The mapped BillIndex.
+   */
+  @Mapping(source = "billCategory.name", target = "billCategoryName")
+  public abstract BillIndex mapToIndex(Bill bill);
+
+  /**
+   * Map a BillDTO to a BillIndex.
+   *
+   * @param billDTO The BillDTO.
+   * @return The mapped BillIndex.
+   */
+  @Mapping(source = "billCategory.name", target = "billCategoryName")
+  public abstract BillIndex mapToIndex(BillDTO billDTO);
 
   /**
    * Get the bill image and convert it to base64.

@@ -6,8 +6,6 @@ import com.github.cmag.financemanager.service.BaseService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,16 +60,5 @@ public class BaseController<D extends BaseDTO, E extends BaseEntity> {
   @DeleteMapping("{id}")
   public void delete(@PathVariable String id) {
     baseService.delete(id);
-  }
-
-  /**
-   * Find all the entities by taking into account the given Pageable.
-   *
-   * @param pageable Contains pagination info.
-   * @return The Page result.
-   */
-  @GetMapping("/paginated")
-  public Page<D> findAll(Pageable pageable) {
-    return baseService.findAll(pageable);
   }
 }

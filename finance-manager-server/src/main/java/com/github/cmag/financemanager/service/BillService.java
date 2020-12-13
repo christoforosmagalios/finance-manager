@@ -2,7 +2,8 @@ package com.github.cmag.financemanager.service;
 
 import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.BillDTO;
-import com.github.cmag.financemanager.dto.BillInfoDTO;
+import com.github.cmag.financemanager.es.index.BillIndex;
+import com.github.cmag.financemanager.es.repository.BillEsRepository;
 import com.github.cmag.financemanager.mapper.BillMapper;
 import com.github.cmag.financemanager.model.Bill;
 import com.github.cmag.financemanager.repository.BillRepository;
@@ -33,6 +34,9 @@ public class BillService extends BaseService<BillDTO, Bill> {
   private BillRepository billRepository;
 
   @Autowired
+  private BillEsRepository es;
+
+  @Autowired
   private BillMapper mapper;
 
   @Value("${finance.manager.bill.images.path}")
@@ -56,7 +60,9 @@ public class BillService extends BaseService<BillDTO, Bill> {
     // Replace the new image with the old one.
     billDTO.setImgPath(fileService.copy(billDTO.getImgPath(), existingImg, imagesPath));
 
-    return super.save(billDTO);
+    BillDTO bill = super.save(billDTO);
+    es.save(mapper.mapToIndex(bill));
+    return bill;
   }
 
   /**
@@ -65,32 +71,32 @@ public class BillService extends BaseService<BillDTO, Bill> {
    * @return A Page that contains the bills as well as the total number of bills and other
    * information.
    */
-  public Page<BillInfoDTO> findAllPaginated(Pageable pageable) {
+  public Page<BillDTO> findAllPaginated(Pageable pageable) {
     // If unsorted, set default sorting.
     if (!pageable.getSort().isSorted()) {
       pageable = PageRequest.of(pageable.getPageNumber(),
           pageable.getPageSize(), Sort.by(AppConstants.UPDATED_ON).descending());
     }
 
-    Page<Bill> page = billRepository.findAll(pageable);
-    return page.map(bill -> mapper.mapToInfo(bill));
+    Page<BillIndex> page = es.findAll(pageable);
+    return page.map(bill -> mapper.mapToDTO(bill));
   }
 
   /**
    * Find the bills whose code start with the given text.
    *
    * @param text The text to search with.
-   * @return A List of BillInfoDTO.
+   * @return A List of BillDTO.
    */
-  public List<BillInfoDTO> filterByCode(String text) {
+  public List<BillDTO> filterByCode(String text) {
     // Do not search for bills if the given text is null or less than 3 characters.
     if (StringUtils.isEmpty(text) || text.length() < 3) {
       return new ArrayList<>();
     }
 
     // Find the bills whose code start with the given text.
-    return billRepository.findByCodeStartsWith(text).stream()
-        .map(bill -> mapper.mapToInfo(bill))
+    return es.findByCodeStartsWith(text).stream()
+        .map(bill -> mapper.mapToDTO(bill))
         .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
   }
@@ -98,14 +104,26 @@ public class BillService extends BaseService<BillDTO, Bill> {
   /**
    * Update the given bill to paid.
    *
-   * @param billInfoDTO The bill to be updated.
+   * @param billDTO The bill to be updated.
    */
-  public void updateToPaid(BillInfoDTO billInfoDTO) {
-    Bill bill = billRepository.getOne(billInfoDTO.getId());
+  public void updateToPaid(BillDTO billDTO) {
+    Bill bill = billRepository.getOne(billDTO.getId());
     if (!bill.isPaid()) {
       bill.setPaid(true);
       bill.setPaidOn(new Date());
-      billRepository.save(bill);
+      super.save(mapper.map(bill));
+      es.save(mapper.mapToIndex(bill));
     }
+  }
+
+  /**
+   * Delete and unindex the bill with the given id.
+   *
+   * @param id The bill id.
+   */
+  @Override
+  public void delete(String id) {
+    billRepository.deleteById(id);
+    es.deleteById(id);
   }
 }
