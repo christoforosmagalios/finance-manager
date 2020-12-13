@@ -1,4 +1,4 @@
-package com.github.cmag.financemanager.exception;
+package com.github.cmag.financemanager.util.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

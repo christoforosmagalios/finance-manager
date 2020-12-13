@@ -1,4 +1,4 @@
-package com.github.cmag.financemanager.exception;
+package com.github.cmag.financemanager.util.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

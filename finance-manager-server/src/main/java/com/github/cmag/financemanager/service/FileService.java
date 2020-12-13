@@ -2,7 +2,7 @@ package com.github.cmag.financemanager.service;
 
 import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.UploadDTO;
-import com.github.cmag.financemanager.exception.FinanceManagerException;
+import com.github.cmag.financemanager.util.exception.FinanceManagerException;
 import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
