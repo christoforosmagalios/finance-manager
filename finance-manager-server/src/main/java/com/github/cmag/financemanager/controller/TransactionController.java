@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,5 +45,25 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
   @GetMapping("/paginated")
   public Page<TransactionDTO> findAll(Pageable pageable) {
     return transactionService.findAllPaginated(pageable);
+  }
+
+  /**
+   * Get the current month's transaction amount based on the given type.
+   *
+   * @return The monthly total earning amount.
+   */
+  @GetMapping("/monthlyTransactionsAmount/{type}")
+  public double getMonthlyTransactionAmount(@PathVariable boolean type) {
+    return this.transactionService.getMonthlyTransactionAmount(type);
+  }
+
+  /**
+   * Calculate the annual balance.
+   *
+   * @return The annual balance.
+   */
+  @GetMapping("/balance")
+  public double getAnnualBalance() {
+    return this.transactionService.getAnnualBalance();
   }
 }

@@ -9,14 +9,35 @@ import { DashboardService } from './dashboard.service';
 export class DashboardComponent implements OnInit {
   // The monthly pending amount.
   pending: number;
+  // The monthly spending amount.
+  spendings: number;
+  // The monthly earnings amount.
+  earnings: number;
+  // The annual balance amount.
+  balance: number;
 
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
     // Get the pending amount.
-    this.dashboardService.getPending().subscribe((amount: number) => {
+    this.dashboardService.getPending().subscribe(amount => {
       this.pending = amount;
-    })
+    });
+
+    // Get the spendings amount.
+    this.dashboardService.getMonthlyTransactionAmount(true).subscribe(amount => {
+      this.spendings = amount;
+    });
+
+    // Get the earnings amount.
+    this.dashboardService.getMonthlyTransactionAmount(false).subscribe(amount => {
+      this.earnings = amount;
+    });
+    
+    // Get the annual balance.
+    this.dashboardService.getAnnualBalance().subscribe(amount => {
+      this.balance = amount;
+    });
   }
 
 }

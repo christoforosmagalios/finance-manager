@@ -5,6 +5,7 @@ import { Constants } from '../shared/constants/constants';
 @Injectable({providedIn: 'root'})
 export class DashboardService {
     billEndopoint = Constants.ENTITY.BILL;
+    transactionEndopoint = Constants.ENTITY.TRANSACTION;
 
     constructor(private http: HttpClient) {}
 
@@ -12,6 +13,20 @@ export class DashboardService {
      * Get the current month's pending amount for the unpaid bills.
      */
     getPending() {
-        return this.http.get(Constants.API + '/' + this.billEndopoint + '/pending');
+        return this.http.get<number>(Constants.API + '/' + this.billEndopoint + '/pending');
+    }
+
+    /**
+     * Get the current month's transaction amount based on the given type.
+     */
+    getMonthlyTransactionAmount(type: boolean) {
+        return this.http.get<number>(Constants.API + '/' + this.transactionEndopoint + '/monthlyTransactionsAmount/' + type);
+    }
+
+    /**
+     * Get the annual balance.
+     */
+    getAnnualBalance() {
+        return this.http.get<number>(Constants.API + '/' + this.transactionEndopoint + '/balance');
     }
 }

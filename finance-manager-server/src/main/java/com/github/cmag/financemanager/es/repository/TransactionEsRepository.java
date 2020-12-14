@@ -21,9 +21,19 @@ public interface TransactionEsRepository extends ElasticsearchRepository<Transac
    * Find the Transaction that are linked with the given billId and do not have the given
    * transactionId.
    *
-   * @param billId The bill id.
+   * @param billId        The bill id.
    * @param transactionId The transaction id.
-   * @return A List of transactions.
+   * @return A list of transactions.
    */
   List<TransactionIndex> findByBillIdAndIdNot(String billId, String transactionId);
+
+  /**
+   * Find the transaction with the given type and between the given dates.
+   *
+   * @param type The transaction type.
+   * @param from From date (in milliseconds)
+   * @param to   To date (in milliseconds)
+   * @return A list of transaction.
+   */
+  List<TransactionIndex> findByTypeAndDateBetween(boolean type, long from, long to);
 }

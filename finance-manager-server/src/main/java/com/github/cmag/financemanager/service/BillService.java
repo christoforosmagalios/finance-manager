@@ -7,12 +7,9 @@ import com.github.cmag.financemanager.es.repository.BillEsRepository;
 import com.github.cmag.financemanager.mapper.BillMapper;
 import com.github.cmag.financemanager.model.Bill;
 import com.github.cmag.financemanager.repository.BillRepository;
+import com.github.cmag.financemanager.util.Utils;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import liquibase.util.StringUtils;
@@ -137,20 +134,11 @@ public class BillService extends BaseService<BillDTO, Bill> {
    * @return The pending amount.
    */
   public double getPendingAmount() {
-    // Get current year.
-    int year = Calendar.getInstance().get(Calendar.YEAR);
-    // Get current month.
-    int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
-    // Get first and last of the current month.
-    YearMonth yearMonth = YearMonth.of(year, month);
-    LocalDate first = yearMonth.atDay(1);
-    LocalDate last = yearMonth.atEndOfMonth();
-
-    long start = first.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
-    long end = last.atTime(23, 59).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    long from = Utils.getFirstDayOfMonthInMil();
+    long to = Utils.getLastDayOfMonthInMil();
 
     // Fetch bills and sum their amount.
-    return es.findByPaidFalseAndDueDateBetween(start, end)
+    return es.findByPaidFalseAndDueDateBetween(from, to)
         .stream().mapToDouble(o -> o.getAmount()).sum();
   }
 }

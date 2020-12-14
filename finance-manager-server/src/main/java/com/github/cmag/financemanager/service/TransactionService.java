@@ -7,6 +7,7 @@ import com.github.cmag.financemanager.es.repository.TransactionEsRepository;
 import com.github.cmag.financemanager.mapper.TransactionMapper;
 import com.github.cmag.financemanager.model.Transaction;
 import com.github.cmag.financemanager.repository.TransactionRepository;
+import com.github.cmag.financemanager.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -75,7 +76,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * Find the transactions that are linked with the given bill id and do not have the given
    * transaction id.
    *
-   * @param billId The Bill id.
+   * @param billId        The Bill id.
    * @param transactionId The transaction Id.
    * @return A list of TransactionDTO.
    */
@@ -99,5 +100,39 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
   public void delete(String id) {
     transactionRepository.deleteById(id);
     es.deleteById(id);
+  }
+
+  /**
+   * Get the current month's transaction amount based on the given type.
+   *
+   * @param type The transaction type.
+   * @return The monthly total spending amount.
+   */
+  public double getMonthlyTransactionAmount(boolean type) {
+    long start = Utils.getFirstDayOfMonthInMil();
+    long end = Utils.getLastDayOfMonthInMil();
+
+    // Fetch transactions and sum their amount.
+    return es.findByTypeAndDateBetween(type, start, end)
+        .stream().mapToDouble(o -> o.getAmount()).sum();
+  }
+
+  /**
+   * Calculate the annual balance.
+   *
+   * @return The annual balance.
+   */
+  public double getAnnualBalance() {
+    long from = Utils.getFirstDayOfYearInMil();
+    long to = Utils.getLastDayOfYearInMil();
+
+    // Get the annual earnings.
+    double earnings = es.findByTypeAndDateBetween(false, from, to)
+        .stream().mapToDouble(o -> o.getAmount()).sum();
+    // Get teh annual spendings.
+    double spendings = es.findByTypeAndDateBetween(true, from, to)
+        .stream().mapToDouble(o -> o.getAmount()).sum();
+
+    return earnings - spendings;
   }
 }
