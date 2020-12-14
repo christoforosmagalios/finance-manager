@@ -8,7 +8,11 @@ import com.github.cmag.financemanager.mapper.BillMapper;
 import com.github.cmag.financemanager.model.Bill;
 import com.github.cmag.financemanager.repository.BillRepository;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import liquibase.util.StringUtils;
@@ -125,5 +129,28 @@ public class BillService extends BaseService<BillDTO, Bill> {
   public void delete(String id) {
     billRepository.deleteById(id);
     es.deleteById(id);
+  }
+
+  /**
+   * Get the current month's pending amount for the unpaid bills.
+   *
+   * @return The pending amount.
+   */
+  public double getPendingAmount() {
+    // Get current year.
+    int year = Calendar.getInstance().get(Calendar.YEAR);
+    // Get current month.
+    int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+    // Get first and last of the current month.
+    YearMonth yearMonth = YearMonth.of(year, month);
+    LocalDate first = yearMonth.atDay(1);
+    LocalDate last = yearMonth.atEndOfMonth();
+
+    long start = first.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    long end = last.atTime(23, 59).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+
+    // Fetch bills and sum their amount.
+    return es.findByPaidFalseAndDueDateBetween(start, end)
+        .stream().mapToDouble(o -> o.getAmount()).sum();
   }
 }
