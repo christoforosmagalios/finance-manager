@@ -5,9 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class GroupedExpenseDTO {
-
+public class GroupedTransactionInfoDTO {
   private String category;
   private double amount;
-
 }

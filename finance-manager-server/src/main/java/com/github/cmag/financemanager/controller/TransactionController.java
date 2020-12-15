@@ -1,6 +1,6 @@
 package com.github.cmag.financemanager.controller;
 
-import com.github.cmag.financemanager.dto.GroupedExpenseDTO;
+import com.github.cmag.financemanager.dto.GroupedTransactionDTO;
 import com.github.cmag.financemanager.dto.TransactionDTO;
 import com.github.cmag.financemanager.model.Transaction;
 import com.github.cmag.financemanager.service.TransactionService;
@@ -75,7 +75,7 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
    * @return A list of grouped expenses.
    */
   @GetMapping("/groupedExpenses")
-  public List<GroupedExpenseDTO> getGroupedExpenses() {
+  public GroupedTransactionDTO getGroupedExpenses() {
     return this.transactionService.getGroupedExpenses();
   }
 }

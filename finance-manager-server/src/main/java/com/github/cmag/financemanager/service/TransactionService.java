@@ -5,7 +5,8 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 import com.github.cmag.financemanager.config.AppConstants;
-import com.github.cmag.financemanager.dto.GroupedExpenseDTO;
+import com.github.cmag.financemanager.dto.GroupedTransactionDTO;
+import com.github.cmag.financemanager.dto.GroupedTransactionInfoDTO;
 import com.github.cmag.financemanager.dto.TransactionDTO;
 import com.github.cmag.financemanager.es.index.TransactionIndex;
 import com.github.cmag.financemanager.es.repository.TransactionEsRepository;
@@ -14,8 +15,8 @@ import com.github.cmag.financemanager.model.Transaction;
 import com.github.cmag.financemanager.repository.TransactionRepository;
 import com.github.cmag.financemanager.util.Utils;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,17 +148,19 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    *
    * @return A list of grouped expenses.
    */
-  public List<GroupedExpenseDTO> getGroupedExpenses() {
+  public GroupedTransactionDTO getGroupedExpenses() {
     long from = Utils.getFirstDayOfMonthInMil();
     long to = Utils.getLastDayOfMonthInMil();
     // Get the expense transactions.
     List<TransactionIndex> transactions = es.findByTypeAndDateBetween(true, from, to);
 
-    return transactions.stream().collect(groupingBy(TransactionIndex::getCategoryName))
+    List<GroupedTransactionInfoDTO> transactionInfos = transactions.stream().collect(groupingBy(TransactionIndex::getCategoryName))
         .entrySet().stream().map(x -> {
           double sumAmount = x.getValue().stream().mapToDouble(TransactionIndex::getAmount).sum();
-          return new GroupedExpenseDTO(x.getKey(), sumAmount);
+          return new GroupedTransactionInfoDTO(x.getKey(), sumAmount);
         }).collect(toList());
+
+    return new GroupedTransactionDTO(new Date(from), new Date(to), transactionInfos);
 
   }
 }
