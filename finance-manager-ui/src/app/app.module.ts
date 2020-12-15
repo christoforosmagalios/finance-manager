@@ -18,6 +18,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BillsModule } from './bills/bills.module';
 import { BillsRoutingModule } from './bills/bills.routing.module';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { BillsRoutingModule } from './bills/bills.routing.module';
     ToastrModule.forRoot(),
     TransactionsModule,
     BillsModule,
+    ChartsModule,
     TranslateModule.forRoot({
       loader: {
       provide: TranslateLoader,

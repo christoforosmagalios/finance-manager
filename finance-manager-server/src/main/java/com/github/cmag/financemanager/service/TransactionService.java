@@ -1,6 +1,11 @@
 package com.github.cmag.financemanager.service;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
+
 import com.github.cmag.financemanager.config.AppConstants;
+import com.github.cmag.financemanager.dto.GroupedExpenseDTO;
 import com.github.cmag.financemanager.dto.TransactionDTO;
 import com.github.cmag.financemanager.es.index.TransactionIndex;
 import com.github.cmag.financemanager.es.repository.TransactionEsRepository;
@@ -10,6 +15,7 @@ import com.github.cmag.financemanager.repository.TransactionRepository;
 import com.github.cmag.financemanager.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +82,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * Find the transactions that are linked with the given bill id and do not have the given
    * transaction id.
    *
-   * @param billId        The Bill id.
+   * @param billId The Bill id.
    * @param transactionId The transaction Id.
    * @return A list of TransactionDTO.
    */
@@ -109,11 +115,11 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * @return The monthly total spending amount.
    */
   public double getMonthlyTransactionAmount(boolean type) {
-    long start = Utils.getFirstDayOfMonthInMil();
-    long end = Utils.getLastDayOfMonthInMil();
+    long from = Utils.getFirstDayOfMonthInMil();
+    long to = Utils.getLastDayOfMonthInMil();
 
     // Fetch transactions and sum their amount.
-    return es.findByTypeAndDateBetween(type, start, end)
+    return es.findByTypeAndDateBetween(type, from, to)
         .stream().mapToDouble(o -> o.getAmount()).sum();
   }
 
@@ -134,5 +140,24 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
         .stream().mapToDouble(o -> o.getAmount()).sum();
 
     return earnings - spendings;
+  }
+
+  /**
+   * Get expenses grouped by category.
+   *
+   * @return A list of grouped expenses.
+   */
+  public List<GroupedExpenseDTO> getGroupedExpenses() {
+    long from = Utils.getFirstDayOfMonthInMil();
+    long to = Utils.getLastDayOfMonthInMil();
+    // Get the expense transactions.
+    List<TransactionIndex> transactions = es.findByTypeAndDateBetween(true, from, to);
+
+    return transactions.stream().collect(groupingBy(TransactionIndex::getCategoryName))
+        .entrySet().stream().map(x -> {
+          double sumAmount = x.getValue().stream().mapToDouble(TransactionIndex::getAmount).sum();
+          return new GroupedExpenseDTO(x.getKey(), sumAmount);
+        }).collect(toList());
+
   }
 }

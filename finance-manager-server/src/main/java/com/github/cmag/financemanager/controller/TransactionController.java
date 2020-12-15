@@ -1,8 +1,10 @@
 package com.github.cmag.financemanager.controller;
 
+import com.github.cmag.financemanager.dto.GroupedExpenseDTO;
 import com.github.cmag.financemanager.dto.TransactionDTO;
 import com.github.cmag.financemanager.model.Transaction;
 import com.github.cmag.financemanager.service.TransactionService;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -65,5 +67,15 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
   @GetMapping("/balance")
   public double getAnnualBalance() {
     return this.transactionService.getAnnualBalance();
+  }
+
+  /**
+   * Get expenses grouped by category.
+   *
+   * @return A list of grouped expenses.
+   */
+  @GetMapping("/groupedExpenses")
+  public List<GroupedExpenseDTO> getGroupedExpenses() {
+    return this.transactionService.getGroupedExpenses();
   }
 }
