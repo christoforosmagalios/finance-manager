@@ -58,7 +58,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     if (!Objects.isNull(transactionDTO.getBill())) {
       this.billService.updateToPaid(transactionDTO.getBill());
     }
-    es.save(mapper.mapToIndex(transactionDTO));
+    es.save(mapper.mapToIndex(transaction));
     return transaction;
   }
 
