@@ -6,17 +6,18 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
         <changeSet author="finance -manager" id="0001">
             <sql>
-				DROP TABLE IF EXISTS `category`;
-				CREATE TABLE IF NOT EXISTS `category` (
-				  `ID` varchar(36) NOT NULL COMMENT 'The Category Id',
-				  `NAME` varchar(255) NOT NULL COMMENT 'The Category name (Translation key)',
-				  `CODE` varchar(255) NOT NULL COMMENT 'The Category code',
-				  `ORDER` int(11) NOT NULL DEFAULT 0 COMMENT 'The Category order',
+				DROP TABLE IF EXISTS `transaction_category`;
+				CREATE TABLE IF NOT EXISTS `transaction_category` (
+				  `ID` varchar(36) NOT NULL COMMENT 'The Transaction Category Id',
+				  `NAME` varchar(255) NOT NULL COMMENT 'The Transaction Category name (Translation key)',
+				  `CODE` varchar(255) NOT NULL COMMENT 'The Transaction Category code',
+					`COLOR` varchar(20) COMMENT 'The Transaction Category color.',
+				  `ORDER` int(11) NOT NULL DEFAULT 0 COMMENT 'The Transaction Category order',
 				  `CREATED_ON` datetime NOT NULL COMMENT 'Created on',
 				  `UPDATED_ON` datetime NOT NULL COMMENT 'Updated on',
 				  PRIMARY KEY (`ID`),
 				  UNIQUE KEY `CODE` (`CODE`)
-				) DEFAULT CHARSET=utf8 COMMENT='The Transaction category.';
+				) DEFAULT CHARSET=utf8 COMMENT='The Transaction Category.';
 
 				DROP TABLE IF EXISTS `bill_category`;
 				CREATE TABLE IF NOT EXISTS `bill_category` (
@@ -60,7 +61,7 @@
 				CREATE TABLE IF NOT EXISTS `transaction` (
 				  `ID` varchar(36) NOT NULL COMMENT 'The Transaction Id',
 				  `TYPE` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Transaction type, 0 stands for income, 1 stands for expense',
-				  `FK_CATEGORY_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the category table',
+				  `FK_TRANSACTION_CATEGORY_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the transactionCategory table',
 				  `FK_BILL_ID` varchar(36) COMMENT 'Foreign key to the bill table. The transaction is linked to this bill.',
 				  `DATE` date NOT NULL COMMENT 'The Transaction date',
 				  `DESCRIPTION` varchar(255) NOT NULL COMMENT 'The Transaction description',
@@ -69,9 +70,9 @@
 				  `CREATED_ON` datetime NOT NULL COMMENT 'Created on',
 				  `UPDATED_ON` datetime NOT NULL COMMENT 'Updated on',
 				  PRIMARY KEY (`ID`),
-				  KEY `FK_TRANSACTION_CATEGORY` (`FK_CATEGORY_ID`),
+				  KEY `FK_TRANSACTION_CATEGORY` (`FK_TRANSACTION_CATEGORY_ID`),
 				  KEY `FK_TRANSACTION_BILL` (`FK_BILL_ID`),
-				  CONSTRAINT `FK_TRANSACTION_CATEGORY` FOREIGN KEY (`FK_CATEGORY_ID`) REFERENCES `category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+				  CONSTRAINT `FK_TRANSACTION_CATEGORY` FOREIGN KEY (`FK_TRANSACTION_CATEGORY_ID`) REFERENCES `transaction_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 				  CONSTRAINT `FK_TRANSACTION_BILL` FOREIGN KEY (`FK_BILL_ID`) REFERENCES `bill` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 
 				) DEFAULT CHARSET=utf8 COMMENT='Information about a transaction.';

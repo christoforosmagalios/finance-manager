@@ -1,5 +1,6 @@
-package com.github.cmag.financemanager.model;
+package com.github.cmag.financemanager.model.master.data;
 
+import com.github.cmag.financemanager.model.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import lombok.Data;

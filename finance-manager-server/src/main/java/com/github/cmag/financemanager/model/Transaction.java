@@ -1,5 +1,6 @@
 package com.github.cmag.financemanager.model;
 
+import com.github.cmag.financemanager.model.master.data.TransactionCategory;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,8 +22,8 @@ public class Transaction extends BaseEntity {
   private boolean type;
 
   @ManyToOne
-  @JoinColumn(name = "fk_category_id", nullable = false)
-  private Category category;
+  @JoinColumn(name = "fk_transaction_category_id", nullable = false)
+  private TransactionCategory transactionCategory;
 
   @OneToOne
   @JoinColumn(name = "fk_bill_id")

@@ -6,7 +6,7 @@ import { Location } from '@angular/common';
 import { NgbDateParserFormatter, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateFRParserFormatter } from '../../shared/services/datepicker.formatter.service';
 import { CRUDService } from '../../shared/services/crud.service';
-import { CategoryDTO } from '../..//dto/category-dto';
+import { TransactionCategoryDTO } from '../../dto/transaction-category-dto';
 import { UtilsService } from '../../shared/services/utils.service';
 import { Constants } from '../../shared/constants/constants';
 import { Observable, of } from 'rxjs';
@@ -32,7 +32,7 @@ export class TransactionComponent implements OnInit {
   // Transaction date.
   date: NgbDate;
   // List of transaction categories.
-  categories: Array<CategoryDTO>;
+  categories: Array<TransactionCategoryDTO>;
   // Is currently searching for bill.
   searching = false;
   // Bill search failed.
@@ -45,7 +45,7 @@ export class TransactionComponent implements OnInit {
   bill = new BillDTO();
   // Error object.
   errors = {
-    category: null,
+    transactionCategory: null,
     type: null,
     notes: null,
     description: null,
@@ -79,7 +79,7 @@ export class TransactionComponent implements OnInit {
   private initForm() {
     // Find all the categories.
     this.crudService.findAll(Constants.ENTITY.CATEGORY)
-    .subscribe((categories: Array<CategoryDTO>) => {
+    .subscribe((categories: Array<TransactionCategoryDTO>) => {
       this.categories = categories;
     });
 

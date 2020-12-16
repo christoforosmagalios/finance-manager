@@ -1,5 +1,6 @@
-package com.github.cmag.financemanager.dto;
+package com.github.cmag.financemanager.dto.master.data;
 
+import com.github.cmag.financemanager.dto.BaseDTO;
 import lombok.Data;
 
 /**

@@ -17,7 +17,7 @@ public abstract class TransactionMapper extends BaseMapper<TransactionDTO, Trans
    */
   @Mapping(source = "bill.id", target = "billId")
   @Mapping(source = "bill.code", target = "billCode")
-  @Mapping(source = "category.name", target = "categoryName")
+  @Mapping(source = "transactionCategory.name", target = "categoryName")
   public abstract TransactionIndex mapToIndex(Transaction transaction);
 
   /**
@@ -28,7 +28,7 @@ public abstract class TransactionMapper extends BaseMapper<TransactionDTO, Trans
    */
   @Mapping(source = "bill.id", target = "billId")
   @Mapping(source = "bill.code", target = "billCode")
-  @Mapping(source = "category.name", target = "categoryName")
+  @Mapping(source = "transactionCategory.name", target = "categoryName")
   public abstract TransactionIndex mapToIndex(TransactionDTO transactionDTO);
 
   /**
@@ -39,6 +39,6 @@ public abstract class TransactionMapper extends BaseMapper<TransactionDTO, Trans
    */
   @Mapping(source = "billId", target = "bill.id")
   @Mapping(source = "billCode", target = "bill.code")
-  @Mapping(source = "categoryName", target = "category.name")
+  @Mapping(source = "categoryName", target = "transactionCategory.name")
   public abstract TransactionDTO mapToDTO(TransactionIndex transactionIndex);
 }

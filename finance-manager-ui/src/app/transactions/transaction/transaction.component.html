@@ -34,14 +34,14 @@
                             <!-- Transaction Category -->
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="category">{{ 'category' | translate }}</label>
-                                    <select class="form-control" id="category" name="category" [(ngModel)]="transaction.category"
+                                    <label for="transactionCategory">{{ 'category' | translate }}</label>
+                                    <select class="form-control" id="transactionCategory" name="transactionCategory" [(ngModel)]="transaction.transactionCategory"
                                     [compareWith]="utils.compareById" [disabled]="!editMode">
-                                        <option *ngFor="let category of categories;" [ngValue]="category">
-                                            {{ category.name | translate }}
+                                        <option *ngFor="let transactionCategory of categories;" [ngValue]="transactionCategory">
+                                            {{ transactionCategory.name | translate }}
                                         </option>
                                     </select>
-                                    <span class="help-block text-danger" *ngIf="errors.category" [innerHTML]="errors.category | translate"></span>
+                                    <span class="help-block text-danger" *ngIf="errors.transactionCategory" [innerHTML]="errors.transactionCategory | translate"></span>
                                 </div>
                             </div>
                             <!-- Transaction Date -->

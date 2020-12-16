@@ -38,7 +38,7 @@
                                         <div class="fm-dot fm-income-dot" *ngIf="!t.type" ngbTooltip="{{ 'income' | translate }}"></div>
                                         <div class="fm-dot fm-expense-dot" *ngIf="t.type" ngbTooltip="{{ 'expense' | translate }}"></div>
                                     </td>
-                                    <td> {{ t.category.name | translate }}</td>
+                                    <td> {{ t.transactionCategory.name | translate }}</td>
                                     <td> {{ t.description }}</td>
                                     <td> {{ t.date | date:'dd/MM/yyyy' }}</td>
                                     <td> {{ t.amount | currency:'EUR' }} </td>

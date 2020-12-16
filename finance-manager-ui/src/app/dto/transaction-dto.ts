@@ -1,11 +1,11 @@
 import { BaseDTO } from './base-dto';
-import { CategoryDTO } from './category-dto';
+import { TransactionCategoryDTO } from './transaction-category-dto';
 import { BillDTO } from './bill-dto';
 
 export class TransactionDTO extends BaseDTO {
 
     public type: boolean;
-    public category: CategoryDTO;
+    public transactionCategory: TransactionCategoryDTO;
     public date: Date;
     public description: string;
     public notes: string;

@@ -6,29 +6,29 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
         <changeSet author="finance -manager" id="0002">
             <sql>
-							INSERT INTO `category` (`ID`, `NAME`, `CODE`, `ORDER`, `CREATED_ON`, `UPDATED_ON`) VALUES
-							('97ad74d6-3237-11eb-adc1-0242ac120000', 'paycheck', 'TC001', 0, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120001', 'supermarket', 'TC002', 1, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120002', 'education', 'TC003', 2, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120003', 'games', 'TC004', 3, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120004', 'electronics', 'TC005', 4, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120005', 'food.dining', 'TC006', 5, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120006', 'car.bike.fuel', 'TC007', 6, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120007', 'others', 'TC_008', 7, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120008', 'public.transportation', 'TC009', 8, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120009', 'car.bike.insurance', 'TC010', 9, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120010', 'bills', 'TC011', 10, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120011', 'hobbies', 'TC012', 11, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120012', 'health', 'TC013', 12, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120013', 'gifts', 'TC014', 13, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120014', 'car.bike.service', 'TC015', 14, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120015', 'personal.care', 'TC016', 15, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120016', 'pets', 'TC017', 16, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120017', 'clothing', 'TC018', 17, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120018', 'travel', 'TC019', 18, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120019', 'car.bike.tax', 'TC020', 19, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120020', 'car.bike.mot', 'TC021', 20, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120021', 'home', 'TC022', 21, NOW(), NOW());
+							INSERT INTO `transaction_category` (`ID`, `NAME`, `CODE`, `COLOR`, `ORDER`, `CREATED_ON`, `UPDATED_ON`) VALUES
+							('97ad74d6-3237-11eb-adc1-0242ac120000', 'paycheck', 'TC001', '#7faa9a', 0, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120001', 'supermarket', 'TC002', '#ff6384', 1, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120002', 'education', 'TC003', '#4bc0c0', 2, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120003', 'games', 'TC004', '#539954', 3, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120004', 'electronics', 'TC005', '#36a2eb', 4, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120005', 'food.dining', 'TC006', '#9966ff', 5, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120006', 'car.bike.fuel', 'TC007', '#ffce56', 6, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120007', 'others', 'TC_008', '#1f1e1d', 7, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120008', 'public.transportation', 'TC009', '#de5d4d', 8, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120009', 'car.bike.insurance', 'TC010', '#1e2733', 9, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120010', 'bills', 'TC011', '#c41234', 10, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120011', 'hobbies', 'TC012', '#30192a', 11, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120012', 'health', 'TC013', '#94d892', 12, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120013', 'gifts', 'TC014', '#0a405d', 13, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120014', 'car.bike.service', 'TC015', '#888488', 14, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120015', 'personal.care', 'TC016', '#b5cb7e', 15, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120016', 'pets', 'TC017', '#b99ab7', 16, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120017', 'clothing', 'TC018', '#ff9f40', 17, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120018', 'travel', 'TC019', '#f2e59b', 18, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120019', 'car.bike.tax', 'TC020', '#c3b188', 19, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120020', 'car.bike.mot', 'TC021', '#4d4d4c', 20, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120021', 'home', 'TC022', '#804a47', 21, NOW(), NOW());
 
 							INSERT INTO `bill_category` (`ID`, `NAME`, `CODE`, `ORDER`, `CREATED_ON`, `UPDATED_ON`) VALUES
 							('97ad74d6-3237-11eb-adc1-0242ac130000', 'electricity', 'BC001', 0, NOW(), NOW()),

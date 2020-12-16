@@ -1,6 +1,7 @@
 package com.github.cmag.financemanager.dto;
 
 import com.github.cmag.financemanager.config.AppConstants;
+import com.github.cmag.financemanager.dto.master.data.TransactionCategoryDTO;
 import com.github.cmag.financemanager.util.validation.NotAlreadyLinked;
 import java.util.Date;
 import javax.validation.constraints.NotEmpty;
@@ -16,7 +17,7 @@ import lombok.Data;
 public class TransactionDTO extends BaseDTO {
 
   @NotNull(message = AppConstants.NOT_NULL)
-  private CategoryDTO category;
+  private TransactionCategoryDTO transactionCategory;
 
   @NotNull(message = AppConstants.NOT_NULL)
   private boolean type;
