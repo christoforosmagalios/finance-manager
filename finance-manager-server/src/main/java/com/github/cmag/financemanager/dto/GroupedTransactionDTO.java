@@ -5,6 +5,9 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * DTO representation of transactions grouped by their category.
+ */
 @Data
 @AllArgsConstructor
 public class GroupedTransactionDTO {

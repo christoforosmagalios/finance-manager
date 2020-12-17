@@ -8,13 +8,13 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   // The monthly pending amount.
-  pending: number;
+  pending: number = null;
   // The monthly spending amount.
-  spendings: number;
+  spendings: number = null;
   // The monthly earnings amount.
-  earnings: number;
+  earnings: number = null;
   // The annual balance amount.
-  balance: number;
+  balance: number = null;
 
   constructor(private dashboardService: DashboardService) { }
 

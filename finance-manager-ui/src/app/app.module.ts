@@ -19,6 +19,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BillsModule } from './bills/bills.module';
 import { BillsRoutingModule } from './bills/bills.routing.module';
 import { ChartsModule } from 'ng2-charts';
+import { ExpenditureSourcesComponent } from './dashboard/expenditure-sources/expenditure-sources.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ChartsModule } from 'ng2-charts';
     ConfirmationModalComponent,
     LoaderComponent,
     DashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    ExpenditureSourcesComponent
   ],
   imports: [
     BrowserModule,

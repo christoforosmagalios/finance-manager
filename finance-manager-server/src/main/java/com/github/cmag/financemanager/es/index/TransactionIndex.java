@@ -15,6 +15,7 @@ public class TransactionIndex {
   @Id
   private String id;
   private String categoryName;
+  private String categoryColor;
   private boolean type;
   private String description;
   private double amount;

@@ -25,5 +25,13 @@ export const Constants = {
         EL: "el"
     },
     // Default Language.
-    DEFAULT_LANGUAGE: "en"
+    DEFAULT_LANGUAGE: "en",
+
+    // Array of month translation keys.
+    MONTHS: ["january", "february", "march", "april", "may", "june",
+        "july", "august", "september", "october", "november", "december"
+    ],
+
+    // Default font family.
+    FONT_FAMILY: "Nunito-Regular"
 };

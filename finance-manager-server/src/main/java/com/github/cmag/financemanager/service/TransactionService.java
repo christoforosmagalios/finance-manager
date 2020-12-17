@@ -157,7 +157,8 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     List<GroupedTransactionInfoDTO> transactionInfos = transactions.stream().collect(groupingBy(TransactionIndex::getCategoryName))
         .entrySet().stream().map(x -> {
           double sumAmount = x.getValue().stream().mapToDouble(TransactionIndex::getAmount).sum();
-          return new GroupedTransactionInfoDTO(x.getKey(), sumAmount);
+          String color = x.getValue().get(0).getCategoryColor();
+          return new GroupedTransactionInfoDTO(x.getKey(), color, sumAmount);
         }).collect(toList());
 
     return new GroupedTransactionDTO(new Date(from), new Date(to), transactionInfos);

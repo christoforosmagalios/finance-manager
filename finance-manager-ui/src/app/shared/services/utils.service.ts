@@ -79,7 +79,7 @@ export class UtilsService {
      * 
      * @param message The message to be translated.
      */
-    private translate(message: string) {
+    translate(message: string) {
         return this.translateWithDefault(message, message);
     }
 
