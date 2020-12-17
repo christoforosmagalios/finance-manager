@@ -19,6 +19,7 @@ public abstract class TransactionMapper extends BaseMapper<TransactionDTO, Trans
   @Mapping(source = "bill.code", target = "billCode")
   @Mapping(source = "transactionCategory.name", target = "categoryName")
   @Mapping(source = "transactionCategory.color", target = "categoryColor")
+  @Mapping(target = "dateReversed", expression = "java( Integer.parseInt((new java.text.SimpleDateFormat(\"yyyyMMdd\")).format(transaction.getDate())) )")
   public abstract TransactionIndex mapToIndex(Transaction transaction);
 
   /**
@@ -31,6 +32,7 @@ public abstract class TransactionMapper extends BaseMapper<TransactionDTO, Trans
   @Mapping(source = "bill.code", target = "billCode")
   @Mapping(source = "transactionCategory.name", target = "categoryName")
   @Mapping(source = "transactionCategory.color", target = "categoryColor")
+  @Mapping(target = "dateReversed", expression = "java( Integer.parseInt((new java.text.SimpleDateFormat(\"yyyyMMdd\")).format(transactionDTO.getDate())) )")
   public abstract TransactionIndex mapToIndex(TransactionDTO transactionDTO);
 
   /**

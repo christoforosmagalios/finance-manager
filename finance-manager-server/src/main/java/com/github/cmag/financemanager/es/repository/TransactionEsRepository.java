@@ -36,4 +36,14 @@ public interface TransactionEsRepository extends ElasticsearchRepository<Transac
    * @return A list of transaction.
    */
   List<TransactionIndex> findByTypeAndDateBetween(boolean type, long from, long to);
+
+  /**
+   * Find the transaction with date between the two given ones.
+   *
+   * @param from An integer date representation (format: yyyyMMdd).
+   * @param to   An integer date representation (format: yyyyMMdd).
+   * @return A List of transactions.
+   */
+  List<TransactionIndex> findByDateReversedGreaterThanEqualAndDateReversedLessThanEqual(int from,
+      int to);
 }

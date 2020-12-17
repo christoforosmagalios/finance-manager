@@ -2,12 +2,12 @@ package com.github.cmag.financemanager.service;
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
 import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.GroupedTransactionDTO;
 import com.github.cmag.financemanager.dto.GroupedTransactionInfoDTO;
 import com.github.cmag.financemanager.dto.TransactionDTO;
+import com.github.cmag.financemanager.dto.TransactionItemDTO;
 import com.github.cmag.financemanager.es.index.TransactionIndex;
 import com.github.cmag.financemanager.es.repository.TransactionEsRepository;
 import com.github.cmag.financemanager.mapper.TransactionMapper;
@@ -83,7 +83,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * Find the transactions that are linked with the given bill id and do not have the given
    * transaction id.
    *
-   * @param billId The Bill id.
+   * @param billId        The Bill id.
    * @param transactionId The transaction Id.
    * @return A list of TransactionDTO.
    */
@@ -154,7 +154,8 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     // Get the expense transactions.
     List<TransactionIndex> transactions = es.findByTypeAndDateBetween(true, from, to);
 
-    List<GroupedTransactionInfoDTO> transactionInfos = transactions.stream().collect(groupingBy(TransactionIndex::getCategoryName))
+    List<GroupedTransactionInfoDTO> transactionInfos = transactions.stream()
+        .collect(groupingBy(TransactionIndex::getCategoryName))
         .entrySet().stream().map(x -> {
           double sumAmount = x.getValue().stream().mapToDouble(TransactionIndex::getAmount).sum();
           String color = x.getValue().get(0).getCategoryColor();
@@ -162,6 +163,39 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
         }).collect(toList());
 
     return new GroupedTransactionDTO(new Date(from), new Date(to), transactionInfos);
+  }
 
+  public List<TransactionItemDTO> getTransactionsPerDay() {
+    int from = Utils.getFirstDayOfMonthReversed();
+    int to = Utils.getLastDayOfMonthReversed();
+
+    List<TransactionIndex> transactions =
+        es.findByDateReversedGreaterThanEqualAndDateReversedLessThanEqual(from, to);
+
+    List<TransactionItemDTO> result = new ArrayList<>();
+    while (from <= to) {
+      double expense = filterByDateAndType(transactions, from, false);
+      double income = filterByDateAndType(transactions, from, true);
+      String day = Utils.getDayFromReversedIntegerDate(from);
+      result.add(new TransactionItemDTO(day, income, expense));
+      from++;
+    }
+    return result;
+  }
+
+  /**
+   * Find the transactions in the given list with the given date and the given type and sum their
+   * amount.
+   *
+   * @param transactions Transaction list.
+   * @param date         An integer date representation (format: yyyyMMdd).
+   * @param type         Transaction type.
+   * @return The summed amount.
+   */
+  private double filterByDateAndType(List<TransactionIndex> transactions, final int date,
+      final boolean type) {
+    return transactions.stream()
+        .filter(t -> (t.getDateReversed() == date && t.isType() == type))
+        .mapToDouble(o -> o.getAmount()).sum();
   }
 }

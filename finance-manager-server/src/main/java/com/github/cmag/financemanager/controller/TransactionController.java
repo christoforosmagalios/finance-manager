@@ -2,6 +2,7 @@ package com.github.cmag.financemanager.controller;
 
 import com.github.cmag.financemanager.dto.GroupedTransactionDTO;
 import com.github.cmag.financemanager.dto.TransactionDTO;
+import com.github.cmag.financemanager.dto.TransactionItemDTO;
 import com.github.cmag.financemanager.model.Transaction;
 import com.github.cmag.financemanager.service.TransactionService;
 import java.util.List;
@@ -77,5 +78,10 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
   @GetMapping("/groupedExpenses")
   public GroupedTransactionDTO getGroupedExpenses() {
     return this.transactionService.getGroupedExpenses();
+  }
+
+  @GetMapping("/transactionsPerDay")
+  public List<TransactionItemDTO> getTransactionsPerDay() {
+    return this.transactionService.getTransactionsPerDay();
   }
 }

@@ -24,4 +24,5 @@ public class TransactionIndex {
   private String billCode;
   private Date createdOn;
   private Date updatedOn;
+  private int dateReversed;
 }
