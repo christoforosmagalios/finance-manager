@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { TransactionItemDTO } from '../dto/transaction-item-dto';
+import { Constants } from '../shared/constants/constants';
+import { UtilsService } from '../shared/services/utils.service';
+import { TransactionService } from '../transactions/transaction.service';
 import { DashboardService } from './dashboard.service';
 
 @Component({
@@ -8,15 +12,22 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   // The monthly pending amount.
-  pending: number = null;
+  public pending: number = null;
   // The monthly spending amount.
-  spendings: number = null;
+  public spendings: number = null;
   // The monthly earnings amount.
-  earnings: number = null;
+  public earnings: number = null;
   // The annual balance amount.
-  balance: number = null;
+  public balance: number = null;
+  // Line chart title.
+  public lineChartTitle: string;
+  // Line chart data.
+  public lineChartData: Array<TransactionItemDTO>;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(
+    private dashboardService: DashboardService,
+    private transactionService: TransactionService,
+    private utils: UtilsService) { }
 
   ngOnInit(): void {
     // Get the pending amount.
@@ -38,6 +49,23 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getAnnualBalance().subscribe(amount => {
       this.balance = amount;
     });
+    
+    // Get the transaction data for the line chart.
+    this.transactionService.getTransactionsPerDay().subscribe((data: Array<TransactionItemDTO>) => {
+      this.lineChartData = data;
+      this.lineChartTitle = this.getMonth(new Date());
+    });
+  }
+
+  /**
+   * Extract the translated month word from the given date.
+   * 
+   * @param date The date.
+   * @returns The translated name of the month.
+   */
+  private getMonth(date: Date) {
+    let monthIndex = new Date(date).getMonth();
+    return this.utils.translate(Constants.MONTHS[monthIndex]);
   }
 
 }

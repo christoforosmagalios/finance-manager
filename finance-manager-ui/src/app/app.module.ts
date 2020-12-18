@@ -20,6 +20,7 @@ import { BillsModule } from './bills/bills.module';
 import { BillsRoutingModule } from './bills/bills.routing.module';
 import { ChartsModule } from 'ng2-charts';
 import { ExpenditureSourcesComponent } from './dashboard/expenditure-sources/expenditure-sources.component';
+import { LineChartComponent } from './shared/components/charts/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ExpenditureSourcesComponent } from './dashboard/expenditure-sources/exp
     LoaderComponent,
     DashboardComponent,
     HeaderComponent,
-    ExpenditureSourcesComponent
+    ExpenditureSourcesComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,

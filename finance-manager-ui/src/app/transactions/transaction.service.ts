@@ -11,4 +11,8 @@ export class TransactionService {
     getGroupedExpenses() {
         return this.http.get(Constants.API + '/' + this.endpoint + '/groupedExpenses');
     }
+
+    getTransactionsPerDay() {
+        return this.http.get(Constants.API + '/' + this.endpoint + '/transactionsPerDay');
+    }
 }

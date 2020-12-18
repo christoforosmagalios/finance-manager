@@ -21,6 +21,7 @@
     "date": "Date",
     "income": "Income",
     "expense": "Expense",
+    "expenses": "Expenses",
     "notes": "Notes",
     "edit": "Edit",
     "show": "Show",

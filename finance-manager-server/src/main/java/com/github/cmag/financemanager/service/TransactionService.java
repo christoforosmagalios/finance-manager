@@ -174,8 +174,8 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
 
     List<TransactionItemDTO> result = new ArrayList<>();
     while (from <= to) {
-      double expense = filterByDateAndType(transactions, from, false);
-      double income = filterByDateAndType(transactions, from, true);
+      double expense = filterByDateAndType(transactions, from, true);
+      double income = filterByDateAndType(transactions, from, false);
       String day = Utils.getDayFromReversedIntegerDate(from);
       result.add(new TransactionItemDTO(day, income, expense));
       from++;
