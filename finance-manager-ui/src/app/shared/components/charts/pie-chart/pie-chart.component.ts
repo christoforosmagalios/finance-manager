@@ -1,21 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label, BaseChartDirective } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { TransactionService } from 'src/app/transactions/transaction.service';
-import { GroupedTransactionDTO } from 'src/app/dto/grouped-transaction-dto';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { Constants } from 'src/app/shared/constants/constants';
 import { GroupedTransactionInfoDTO } from 'src/app/dto/grouped-transaction-info-dto';
 
 @Component({
-  selector: 'app-expenditure-sources',
-  templateUrl: './expenditure-sources.component.html',
-  styleUrls: ['./expenditure-sources.component.css']
+  selector: 'app-pie-chart',
+  templateUrl: './pie-chart.component.html',
+  styleUrls: ['./pie-chart.component.css']
 })
-export class ExpenditureSourcesComponent implements OnInit {
-
+export class PieChartComponent implements OnInit {
+  // Chart Object.
   @ViewChild(BaseChartDirective) chart;
+  // Chart title.
+  @Input() title;
+  // Chart data.
+  @Input() pieChartData;
   // Pie chart labels.
   public labels: Label[] = [];
   // Pie chart data.
@@ -59,21 +61,16 @@ export class ExpenditureSourcesComponent implements OnInit {
     }
   };
 
-  constructor(
-    private transactionService: TransactionService,
-    private utils: UtilsService) { }
+  constructor(private utils: UtilsService) { }
 
   ngOnInit(): void {
-    this.getExpenses();
   }
 
   /**
    * Find the grouped expenses and add them to the pie chart.
    */
-  private getExpenses() {
-    // Get the grouped expenses.
-    this.transactionService.getGroupedExpenses().subscribe((groupedTransaction: GroupedTransactionDTO) => {
-      let transactionInfo = groupedTransaction.transactions;
+  private createChart() {
+      let transactionInfo = this.pieChartData.transactions;
       for (let i = 0; i < transactionInfo.length; i++) {
         if (transactionInfo[i].amount > 0) {
           // Add the grouped transaction info to the chart.
@@ -81,21 +78,9 @@ export class ExpenditureSourcesComponent implements OnInit {
         }
       }
       // Set the title.
-      this.options.title.text = this.getMonth(groupedTransaction.to) + ": € " + this.total;
+      this.options.title.text = this.title + ": € " + this.total;
       // Refresh the chart.
       this.chart.refresh();
-    });
-  }
-
-  /**
-   * Extract the translated month word from the given date.
-   * 
-   * @param date The date.
-   * @returns The translated name of the month.
-   */
-  private getMonth(date: Date) {
-    let monthIndex = new Date(date).getMonth();
-    return this.utils.translate(Constants.MONTHS[monthIndex]);
   }
 
   /**
@@ -132,4 +117,16 @@ export class ExpenditureSourcesComponent implements OnInit {
     return (value*100 / sum).toFixed(2)+"%";
   }
 
+  /**
+   * Listen to input changes. If the lineChartData or the title has benn changed,
+   * create the new line chart.
+   * 
+   * @param changes SimpleChanges
+   */
+  ngOnChanges(changes: SimpleChanges) {
+    if ((changes.pieChartData || changes.title) && this.pieChartData 
+    && this.pieChartData.transactions && this.pieChartData.transactions.length > 0) {
+        this.createChart();
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GroupedTransactionDTO } from '../dto/grouped-transaction-dto';
 import { TransactionItemDTO } from '../dto/transaction-item-dto';
 import { Constants } from '../shared/constants/constants';
 import { UtilsService } from '../shared/services/utils.service';
@@ -23,6 +24,10 @@ export class DashboardComponent implements OnInit {
   public lineChartTitle: string;
   // Line chart data.
   public lineChartData: Array<TransactionItemDTO>;
+  // Pie chart title.
+  public pieChartTitle: string;
+  // Pie chart data.
+  public pieChartData: GroupedTransactionDTO;
 
   constructor(
     private dashboardService: DashboardService,
@@ -54,6 +59,12 @@ export class DashboardComponent implements OnInit {
     this.transactionService.getTransactionsPerDay().subscribe((data: Array<TransactionItemDTO>) => {
       this.lineChartData = data;
       this.lineChartTitle = this.getMonth(new Date());
+    });
+
+    // Get the grouped expenses.
+    this.transactionService.getGroupedExpenses().subscribe((data: GroupedTransactionDTO) => {
+      this.pieChartData = data;
+      this.pieChartTitle = this.getMonth(new Date());
     });
   }
 
