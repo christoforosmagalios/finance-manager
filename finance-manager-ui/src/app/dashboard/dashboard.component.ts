@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { GroupedTransactionDTO } from '../dto/grouped-transaction-dto';
 import { TransactionItemDTO } from '../dto/transaction-item-dto';
 import { Constants } from '../shared/constants/constants';
@@ -28,11 +30,19 @@ export class DashboardComponent implements OnInit {
   public pieChartTitle: string;
   // Pie chart data.
   public pieChartData: GroupedTransactionDTO;
+  // Subscription.
+  private subscription: Subscription;
 
   constructor(
     private dashboardService: DashboardService,
     private transactionService: TransactionService,
-    private utils: UtilsService) { }
+    private utils: UtilsService,
+    private translate: TranslateService) {
+      // Subscribe to transalte service in case language is changed.
+      this.subscription = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+        this.updateCharts();
+      });
+    }
 
   ngOnInit(): void {
     // Get the pending amount.
@@ -54,7 +64,19 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getAnnualBalance().subscribe(amount => {
       this.balance = amount;
     });
-    
+
+    // Update charts.
+    this.updateCharts();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  /**
+   * Update line and pie charts.
+   */
+  private updateCharts() {
     // Get the transaction data for the line chart.
     this.transactionService.getTransactionsPerDay().subscribe((data: Array<TransactionItemDTO>) => {
       this.lineChartData = data;

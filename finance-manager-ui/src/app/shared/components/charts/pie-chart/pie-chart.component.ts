@@ -70,6 +70,7 @@ export class PieChartComponent implements OnInit {
    * Find the grouped expenses and add them to the pie chart.
    */
   private createChart() {
+    this.clearChart();
       let transactionInfo = this.pieChartData.transactions;
       for (let i = 0; i < transactionInfo.length; i++) {
         if (transactionInfo[i].amount > 0) {
@@ -81,6 +82,18 @@ export class PieChartComponent implements OnInit {
       this.options.title.text = this.title + ": € " + this.total;
       // Refresh the chart.
       this.chart.refresh();
+  }
+
+  /**
+   * Clear the chart data.
+   */
+  private clearChart() {
+    this.labels = [];
+    this.data = [];
+    this.colors[0].backgroundColor = [];
+    this.colors[0].borderColor = [];
+
+    this.total = 0;
   }
 
   /**
