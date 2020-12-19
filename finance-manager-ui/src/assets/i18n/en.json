@@ -51,6 +51,8 @@
     "code": "Code",
     "bill.code": "Bill code",
     "bill.description": "Bill description",
+    "address": "Address",
+    "new.address": "New Address",
 
     "success": "Success",
     "info": "Info",

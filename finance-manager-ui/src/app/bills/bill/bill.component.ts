@@ -12,6 +12,7 @@ import { NgbDateFRParserFormatter } from 'src/app/shared/services/datepicker.for
 import { BillDates } from 'src/app/dto/bill-dates-dto';
 import { BillService } from '../bill.service';
 import { UploadDTO } from 'src/app/dto/upload-dto';
+import { AddressDTO } from 'src/app/dto/address-dto';
 
 @Component({
   selector: 'app-bill',
@@ -35,6 +36,8 @@ export class BillComponent implements OnInit {
   dates = new BillDates();
   // List of bill categories.
   billCategories: Array<BillCategoryDTO>;
+  // List of bill addresses.
+  addresses: Array<AddressDTO>;
   // Error object.
   errors = {
     consumptionFrom: null,
@@ -76,6 +79,12 @@ export class BillComponent implements OnInit {
     this.crudService.findAll(Constants.ENTITY.BILL_CATEGORY)
     .subscribe((billCategories: Array<BillCategoryDTO>) => {
       this.billCategories = billCategories;
+    });
+
+    // Find all the addresses.
+    this.crudService.findAll(Constants.ENTITY.ADDRESS)
+    .subscribe((addresses: Array<AddressDTO>) => {
+      this.addresses = addresses;
     });
 
     // In case of edit mode fetch the bill from the database.
@@ -199,6 +208,4 @@ export class BillComponent implements OnInit {
     this.bill.base64 = null;
     this.uploader.nativeElement.value = "";
   }
-
-
 }

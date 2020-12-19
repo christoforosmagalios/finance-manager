@@ -31,10 +31,20 @@
 				UNIQUE KEY `CODE` (`CODE`)
 				) DEFAULT CHARSET=utf8 COMMENT='The Bill Category.';
 
+				DROP TABLE IF EXISTS `address`;
+				CREATE TABLE IF NOT EXISTS `address` (
+				`ID` varchar(36) NOT NULL COMMENT 'The Address Id',
+				`DESCRIPTION` varchar(255) NOT NULL COMMENT 'The Address description',
+				`CREATED_ON` datetime NOT NULL COMMENT 'Created on',
+				`UPDATED_ON` datetime NOT NULL COMMENT 'Updated on',
+				PRIMARY KEY (`ID`)
+				) DEFAULT CHARSET=utf8 COMMENT='The Address.';
+
 				DROP TABLE IF EXISTS `bill`;
 				CREATE TABLE IF NOT EXISTS `bill` (
 				`ID` varchar(36) NOT NULL COMMENT 'The Bill Id',
-				`FK_BILL_CATEGORY_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the Bill table',
+				`FK_BILL_CATEGORY_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the Bill Category table',
+				`FK_BILL_ADDRESS_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the Bill Address table',
 				`CODE` varchar(10) NOT NULL COMMENT 'The Bill auto generated alphanumeric code.',
 				`ISSUED_ON` date NOT NULL COMMENT 'The Bill issue date',
 				`DUE_DATE` date NOT NULL COMMENT 'The Bill due date',
@@ -54,7 +64,9 @@
 				PRIMARY KEY (`ID`),
 				UNIQUE KEY `CODE` (`CODE`),
 				KEY `FK_BILL_CATEGORY` (`FK_BILL_CATEGORY_ID`),
-				CONSTRAINT `FK_BILL_CATEGORY` FOREIGN KEY (`FK_BILL_CATEGORY_ID`) REFERENCES `bill_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+				KEY `FK_BILL_ADDRESS` (`FK_BILL_ADDRESS_ID`),
+				CONSTRAINT `FK_BILL_CATEGORY` FOREIGN KEY (`FK_BILL_CATEGORY_ID`) REFERENCES `bill_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+				CONSTRAINT `FK_BILL_ADDRESS_ID` FOREIGN KEY (`FK_BILL_ADDRESS_ID`) REFERENCES `address` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 				) DEFAULT CHARSET=utf8 COMMENT='Information about a Bill.';
 				
 				DROP TABLE IF EXISTS `transaction`;

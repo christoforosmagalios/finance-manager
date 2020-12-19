@@ -51,6 +51,8 @@
     "code": "Κωδικός",
     "bill.code": "Κωδικός λογαριασμού",
     "bill.description": "Περιγραφή λογαριασμού",
+    "address": "Διεύθυνση",
+    "new.address": "Νέα Διεύθυνση",
 
     "success": "Επιτυχία",
     "info": "Info",

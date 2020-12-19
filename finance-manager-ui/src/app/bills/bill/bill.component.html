@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="row">
                                     <!-- Bill Category -->
-                                    <div class="col-12">
+                                    <div class="col-4">
                                         <div class="form-group">
                                             <label for="category">{{ 'category' | translate }}</label>
                                             <select class="form-control" id="category" name="category" [(ngModel)]="bill.billCategory"
@@ -64,6 +64,19 @@
                                                 </option>
                                             </select>
                                             <span class="help-block text-danger" *ngIf="errors.billCategory" [innerHTML]="errors.billCategory | translate"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bill Address -->
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label class="w-100">{{ 'address' | translate }} <a class="float-right cursor-pointer"><span class="fas fa-plus"></span> {{ 'new.address' | translate }}</a></label>
+                                            <select class="form-control" id="address" name="address" [(ngModel)]="bill.address"
+                                            [compareWith]="utils.compareById" [disabled]="!editMode">
+                                                <option *ngFor="let address of addresses;" [ngValue]="address">
+                                                    {{ address.description }}
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

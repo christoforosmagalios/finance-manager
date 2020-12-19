@@ -13,7 +13,8 @@ export const Constants = {
         TRANSACTION: "transaction",
         CATEGORY: "transactionCategory",
         BILL: "bill",
-        BILL_CATEGORY: "billCategory"
+        BILL_CATEGORY: "billCategory",
+        ADDRESS: "address"
     },
 
     // Items per page for tables.

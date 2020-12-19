@@ -1,3 +1,4 @@
+import { AddressDTO } from './address-dto';
 import { BaseDTO } from './base-dto';
 import { BillCategoryDTO } from './bill-category-dto';
 
@@ -19,6 +20,7 @@ export class BillDTO extends BaseDTO {
     public imgPath: string;
     public imgType: string;
     public base64: string;
+    public address: AddressDTO;
 
     // To be used only in UI.
     public enableDelete: boolean;
