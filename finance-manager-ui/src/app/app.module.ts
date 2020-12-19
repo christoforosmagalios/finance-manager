@@ -21,6 +21,8 @@ import { BillsRoutingModule } from './bills/bills.routing.module';
 import { ChartsModule } from 'ng2-charts';
 import { PieChartComponent } from './shared/components/charts/pie-chart/pie-chart.component';
 import { LineChartComponent } from './shared/components/charts/line-chart/line-chart.component';
+import { AuthModule } from './auth/auth.module';
+import { AuthRoutingModule } from './auth/auth.routing.module';
 
 @NgModule({
   declarations: [
@@ -40,9 +42,11 @@ import { LineChartComponent } from './shared/components/charts/line-chart/line-c
     BrowserAnimationsModule,
     TransactionsRoutingModule,
     BillsRoutingModule,
+    AuthRoutingModule,
     ToastrModule.forRoot(),
     TransactionsModule,
     BillsModule,
+    AuthModule,
     ChartsModule,
     TranslateModule.forRoot({
       loader: {

@@ -27,6 +27,7 @@
     "show": "Προβολή",
     "save": "Αποθήκευση",
     "cancel": "Έξοδος",
+    "back": "Πίσω",
     "abort": "Ακύρωση",
     "delete": "Διαγραφή",
     "yes": "Ναι",
@@ -64,6 +65,11 @@
     "error.size.max.250": "Το επιτρεπόμενο πλήθος χαρακτήρων είναι 250.",
     "error.size.max.500": "Το επιτρεπόμενο πλήθος χαρακτήρων είναι 500.",
     "error.bill.is.already.link": "Αυτός ο λογαριασμός είναι ήδη συνδεδεμένος με άλλη συναλλαγή.",
+    "error.enter.username.email": "Παρακαλώ συμπληρώστε το Username ή το Email σας.",
+    "error.enter.password": "Παρακαλώ συμπληρώστε τον Κωδικό σας.",
+    "error.enter.confirm.password": "Παρακαλώ Επιβεβαίωστε τον Κωδικό σας.",
+    "error.enter.email": "Παρακαλώ συμπληρώστε το Email σας.",
+    "error.enter.username": "Παρακαλώ συμπληρώστε το Username σας.",
 
     "paycheck": "Μισθός",
     "supermarket": "Super Market",
@@ -104,5 +110,16 @@
     "september": "Σεπτέμβριος",
     "october": "Οκτώβριος",
     "november": "Νοέμβριος",
-    "december": "Δεκέμβριος"
+    "december": "Δεκέμβριος",
+
+    "login": "Σύνδεση",
+    "username.email": "Username ή Email",
+    "password": "Κωδικός",
+    "register": "Δημιουργία λογαριασμού",
+    "forgot.password": "Ξεχάσατε τον κωδικό?",
+    "create.account": "Δημιουργία λογαριασμού",
+    "username": "Username",
+    "email": "Email",
+    "confirm.password": "Επιβεβαίωση κωδικού",
+    "create": "Δημιουργία"
 }

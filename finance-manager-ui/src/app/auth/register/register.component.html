@@ -1,0 +1,76 @@
+<div class="container-fluid"> 
+    <div class="row justify-content-center">
+        
+        <div class="col-lg-5 col-md-7 col-12">
+            <div class="container-fluid">
+                
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow mb-4">
+                            <!-- Card Body -->
+                            <div class="card-body">
+
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                    <h1 class="h3 mb-0 text-gray">{{ 'register' | translate }}</h1>
+                                </div>
+
+                                <form #rForm="ngForm" (ngSubmit)="onSubmit(rForm)">
+                                    <div class="row">
+                                        <!-- Username -->
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="username">{{ 'username' | translate }}</label>
+                                                <input class="form-control" id="username" name="username" [(ngModel)]="register.username" 
+                                                required #u="ngModel"/>
+                                                <span class="help-block text-danger" *ngIf="!u.valid && u.dirty">{{ 'error.enter.username' | translate }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <!-- Email -->
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="username">{{ 'email' | translate }}</label>
+                                                <input class="form-control" id="email" name="email" [(ngModel)]="register.email" 
+                                                required #e="ngModel"/>
+                                                <span class="help-block text-danger" *ngIf="!e.valid && e.dirty">{{ 'error.enter.email' | translate }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <!-- Password -->
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="password">{{ 'password' | translate }}</label>
+                                                <input class="form-control" type="password" id="password" name="password" [(ngModel)]="register.password"
+                                                required #p="ngModel"/>
+                                                <span class="help-block text-danger" *ngIf="!p.valid && p.dirty">{{ 'error.enter.password' | translate }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <!-- Confirm Password -->
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="confirmPassword">{{ 'confirm.password' | translate }}</label>
+                                                <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="register.confirmPassword"
+                                                required #c="ngModel"/>
+                                                <span class="help-block text-danger" *ngIf="!c.valid && c.dirty">{{ 'error.enter.confirm.password' | translate }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Form footer -->
+                                    <div class="row form-footer">
+                                        <div class="col-12 pr-0 text-right">
+                                            <button class="btn btn-secondary btn-min-width" routerLink="/login" type="button">{{ 'back' | translate }}</button>
+                                            <button class="btn btn-primary btn-min-width ml-2" type="submit">{{ 'create' | translate }}</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>

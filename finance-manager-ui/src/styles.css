@@ -84,6 +84,14 @@ label {
   cursor: pointer;
 }
 
+.cursor-pointer-underline {
+  cursor: pointer;
+}
+
+.cursor-pointer-underline:hover {
+  text-decoration: underline;
+}
+
 .dropdown .dropdown-menu .dropdown-header {
   font-weight: 800;
   font-size: .65rem;

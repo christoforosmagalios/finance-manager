@@ -1,0 +1,63 @@
+<div class="container-fluid"> 
+    <div class="row justify-content-center">
+        
+        <div class="col-lg-4 col-md-8 col-12">
+            <div class="container-fluid">
+                
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow mb-4 login-card">
+                            <!-- Card Body -->
+                            <div class="card-body">
+
+                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                    <h1 class="h3 mb-0 text-gray">{{ 'login' | translate }}</h1>
+                                </div>
+
+                                <form #lForm="ngForm" (ngSubmit)="onSubmit(lForm)">
+                                    <div class="row">
+                                        <!-- Username or email -->
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="username">{{ 'username.email' | translate }}</label>
+                                                <input class="form-control" id="username" name="username" [(ngModel)]="username" 
+                                                required #u="ngModel"/>
+                                                <span class="help-block text-danger" *ngIf="!u.valid && u.dirty">{{ 'error.enter.username.email' | translate }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <!-- Password -->
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="password">{{ 'password' | translate }}</label>
+                                                <input class="form-control" type="password" id="password" name="password" [(ngModel)]="password"
+                                                required #p="ngModel"/>
+                                                <span class="help-block text-danger" *ngIf="!p.valid && p.dirty">{{ 'error.enter.password' | translate }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Form footer -->
+                                    <div class="row form-footer">
+                                        <div class="col-12 pr-0 pl-0">
+                                            <button class="btn btn-primary w-100" type="submit">{{ 'login' | translate }}</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <span routerLink="/register" class="cursor-pointer-underline">{{ 'forgot.password' | translate }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 mt-4 text-center">
+                                        <span routerLink="/register" class="cursor-pointer-underline">{{ 'create.account' | translate }} <span class="fas fa-long-arrow-alt-right"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>

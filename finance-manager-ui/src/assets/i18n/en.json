@@ -27,6 +27,7 @@
     "show": "Show",
     "save": "Save",
     "cancel": "Cancel",
+    "back": "Back",
     "abort": "Cancel",
     "delete": "Delete",
     "yes": "Yes",
@@ -64,6 +65,12 @@
     "error.size.max.250": "The allowed number of characters is 250.",
     "error.size.max.500": "The allowed number of characters is 500.",
     "error.bill.is.already.link": "This Bill is already linked to another transaction.",
+    "error.enter.username.email": "Please enter your Username or Email.",
+    "error.enter.password": "Please enter your Password.",
+    "error.enter.confirm.password": "Please confirm your Password.",
+    "error.enter.email": "Please enter an Email",
+    "error.enter.username": "Please enter a Username",
+
 
     "paycheck": "Paycheck",
     "supermarket": "Supermarket",
@@ -104,5 +111,16 @@
     "september": "September",
     "october": "October",
     "november": "November",
-    "december": "December"
+    "december": "December",
+
+    "login": "Login",
+    "username.email": "Username or Email",
+    "password": "Password",
+    "register": "Register",
+    "forgot.password": "Forgot password?",
+    "create.account": "Create an account",
+    "username": "Username",
+    "email": "Email",
+    "confirm.password": "Confirm Password",
+    "create": "Create"
 }
