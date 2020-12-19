@@ -34,5 +34,8 @@ export const Constants = {
     ],
 
     // Default font family.
-    FONT_FAMILY: "Nunito-Regular"
+    FONT_FAMILY: "Nunito-Regular",
+
+    // Transaction category - Bills code
+    BILLS_TRANSACTION_CATEGORY: "TC011"
 };

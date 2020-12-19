@@ -10,8 +10,11 @@ import com.github.cmag.financemanager.dto.TransactionDTO;
 import com.github.cmag.financemanager.dto.TransactionItemDTO;
 import com.github.cmag.financemanager.es.index.TransactionIndex;
 import com.github.cmag.financemanager.es.repository.TransactionEsRepository;
+import com.github.cmag.financemanager.mapper.TransactionCategoryMapper;
 import com.github.cmag.financemanager.mapper.TransactionMapper;
 import com.github.cmag.financemanager.model.Transaction;
+import com.github.cmag.financemanager.model.master.data.TransactionCategory;
+import com.github.cmag.financemanager.repository.TransactionCategoryRepository;
 import com.github.cmag.financemanager.repository.TransactionRepository;
 import com.github.cmag.financemanager.util.Utils;
 import java.util.ArrayList;
@@ -38,6 +41,9 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
   private TransactionRepository transactionRepository;
 
   @Autowired
+  private TransactionCategoryRepository transactionCategoryRepository;
+
+  @Autowired
   private TransactionEsRepository es;
 
   @Autowired
@@ -46,6 +52,9 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
   @Autowired
   private TransactionMapper mapper;
 
+  @Autowired
+  private TransactionCategoryMapper transactionCategoryMapper;
+
   /**
    * Save the given transaction. In case the transaction is linked with a bill, update the bill to
    * paid.
@@ -53,7 +62,19 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * @param transactionDTO The transaction to be saved.
    * @return The saved transaction.
    */
+  @Override
   public TransactionDTO save(TransactionDTO transactionDTO) {
+
+    // In case the transaction is connected to a bill and the transaction category is not the
+    // Bills category, set the proper transaction category.
+    if (!Objects.isNull(transactionDTO.getBill())
+        && !transactionDTO.getTransactionCategory().getCode()
+        .equals(AppConstants.BILLS_TRANSACTION_CATEGORY_CODE)) {
+      TransactionCategory transactionCategory
+          = transactionCategoryRepository.findByCode(AppConstants.BILLS_TRANSACTION_CATEGORY_CODE);
+      transactionDTO.setTransactionCategory(transactionCategoryMapper.map(transactionCategory));
+    }
+
     TransactionDTO transaction = super.save(transactionDTO);
     if (!Objects.isNull(transactionDTO.getBill())) {
       this.billService.updateToPaid(transactionDTO.getBill());
@@ -83,7 +104,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * Find the transactions that are linked with the given bill id and do not have the given
    * transaction id.
    *
-   * @param billId        The Bill id.
+   * @param billId The Bill id.
    * @param transactionId The transaction Id.
    * @return A list of TransactionDTO.
    */
@@ -188,8 +209,8 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * amount.
    *
    * @param transactions Transaction list.
-   * @param date         An integer date representation (format: yyyyMMdd).
-   * @param type         Transaction type.
+   * @param date An integer date representation (format: yyyyMMdd).
+   * @param type Transaction type.
    * @return The summed amount.
    */
   private double filterByDateAndType(List<TransactionIndex> transactions, final int date,

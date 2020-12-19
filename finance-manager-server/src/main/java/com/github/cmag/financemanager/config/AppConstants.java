@@ -26,4 +26,6 @@ public class AppConstants {
   public static final String MAX_SIZE_500 = "error.size.max.500";
   // Bill already linked with another transaction error message key.
   public static final String BILL_ALREADY_LINNKED = "error.bill.is.already.link";
+  // The code of the bills transaction category.
+  public static final String BILLS_TRANSACTION_CATEGORY_CODE = "TC011";
 }

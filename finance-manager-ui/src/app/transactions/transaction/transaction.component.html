@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                     <label for="transactionCategory">{{ 'category' | translate }}</label>
                                     <select class="form-control" id="transactionCategory" name="transactionCategory" [(ngModel)]="transaction.transactionCategory"
-                                    [compareWith]="utils.compareById" [disabled]="!editMode">
+                                    [compareWith]="utils.compareById" [disabled]="!editMode || (bill && bill.id)">
                                         <option *ngFor="let transactionCategory of categories;" [ngValue]="transactionCategory">
                                             {{ transactionCategory.name | translate }}
                                         </option>

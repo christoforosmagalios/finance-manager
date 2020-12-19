@@ -183,7 +183,17 @@ export class TransactionComponent implements OnInit {
   onModelBillChange() {
     if (this.bill && this.bill.id) {
       this.transaction.amount = this.bill.amount;
+      this.transaction.transactionCategory = this.findBillsCategory();
     }
+  }
+
+  /**
+   * Find the bills transaction category.
+   * 
+   * @returns The transaction category.
+   */
+  private findBillsCategory() {
+    return this.categories.find(c => c.code === Constants.BILLS_TRANSACTION_CATEGORY);;
   }
 
   /**
