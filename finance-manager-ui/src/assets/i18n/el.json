@@ -68,8 +68,14 @@
     "error.enter.username.email": "Παρακαλώ συμπληρώστε το Username ή το Email σας.",
     "error.enter.password": "Παρακαλώ συμπληρώστε τον Κωδικό σας.",
     "error.enter.confirm.password": "Παρακαλώ Επιβεβαίωστε τον Κωδικό σας.",
-    "error.enter.email": "Παρακαλώ συμπληρώστε το Email σας.",
-    "error.enter.username": "Παρακαλώ συμπληρώστε το Username σας.",
+    "error.invalid.email": "Το Email δεν είναι έγκυρο.",
+    "error.size.min.6": "Πρέπει να έχει τουλάχιστον 6 χαρακτήρες.",
+    "error.size.min.3": "Πρέπει να έχει τουλάχιστον 3 χαρακτήρες.",
+    "error.passwords.do.not.match": "Οι κωδικοί πρέπει να ταιριάζουν.",
+    "must not be blank": "Αυτό το πεδίο δεν μπορεί να είναι κενό.",
+    "error.username.exists": "Αυτό το Username χρησιμοποιείται ήδη.",
+    "error.email.exists": "Αυτό το Email χρησιμοποιείται ήδη.",
+    "error.invalid.credetials": "Το Username ή το Password είναι λάθος.",
 
     "paycheck": "Μισθός",
     "supermarket": "Super Market",
@@ -113,6 +119,7 @@
     "december": "Δεκέμβριος",
 
     "login": "Σύνδεση",
+    "logout": "Αποσύνδεση",
     "username.email": "Username ή Email",
     "password": "Κωδικός",
     "register": "Δημιουργία λογαριασμού",
@@ -121,5 +128,7 @@
     "username": "Username",
     "email": "Email",
     "confirm.password": "Επιβεβαίωση κωδικού",
-    "create": "Δημιουργία"
+    "create": "Δημιουργία",
+    "firstName": "Όνομα",
+    "lastName": "Επίθετο"
 }

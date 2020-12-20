@@ -167,6 +167,12 @@ label {
   min-width: 32px;
 }
 
+.dropdown-item.active, .dropdown-item:active {
+  color:rgba(0, 0, 0, 0.9);
+  text-decoration: none;
+  background-color: #fff;
+}
+
 /** Bootstrap pagination **/
 .page-item.active .page-link {
   background-color: #2e59d9;

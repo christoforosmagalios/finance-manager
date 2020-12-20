@@ -68,9 +68,14 @@
     "error.enter.username.email": "Please enter your Username or Email.",
     "error.enter.password": "Please enter your Password.",
     "error.enter.confirm.password": "Please confirm your Password.",
-    "error.enter.email": "Please enter an Email",
-    "error.enter.username": "Please enter a Username",
-
+    "error.invalid.email": "Invalid Email.",
+    "error.size.min.6": "Must be at least 6 characters long.",
+    "error.size.min.3": "Must be at least 3 characters long.",
+    "error.passwords.do.not.match": "Passwords do not match.",
+    "must not be blank": "This field may not be blank.",
+    "error.username.exists": "This Username already exists.",
+    "error.email.exists": "This Email already exists.",
+    "error.invalid.credetials": "Wrong Username or Password.",
 
     "paycheck": "Paycheck",
     "supermarket": "Supermarket",
@@ -114,6 +119,7 @@
     "december": "December",
 
     "login": "Login",
+    "logout": "Logout",
     "username.email": "Username or Email",
     "password": "Password",
     "register": "Register",
@@ -122,5 +128,7 @@
     "username": "Username",
     "email": "Email",
     "confirm.password": "Confirm Password",
-    "create": "Create"
+    "create": "Create",
+    "firstName": "First Name",
+    "lastName": "Last Name"
 }

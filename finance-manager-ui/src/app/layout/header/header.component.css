@@ -28,3 +28,7 @@
     cursor: pointer;
     text-decoration: underline;
 }
+
+.languages-item {
+    padding: 0.5rem 1rem;
+}

@@ -66,4 +66,8 @@ public class Bill extends BaseEntity {
   @ManyToOne
   @JoinColumn(name = "fk_bill_address_id")
   private Address address;
+
+  @ManyToOne
+  @JoinColumn(name = "fk_user_id")
+  private User user;
 }

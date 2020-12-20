@@ -22,6 +22,7 @@ public class BillIndex {
   private double amount;
   private boolean paid;
   private Date paidOn;
+  private String userId;
   private Date createdOn;
   private Date updatedOn;
 }

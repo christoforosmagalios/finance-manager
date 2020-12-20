@@ -52,4 +52,5 @@ public class BillDTO extends BaseDTO {
   private String imgType;
   private String base64;
   private AddressDTO address;
+  private UserDTO user;
 }

@@ -14,7 +14,8 @@ export const Constants = {
         CATEGORY: "transactionCategory",
         BILL: "bill",
         BILL_CATEGORY: "billCategory",
-        ADDRESS: "address"
+        ADDRESS: "address",
+        AUTH: "auth"
     },
 
     // Items per page for tables.
@@ -37,5 +38,14 @@ export const Constants = {
     FONT_FAMILY: "Nunito-Regular",
 
     // Transaction category - Bills code
-    BILLS_TRANSACTION_CATEGORY: "TC011"
+    BILLS_TRANSACTION_CATEGORY: "TC011",
+
+    // Name of the Local storage key that keeps the user session info.
+    LOCAL_STORAGE_KEY: "finance-manager-session",
+
+    // Http headers.
+    HEADERS: {
+        AUTH : "authorization",
+        AUTH_USER : "authorization-user"
+    }
 };

@@ -22,6 +22,7 @@ public class TransactionIndex {
   private Date date;
   private String billId;
   private String billCode;
+  private String userId;
   private Date createdOn;
   private Date updatedOn;
   private int dateReversed;

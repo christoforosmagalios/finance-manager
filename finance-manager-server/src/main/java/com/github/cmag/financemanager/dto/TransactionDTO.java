@@ -35,4 +35,5 @@ public class TransactionDTO extends BaseDTO {
   @NotNull(message = AppConstants.NOT_NULL)
   private Date date;
   private BillDTO bill;
+  private UserDTO user;
 }

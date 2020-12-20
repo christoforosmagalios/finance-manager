@@ -40,4 +40,8 @@ public class Transaction extends BaseEntity {
 
   @Column(name = "amount")
   private double amount;
+
+  @ManyToOne
+  @JoinColumn(name = "fk_user_id")
+  private User user;
 }

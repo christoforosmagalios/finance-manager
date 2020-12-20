@@ -6,6 +6,21 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
         <changeSet author="finance -manager" id="0001">
             <sql>
+
+        DROP TABLE IF EXISTS `user`;
+        CREATE TABLE IF NOT EXISTS `user` (
+        `ID` varchar(36) NOT NULL COMMENT 'The User Id',
+        `USERNAME` varchar(255) NOT NULL COMMENT 'The username.',
+				`FIRST_NAME` varchar(255) NOT NULL COMMENT 'The firstname.',
+				`LAST_NAME` varchar(255) NOT NULL COMMENT 'The lastname.',
+        `PASSWORD` varchar(100) NOT NULL COMMENT 'The password.',
+        `EMAIL` varchar(255) NOT NULL COMMENT 'The email.',
+        `ACTIVE` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 stands for not active, 1 stands for active',
+        `CREATED_ON` datetime NOT NULL COMMENT 'Created on',
+        `UPDATED_ON` datetime NOT NULL COMMENT 'Updated on',
+        PRIMARY KEY (`ID`)
+        ) DEFAULT CHARSET=utf8 COMMENT='Information about a User.';
+
 				DROP TABLE IF EXISTS `transaction_category`;
 				CREATE TABLE IF NOT EXISTS `transaction_category` (
 				  `ID` varchar(36) NOT NULL COMMENT 'The Transaction Category Id',
@@ -45,6 +60,7 @@
 				`ID` varchar(36) NOT NULL COMMENT 'The Bill Id',
 				`FK_BILL_CATEGORY_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the Bill Category table',
 				`FK_BILL_ADDRESS_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the Bill Address table',
+        `FK_USER_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the User table',
 				`CODE` varchar(10) NOT NULL COMMENT 'The Bill auto generated alphanumeric code.',
 				`ISSUED_ON` date NOT NULL COMMENT 'The Bill issue date',
 				`DUE_DATE` date NOT NULL COMMENT 'The Bill due date',
@@ -65,8 +81,10 @@
 				UNIQUE KEY `CODE` (`CODE`),
 				KEY `FK_BILL_CATEGORY` (`FK_BILL_CATEGORY_ID`),
 				KEY `FK_BILL_ADDRESS` (`FK_BILL_ADDRESS_ID`),
+        KEY `FK_BILL_USER` (`FK_USER_ID`),
 				CONSTRAINT `FK_BILL_CATEGORY` FOREIGN KEY (`FK_BILL_CATEGORY_ID`) REFERENCES `bill_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-				CONSTRAINT `FK_BILL_ADDRESS_ID` FOREIGN KEY (`FK_BILL_ADDRESS_ID`) REFERENCES `address` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+				CONSTRAINT `FK_BILL_ADDRESS_ID` FOREIGN KEY (`FK_BILL_ADDRESS_ID`) REFERENCES `address` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+        CONSTRAINT `FK_BILL_USER` FOREIGN KEY (`FK_USER_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 				) DEFAULT CHARSET=utf8 COMMENT='Information about a Bill.';
 				
 				DROP TABLE IF EXISTS `transaction`;
@@ -75,6 +93,7 @@
 				  `TYPE` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Transaction type, 0 stands for income, 1 stands for expense',
 				  `FK_TRANSACTION_CATEGORY_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the transactionCategory table',
 				  `FK_BILL_ID` varchar(36) COMMENT 'Foreign key to the bill table. The transaction is linked to this bill.',
+          `FK_USER_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the User table',
 				  `DATE` date NOT NULL COMMENT 'The Transaction date',
 				  `DESCRIPTION` varchar(255) NOT NULL COMMENT 'The Transaction description',
 				  `NOTES` varchar(512) DEFAULT NULL COMMENT 'The Transaction notes',
@@ -84,9 +103,10 @@
 				  PRIMARY KEY (`ID`),
 				  KEY `FK_TRANSACTION_CATEGORY` (`FK_TRANSACTION_CATEGORY_ID`),
 				  KEY `FK_TRANSACTION_BILL` (`FK_BILL_ID`),
+          KEY `FK_TRANSACTION_USER` (`FK_USER_ID`),
 				  CONSTRAINT `FK_TRANSACTION_CATEGORY` FOREIGN KEY (`FK_TRANSACTION_CATEGORY_ID`) REFERENCES `transaction_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-				  CONSTRAINT `FK_TRANSACTION_BILL` FOREIGN KEY (`FK_BILL_ID`) REFERENCES `bill` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-
+				  CONSTRAINT `FK_TRANSACTION_BILL` FOREIGN KEY (`FK_BILL_ID`) REFERENCES `bill` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+          CONSTRAINT `FK_TRANSACTION_USER` FOREIGN KEY (`FK_USER_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 				) DEFAULT CHARSET=utf8 COMMENT='Information about a transaction.';
             </sql>
         </changeSet>

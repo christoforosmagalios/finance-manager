@@ -92,6 +92,17 @@ public abstract class BaseService<D extends BaseDTO, E extends BaseEntity> {
   }
 
   /**
+   * Save the given entity.
+   *
+   * @param entity The entity to be saved.
+   * @return The saved DTO.
+   */
+  public D save(E entity) {
+    return mapper.map(baseRepository.save(entity));
+
+  }
+
+  /**
    * Delete the entity with the given id.
    *
    * @param id The entity id.

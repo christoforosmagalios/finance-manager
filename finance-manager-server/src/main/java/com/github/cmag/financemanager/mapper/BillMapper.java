@@ -24,6 +24,7 @@ public abstract class BillMapper extends BaseMapper<BillDTO, Bill> {
    * @return The mapped BillDTO.
    */
   @Mapping(source = "billCategoryName", target = "billCategory.name")
+  @Mapping(source = "userId", target = "user.id")
   public abstract BillDTO mapToDTO(BillIndex billIndex);
 
   /**
@@ -33,6 +34,7 @@ public abstract class BillMapper extends BaseMapper<BillDTO, Bill> {
    * @return The mapped BillIndex.
    */
   @Mapping(source = "billCategory.name", target = "billCategoryName")
+  @Mapping(source = "user.id", target = "userId")
   public abstract BillIndex mapToIndex(Bill bill);
 
   /**
@@ -42,6 +44,7 @@ public abstract class BillMapper extends BaseMapper<BillDTO, Bill> {
    * @return The mapped BillIndex.
    */
   @Mapping(source = "billCategory.name", target = "billCategoryName")
+  @Mapping(source = "user.id", target = "userId")
   public abstract BillIndex mapToIndex(BillDTO billDTO);
 
   /**

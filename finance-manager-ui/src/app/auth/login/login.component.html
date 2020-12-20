@@ -35,6 +35,7 @@
                                                 <input class="form-control" type="password" id="password" name="password" [(ngModel)]="password"
                                                 required #p="ngModel"/>
                                                 <span class="help-block text-danger" *ngIf="!p.valid && p.dirty">{{ 'error.enter.password' | translate }}</span>
+                                                <span class="help-block text-danger" *ngIf="invlaidCredentials">{{ 'error.invalid.credetials' | translate }}</span>
                                             </div>
                                         </div>
                                     </div>
