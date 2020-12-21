@@ -46,5 +46,6 @@ public abstract class TransactionMapper extends BaseMapper<TransactionDTO, Trans
   @Mapping(source = "billId", target = "bill.id")
   @Mapping(source = "billCode", target = "bill.code")
   @Mapping(source = "userId", target = "user.id")
+  @Mapping(source = "categoryName", target = "transactionCategory.name")
   public abstract TransactionDTO mapToDTO(TransactionIndex transactionIndex);
 }

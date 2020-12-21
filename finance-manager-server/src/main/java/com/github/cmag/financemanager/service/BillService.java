@@ -32,6 +32,9 @@ public class BillService extends BaseService<BillDTO, Bill> {
   private FileService fileService;
 
   @Autowired
+  private UserService userService;
+
+  @Autowired
   private BillRepository billRepository;
 
   @Autowired
@@ -61,6 +64,7 @@ public class BillService extends BaseService<BillDTO, Bill> {
     // Replace the new image with the old one.
     billDTO.setImgPath(fileService.copy(billDTO.getImgPath(), existingImg, imagesPath));
 
+    billDTO.setUser(userService.getLoggedInUserDTO());
     BillDTO bill = super.save(billDTO);
     es.save(mapper.mapToIndex(bill));
     return bill;

@@ -79,6 +79,7 @@ export class AuthService {
         // In case there are no data stored in the local storage, return.
         if (!user) {
             this.router.navigate(['/login']);
+            return;
         }
         // Init a Auth object and update the logged in user info.
         const loadedUser = new AuthDTO(user.fullname, user.token);

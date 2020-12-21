@@ -50,6 +50,9 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
   private BillService billService;
 
   @Autowired
+  private UserService userService;
+
+  @Autowired
   private TransactionMapper mapper;
 
   @Autowired
@@ -75,6 +78,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
       transactionDTO.setTransactionCategory(transactionCategoryMapper.map(transactionCategory));
     }
 
+    transactionDTO.setUser(userService.getLoggedInUserDTO());
     TransactionDTO transaction = super.save(transactionDTO);
     if (!Objects.isNull(transactionDTO.getBill())) {
       this.billService.updateToPaid(transactionDTO.getBill());

@@ -59,7 +59,7 @@
 				CREATE TABLE IF NOT EXISTS `bill` (
 				`ID` varchar(36) NOT NULL COMMENT 'The Bill Id',
 				`FK_BILL_CATEGORY_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the Bill Category table',
-				`FK_BILL_ADDRESS_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the Bill Address table',
+				`FK_BILL_ADDRESS_ID` varchar(36) COMMENT 'Foreign key to the Bill Address table',
         `FK_USER_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the User table',
 				`CODE` varchar(10) NOT NULL COMMENT 'The Bill auto generated alphanumeric code.',
 				`ISSUED_ON` date NOT NULL COMMENT 'The Bill issue date',
