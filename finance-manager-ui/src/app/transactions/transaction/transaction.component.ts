@@ -193,7 +193,7 @@ export class TransactionComponent implements OnInit {
    * @returns The transaction category.
    */
   private findBillsCategory() {
-    return this.categories.find(c => c.code === Constants.BILLS_TRANSACTION_CATEGORY);;
+    return this.categories.find(c => c.code === Constants.BILLS_TRANSACTION_CATEGORY);
   }
 
   /**

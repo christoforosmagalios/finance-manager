@@ -23,6 +23,12 @@ label {
   font-family: "Nunito-SemiBold", sans-serif;
 }
 
+.fm-logo > img {
+  width: 350px;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
 .form-footer {
   margin: 1rem 0;
 }
