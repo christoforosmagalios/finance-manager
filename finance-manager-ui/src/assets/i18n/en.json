@@ -130,5 +130,11 @@
     "confirm.password": "Confirm Password",
     "create": "Create",
     "firstName": "First Name",
-    "lastName": "Last Name"
+    "lastName": "Last Name",
+    "my.account": "My Account",
+    "settings": "Settings",
+
+    "addresses": "Addresses",
+    "bill.categories": "Bill categories",
+    "transaction.categories": "Transaction categories"
 }

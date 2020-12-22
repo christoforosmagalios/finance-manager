@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray">{{ 'settings' | translate }}</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="container-fluid">
+                <div class="row mt-4">
+                    <div class="col-6">
+                        
+                    </div>
+                </div>
+            </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    
+                    <div class="d-flex">
+                        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+                          <li ngbNavItem="top">
+                            <a ngbNavLink class="text-nowrap">{{ 'addresses' | translate }}</a>
+                            <ng-template ngbNavContent>
+                              <app-address></app-address>
+                            </ng-template>
+                          </li>
+                          <li ngbNavItem="middle">
+                            <a ngbNavLink class="text-nowrap">{{ 'transaction.categories' | translate }}</a>
+                            <ng-template ngbNavContent>
+                            </ng-template>
+                          </li>
+                          <li ngbNavItem="bottom">
+                            <a ngbNavLink class="text-nowrap">{{ 'bill.categories' | translate }}</a>
+                            <ng-template ngbNavContent>
+                            </ng-template>
+                          </li>
+                        </ul>
+                      
+                        <div [ngbNavOutlet]="nav" class="ml-4 w-100"></div>
+                      </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

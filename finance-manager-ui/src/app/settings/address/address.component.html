@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <caption>{{ 'transactions.table' | translate }}</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">{{ 'description' | translate }}</th>
+                            <th scope="col" class="t-actions"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let a of addresses; index as i;">
+                            <td>
+                                <span *ngIf="!a.enableEdit">{{ a.description }}</span>
+                                <input class="form-control" *ngIf="a.enableEdit" [(ngModel)]="a.description"/>
+                            </td>
+                            <td class="text-right">
+                                <!-- Edit Button -->
+                                <button class="btn btn-sm btn-primary btn-square" (click)="a.enableEdit=true;" *ngIf="!a.enableDelete && !a.enableEdit" ngbTooltip="{{ 'edit' | translate }}">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <!-- Edit Actions -->
+                                <button class="btn btn-sm btn-success btn-square ml-2" *ngIf="a.enableEdit" (click)="save(a)" ngbTooltip="{{ 'yes' | translate }}">
+                                    <span class="fas fa-check"></span>
+                                </button>
+                                <button class="btn btn-sm btn-secondary btn-square ml-2" *ngIf="a.enableEdit" (click)="a.enableEdit=false" ngbTooltip="{{ 'no' | translate }}">
+                                    <span class="fas fa-times"></span>
+                                </button>
+
+                                <!-- Delete Button -->
+                                <button class="btn btn-sm btn-danger btn-square ml-2" (click)="a.enableDelete=true" *ngIf="!a.enableDelete && !a.enableEdit" ngbTooltip="{{ 'delete' | translate }}">
+                                    <span class="fas fa-trash"></span>
+                                </button>
+                                <!-- Delete Actions -->
+                                <button class="btn btn-sm btn-success btn-square ml-2" *ngIf="a.enableDelete" (click)="delete(a.id)" ngbTooltip="{{ 'yes' | translate }}">
+                                    <span class="fas fa-check"></span>
+                                </button>
+                                <button class="btn btn-sm btn-secondary btn-square ml-2" *ngIf="a.enableDelete" (click)="a.enableDelete=false" ngbTooltip="{{ 'no' | translate }}">
+                                    <span class="fas fa-times"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

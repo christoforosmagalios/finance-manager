@@ -23,6 +23,7 @@ import { PieChartComponent } from './shared/components/charts/pie-chart/pie-char
 import { LineChartComponent } from './shared/components/charts/line-chart/line-chart.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthRoutingModule } from './auth/auth.routing.module';
+import { SettingsModule } from './settings/settings.module';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AuthRoutingModule } from './auth/auth.routing.module';
     BillsModule,
     AuthModule,
     ChartsModule,
+    SettingsModule,
     TranslateModule.forRoot({
       loader: {
       provide: TranslateLoader,

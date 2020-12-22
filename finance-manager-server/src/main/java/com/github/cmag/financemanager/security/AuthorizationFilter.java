@@ -2,6 +2,7 @@ package com.github.cmag.financemanager.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.github.cmag.financemanager.config.AppConstants;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,6 +19,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 /**
  * Authorization Filter.
  */
+@Slf4j
 public class AuthorizationFilter extends BasicAuthenticationFilter {
 
   private String secret;
@@ -59,16 +62,20 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
     // Get the token from the Authorization header.
     String token = request.getHeader(AppConstants.AUTH_HEADER_STRING);
     if (token != null) {
-      // Parse the token.
-      String user = JWT.require(Algorithm.HMAC512(secret.getBytes()))
-          .build()
-          .verify(token.replace(AppConstants.TOKEN_PREFIX, ""))
-          .getSubject();
 
-      if (user != null) {
-        return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+      try {
+        // Parse the token.
+        String user = JWT.require(Algorithm.HMAC512(secret.getBytes()))
+            .build()
+            .verify(token.replace(AppConstants.TOKEN_PREFIX, ""))
+            .getSubject();
+
+        if (user != null) {
+          return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+        }
+      } catch (TokenExpiredException e) {
+        log.warn("Session Expired!", e);
       }
-      return null;
     }
     return null;
   }

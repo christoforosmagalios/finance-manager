@@ -130,5 +130,11 @@
     "confirm.password": "Επιβεβαίωση κωδικού",
     "create": "Δημιουργία",
     "firstName": "Όνομα",
-    "lastName": "Επίθετο"
+    "lastName": "Επίθετο",
+    "my.account": "Ο λογαριασμός μου",
+    "settings": "Ρυθμίσεις",
+
+    "addresses": "Διευθύνσεις",
+    "bill.categories": "Kατηγορίες λογαριασμών",
+    "transaction.categories": "Kατηγορίες συναλλαγών"
 }

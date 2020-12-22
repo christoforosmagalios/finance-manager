@@ -185,6 +185,22 @@ label {
   border-color: #2e59d9;
 }
 
+/** Pills */
+.nav-pills.nav.flex-column {
+  border-right: 1px solid #ddd;
+}
+
+.nav-pills .nav-link {
+  color: #5a5c69;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #5a5c69;
+  background: #f9f9f9;
+  border-left: 4px solid #4e73df;
+  border-radius: 0;
+}
+
 /** Table Sort Directive CSS **/
 [sortable]:hover {
     cursor: pointer;

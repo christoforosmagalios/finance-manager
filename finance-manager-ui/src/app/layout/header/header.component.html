@@ -35,7 +35,13 @@
             <div class="nav-link cursor-pointer" id="userActions" ngbDropdownToggle> {{ isLoggedInUser.fullname }} </div>
             <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="userActions">
               <button class="dropdown-item" (click)="logout()">
-                {{ 'logout' | translate }}
+                <span class="fas fa-user-alt mr-2"></span> {{ 'my.account' | translate }}
+              </button>
+              <button class="dropdown-item" routerLink="/settings">
+                <span class="fas fa-cog mr-2"></span> {{ 'settings' | translate }}
+              </button>
+              <button class="dropdown-item" (click)="logout()">
+                <span class="fas fa-power-off mr-2"></span> {{ 'logout' | translate }}
               </button>
             </div>
           </div>

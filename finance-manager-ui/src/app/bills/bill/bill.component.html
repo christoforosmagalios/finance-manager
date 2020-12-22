@@ -70,7 +70,7 @@
                                     <!-- Bill Address -->
                                     <div class="col-8">
                                         <div class="form-group">
-                                            <label class="w-100">{{ 'address' | translate }} <a class="float-right cursor-pointer"><span class="fas fa-plus"></span> {{ 'new.address' | translate }}</a></label>
+                                            <label class="w-100">{{ 'address' | translate }} <a routerLink="/settings" class="float-right"><span class="fas fa-plus"></span> {{ 'new.address' | translate }}</a></label>
                                             <select class="form-control" id="address" name="address" [(ngModel)]="bill.address"
                                             [compareWith]="utils.compareById" [disabled]="!editMode">
                                                 <option *ngFor="let address of addresses;" [ngValue]="address">
