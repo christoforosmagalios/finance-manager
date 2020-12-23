@@ -49,6 +49,7 @@
     "bill.image": "Εικόνα λογαριασμού",
     "transactions.table": "Λίστα συναλλαγών",
     "bills.table": "Λίστα λογαριασμών",
+    "address.table": "Λίστα διευθύνσεων",
     "code": "Κωδικός",
     "bill.code": "Κωδικός λογαριασμού",
     "bill.description": "Περιγραφή λογαριασμού",

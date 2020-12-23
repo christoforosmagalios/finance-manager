@@ -7,11 +7,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DirectivesModule } from '../shared/directives/directives.module';
 import { FormsModule } from '@angular/forms';
+import { AddressItemComponent } from './address/address-item/address-item.component';
 
 
 
 @NgModule({
-  declarations: [SettingsComponent, AddressComponent],
+  declarations: [SettingsComponent, AddressComponent, AddressItemComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,

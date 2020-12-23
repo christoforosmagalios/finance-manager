@@ -49,6 +49,7 @@
     "bill.image": "Bill image",
     "transactions.table": "Transactions table",
     "bills.table": "Bills table",
+    "address.table": "Addresses table",
     "code": "Code",
     "bill.code": "Bill code",
     "bill.description": "Bill description",
