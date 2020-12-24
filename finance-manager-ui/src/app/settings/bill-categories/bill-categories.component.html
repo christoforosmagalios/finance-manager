@@ -1,23 +1,24 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-2">
-        <h4 class="h4 mb-0 text-gray">{{ 'addresses' | translate }}</h4>
-        <button class="btn btn-primary float-right" (click)="addAddress()"><span class="fas fa-plus"></span> {{ 'address' | translate }}</button>
+        <h4 class="h4 mb-0 text-gray">{{ 'bill.categories' | translate }}</h4>
     </div>
     <div class="row">
         <div class="col-12">
             <div class="table-responsive">
                 <table class="table table-striped">
-                    <caption>{{ 'address.table' | translate }}</caption>
+                    <caption>{{ 'bill.categories.table' | translate }}</caption>
                     <thead>
                         <tr>
+                            <th scope="col" width="5%">{{ 'order' | translate }}</th>
+                            <th scope="col" width="10%">{{ 'code' | translate }}</th>
                             <th scope="col">{{ 'description' | translate }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let a of addresses; index as i;">
-                            <td>
-                                <app-address-item [address]="a" (updateAddresses)="findAll()"></app-address-item>
-                            </td>
+                        <tr *ngFor="let tc of billCatogories; index as i;">
+                            <td>{{ tc.order }}</td>
+                            <td>{{ tc.code }}</td>
+                            <td>{{ tc.name | translate }}</td>
                         </tr>
                     </tbody>
                 </table>

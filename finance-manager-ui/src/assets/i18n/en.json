@@ -50,6 +50,8 @@
     "transactions.table": "Transactions table",
     "bills.table": "Bills table",
     "address.table": "Addresses table",
+    "transaction.categories.table": "Transactions categories table",
+    "bills.categories.table": "Bill categories table",
     "code": "Code",
     "bill.code": "Bill code",
     "bill.description": "Bill description",
@@ -137,5 +139,7 @@
 
     "addresses": "Addresses",
     "bill.categories": "Bill categories",
-    "transaction.categories": "Transaction categories"
+    "transaction.categories": "Transaction categories",
+    "order": "Order",
+    "color": "Color"
 }

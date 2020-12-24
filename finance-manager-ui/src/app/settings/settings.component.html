@@ -17,21 +17,23 @@
                 <div class="card-body">
                     
                     <div class="d-flex">
-                        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
-                          <li ngbNavItem="top">
-                            <a ngbNavLink class="text-nowrap">{{ 'addresses' | translate }}</a>
+                        <ul ngbNav #nav="ngbNav" [activeId]="route.fragment | async" class="nav-pills" orientation="vertical">
+                          <li ngbNavItem="addresses">
+                            <a ngbNavLink class="text-nowrap" routerLink="." fragment="addresses">{{ 'addresses' | translate }}</a>
                             <ng-template ngbNavContent>
                               <app-address></app-address>
                             </ng-template>
                           </li>
-                          <li ngbNavItem="middle">
-                            <a ngbNavLink class="text-nowrap">{{ 'transaction.categories' | translate }}</a>
+                          <li ngbNavItem="transactionCategories">
+                            <a ngbNavLink class="text-nowrap" routerLink="." fragment="transactionCategories">{{ 'transaction.categories' | translate }}</a>
                             <ng-template ngbNavContent>
+                              <app-transaction-categories></app-transaction-categories>
                             </ng-template>
                           </li>
-                          <li ngbNavItem="bottom">
-                            <a ngbNavLink class="text-nowrap">{{ 'bill.categories' | translate }}</a>
+                          <li ngbNavItem="billCategories">
+                            <a ngbNavLink class="text-nowrap" routerLink="." fragment="billCategories">{{ 'bill.categories' | translate }}</a>
                             <ng-template ngbNavContent>
+                              <app-bill-categories></app-bill-categories>
                             </ng-template>
                           </li>
                         </ul>

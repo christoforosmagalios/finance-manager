@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-2">
+        <h4 class="h4 mb-0 text-gray">{{ 'transaction.categories' | translate }}</h4>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <caption>{{ 'transaction.categories.table' | translate }}</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col" width="5%">{{ 'order' | translate }}</th>
+                            <th scope="col" width="10%">{{ 'code' | translate }}</th>
+                            <th scope="col" width="7%">{{ 'color' | translate }}</th>
+                            <th scope="col">{{ 'description' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tc of transactionCatogories; index as i;">
+                            <td>{{ tc.order }}</td>
+                            <td>{{ tc.code }}</td>
+                            <td><div class="color-circle" [ngStyle]="{'background': tc.color}" ngbTooltip="{{ tc.color }}"></div></td>
+                            <td>{{ tc.name | translate }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

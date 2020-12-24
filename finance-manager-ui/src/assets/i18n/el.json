@@ -50,6 +50,8 @@
     "transactions.table": "Λίστα συναλλαγών",
     "bills.table": "Λίστα λογαριασμών",
     "address.table": "Λίστα διευθύνσεων",
+    "transaction.categories.table": "Kατηγορίες συναλλαγών",
+    "bills.categories.table": "Kατηγορίες λογαριασμών",
     "code": "Κωδικός",
     "bill.code": "Κωδικός λογαριασμού",
     "bill.description": "Περιγραφή λογαριασμού",
@@ -137,5 +139,7 @@
 
     "addresses": "Διευθύνσεις",
     "bill.categories": "Kατηγορίες λογαριασμών",
-    "transaction.categories": "Kατηγορίες συναλλαγών"
+    "transaction.categories": "Kατηγορίες συναλλαγών",
+    "order": "Σειρά",
+    "color": "Χρώμα"
 }

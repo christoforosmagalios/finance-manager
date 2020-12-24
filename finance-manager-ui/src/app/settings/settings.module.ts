@@ -8,11 +8,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DirectivesModule } from '../shared/directives/directives.module';
 import { FormsModule } from '@angular/forms';
 import { AddressItemComponent } from './address/address-item/address-item.component';
+import { TransactionCategoriesComponent } from './transaction-categories/transaction-categories.component';
+import { BillCategoriesComponent } from './bill-categories/bill-categories.component';
 
 
 
 @NgModule({
-  declarations: [SettingsComponent, AddressComponent, AddressItemComponent],
+  declarations: [SettingsComponent, AddressComponent, AddressItemComponent, TransactionCategoriesComponent, BillCategoriesComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,
