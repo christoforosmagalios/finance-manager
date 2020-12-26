@@ -141,5 +141,9 @@
     "bill.categories": "Bill categories",
     "transaction.categories": "Transaction categories",
     "order": "Order",
-    "color": "Color"
+    "color": "Color",
+    "details": "Details",
+    "change.password": "Change Password",
+    "bill.saved.successfully": "Bill saved successfully!",
+    "transaction.saved.successfully": "Transaction saved successfully!"
 }

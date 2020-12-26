@@ -24,6 +24,8 @@ import { LineChartComponent } from './shared/components/charts/line-chart/line-c
 import { AuthModule } from './auth/auth.module';
 import { AuthRoutingModule } from './auth/auth.routing.module';
 import { SettingsModule } from './settings/settings.module';
+import { UserComponent } from './user/user.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,12 +35,14 @@ import { SettingsModule } from './settings/settings.module';
     DashboardComponent,
     HeaderComponent,
     PieChartComponent,
-    LineChartComponent
+    LineChartComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     TransactionsRoutingModule,

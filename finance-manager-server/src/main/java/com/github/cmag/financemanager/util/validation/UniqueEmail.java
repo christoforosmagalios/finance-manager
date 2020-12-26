@@ -10,12 +10,14 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Documented
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {UniqueEmailValidator.class})
 public @interface UniqueEmail {
 
   String message() default AppConstants.EMAIL_EXISTS;
+
+  String field() default "email";
 
   Class<?>[] groups() default {};
 

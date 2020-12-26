@@ -4,7 +4,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { BillCategoryDTO } from 'src/app/dto/bill-category-dto';
 import { BillDTO } from 'src/app/dto/bill-dto';
-import { Location } from '@angular/common';
 import { Constants } from 'src/app/shared/constants/constants';
 import { CRUDService } from 'src/app/shared/services/crud.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -54,7 +53,6 @@ export class BillComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private location: Location,
     public formatter: NgbDateParserFormatter,
     private crudService: CRUDService,
     public utils: UtilsService,
@@ -148,27 +146,18 @@ export class BillComponent implements OnInit {
    * @param form The Form.
    */
   onSubmit(form: NgForm) {
-    this.clearErrors();
-
+    // Clear the form errors.
+    this.utils.clearErrors(this.errors);
+    // Save the bill.
     this.billService.saveBill(this.bill).subscribe(result => {
-      this.utils.showSuccess("Saved successfully.");
+      // Show success notification.
+      this.utils.showSuccess("bill.saved.successfully");
+      // Navigate to Bills view.
       this.router.navigate(['/bills']);
     }, error => {
-      if (error && error.errors instanceof Array) {
-        for (let e of error.errors) {
-          this.errors[e.field] = e.defaultMessage;
-        }
-      }
+      // Mark the validation errors.
+      this.utils.markErrors(this.errors, error);
     });
-  }
-
-  /**
-   * Clear any previous validation errors.
-   */
-  private clearErrors() {
-    for (let property in this.errors) {
-      this.errors[property] = null;
-    }
   }
 
   /**
@@ -178,9 +167,9 @@ export class BillComponent implements OnInit {
     if(this.editMode && this.id) {
       this.bill = {...this.originalBill};
       this.editMode = false;
-      this.clearErrors();
+      this.utils.clearErrors(this.errors);
     } else {
-      this.location.back();
+      this.utils.goBack();
     }
   }
 

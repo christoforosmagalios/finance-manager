@@ -10,12 +10,14 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Documented
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {UniqueUsernameValidator.class})
 public @interface UniqueUsername {
 
   String message() default AppConstants.USERNAME_EXISTS;
+
+  String field() default "username";
 
   Class<?>[] groups() default {};
 

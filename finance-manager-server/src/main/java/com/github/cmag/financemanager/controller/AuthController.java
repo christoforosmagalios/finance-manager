@@ -1,7 +1,7 @@
 package com.github.cmag.financemanager.controller;
 
-import com.github.cmag.financemanager.dto.RegisterDTO;
-import com.github.cmag.financemanager.service.AuthService;
+import com.github.cmag.financemanager.dto.UserDetailsDTO;
+import com.github.cmag.financemanager.service.UserService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
   @Autowired
-  private AuthService authService;
+  private UserService userService;
 
   /**
    * Register the given user.
    *
-   * @param registerDTO Contains registration info.
+   * @param userDetailsDTO Contains registration info.
    */
   @PostMapping("/register")
-  public void register(@Valid @RequestBody RegisterDTO registerDTO) {
-    authService.register(registerDTO);
+  public void register(@Valid @RequestBody UserDetailsDTO userDetailsDTO) {
+    userService.create(userDetailsDTO);
   }
 }

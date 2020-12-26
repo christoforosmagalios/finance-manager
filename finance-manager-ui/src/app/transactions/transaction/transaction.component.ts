@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TransactionDTO } from '../../dto/transaction-dto';
-import { Location } from '@angular/common';
 import { NgbDateParserFormatter, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateFRParserFormatter } from '../../shared/services/datepicker.formatter.service';
 import { CRUDService } from '../../shared/services/crud.service';
@@ -56,7 +55,6 @@ export class TransactionComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private location: Location,
     public formatter: NgbDateParserFormatter,
     private crudService: CRUDService,
     public utils: UtilsService,
@@ -129,28 +127,19 @@ export class TransactionComponent implements OnInit {
       this.transaction.bill = this.bill;
     }
 
-    this.clearErrors();
-
+    // Clear the form errors.
+    this.utils.clearErrors(this.errors);
+    // Save the transaction.
     this.crudService.save(Constants.ENTITY.TRANSACTION, this.transaction)
     .subscribe(result => {
-      this.utils.showSuccess("Saved successfully.");
+      // Show success notification.
+      this.utils.showSuccess("transaction.saved.successfully");
+      // Navigate to Transactions view.
       this.router.navigate(['/transactions']);
     }, error => {
-      if (error && error.errors instanceof Array) {
-        for (let e of error.errors) {
-          this.errors[e.field] = e.defaultMessage;
-        }
-      }
+      // Mark the validation errors.
+      this.utils.markErrors(this.errors, error);
     });
-  }
-
-  /**
-   * Clear any previous validation errors.
-   */
-  private clearErrors() {
-    for (let property in this.errors) {
-      this.errors[property] = null;
-    }
   }
 
   /**
@@ -160,9 +149,9 @@ export class TransactionComponent implements OnInit {
     if(this.editMode && this.id) {
       this.transaction = {...this.originalTransaction};
       this.editMode = false;
-      this.clearErrors();
+      this.utils.clearErrors(this.errors);
     } else {
-      this.location.back();
+      this.utils.goBack();
     }
   }
 

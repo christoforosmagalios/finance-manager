@@ -3,6 +3,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from "ngx-toastr";
 import { ConfirmationModalComponent } from "../components/confirmation-modal/confirmation-modal.component";
+import { Location } from '@angular/common';
 
 @Injectable({providedIn: 'root'})
 export class UtilsService {
@@ -10,7 +11,8 @@ export class UtilsService {
     constructor(
         private _modalService: NgbModal,
         private toastr: ToastrService,
-        private translateService: TranslateService
+        private translateService: TranslateService,
+        private location: Location
     ) {}
 
     /**
@@ -115,6 +117,36 @@ export class UtilsService {
      */
     setTwoNumberDecimal($event) {
         $event.target.value = parseFloat($event.target.value).toFixed(2);
+    }
+
+    /**
+     * Go to previous state.
+     */
+    goBack() {
+        this.location.back();
+    }
+
+    /**
+     * Clear any previous validation errors.
+     */
+    clearErrors(errors: Object) {
+        for (let property in errors) {
+            errors[property] = null;
+        }
+    }
+
+    /**
+     * Mark the validation errors.
+     * 
+     * @param errors Object that contains the form elements.
+     * @param error  Http Error response.
+     */
+    markErrors(errors: Object, error: any) {
+        if (error && error.errors instanceof Array) {
+            for (let e of error.errors) {
+                errors[e.field] = e.defaultMessage;
+            }
+        }
     }
 
 }

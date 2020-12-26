@@ -1,0 +1,108 @@
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray">{{ user.firstName }} {{ user.lastName }}</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h5 mb-0 text-gray">{{ 'details' | translate }}</h1>
+                            </div>
+                            <form #uForm="ngForm" (ngSubmit)="onSubmit(uForm)">
+                                <div class="row">
+                                    <!-- First name -->
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="firstName">{{ 'firstName' | translate }}</label>
+                                            <input class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName" [disabled]="!editMode" required #fn="ngModel"/>
+                                            <div class="help-block text-danger" *ngIf="!fn.valid && fn.dirty && editMode">{{ 'must not be blank' | translate }}</div>
+                                            <div class="help-block text-danger" *ngIf="errors.firstName" [innerHTML]="errors.firstName | translate"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Last name -->
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="lastName">{{ 'lastName' | translate }}</label>
+                                            <input class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName" [disabled]="!editMode" required #ln="ngModel"/>
+                                            <div class="help-block text-danger" *ngIf="!ln.valid && ln.dirty && editMode">{{ 'must not be blank' | translate }}</div>
+                                            <div class="help-block text-danger" *ngIf="errors.lastName" [innerHTML]="errors.lastName | translate"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- Username -->
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="username">{{ 'username' | translate }}</label>
+                                            <input class="form-control" id="username" name="username" [(ngModel)]="user.username" disabled required #un="ngModel"/>
+                                            <div class="help-block text-danger" *ngIf="!un.valid && un.dirty && editMode">{{ 'must not be blank' | translate }}</div>
+                                            <div class="help-block text-danger" *ngIf="errors.username" [innerHTML]="errors.username | translate"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Email -->
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="email">{{ 'email' | translate }}</label>
+                                            <input class="form-control" id="email" name="email" [(ngModel)]="user.email" required [disabled]="!editMode" #em="ngModel"/>
+                                            <div class="help-block text-danger" *ngIf="!em.valid && em.dirty && editMode">{{ 'must not be blank' | translate }}</div>
+                                            <div class="help-block text-danger" *ngIf="errors.email" [innerHTML]="errors.email | translate"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-4" *ngIf="editMode">
+                                    <!-- Change password -->
+                                    <div class="col-12">
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input" id="changePassword" name="changePassword"  required [(ngModel)]="user.changePassword">
+                                            <label class="form-check-label" for="changePassword">{{ 'change.password' | translate }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- Password -->
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="password">{{ 'password' | translate }}</label>
+                                            <input class="form-control" type="password" id="password" name="password" [(ngModel)]="user.password" 
+                                            [disabled]="!user.changePassword || !editMode" [required]="user.changePassword" #p="ngModel"/>
+                                            <div class="help-block text-danger" *ngIf="!p.valid && p.dirty && user.changePassword && editMode">{{ 'error.enter.password' | translate }}</div>
+                                            <div class="help-block text-danger" *ngIf="errors.password" [innerHTML]="errors.password | translate"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Confirm Password -->
+                                    <div class="col-lg-6 col-12">
+                                        <div class="form-group">
+                                            <label for="confirmPassword">{{ 'confirm.password' | translate }}</label>
+                                            <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="user.confirmPassword" 
+                                            [disabled]="!user.changePassword || !editMode" [required]="user.changePassword" #c="ngModel"/>
+                                            <div class="help-block text-danger" *ngIf="!c.valid && c.dirty && user.changePassword && editMode">{{ 'error.enter.confirm.password' | translate }}</div>
+                                            <div class="help-block text-danger" *ngIf="errors.password" [innerHTML]="errors.password | translate"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Form footer -->
+                                <div class="row form-footer">
+                                    <div class="col-12 pr-0 text-right">
+                                        <button class="btn btn-secondary btn-min-width ml-2" type="button" (click)="utils.goBack()" *ngIf="!editMode">{{ 'cancel' | translate }}</button>
+                                        <button class="btn btn-secondary btn-min-width ml-2" type="button" (click)="onAbort()" *ngIf="editMode">{{ 'abort' | translate }}</button>
+                                        <button class="btn btn-primary btn-min-width ml-2" type="button" (click)="editMode = true" *ngIf="!editMode">{{ 'edit' | translate }}</button>
+                                        <button class="btn btn-primary btn-min-width ml-2" type="submit" *ngIf="editMode">{{ 'save' | translate }}</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

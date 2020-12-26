@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterDTO } from 'src/app/dto/register-dto';
+import { UserDetailsDTO } from 'src/app/dto/user-details-dto';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { AuthService } from '../auth.service';
 export class RegisterComponent implements OnInit {
 
   // Register object.
-  register = new RegisterDTO();
+  user = new UserDetailsDTO();
   // Error object.
   errors = {
     username: null,
@@ -26,7 +27,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private loader: LoaderService,
-    private router: Router) { }
+    private router: Router,
+    private utils: UtilsService) { }
 
   ngOnInit(): void {
   }
@@ -41,27 +43,19 @@ export class RegisterComponent implements OnInit {
     if (!form.valid) {
       return;
     }
-    this.clearErrors();
+    // Clear form errors.
+    this.utils.clearErrors(this.errors);
+    // Show the Loader.
     this.loader.show();
-    this.auth.register(this.register).subscribe(res => {
+    // Register user.
+    this.auth.register(this.user).subscribe(res => {
+      // Hide the Loader.
       this.loader.hide();
+      // Navigate to the Login page.
       this.router.navigate(["/login"]);
     }, error => {
-      if (error && error.errors instanceof Array) {
-        for (let e of error.errors) {
-          this.errors[e.field] = e.defaultMessage;
-        }
-      }
+      // Mark the validation errors.
+      this.utils.markErrors(this.errors, error);
     });
-    
-  }
-  
-  /**
-   * Clear any previous validation errors.
-   */
-  private clearErrors() {
-    for (let property in this.errors) {
-      this.errors[property] = null;
-    }
   }
 }

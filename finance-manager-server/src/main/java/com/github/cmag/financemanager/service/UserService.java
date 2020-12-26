@@ -1,6 +1,7 @@
 package com.github.cmag.financemanager.service;
 
 import com.github.cmag.financemanager.dto.UserDTO;
+import com.github.cmag.financemanager.dto.UserDetailsDTO;
 import com.github.cmag.financemanager.mapper.UserMapper;
 import com.github.cmag.financemanager.model.User;
 import com.github.cmag.financemanager.repository.UserRepository;
@@ -8,6 +9,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,9 @@ public class UserService extends BaseService<UserDTO, User> {
 
   @Autowired
   private UserMapper mapper;
+
+  @Autowired
+  private BCryptPasswordEncoder encoder;
 
   /**
    * Find the User with the given username.
@@ -64,5 +69,36 @@ public class UserService extends BaseService<UserDTO, User> {
    */
   public UserDTO getLoggedInUserDTO() {
     return mapper.map(getLoggedInUser());
+  }
+
+  /**
+   * Encode the given password and save the user.
+   *
+   * @param userDetailsDTO Contains information about the user to be saved.
+   */
+  public void create(UserDetailsDTO userDetailsDTO) {
+    userDetailsDTO.setPassword(encoder.encode(userDetailsDTO.getPassword()));
+    userRepository.save(mapper.map(userDetailsDTO));
+  }
+
+  /**
+   * Save the given user details.
+   *
+   * @param userDetailsDTO The user details.
+   * @return The saved user dto representation.
+   */
+  public UserDTO update(UserDetailsDTO userDetailsDTO) {
+    // Fetch the user from the database.
+    User user = userRepository.getOne(userDetailsDTO.getId());
+    // Update only the allowed fields.
+    user.setEmail(userDetailsDTO.getEmail());
+    user.setFirstName(userDetailsDTO.getFirstName());
+    user.setLastName(userDetailsDTO.getLastName());
+    // Update the password in case the user selected this option.
+    if (userDetailsDTO.isChangePassword()) {
+      user.setPassword(encoder.encode(userDetailsDTO.getPassword()));
+    }
+    // Update and return the user.
+    return mapper.map(userRepository.save(user));
   }
 }

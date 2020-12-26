@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthDTO } from '../dto/auth-dto';
 import { LoginDTO } from '../dto/login-dto';
-import { RegisterDTO } from '../dto/register-dto';
+import { UserDetailsDTO } from '../dto/user-details-dto';
 import { Constants } from '../shared/constants/constants';
 
 @Injectable({providedIn: 'root'})
@@ -20,10 +20,10 @@ export class AuthService {
     /**
      * Register the user with the given information.
      * 
-     * @param registerDTO Object with the registration info.
+     * @param userDetailsDTO Object with the registration info.
      */
-    register(registerDTO: RegisterDTO) {
-        return this.http.post(Constants.API + '/' + this.endpoint + '/register', registerDTO);
+    register(userDetailsDTO: UserDetailsDTO) {
+        return this.http.post(Constants.API + '/' + this.endpoint + '/register', userDetailsDTO);
     }
 
     /**

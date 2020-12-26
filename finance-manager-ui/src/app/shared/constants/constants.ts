@@ -15,7 +15,8 @@ export const Constants = {
         BILL: "bill",
         BILL_CATEGORY: "billCategory",
         ADDRESS: "address",
-        AUTH: "auth"
+        AUTH: "auth",
+        USER: "user"
     },
 
     // Items per page for tables.

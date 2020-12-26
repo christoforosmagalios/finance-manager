@@ -34,7 +34,7 @@
           <div ngbDropdown class="d-inline-block" display="dynamic">
             <div class="nav-link cursor-pointer" id="userActions" ngbDropdownToggle> {{ isLoggedInUser.fullname }} </div>
             <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="userActions">
-              <button class="dropdown-item" (click)="logout()">
+              <button class="dropdown-item" routerLink="/user">
                 <span class="fas fa-user-alt mr-2"></span> {{ 'my.account' | translate }}
               </button>
               <button class="dropdown-item" routerLink="/settings" fragment="addresses">
