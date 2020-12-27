@@ -4,7 +4,6 @@ import { PageDTO } from 'src/app/dto/page-dto';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { Constants } from 'src/app/shared/constants/constants';
 import { CRUDService } from 'src/app/shared/services/crud.service';
-import { BillService } from '../bill.service';
 
 @Component({
   selector: 'app-bills',
@@ -31,8 +30,7 @@ export class BillsComponent implements OnInit {
 
   constructor(
     private loader: LoaderService,
-    private crudService: CRUDService,
-    private billService: BillService
+    private crudService: CRUDService
   ) { }
 
   ngOnInit(): void {

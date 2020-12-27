@@ -72,6 +72,15 @@ public class UserService extends BaseService<UserDTO, User> {
   }
 
   /**
+   * Get the id of the logged in user.
+   *
+   * @return The id.
+   */
+  public String getLoggedInUserId() {
+    return getLoggedInUser().getId();
+  }
+
+  /**
    * Encode the given password and save the user.
    *
    * @param userDetailsDTO Contains information about the user to be saved.

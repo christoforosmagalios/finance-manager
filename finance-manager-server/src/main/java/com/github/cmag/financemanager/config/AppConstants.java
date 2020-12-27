@@ -46,4 +46,6 @@ public class AppConstants {
   public static final String AUTH_HEADER_STRING = "Authorization";
   // Auth response header.
   public static final String AUTH_RESP_HEADER_STRING = "Authorization-User";
+  // Not allowed response.
+  public static final String NOT_ALLOWED = "Not allowed!";
 }

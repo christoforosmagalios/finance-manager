@@ -13,16 +13,18 @@ public interface BillEsRepository extends ElasticsearchRepository<BillIndex, Str
    * Find the bills whose code start with the given text.
    *
    * @param text The text to search with.
+   * @param userId The id of the logged in user.
    * @return List of bills.
    */
-  List<BillIndex> findByCodeStartsWith(String text);
+  List<BillIndex> findByCodeStartsWithAndUserId(String text, String userId);
 
   /**
    * Find the unpaid bills between the given dates.
    *
    * @param from From date (in milliseconds)
-   * @param to   To date (in milliseconds)
+   * @param to To date (in milliseconds)
+   * @param userId The id of the logged in user.
    * @return List of Bills.
    */
-  List<BillIndex> findByPaidFalseAndDueDateBetween(long from, long to);
+  List<BillIndex> findByPaidFalseAndDueDateBetweenAndUserId(long from, long to, String userId);
 }

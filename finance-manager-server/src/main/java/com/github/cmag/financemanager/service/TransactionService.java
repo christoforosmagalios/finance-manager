@@ -17,6 +17,7 @@ import com.github.cmag.financemanager.model.master.data.TransactionCategory;
 import com.github.cmag.financemanager.repository.TransactionCategoryRepository;
 import com.github.cmag.financemanager.repository.TransactionRepository;
 import com.github.cmag.financemanager.util.Utils;
+import com.github.cmag.financemanager.util.exception.FinanceManagerException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,9 +25,17 @@ import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.Criteria;
+import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
+import org.springframework.data.elasticsearch.core.query.Query;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,6 +66,9 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
 
   @Autowired
   private TransactionCategoryMapper transactionCategoryMapper;
+
+  @Autowired
+  private ElasticsearchOperations elasticsearchOperations;
 
   /**
    * Save the given transaction. In case the transaction is linked with a bill, update the bill to
@@ -100,8 +112,18 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
           pageable.getPageSize(), Sort.by(AppConstants.UPDATED_ON).descending());
     }
 
-    Page<TransactionIndex> page = es.findAll(pageable);
-    return page.map(transaction -> mapper.mapToDTO(transaction));
+    Criteria criteria = new Criteria("userId").is(userService.getLoggedInUserId());
+    Query query = new CriteriaQuery(criteria).setPageable(pageable);
+    SearchHits<TransactionIndex> result = elasticsearchOperations.search(query, TransactionIndex.class);
+
+    List<TransactionDTO> transactions = new ArrayList<>();
+    List<SearchHit<TransactionIndex>> hits = result.getSearchHits();
+    hits.forEach(hit -> {
+      TransactionIndex item = hit.getContent();
+      transactions.add(mapper.mapToDTO(item));
+    });
+
+    return new PageImpl<>(transactions);
   }
 
   /**
@@ -115,9 +137,10 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
   public List<TransactionDTO> findTransactionsByBillId(String billId, String transactionId) {
     List<TransactionIndex> transactions;
     if (StringUtils.isBlank(transactionId)) {
-      transactions = es.findByBillId(billId);
+      transactions = es.findByBillIdAndUserId(billId, userService.getLoggedInUserId());
     } else {
-      transactions = es.findByBillIdAndIdNot(billId, transactionId);
+      transactions = es.findByBillIdAndIdNotAndUserId(billId, transactionId,
+          userService.getLoggedInUserId());
     }
     return transactions.stream().map(t -> mapper.mapToDTO(t))
         .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
@@ -130,8 +153,13 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    */
   @Override
   public void delete(String id) {
-    transactionRepository.deleteById(id);
-    es.deleteById(id);
+    Transaction transaction = transactionRepository.getOne(id);
+    if (transaction.getId().equals(userService.getLoggedInUserId())) {
+      transactionRepository.delete(transaction);
+      es.deleteById(id);
+    } else {
+      throw new FinanceManagerException(AppConstants.NOT_ALLOWED, HttpStatus.FORBIDDEN);
+    }
   }
 
   /**
@@ -145,7 +173,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     long to = Utils.getLastDayOfMonthInMil();
 
     // Fetch transactions and sum their amount.
-    return es.findByTypeAndDateBetween(type, from, to)
+    return es.findByTypeAndDateBetweenAndUserId(type, from, to, userService.getLoggedInUserId())
         .stream().mapToDouble(o -> o.getAmount()).sum();
   }
 
@@ -159,10 +187,10 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     long to = Utils.getLastDayOfYearInMil();
 
     // Get the annual earnings.
-    double earnings = es.findByTypeAndDateBetween(false, from, to)
+    double earnings = es.findByTypeAndDateBetweenAndUserId(false, from, to, userService.getLoggedInUserId())
         .stream().mapToDouble(o -> o.getAmount()).sum();
     // Get teh annual spendings.
-    double spendings = es.findByTypeAndDateBetween(true, from, to)
+    double spendings = es.findByTypeAndDateBetweenAndUserId(true, from, to, userService.getLoggedInUserId())
         .stream().mapToDouble(o -> o.getAmount()).sum();
 
     return earnings - spendings;
@@ -177,7 +205,8 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     long from = Utils.getFirstDayOfMonthInMil();
     long to = Utils.getLastDayOfMonthInMil();
     // Get the expense transactions.
-    List<TransactionIndex> transactions = es.findByTypeAndDateBetween(true, from, to);
+    List<TransactionIndex> transactions = es.findByTypeAndDateBetweenAndUserId(true, from, to,
+        userService.getLoggedInUserId());
 
     List<GroupedTransactionInfoDTO> transactionInfos = transactions.stream()
         .collect(groupingBy(TransactionIndex::getCategoryName))
@@ -195,7 +224,8 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     int to = Utils.getLastDayOfMonthReversed();
 
     List<TransactionIndex> transactions =
-        es.findByDateReversedGreaterThanEqualAndDateReversedLessThanEqual(from, to);
+        es.findByDateReversedGreaterThanEqualAndDateReversedLessThanEqualAndUserId(from, to,
+            userService.getLoggedInUserId());
 
     List<TransactionItemDTO> result = new ArrayList<>();
     while (from <= to) {

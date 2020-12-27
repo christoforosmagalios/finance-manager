@@ -8,6 +8,7 @@ import com.github.cmag.financemanager.mapper.BillMapper;
 import com.github.cmag.financemanager.model.Bill;
 import com.github.cmag.financemanager.repository.BillRepository;
 import com.github.cmag.financemanager.util.Utils;
+import com.github.cmag.financemanager.util.exception.FinanceManagerException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,9 +18,17 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.Criteria;
+import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
+import org.springframework.data.elasticsearch.core.query.Query;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 /**
@@ -42,6 +51,9 @@ public class BillService extends BaseService<BillDTO, Bill> {
 
   @Autowired
   private BillMapper mapper;
+
+  @Autowired
+  private ElasticsearchOperations elasticsearchOperations;
 
   @Value("${finance.manager.bill.images.path}")
   private String imagesPath;
@@ -83,8 +95,18 @@ public class BillService extends BaseService<BillDTO, Bill> {
           pageable.getPageSize(), Sort.by(AppConstants.UPDATED_ON).descending());
     }
 
-    Page<BillIndex> page = es.findAll(pageable);
-    return page.map(bill -> mapper.mapToDTO(bill));
+    Criteria criteria = new Criteria("userId").is(userService.getLoggedInUserId());
+    Query query = new CriteriaQuery(criteria).setPageable(pageable);
+    SearchHits<BillIndex> result = elasticsearchOperations.search(query, BillIndex.class);
+
+    List<BillDTO> bills = new ArrayList<>();
+    List<SearchHit<BillIndex>> hits = result.getSearchHits();
+    hits.forEach(hit -> {
+      BillIndex item = hit.getContent();
+      bills.add(mapper.mapToDTO(item));
+    });
+
+    return new PageImpl<>(bills);
   }
 
   /**
@@ -100,7 +122,7 @@ public class BillService extends BaseService<BillDTO, Bill> {
     }
 
     // Find the bills whose code start with the given text.
-    return es.findByCodeStartsWith(text).stream()
+    return es.findByCodeStartsWithAndUserId(text, userService.getLoggedInUserId()).stream()
         .map(bill -> mapper.mapToDTO(bill))
         .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
@@ -128,8 +150,13 @@ public class BillService extends BaseService<BillDTO, Bill> {
    */
   @Override
   public void delete(String id) {
-    billRepository.deleteById(id);
-    es.deleteById(id);
+    Bill bill = billRepository.getOne(id);
+    if (bill.getId().equals(userService.getLoggedInUserId())) {
+      billRepository.delete(bill);
+      es.deleteById(id);
+    } else {
+      throw new FinanceManagerException(AppConstants.NOT_ALLOWED, HttpStatus.FORBIDDEN);
+    }
   }
 
   /**
@@ -142,7 +169,7 @@ public class BillService extends BaseService<BillDTO, Bill> {
     long to = Utils.getLastDayOfMonthInMil();
 
     // Fetch bills and sum their amount.
-    return es.findByPaidFalseAndDueDateBetween(from, to)
+    return es.findByPaidFalseAndDueDateBetweenAndUserId(from, to, userService.getLoggedInUserId())
         .stream().mapToDouble(o -> o.getAmount()).sum();
   }
 }
