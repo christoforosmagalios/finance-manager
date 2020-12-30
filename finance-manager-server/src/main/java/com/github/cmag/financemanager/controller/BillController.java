@@ -67,7 +67,7 @@ public class BillController extends BaseController<BillDTO, Bill> {
    * @param pageable Contains pagination info.
    * @return The Page result.
    */
-  @GetMapping("/paginated")
+  @PostMapping("/paginated")
   public Page<BillDTO> findAll(Pageable pageable) {
     return billService.findAllPaginated(pageable);
   }

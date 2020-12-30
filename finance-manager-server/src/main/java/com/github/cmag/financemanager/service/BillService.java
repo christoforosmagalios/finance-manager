@@ -10,8 +10,8 @@ import com.github.cmag.financemanager.repository.BillRepository;
 import com.github.cmag.financemanager.util.Utils;
 import com.github.cmag.financemanager.util.exception.FinanceManagerException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import liquibase.util.StringUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -137,7 +137,7 @@ public class BillService extends BaseService<BillDTO, Bill> {
     Bill bill = billRepository.getOne(billDTO.getId());
     if (!bill.isPaid()) {
       bill.setPaid(true);
-      bill.setPaidOn(new Date());
+      bill.setPaidOn(LocalDate.now());
       super.save(mapper.map(bill));
       es.save(mapper.mapToIndex(bill));
     }
@@ -165,8 +165,8 @@ public class BillService extends BaseService<BillDTO, Bill> {
    * @return The pending amount.
    */
   public double getPendingAmount() {
-    long from = Utils.getFirstDayOfMonthInMil();
-    long to = Utils.getLastDayOfMonthInMil();
+    LocalDate from = Utils.getFirstDayOfMonth();
+    LocalDate to = Utils.getLastDayOfMonth();
 
     // Fetch bills and sum their amount.
     return es.findByPaidFalseAndDueDateBetweenAndUserId(from, to, userService.getLoggedInUserId())

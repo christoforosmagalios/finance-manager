@@ -1,6 +1,7 @@
 package com.github.cmag.financemanager.model;
 
 import com.github.cmag.financemanager.model.master.data.TransactionCategory;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class Transaction extends BaseEntity {
   private Bill bill;
 
   @Column(name = "date")
-  private Date date;
+  private LocalDate date;
 
   @Column(name = "description")
   private String description;

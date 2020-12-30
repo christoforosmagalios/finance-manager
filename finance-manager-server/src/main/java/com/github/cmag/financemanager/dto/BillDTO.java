@@ -2,7 +2,7 @@ package com.github.cmag.financemanager.dto;
 
 import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.master.data.BillCategoryDTO;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,10 +20,10 @@ public class BillDTO extends BaseDTO {
   private String code;
 
   @NotNull(message = AppConstants.NOT_NULL)
-  private Date issuedOn;
+  private LocalDate issuedOn;
 
   @NotNull(message = AppConstants.NOT_NULL)
-  private Date dueDate;
+  private LocalDate dueDate;
 
   @NotEmpty(message = AppConstants.NOT_NULL)
   @Size(max = 250, message = AppConstants.MAX_SIZE_250)
@@ -34,13 +34,13 @@ public class BillDTO extends BaseDTO {
 
   @NotNull(message = AppConstants.NOT_NULL)
   private boolean paid;
-  private Date paidOn;
+  private LocalDate paidOn;
 
   @NotNull(message = AppConstants.NOT_NULL)
-  private Date consumptionFrom;
+  private LocalDate consumptionFrom;
 
   @NotNull(message = AppConstants.NOT_NULL)
-  private Date consumptionTo;
+  private LocalDate consumptionTo;
 
   @Size(max = 250, message = AppConstants.MAX_SIZE_500)
   private String notes;

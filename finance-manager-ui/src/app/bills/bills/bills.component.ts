@@ -43,7 +43,7 @@ export class BillsComponent implements OnInit {
     // Show loader.
     this.loader.show();
     // Find the Bills.
-    this.crudService.findAllPaginated(Constants.ENTITY.BILL, this.size, (this.page - 1), this.sort.name, this.sort.direction)
+    this.crudService.findAllPaginated(Constants.ENTITY.BILL, this.size, (this.page - 1), this.sort.name, this.sort.direction, null)
     .subscribe((page: PageDTO<BillDTO>) => {
       this.bills = page.content;
       this.collectionSize = page.totalElements;

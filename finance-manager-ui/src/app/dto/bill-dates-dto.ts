@@ -11,7 +11,7 @@ export class BillDates {
     constructor() {
         // Default values.
         let date = new Date();
-        let ngbDdate = new NgbDate(date.getFullYear(), date.getMonth() + 1,  date.getDate())
+        let ngbDdate = new NgbDate(date.getFullYear(), date.getMonth() + 1,  date.getDate());
         this.issuedOn = ngbDdate;
         this.dueDate = ngbDdate;
         this.paidOn = null;

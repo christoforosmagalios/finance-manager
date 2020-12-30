@@ -48,4 +48,16 @@ public class AppConstants {
   public static final String AUTH_RESP_HEADER_STRING = "Authorization-User";
   // Not allowed response.
   public static final String NOT_ALLOWED = "Not allowed!";
+  // Transaction type field name.
+  public static final String T_TYPE = "type";
+  // Transaction amount field name.
+  public static final String T_AMOUNT = "amount";
+  // Transaction date field name.
+  public static final String T_DATE = "date";
+  // Transaction billCode field name.
+  public static final String T_BILL_CODE = "billCode";
+  // Transaction categoryId field name.
+  public static final String T_CATEGORY_ID = "categoryId";
+  // The userId field name.
+  public static final String USER_ID = "userId";
 }

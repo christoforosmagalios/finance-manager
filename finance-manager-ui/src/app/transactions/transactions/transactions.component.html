@@ -7,15 +7,102 @@
         <div class="col-12">
             <div class="card shadow mb-4">
                 <div class="container-fluid">
-                <div class="row mt-4">
-                    <div class="col-6">
-
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-secondary btn-sm" (click)="filterIsCollapsed = !filterIsCollapsed"
+                            [attr.aria-expanded]="!filterIsCollapsed" aria-controls="transactionsFilter">
+                                <span class="fas fa-filter"></span>
+                            </button>
+                        </div>
+                        <div class="col-6 text-right">
+                            <button class="btn btn-primary" routerLink="/transaction"><span class="fas fa-plus"></span> {{ 'transaction' | translate }}</button>
+                        </div>
                     </div>
-                    <div class="col-6 text-right">
-                        <button class="btn btn-primary" routerLink="/transaction"><span class="fas fa-plus"></span> {{ 'transaction' | translate }}</button>
+                    <div id="transactionsFilter" [ngbCollapse]="filterIsCollapsed">
+                        <div class="row mt-3 pt-2 fm-bt-gray">
+                            <div class="col-md-3 col-6">
+                                <!-- Transaction Type -->
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="type">{{ 'type' | translate }}</label>
+                                        <select class="form-control" id="type" name="type" [(ngModel)]="filter.type">
+                                            <option [ngValue]="null"></option>
+                                            <option [ngValue]="false">{{ 'income' | translate }}</option>
+                                            <option [ngValue]="true">{{ 'expense' | translate }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <!-- Transaction Category -->
+                                <div class="form-group">
+                                    <label for="transactionCategory">{{ 'category' | translate }}</label>
+                                    <select class="form-control" id="transactionCategory" name="transactionCategory" [(ngModel)]="filter.transactionCategory"
+                                    [compareWith]="utils.compareById">
+                                        <option [ngValue]="null"></option>
+                                        <option *ngFor="let transactionCategory of transactionCategories;" [ngValue]="transactionCategory">
+                                            {{ transactionCategory.name | translate }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-12">
+                                <div class="form-group">
+                                    <label for="billCode">{{ 'bill.code' | translate }}</label>
+                                    <input class="form-control" id="billCode" name="billCode" [(ngModel)]="filter.billCode"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-6">
+                                <label for="dateFrom">{{ 'date.from' | translate }}</label>
+                                <div class="input-group">
+                                    <input class="form-control fm-datepicker-readonly" placeholder="DD/MM/YYYY" [value]="formatter.format(dateFrom)"
+                                    id="dateFrom" name="dateFrom" ngbDatepicker #df="ngbDatepicker" (dateSelect)="filter.dateFrom = utils.onDateSelection($event)" 
+                                    [readonly]="true" [(ngModel)]="dateFrom">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" (click)="df.toggle()" type="button">
+                                            <span class="far fa-calendar-alt"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <label for="dateTo">{{ 'date.to' | translate }}</label>
+                                <div class="input-group">
+                                    <input class="form-control fm-datepicker-readonly" placeholder="DD/MM/YYYY" [value]="formatter.format(dateTo)"
+                                    id="dateTo" name="dateTo" ngbDatepicker #dt="ngbDatepicker" (dateSelect)="filter.dateTo = utils.onDateSelection($event)" 
+                                    [readonly]="true" [(ngModel)]="dateTo">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" (click)="dt.toggle()" type="button">
+                                            <span class="far fa-calendar-alt"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="form-group">
+                                    <label for="amountFrom">{{ 'amount.from' | translate }}</label>
+                                    <input class="form-control" id="amountFrom" name="amountFrom" [ngModel]="filter.amountFrom | number:'1.2-2'" 
+                                    (change)="utils.setTwoNumberDecimal($event)" (ngModelChange)="filter.amountFrom=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="form-group">
+                                    <label for="amountTo">{{ 'amount.to' | translate }}</label>
+                                    <input class="form-control" id="amountTo" name="amountTo" [ngModel]="filter.amountTo | number:'1.2-2'"
+                                    (change)="utils.setTwoNumberDecimal($event)" (ngModelChange)="filter.amountTo=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-right">
+                                <button class="btn btn-secondary" (click)="clearFilter()">{{ 'clear.filter' | translate }}</button>
+                                <button class="btn btn-primary ml-2" (click)="search()">{{ 'search' | translate }}</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="table-responsive">

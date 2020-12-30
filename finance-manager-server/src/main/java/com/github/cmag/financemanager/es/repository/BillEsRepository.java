@@ -1,6 +1,7 @@
 package com.github.cmag.financemanager.es.repository;
 
 import com.github.cmag.financemanager.es.index.BillIndex;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
@@ -21,10 +22,11 @@ public interface BillEsRepository extends ElasticsearchRepository<BillIndex, Str
   /**
    * Find the unpaid bills between the given dates.
    *
-   * @param from From date (in milliseconds)
-   * @param to To date (in milliseconds)
+   * @param from Date from.
+   * @param to Date to.
    * @param userId The id of the logged in user.
    * @return List of Bills.
    */
-  List<BillIndex> findByPaidFalseAndDueDateBetweenAndUserId(long from, long to, String userId);
+  List<BillIndex> findByPaidFalseAndDueDateBetweenAndUserId(LocalDate from, LocalDate to,
+      String userId);
 }

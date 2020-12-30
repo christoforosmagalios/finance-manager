@@ -145,5 +145,12 @@
     "details": "Details",
     "change.password": "Change Password",
     "bill.saved.successfully": "Bill saved successfully!",
-    "transaction.saved.successfully": "Transaction saved successfully!"
+    "transaction.saved.successfully": "Transaction saved successfully!",
+
+    "date.from": "Date from",
+    "date.to": "Date to",
+    "amount.from": "Amount from",
+    "amount.to": "Amount to",
+    "search": "Search",
+    "clear.filter": "Clear filters"
 }

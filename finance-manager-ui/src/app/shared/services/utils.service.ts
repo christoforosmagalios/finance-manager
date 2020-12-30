@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { NgbDate, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from "ngx-toastr";
 import { ConfirmationModalComponent } from "../components/confirmation-modal/confirmation-modal.component";
@@ -147,6 +147,15 @@ export class UtilsService {
                 errors[e.field] = e.defaultMessage;
             }
         }
+    }
+
+    /**
+     * Handle date selection.
+     * 
+     * @param date The new date.
+     */
+    onDateSelection(date: NgbDate) {
+        return new Date(date.year + "-" + date.month + "-" + date.day);
     }
 
 }

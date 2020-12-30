@@ -2,6 +2,7 @@ package com.github.cmag.financemanager.controller;
 
 import com.github.cmag.financemanager.dto.GroupedTransactionDTO;
 import com.github.cmag.financemanager.dto.TransactionDTO;
+import com.github.cmag.financemanager.dto.TransactionFilterDTO;
 import com.github.cmag.financemanager.dto.TransactionItemDTO;
 import com.github.cmag.financemanager.model.Transaction;
 import com.github.cmag.financemanager.service.TransactionService;
@@ -45,9 +46,9 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
    * @param pageable Contains pagination info.
    * @return The Page result.
    */
-  @GetMapping("/paginated")
-  public Page<TransactionDTO> findAll(Pageable pageable) {
-    return transactionService.findAllPaginated(pageable);
+  @PostMapping("/paginated")
+  public Page<TransactionDTO> findAll(Pageable pageable, @RequestBody TransactionFilterDTO filter) {
+    return transactionService.findAllPaginated(pageable, filter);
   }
 
   /**
@@ -57,7 +58,7 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
    */
   @GetMapping("/monthlyTransactionsAmount/{type}")
   public double getMonthlyTransactionAmount(@PathVariable boolean type) {
-    return this.transactionService.getMonthlyTransactionAmount(type);
+    return transactionService.getMonthlyTransactionAmount(type);
   }
 
   /**

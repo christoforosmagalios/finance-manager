@@ -1,6 +1,7 @@
 package com.github.cmag.financemanager.es.repository;
 
 import com.github.cmag.financemanager.es.index.TransactionIndex;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
@@ -16,7 +17,7 @@ public interface TransactionEsRepository extends ElasticsearchRepository<Transac
    * @param userId The id of the logged in user.
    * @return A List of transactions.
    */
-  List<TransactionIndex> findByBillIdAndUserId(String billId,  String userId);
+  List<TransactionIndex> findByBillIdAndUserId(String billId, String userId);
 
   /**
    * Find the Transaction that are linked with the given billId and do not have the given
@@ -34,22 +35,21 @@ public interface TransactionEsRepository extends ElasticsearchRepository<Transac
    * Find the transaction with the given type and between the given dates.
    *
    * @param type The transaction type.
-   * @param from From date (in milliseconds)
-   * @param to To date (in milliseconds)
+   * @param from Date from.
+   * @param to Date to.
    * @param userId The id of the logged in user.
    * @return A list of transaction.
    */
-  List<TransactionIndex> findByTypeAndDateBetweenAndUserId(boolean type, long from, long to,
-      String userId);
+  List<TransactionIndex> findByTypeAndDateBetweenAndUserId(boolean type, LocalDate from,
+      LocalDate to, String userId);
 
   /**
    * Find the transaction with date between the two given ones.
    *
-   * @param from An integer date representation (format: yyyyMMdd).
-   * @param to An integer date representation (format: yyyyMMdd).
+   * @param from Date from.
+   * @param to Date to.
    * @param userId The id of the logged in user.
    * @return A List of transactions.
    */
-  List<TransactionIndex> findByDateReversedGreaterThanEqualAndDateReversedLessThanEqualAndUserId(
-      int from, int to, String userId);
+  List<TransactionIndex> findByDateBetweenAndUserId(LocalDate from, LocalDate to, String userId);
 }

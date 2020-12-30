@@ -1,6 +1,6 @@
 package com.github.cmag.financemanager.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,8 +12,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class GroupedTransactionDTO {
 
-  private Date from;
-  private Date to;
+  private LocalDate from;
+  private LocalDate to;
   List<GroupedTransactionInfoDTO> transactions;
 
 }

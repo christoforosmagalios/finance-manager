@@ -47,8 +47,8 @@ export class CRUDService {
      * @param sort Sort column.
      * @param direction Sort direction. 
      */
-    findAllPaginated(entity: string, size: number, page: number, sort: string, direction: string) {
-        return this.http.get<PageDTO<BaseDTO>>(Constants.API + '/' + entity + '/paginated?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+    findAllPaginated(entity: string, size: number, page: number, sort: string, direction: string, filter: any) {
+        return this.http.post<PageDTO<BaseDTO>>(Constants.API + '/' + entity + '/paginated?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction, filter);
     }
 
     /**

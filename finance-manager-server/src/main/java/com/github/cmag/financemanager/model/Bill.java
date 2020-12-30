@@ -1,7 +1,7 @@
 package com.github.cmag.financemanager.model;
 
 import com.github.cmag.financemanager.model.master.data.BillCategory;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -25,19 +25,19 @@ public class Bill extends BaseEntity {
   private String code;
 
   @Column(name = "issued_on")
-  private Date issuedOn;
+  private LocalDate issuedOn;
 
   @Column(name = "due_date")
-  private Date dueDate;
+  private LocalDate dueDate;
 
   @Column(name = "paid_on")
-  private Date paidOn;
+  private LocalDate paidOn;
 
   @Column(name = "consumption_from")
-  private Date consumptionFrom;
+  private LocalDate consumptionFrom;
 
   @Column(name = "consumption_to")
-  private Date consumptionTo;
+  private LocalDate consumptionTo;
 
   @Column(name = "description")
   private String description;

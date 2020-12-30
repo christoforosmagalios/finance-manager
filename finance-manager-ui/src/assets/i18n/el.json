@@ -145,5 +145,12 @@
     "details": "Λεπτομέριες",
     "change.password": "Αλλαγή κωδικού",
     "bill.saved.successfully": "Ο λογαριασμός αποθηκεύτηκε με επιτυχία!",
-    "transaction.saved.successfully": "Η συναλλαγή αποθηκεύτηκε με επιτυχία!"
+    "transaction.saved.successfully": "Η συναλλαγή αποθηκεύτηκε με επιτυχία!",
+
+    "date.from": "Από",
+    "date.to": "Έως",
+    "amount.from": "Ποσό από",
+    "amount.to": "Ποσό έως",
+    "search": "Αναζήτηση",
+    "clear.filter": "Αφαίρεση φίλτρων"
 }

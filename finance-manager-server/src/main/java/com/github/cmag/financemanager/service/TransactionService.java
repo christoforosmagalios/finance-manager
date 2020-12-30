@@ -7,6 +7,7 @@ import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.GroupedTransactionDTO;
 import com.github.cmag.financemanager.dto.GroupedTransactionInfoDTO;
 import com.github.cmag.financemanager.dto.TransactionDTO;
+import com.github.cmag.financemanager.dto.TransactionFilterDTO;
 import com.github.cmag.financemanager.dto.TransactionItemDTO;
 import com.github.cmag.financemanager.es.index.TransactionIndex;
 import com.github.cmag.financemanager.es.repository.TransactionEsRepository;
@@ -18,11 +19,12 @@ import com.github.cmag.financemanager.repository.TransactionCategoryRepository;
 import com.github.cmag.financemanager.repository.TransactionRepository;
 import com.github.cmag.financemanager.util.Utils;
 import com.github.cmag.financemanager.util.exception.FinanceManagerException;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -70,6 +72,9 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
   @Autowired
   private ElasticsearchOperations elasticsearchOperations;
 
+  @Autowired
+  private RestHighLevelClient restHighLevelClient;
+
   /**
    * Save the given transaction. In case the transaction is linked with a bill, update the bill to
    * paid.
@@ -102,19 +107,22 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
   /**
    * Find all the transactions based on the given Pageable.
    *
+   * @param filter The Transaction filter.
+   * @param pageable The Pageable object.
    * @return A Page that contains the transactions as well as the total number of bills and other
    * information.
    */
-  public Page<TransactionDTO> findAllPaginated(Pageable pageable) {
+  public Page<TransactionDTO> findAllPaginated(Pageable pageable, TransactionFilterDTO filter) {
     // If unsorted, set default sorting.
     if (!pageable.getSort().isSorted()) {
       pageable = PageRequest.of(pageable.getPageNumber(),
-          pageable.getPageSize(), Sort.by(AppConstants.UPDATED_ON).descending());
+          pageable.getPageSize(), Sort.by(AppConstants.UPDATED_ON).ascending());
     }
 
-    Criteria criteria = new Criteria("userId").is(userService.getLoggedInUserId());
+    Criteria criteria = getCriteria(filter);
     Query query = new CriteriaQuery(criteria).setPageable(pageable);
-    SearchHits<TransactionIndex> result = elasticsearchOperations.search(query, TransactionIndex.class);
+    SearchHits<TransactionIndex> result = elasticsearchOperations
+        .search(query, TransactionIndex.class);
 
     List<TransactionDTO> transactions = new ArrayList<>();
     List<SearchHit<TransactionIndex>> hits = result.getSearchHits();
@@ -124,6 +132,49 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     });
 
     return new PageImpl<>(transactions);
+  }
+
+  /**
+   * Construct the criteria for the transaction search operation.
+   *
+   * @param filter Contains the selected filters.
+   * @return The search criteria.
+   */
+  private Criteria getCriteria(TransactionFilterDTO filter) {
+    // Initialize the criteria with the logged in user id.
+    Criteria criteria = new Criteria(AppConstants.USER_ID).is(userService.getLoggedInUserId());
+    // If the filter contains a specific bill code, add it to the criteria.
+    if (!StringUtils.isBlank(filter.getBillCode())) {
+      criteria.and(new Criteria(AppConstants.T_BILL_CODE).startsWith(filter.getBillCode()));
+    }
+    // If the filter contains a specific category, add it to the criteria.
+    if (!Objects.isNull(filter.getTransactionCategory())) {
+      criteria.and(
+          new Criteria(AppConstants.T_CATEGORY_ID).is(filter.getTransactionCategory().getId()));
+    }
+    // If the filter contains a specific type, add it to the criteria.
+    if (!Objects.isNull(filter.getType())) {
+      criteria.and(new Criteria(AppConstants.T_TYPE).is(filter.getType()));
+    }
+    // If the filter contains a specific amount from, add it to the criteria.
+    if (filter.getAmountFrom() > 0) {
+      criteria.and(new Criteria(AppConstants.T_AMOUNT).greaterThanEqual(filter.getAmountFrom()));
+    }
+    // If the filter contains a specific amount to, add it to the criteria.
+    if (filter.getAmountTo() > 0) {
+      criteria.and(new Criteria(AppConstants.T_AMOUNT).lessThanEqual(filter.getAmountTo()));
+    }
+    // If the filter contains a specific date from, add it to the criteria.
+    if (!Objects.isNull(filter.getDateFrom())) {
+      criteria.and(new Criteria(AppConstants.T_DATE)
+          .greaterThanEqual(Utils.getDateReversed(filter.getDateFrom())));
+    }
+    // If the filter contains a specific date from, add it to the criteria.
+    if (!Objects.isNull(filter.getDateTo())) {
+      criteria.and(new Criteria(AppConstants.T_DATE)
+          .lessThanEqual(Utils.getDateReversed(filter.getDateTo())));
+    }
+    return criteria;
   }
 
   /**
@@ -169,8 +220,8 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * @return The monthly total spending amount.
    */
   public double getMonthlyTransactionAmount(boolean type) {
-    long from = Utils.getFirstDayOfMonthInMil();
-    long to = Utils.getLastDayOfMonthInMil();
+    LocalDate from = Utils.getFirstDayOfMonth();
+    LocalDate to = Utils.getLastDayOfMonth();
 
     // Fetch transactions and sum their amount.
     return es.findByTypeAndDateBetweenAndUserId(type, from, to, userService.getLoggedInUserId())
@@ -183,14 +234,16 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * @return The annual balance.
    */
   public double getAnnualBalance() {
-    long from = Utils.getFirstDayOfYearInMil();
-    long to = Utils.getLastDayOfYearInMil();
+    LocalDate from = Utils.getFirstDayOfYear();
+    LocalDate to = Utils.getLastDayOfYear();
 
     // Get the annual earnings.
-    double earnings = es.findByTypeAndDateBetweenAndUserId(false, from, to, userService.getLoggedInUserId())
+    double earnings = es
+        .findByTypeAndDateBetweenAndUserId(false, from, to, userService.getLoggedInUserId())
         .stream().mapToDouble(o -> o.getAmount()).sum();
     // Get teh annual spendings.
-    double spendings = es.findByTypeAndDateBetweenAndUserId(true, from, to, userService.getLoggedInUserId())
+    double spendings = es
+        .findByTypeAndDateBetweenAndUserId(true, from, to, userService.getLoggedInUserId())
         .stream().mapToDouble(o -> o.getAmount()).sum();
 
     return earnings - spendings;
@@ -202,8 +255,8 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * @return A list of grouped expenses.
    */
   public GroupedTransactionDTO getGroupedExpenses() {
-    long from = Utils.getFirstDayOfMonthInMil();
-    long to = Utils.getLastDayOfMonthInMil();
+    LocalDate from = Utils.getFirstDayOfMonth();
+    LocalDate to = Utils.getLastDayOfMonth();
     // Get the expense transactions.
     List<TransactionIndex> transactions = es.findByTypeAndDateBetweenAndUserId(true, from, to,
         userService.getLoggedInUserId());
@@ -216,24 +269,24 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
           return new GroupedTransactionInfoDTO(x.getKey(), color, sumAmount);
         }).collect(toList());
 
-    return new GroupedTransactionDTO(new Date(from), new Date(to), transactionInfos);
+    return new GroupedTransactionDTO(from, to, transactionInfos);
   }
 
   public List<TransactionItemDTO> getTransactionsPerDay() {
-    int from = Utils.getFirstDayOfMonthReversed();
-    int to = Utils.getLastDayOfMonthReversed();
+    LocalDate from = Utils.getFirstDayOfMonth();
+    LocalDate to = Utils.getLastDayOfMonth();
 
     List<TransactionIndex> transactions =
-        es.findByDateReversedGreaterThanEqualAndDateReversedLessThanEqualAndUserId(from, to,
+        es.findByDateBetweenAndUserId(from, to,
             userService.getLoggedInUserId());
 
     List<TransactionItemDTO> result = new ArrayList<>();
-    while (from <= to) {
+    while (!from.equals(to)) {
       double expense = filterByDateAndType(transactions, from, true);
       double income = filterByDateAndType(transactions, from, false);
-      String day = Utils.getDayFromReversedIntegerDate(from);
+      String day = String.valueOf(from.getDayOfMonth());
       result.add(new TransactionItemDTO(day, income, expense));
-      from++;
+      from = from.plusDays(1);
     }
     return result;
   }
@@ -247,10 +300,10 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * @param type Transaction type.
    * @return The summed amount.
    */
-  private double filterByDateAndType(List<TransactionIndex> transactions, final int date,
+  private double filterByDateAndType(List<TransactionIndex> transactions, final LocalDate date,
       final boolean type) {
     return transactions.stream()
-        .filter(t -> (t.getDateReversed() == date && t.isType() == type))
+        .filter(t -> (t.getDate().equals(date) && t.isType() == type))
         .mapToDouble(o -> o.getAmount()).sum();
   }
 }

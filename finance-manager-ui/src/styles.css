@@ -118,6 +118,10 @@ label {
   background-color: #fff !important;
 }
 
+.fm-bt-gray {
+  border-top: 1px solid #dee2e6;
+}
+
 /** Bootstrap buttons **/
 .btn-min-width {
   min-width: 5rem;
