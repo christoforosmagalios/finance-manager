@@ -3,7 +3,7 @@ import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { PageDTO } from 'src/app/dto/page-dto';
 import { TransactionCategoryDTO } from 'src/app/dto/transaction-category-dto';
 import { TransactionDTO } from 'src/app/dto/transaction-dto';
-import { TransactionsFilter } from 'src/app/dto/transaction-filter';
+import { TransactionsFilter } from 'src/app/dto/transactions-filter';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { Constants } from 'src/app/shared/constants/constants';
 import { CRUDService } from 'src/app/shared/services/crud.service';

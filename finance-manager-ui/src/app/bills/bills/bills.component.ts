@@ -1,14 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { BillCategoryDTO } from 'src/app/dto/bill-category-dto';
 import { BillDTO } from 'src/app/dto/bill-dto';
+import { BillsFilter } from 'src/app/dto/bills-filter';
 import { PageDTO } from 'src/app/dto/page-dto';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { Constants } from 'src/app/shared/constants/constants';
 import { CRUDService } from 'src/app/shared/services/crud.service';
+import { NgbDateFRParserFormatter } from 'src/app/shared/services/datepicker.formatter.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-bills',
   templateUrl: './bills.component.html',
-  styleUrls: ['./bills.component.css']
+  styleUrls: ['./bills.component.css'],
+  providers: [{provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter}]
 })
 export class BillsComponent implements OnInit {
 
@@ -27,14 +33,34 @@ export class BillsComponent implements OnInit {
   };
   // Items per page options
   itemsPerPage = [];
+  // Filter area is collapsed.
+  filterIsCollapsed = true;
+  // Bills filter.
+  filter = new BillsFilter();
+  // Bill categories.
+  billCategories: Array<BillCategoryDTO>;
+  // Filter issue Date from.
+  issueDateFrom: NgbDate;
+  // Filter issue Date to.
+  issueDateTo: NgbDate;
+  // Filter due Date from.
+  dueDateFrom: NgbDate;
+  // Filter due Date to.
+  dueDateTo: NgbDate;
 
   constructor(
     private loader: LoaderService,
-    private crudService: CRUDService
+    private crudService: CRUDService,
+    public formatter: NgbDateParserFormatter,
+    public utils: UtilsService
   ) { }
 
   ngOnInit(): void {
     this.itemsPerPage = Constants.ITEMS_PER_PAGE;
+    this.crudService.findAll(Constants.ENTITY.BILL_CATEGORY)
+    .subscribe((categories: Array<BillCategoryDTO>) => {
+      this.billCategories = categories;
+    });
     // Find all bills in order to display them.
     this.findAll();
   }
@@ -43,7 +69,7 @@ export class BillsComponent implements OnInit {
     // Show loader.
     this.loader.show();
     // Find the Bills.
-    this.crudService.findAllPaginated(Constants.ENTITY.BILL, this.size, (this.page - 1), this.sort.name, this.sort.direction, null)
+    this.crudService.findAllPaginated(Constants.ENTITY.BILL, this.size, (this.page - 1), this.sort.name, this.sort.direction, this.filter)
     .subscribe((page: PageDTO<BillDTO>) => {
       this.bills = page.content;
       this.collectionSize = page.totalElements;
@@ -72,6 +98,18 @@ export class BillsComponent implements OnInit {
   getSort(newSort) {
     this.sort = {...newSort};
     this.findAll();
+  }
+
+  search() {
+    this.findAll();
+  }
+
+  clearFilter() {
+    this.issueDateFrom = undefined;
+    this.issueDateTo = undefined;
+    this.dueDateFrom = undefined;
+    this.dueDateTo = undefined;
+    this.filter = new BillsFilter();
   }
 
 }

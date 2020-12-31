@@ -152,5 +152,9 @@
     "amount.from": "Amount from",
     "amount.to": "Amount to",
     "search": "Search",
-    "clear.filter": "Clear filters"
+    "clear.filter": "Clear filters",
+    "issue.date.from": "Issue date from",
+    "issue.date.to": "Issue date to",
+    "due.date.from": "Due date from",
+    "due.date.to": "Due date to"
 }

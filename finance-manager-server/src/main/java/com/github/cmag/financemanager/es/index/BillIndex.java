@@ -20,8 +20,11 @@ public class BillIndex {
   @Field(type = FieldType.Text)
   private String id;
 
+  @Field(type = FieldType.Text)
+  private String categoryId;
+
   @Field(type = FieldType.Text, fielddata = true)
-  private String billCategoryName;
+  private String categoryName;
 
   @Field(type = FieldType.Text, fielddata = true)
   private String code;

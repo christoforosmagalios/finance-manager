@@ -62,4 +62,16 @@ public class AppConstants {
   public static final String USER_ID = "userId";
   // Bill issuedOn field name.
   public static final String B_ISSUED_ON = "issuedOn";
+  // Bill code field name.
+  public static final String B_CODE = "code";
+  // Bill categoryId field name.
+  public static final String B_CATEGORY_ID = "categoryId";
+  // Bill paid field name.
+  public static final String B_PAID = "paid";
+  // Bill amount field name.
+  public static final String B_AMOUNT = "amount";
+  // Bill issuedOn field name.
+  public static final String B_ISSUE_DATE = "issuedOn";
+  // Bill dueDate field name.
+  public static final String B_DUE_DATE = "dueDate";
 }

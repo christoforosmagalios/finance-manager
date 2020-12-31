@@ -2,6 +2,7 @@ package com.github.cmag.financemanager.service;
 
 import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.BillDTO;
+import com.github.cmag.financemanager.dto.BillFilterDTO;
 import com.github.cmag.financemanager.dto.PageItem;
 import com.github.cmag.financemanager.es.index.BillIndex;
 import com.github.cmag.financemanager.es.repository.BillEsRepository;
@@ -14,8 +15,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import liquibase.util.StringUtils;
+import java.util.Objects;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
@@ -86,7 +88,7 @@ public class BillService extends BaseService<BillDTO, Bill> {
    * @return A Page that contains the bills as well as the total number of bills and other
    * information.
    */
-  public PageItem<BillDTO> findAllPaginated(Pageable pageable) {
+  public PageItem<BillDTO> findAllPaginated(Pageable pageable, BillFilterDTO filter) {
     // If unsorted, set default sorting.
     if (!pageable.getSort().isSorted()) {
       pageable = PageRequest.of(pageable.getPageNumber(),
@@ -94,7 +96,7 @@ public class BillService extends BaseService<BillDTO, Bill> {
     }
 
     // Get the search criteria.
-    Criteria criteria = new Criteria(AppConstants.USER_ID).is(userService.getLoggedInUserId());
+    Criteria criteria = getCriteria(filter);
     // Initialize the search query with the criteria and the pageable.
     Query query = new CriteriaQuery(criteria).setPageable(pageable);
     // Find the bills.
@@ -109,6 +111,54 @@ public class BillService extends BaseService<BillDTO, Bill> {
     return new PageItem<>(bills, result.getTotalHits());
   }
 
+  private Criteria getCriteria(BillFilterDTO filter) {
+    // Initialize the criteria with the logged in user id.
+    Criteria criteria = new Criteria(AppConstants.USER_ID).is(userService.getLoggedInUserId());
+
+    // If the filter contains a specific type, add it to the criteria.
+    if (!Objects.isNull(filter.getPaid())) {
+      criteria.and(new Criteria(AppConstants.B_PAID).is(filter.getPaid()));
+    }
+    // If the filter contains a specific bill code, add it to the criteria.
+    if (!StringUtils.isBlank(filter.getCode())) {
+      criteria.and(new Criteria(AppConstants.B_CODE).startsWith(filter.getCode()));
+    }
+    // If the filter contains a specific category, add it to the criteria.
+    if (!Objects.isNull(filter.getBillCategory())) {
+      criteria.and(
+          new Criteria(AppConstants.B_CATEGORY_ID).is(filter.getBillCategory().getId()));
+    }
+    // If the filter contains a specific amount from, add it to the criteria.
+    if (filter.getAmountFrom() > 0) {
+      criteria.and(new Criteria(AppConstants.B_AMOUNT).greaterThanEqual(filter.getAmountFrom()));
+    }
+    // If the filter contains a specific amount to, add it to the criteria.
+    if (filter.getAmountTo() > 0) {
+      criteria.and(new Criteria(AppConstants.B_AMOUNT).lessThanEqual(filter.getAmountTo()));
+    }
+    // If the filter contains a specific issue date from, add it to the criteria.
+    if (!Objects.isNull(filter.getIssueDateFrom())) {
+      criteria.and(new Criteria(AppConstants.B_ISSUE_DATE)
+          .greaterThanEqual(Utils.getDateReversed(filter.getIssueDateFrom())));
+    }
+    // If the filter contains a specific issue date from, add it to the criteria.
+    if (!Objects.isNull(filter.getIssueDateTo())) {
+      criteria.and(new Criteria(AppConstants.B_ISSUE_DATE)
+          .lessThanEqual(Utils.getDateReversed(filter.getIssueDateTo())));
+    }
+    // If the filter contains a specific due date from, add it to the criteria.
+    if (!Objects.isNull(filter.getDueDateFrom())) {
+      criteria.and(new Criteria(AppConstants.B_DUE_DATE)
+          .greaterThanEqual(Utils.getDateReversed(filter.getDueDateFrom())));
+    }
+    // If the filter contains a specific due date from, add it to the criteria.
+    if (!Objects.isNull(filter.getDueDateTo())) {
+      criteria.and(new Criteria(AppConstants.B_DUE_DATE)
+          .lessThanEqual(Utils.getDateReversed(filter.getDueDateTo())));
+    }
+    return criteria;
+  }
+
   /**
    * Find the bills whose code start with the given text.
    *
@@ -117,7 +167,7 @@ public class BillService extends BaseService<BillDTO, Bill> {
    */
   public List<BillDTO> filterByCode(String text) {
     // Do not search for bills if the given text is null or less than 3 characters.
-    if (StringUtils.isEmpty(text) || text.length() < 3) {
+    if (StringUtils.isBlank(text) || text.length() < 3) {
       return new ArrayList<>();
     }
 

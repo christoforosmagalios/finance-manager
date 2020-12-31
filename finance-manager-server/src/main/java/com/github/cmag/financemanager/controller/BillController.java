@@ -1,6 +1,7 @@
 package com.github.cmag.financemanager.controller;
 
 import com.github.cmag.financemanager.dto.BillDTO;
+import com.github.cmag.financemanager.dto.BillFilterDTO;
 import com.github.cmag.financemanager.dto.PageItem;
 import com.github.cmag.financemanager.dto.UploadDTO;
 import com.github.cmag.financemanager.model.Bill;
@@ -11,7 +12,6 @@ import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,8 +69,8 @@ public class BillController extends BaseController<BillDTO, Bill> {
    * @return The Page result.
    */
   @PostMapping("/paginated")
-  public PageItem findAll(Pageable pageable) {
-    return billService.findAllPaginated(pageable);
+  public PageItem findAll(Pageable pageable, @RequestBody BillFilterDTO filter) {
+    return billService.findAllPaginated(pageable ,filter);
   }
 
   /**
