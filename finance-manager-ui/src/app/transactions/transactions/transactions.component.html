@@ -111,11 +111,11 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="t-type">{{ 'type' | translate }}</th>
-                                    <th scope="col" [columnName]="'category'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'category' | translate }}</th>
+                                    <th scope="col" [columnName]="'categoryName'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'category' | translate }}</th>
                                     <th scope="col" [columnName]="'description'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'description' | translate }}</th>
                                     <th scope="col" [columnName]="'date'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'date' | translate }}</th>
                                     <th scope="col" [columnName]="'amount'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'amount' | translate }}</th>
-                                    <th scope="col">{{ 'bill' | translate }}</th>
+                                    <th scope="col" [columnName]="'billCode'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'bill' | translate }}</th>
                                     <th scope="col" class="t-actions"></th>
                                 </tr>
                             </thead>

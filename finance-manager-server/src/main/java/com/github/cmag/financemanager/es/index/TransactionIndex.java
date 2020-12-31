@@ -1,6 +1,5 @@
 package com.github.cmag.financemanager.es.index;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Id;
@@ -18,18 +17,39 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 public class TransactionIndex {
 
   @Id
+  @Field(type = FieldType.Text)
   private String id;
+
+  @Field(type = FieldType.Text)
   private String categoryId;
+
+  @Field(type = FieldType.Text, fielddata = true)
   private String categoryName;
+
+  @Field(type = FieldType.Text)
   private String categoryColor;
+
+  @Field(type = FieldType.Boolean)
   private boolean type;
+
+  @Field(type = FieldType.Text, fielddata = true)
   private String description;
+
+  @Field(type = FieldType.Float)
   private double amount;
+
   @Field(type = FieldType.Date, format = DateFormat.basic_date)
   private LocalDate date;
+
+  @Field(type = FieldType.Text)
   private String billId;
+
+  @Field(type = FieldType.Text, fielddata = true)
   private String billCode;
+
+  @Field(type = FieldType.Text)
   private String userId;
+
   private Date createdOn;
   private Date updatedOn;
 }

@@ -1,6 +1,7 @@
 package com.github.cmag.financemanager.controller;
 
 import com.github.cmag.financemanager.dto.BillDTO;
+import com.github.cmag.financemanager.dto.PageItem;
 import com.github.cmag.financemanager.dto.UploadDTO;
 import com.github.cmag.financemanager.model.Bill;
 import com.github.cmag.financemanager.service.BillService;
@@ -68,7 +69,7 @@ public class BillController extends BaseController<BillDTO, Bill> {
    * @return The Page result.
    */
   @PostMapping("/paginated")
-  public Page<BillDTO> findAll(Pageable pageable) {
+  public PageItem findAll(Pageable pageable) {
     return billService.findAllPaginated(pageable);
   }
 

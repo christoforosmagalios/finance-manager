@@ -2,6 +2,7 @@ package com.github.cmag.financemanager.service;
 
 import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.BillDTO;
+import com.github.cmag.financemanager.dto.PageItem;
 import com.github.cmag.financemanager.es.index.BillIndex;
 import com.github.cmag.financemanager.es.repository.BillEsRepository;
 import com.github.cmag.financemanager.mapper.BillMapper;
@@ -17,13 +18,10 @@ import liquibase.util.StringUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
@@ -88,25 +86,27 @@ public class BillService extends BaseService<BillDTO, Bill> {
    * @return A Page that contains the bills as well as the total number of bills and other
    * information.
    */
-  public Page<BillDTO> findAllPaginated(Pageable pageable) {
+  public PageItem<BillDTO> findAllPaginated(Pageable pageable) {
     // If unsorted, set default sorting.
     if (!pageable.getSort().isSorted()) {
       pageable = PageRequest.of(pageable.getPageNumber(),
-          pageable.getPageSize(), Sort.by(AppConstants.UPDATED_ON).descending());
+          pageable.getPageSize(), Sort.by(AppConstants.B_ISSUED_ON).descending());
     }
 
-    Criteria criteria = new Criteria("userId").is(userService.getLoggedInUserId());
+    // Get the search criteria.
+    Criteria criteria = new Criteria(AppConstants.USER_ID).is(userService.getLoggedInUserId());
+    // Initialize the search query with the criteria and the pageable.
     Query query = new CriteriaQuery(criteria).setPageable(pageable);
+    // Find the bills.
     SearchHits<BillIndex> result = elasticsearchOperations.search(query, BillIndex.class);
 
     List<BillDTO> bills = new ArrayList<>();
-    List<SearchHit<BillIndex>> hits = result.getSearchHits();
-    hits.forEach(hit -> {
-      BillIndex item = hit.getContent();
-      bills.add(mapper.mapToDTO(item));
+    // Map the bills to dto representations.
+    result.getSearchHits().forEach(hit -> {
+      bills.add(mapper.mapToDTO(hit.getContent()));
     });
-
-    return new PageImpl<>(bills);
+    // Create a new page item based on the results.
+    return new PageItem<>(bills, result.getTotalHits());
   }
 
   /**

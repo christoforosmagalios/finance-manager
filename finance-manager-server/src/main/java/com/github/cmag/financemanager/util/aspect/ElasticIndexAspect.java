@@ -1,0 +1,96 @@
+package com.github.cmag.financemanager.util.aspect;
+
+import com.github.cmag.financemanager.dto.BillDTO;
+import com.github.cmag.financemanager.dto.TransactionDTO;
+import com.github.cmag.financemanager.es.repository.BillEsRepository;
+import com.github.cmag.financemanager.es.repository.TransactionEsRepository;
+import com.github.cmag.financemanager.mapper.BillMapper;
+import com.github.cmag.financemanager.mapper.TransactionMapper;
+import com.github.cmag.financemanager.model.Bill;
+import com.github.cmag.financemanager.model.Transaction;
+import com.github.cmag.financemanager.repository.BillRepository;
+import com.github.cmag.financemanager.repository.TransactionRepository;
+import org.apache.commons.lang3.StringUtils;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+/**
+ * Index/Unidex after performing CRUD operation in the Database.
+ */
+@Aspect
+@Component
+public class ElasticIndexAspect {
+
+  @Autowired
+  private TransactionRepository transactionRepository;
+
+  @Autowired
+  private TransactionEsRepository transactionEs;
+
+  @Autowired
+  private TransactionMapper transactionMapper;
+
+  @Autowired
+  private BillEsRepository billEs;
+
+  @Autowired
+  private BillRepository billRepository;
+
+  @Autowired
+  private BillMapper billMapper;
+
+  /**
+   * Index the transaction after an update in the Database.
+   *
+   * @param joinPoint The Join point.
+   * @param result The save result.
+   */
+  @AfterReturning(pointcut = "execution(* com.github.cmag.financemanager.service.TransactionService.save(..))", returning = "result")
+  public void indexTransaction(JoinPoint joinPoint, TransactionDTO result) {
+    Transaction transaction = transactionRepository.getOne(result.getId());
+    transactionEs.save(transactionMapper.mapToIndex(transaction));
+  }
+
+  /**
+   * Index the bill after an update in the Database.
+   *
+   * @param joinPoint The Join point.
+   * @param result The save result.
+   */
+  @AfterReturning(pointcut = "execution(* com.github.cmag.financemanager.service.BillService.save(..))", returning = "result")
+  public void indexBill(JoinPoint joinPoint, BillDTO result) {
+    Bill bill = billRepository.getOne(result.getId());
+    billEs.save(billMapper.mapToIndex(bill));
+  }
+
+  /**
+   * Unindex the transaction after deleting it from the database.
+   *
+   * @param joinPoint The Join Point.
+   */
+  @AfterReturning(pointcut = "execution(* com.github.cmag.financemanager.service.TransactionService.delete(..))")
+  public void deleteTransaction(JoinPoint joinPoint) {
+    String id = joinPoint.getArgs().length > 0 ? (String) joinPoint.getArgs()[0] : null;
+    if (!StringUtils.isBlank(id)) {
+      transactionEs.deleteById(id);
+    }
+  }
+
+  /**
+   * Unindex the bill after deleting it from the database.
+   *
+   * @param joinPoint The Join Point.
+   */
+  @AfterReturning(pointcut = "execution(* com.github.cmag.financemanager.service.BillService.delete(..))")
+  public void deleteBill(JoinPoint joinPoint) {
+    String id = joinPoint.getArgs().length > 0 ? (String) joinPoint.getArgs()[0] : null;
+    if (!StringUtils.isBlank(id)) {
+      billEs.deleteById(id);
+    }
+  }
+
+
+}

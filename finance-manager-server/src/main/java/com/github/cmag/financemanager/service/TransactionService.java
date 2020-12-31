@@ -6,6 +6,7 @@ import static java.util.stream.Collectors.toList;
 import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.GroupedTransactionDTO;
 import com.github.cmag.financemanager.dto.GroupedTransactionInfoDTO;
+import com.github.cmag.financemanager.dto.PageItem;
 import com.github.cmag.financemanager.dto.TransactionDTO;
 import com.github.cmag.financemanager.dto.TransactionFilterDTO;
 import com.github.cmag.financemanager.dto.TransactionItemDTO;
@@ -26,26 +27,21 @@ import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * The Transaction Service.
  */
 @Service
-@Transactional
 public class TransactionService extends BaseService<TransactionDTO, Transaction> {
 
   @Autowired
@@ -100,7 +96,6 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     if (!Objects.isNull(transactionDTO.getBill())) {
       this.billService.updateToPaid(transactionDTO.getBill());
     }
-    es.save(mapper.mapToIndex(transaction));
     return transaction;
   }
 
@@ -112,26 +107,28 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * @return A Page that contains the transactions as well as the total number of bills and other
    * information.
    */
-  public Page<TransactionDTO> findAllPaginated(Pageable pageable, TransactionFilterDTO filter) {
+  public PageItem<TransactionDTO> findAllPaginated(Pageable pageable, TransactionFilterDTO filter) {
     // If unsorted, set default sorting.
     if (!pageable.getSort().isSorted()) {
       pageable = PageRequest.of(pageable.getPageNumber(),
-          pageable.getPageSize(), Sort.by(AppConstants.UPDATED_ON).ascending());
+          pageable.getPageSize(), Sort.by("categoryName").descending());
     }
 
+    // Get the search criteria.
     Criteria criteria = getCriteria(filter);
+    // Initialize the search query with the criteria and the pageable.
     Query query = new CriteriaQuery(criteria).setPageable(pageable);
+    // Find the transactions.
     SearchHits<TransactionIndex> result = elasticsearchOperations
         .search(query, TransactionIndex.class);
 
     List<TransactionDTO> transactions = new ArrayList<>();
-    List<SearchHit<TransactionIndex>> hits = result.getSearchHits();
-    hits.forEach(hit -> {
-      TransactionIndex item = hit.getContent();
-      transactions.add(mapper.mapToDTO(item));
+    // Map the transactions to dto representations.
+    result.getSearchHits().forEach(hit -> {
+      transactions.add(mapper.mapToDTO(hit.getContent()));
     });
-
-    return new PageImpl<>(transactions);
+    // Create a new page item based on the results.
+    return new PageItem<>(transactions, result.getTotalHits());
   }
 
   /**
@@ -205,9 +202,8 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
   @Override
   public void delete(String id) {
     Transaction transaction = transactionRepository.getOne(id);
-    if (transaction.getId().equals(userService.getLoggedInUserId())) {
-      transactionRepository.delete(transaction);
-      es.deleteById(id);
+    if (transaction.getUser().getId().equals(userService.getLoggedInUserId())) {
+      transactionRepository.deleteById(transaction.getId());
     } else {
       throw new FinanceManagerException(AppConstants.NOT_ALLOWED, HttpStatus.FORBIDDEN);
     }
@@ -276,9 +272,8 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     LocalDate from = Utils.getFirstDayOfMonth();
     LocalDate to = Utils.getLastDayOfMonth();
 
-    List<TransactionIndex> transactions =
-        es.findByDateBetweenAndUserId(from, to,
-            userService.getLoggedInUserId());
+    List<TransactionIndex> transactions = es.findByDateBetweenAndUserId(from, to,
+        userService.getLoggedInUserId());
 
     List<TransactionItemDTO> result = new ArrayList<>();
     while (!from.equals(to)) {

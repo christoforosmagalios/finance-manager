@@ -1,6 +1,7 @@
 package com.github.cmag.financemanager.controller;
 
 import com.github.cmag.financemanager.dto.GroupedTransactionDTO;
+import com.github.cmag.financemanager.dto.PageItem;
 import com.github.cmag.financemanager.dto.TransactionDTO;
 import com.github.cmag.financemanager.dto.TransactionFilterDTO;
 import com.github.cmag.financemanager.dto.TransactionItemDTO;
@@ -9,7 +10,6 @@ import com.github.cmag.financemanager.service.TransactionService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +47,7 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
    * @return The Page result.
    */
   @PostMapping("/paginated")
-  public Page<TransactionDTO> findAll(Pageable pageable, @RequestBody TransactionFilterDTO filter) {
+  public PageItem findAll(Pageable pageable, @RequestBody TransactionFilterDTO filter) {
     return transactionService.findAllPaginated(pageable, filter);
   }
 

@@ -60,4 +60,6 @@ public class AppConstants {
   public static final String T_CATEGORY_ID = "categoryId";
   // The userId field name.
   public static final String USER_ID = "userId";
+  // Bill issuedOn field name.
+  public static final String B_ISSUED_ON = "issuedOn";
 }

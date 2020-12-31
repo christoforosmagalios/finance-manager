@@ -17,19 +17,36 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 public class BillIndex {
 
   @Id
+  @Field(type = FieldType.Text)
   private String id;
+
+  @Field(type = FieldType.Text, fielddata = true)
   private String billCategoryName;
+
+  @Field(type = FieldType.Text, fielddata = true)
   private String code;
+
   @Field(type = FieldType.Date, format = DateFormat.basic_date)
   private LocalDate issuedOn;
+
   @Field(type = FieldType.Date, format = DateFormat.basic_date)
   private LocalDate dueDate;
+
+  @Field(type = FieldType.Text, fielddata = true)
   private String description;
+
+  @Field(type = FieldType.Float)
   private double amount;
+
+  @Field(type = FieldType.Boolean)
   private boolean paid;
+
   @Field(type = FieldType.Date, format = DateFormat.basic_date)
   private LocalDate paidOn;
+
+  @Field(type = FieldType.Text)
   private String userId;
+
   private Date createdOn;
   private Date updatedOn;
 }

@@ -24,7 +24,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col" [columnName]="'code'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'code' | translate }}</th>
-                                    <th scope="col" [columnName]="'billCategory'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'category' | translate }}</th>
+                                    <th scope="col" [columnName]="'billCategoryName'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'category' | translate }}</th>
                                     <th scope="col" [columnName]="'paid'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'paid' | translate }}</th>
                                     <th scope="col" [columnName]="'description'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'description' | translate }}</th>
                                     <th scope="col" [columnName]="'issuedOn'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'issued.on' | translate }}</th>
