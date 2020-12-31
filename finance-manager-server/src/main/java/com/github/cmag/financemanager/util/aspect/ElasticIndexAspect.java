@@ -46,11 +46,10 @@ public class ElasticIndexAspect {
    * Index the transaction after an update in the Database.
    *
    * @param joinPoint The Join point.
-   * @param result The save result.
+   * @param transaction The save result.
    */
-  @AfterReturning(pointcut = "execution(* com.github.cmag.financemanager.service.TransactionService.save(..))", returning = "result")
-  public void indexTransaction(JoinPoint joinPoint, TransactionDTO result) {
-    Transaction transaction = transactionRepository.getOne(result.getId());
+  @AfterReturning(pointcut = "execution(* com.github.cmag.financemanager.repository.TransactionRepository.save(..))", returning = "transaction")
+  public void indexTransaction(JoinPoint joinPoint, Transaction transaction) {
     transactionEs.save(transactionMapper.mapToIndex(transaction));
   }
 
@@ -58,11 +57,10 @@ public class ElasticIndexAspect {
    * Index the bill after an update in the Database.
    *
    * @param joinPoint The Join point.
-   * @param result The save result.
+   * @param bill The save result.
    */
-  @AfterReturning(pointcut = "execution(* com.github.cmag.financemanager.service.BillService.save(..))", returning = "result")
-  public void indexBill(JoinPoint joinPoint, BillDTO result) {
-    Bill bill = billRepository.getOne(result.getId());
+  @AfterReturning(pointcut = "execution(* com.github.cmag.financemanager.repository.BillRepository.save(..))", returning = "bill")
+  public void indexBill(JoinPoint joinPoint, Bill bill) {
     billEs.save(billMapper.mapToIndex(bill));
   }
 
@@ -71,7 +69,7 @@ public class ElasticIndexAspect {
    *
    * @param joinPoint The Join Point.
    */
-  @AfterReturning(pointcut = "execution(* com.github.cmag.financemanager.service.TransactionService.delete(..))")
+  @AfterReturning(pointcut = "execution(* com.github.cmag.financemanager.repository.TransactionRepository.deleteById(..))")
   public void deleteTransaction(JoinPoint joinPoint) {
     String id = joinPoint.getArgs().length > 0 ? (String) joinPoint.getArgs()[0] : null;
     if (!StringUtils.isBlank(id)) {
@@ -84,7 +82,7 @@ public class ElasticIndexAspect {
    *
    * @param joinPoint The Join Point.
    */
-  @AfterReturning(pointcut = "execution(* com.github.cmag.financemanager.service.BillService.delete(..))")
+  @AfterReturning(pointcut = "execution(* com.github.cmag.financemanager.repository.BillRepository.deleteById(..))")
   public void deleteBill(JoinPoint joinPoint) {
     String id = joinPoint.getArgs().length > 0 ? (String) joinPoint.getArgs()[0] : null;
     if (!StringUtils.isBlank(id)) {

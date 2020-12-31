@@ -78,7 +78,6 @@ public class BillService extends BaseService<BillDTO, Bill> {
 
     billDTO.setUser(userService.getLoggedInUserDTO());
     BillDTO bill = super.save(billDTO);
-    es.save(mapper.mapToIndex(bill));
     return bill;
   }
 
@@ -111,6 +110,12 @@ public class BillService extends BaseService<BillDTO, Bill> {
     return new PageItem<>(bills, result.getTotalHits());
   }
 
+  /**
+   * Construct the criteria for the bill search operation.
+   *
+   * @param filter Contains the selected filters.
+   * @return The search criteria.
+   */
   private Criteria getCriteria(BillFilterDTO filter) {
     // Initialize the criteria with the logged in user id.
     Criteria criteria = new Criteria(AppConstants.USER_ID).is(userService.getLoggedInUserId());
@@ -188,22 +193,20 @@ public class BillService extends BaseService<BillDTO, Bill> {
     if (!bill.isPaid()) {
       bill.setPaid(true);
       bill.setPaidOn(LocalDate.now());
-      super.save(mapper.map(bill));
-      es.save(mapper.mapToIndex(bill));
+      save(mapper.map(bill));
     }
   }
 
   /**
-   * Delete and unindex the bill with the given id.
+   * Delete the bill with the given id.
    *
    * @param id The bill id.
    */
   @Override
   public void delete(String id) {
     Bill bill = billRepository.getOne(id);
-    if (bill.getId().equals(userService.getLoggedInUserId())) {
-      billRepository.delete(bill);
-      es.deleteById(id);
+    if (bill.getUser().getId().equals(userService.getLoggedInUserId())) {
+      billRepository.deleteById(bill.getId());
     } else {
       throw new FinanceManagerException(AppConstants.NOT_ALLOWED, HttpStatus.FORBIDDEN);
     }
