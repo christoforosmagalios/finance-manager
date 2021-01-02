@@ -44,6 +44,9 @@ public class BillService extends BaseService<BillDTO, Bill> {
   private UserService userService;
 
   @Autowired
+  private TransactionService transactionService;
+
+  @Autowired
   private BillRepository billRepository;
 
   @Autowired
@@ -78,6 +81,9 @@ public class BillService extends BaseService<BillDTO, Bill> {
 
     billDTO.setUser(userService.getLoggedInUserDTO());
     BillDTO bill = super.save(billDTO);
+    if (bill.isPaid()) {
+      transactionService.createTransactionForBill(bill);
+    }
     return bill;
   }
 

@@ -4,12 +4,14 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 import com.github.cmag.financemanager.config.AppConstants;
+import com.github.cmag.financemanager.dto.BillDTO;
 import com.github.cmag.financemanager.dto.GroupedTransactionDTO;
 import com.github.cmag.financemanager.dto.GroupedTransactionInfoDTO;
 import com.github.cmag.financemanager.dto.PageItem;
 import com.github.cmag.financemanager.dto.TransactionDTO;
 import com.github.cmag.financemanager.dto.TransactionFilterDTO;
 import com.github.cmag.financemanager.dto.TransactionItemDTO;
+import com.github.cmag.financemanager.dto.master.data.TransactionCategoryDTO;
 import com.github.cmag.financemanager.es.index.TransactionIndex;
 import com.github.cmag.financemanager.es.repository.TransactionEsRepository;
 import com.github.cmag.financemanager.mapper.TransactionCategoryMapper;
@@ -111,7 +113,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     // If unsorted, set default sorting.
     if (!pageable.getSort().isSorted()) {
       pageable = PageRequest.of(pageable.getPageNumber(),
-          pageable.getPageSize(), Sort.by("categoryName").descending());
+          pageable.getPageSize(), Sort.by(AppConstants.T_DATE).descending());
     }
 
     // Get the search criteria.
@@ -300,5 +302,30 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     return transactions.stream()
         .filter(t -> (t.getDate().equals(date) && t.isType() == type))
         .mapToDouble(o -> o.getAmount()).sum();
+  }
+
+  /**
+   * If the given bill is not already linked with a transaction, create a new transaction for the
+   * given bill.
+   *
+   * @param billDTO The Bill.
+   */
+  public void createTransactionForBill(BillDTO billDTO) {
+    // Find the transactions that are linked to the given bill.
+    List<TransactionDTO> transactions = findTransactionsByBillId(billDTO.getId(), null);
+    // If no transaction is linked with the given bill, create a new transaction.
+    if (transactions.isEmpty()) {
+      TransactionDTO transaction = new TransactionDTO();
+      transaction.setUser(userService.getLoggedInUserDTO());
+      TransactionCategoryDTO category = transactionCategoryMapper.map(transactionCategoryRepository
+          .findByCode(AppConstants.BILLS_TRANSACTION_CATEGORY_CODE));
+      transaction.setTransactionCategory(category);
+      transaction.setAmount(billDTO.getAmount());
+      transaction.setBill(billDTO);
+      transaction.setDate(LocalDate.now());
+      transaction.setDescription(billDTO.getDescription());
+      transaction.setType(true);
+      super.save(transaction);
+    }
   }
 }
