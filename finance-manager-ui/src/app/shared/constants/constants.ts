@@ -8,6 +8,9 @@ export const Constants = {
         DESC: "desc"
     },
 
+    // Default sort column.
+    DEFAULT_SORT: "updatedOn",
+
     // Entities.
     ENTITY: {
         TRANSACTION: "transaction",

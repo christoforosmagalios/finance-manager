@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { PageDTO } from 'src/app/dto/page-dto';
+import { SortDTO } from 'src/app/dto/sort-dto';
 import { TransactionCategoryDTO } from 'src/app/dto/transaction-category-dto';
 import { TransactionDTO } from 'src/app/dto/transaction-dto';
 import { TransactionsFilter } from 'src/app/dto/transactions-filter';
@@ -27,9 +28,9 @@ export class TransactionsComponent implements OnInit {
   // Transactions per page.
   size: number = 10;
   // The sort options to be used in pagination.
-  sort = {
-    direction: "",
-    name: ""
+  sort: SortDTO = {
+    direction: Constants.ORDER.DESC,
+    name: "date"
   };
   // Filter area is collapsed.
   filterIsCollapsed = true;

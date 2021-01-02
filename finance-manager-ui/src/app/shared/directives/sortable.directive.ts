@@ -1,4 +1,5 @@
 import { Directive, ElementRef, HostListener, OnInit, Renderer2, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
+import { SortDTO } from 'src/app/dto/sort-dto';
 import { Constants } from '../constants/constants';
 
 @Directive({
@@ -10,8 +11,8 @@ export class SortableDirective implements OnInit {
     @Output() ngModelChange: EventEmitter<any> = new EventEmitter();
     // The name of the column.
     @Input() columnName: string;
-    // The active sort column.
-    @Input() active: string;
+    // The active sort details.
+    @Input() sort: SortDTO;
 
     constructor(
         private element: ElementRef,
@@ -23,9 +24,15 @@ export class SortableDirective implements OnInit {
 
     ngOnChanges(changes: SimpleChanges) {
         // If another column is active, remove the CSS classes from the current one.
-        if (changes.active && this.active !== this.columnName) {
+        if (changes.sort && this.sort.name !== this.columnName) {
             this.renderer.removeClass(this.element.nativeElement, Constants.ORDER.ASC);
             this.renderer.removeClass(this.element.nativeElement, Constants.ORDER.DESC);
+        }
+    }
+
+    ngAfterViewInit() {
+        if(this.sort && this.sort.name === this.columnName) {
+            this.renderer.addClass(this.element.nativeElement, this.sort.direction);
         }
     }
 

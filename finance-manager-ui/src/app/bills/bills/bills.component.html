@@ -138,13 +138,13 @@
                             <caption>{{ 'bills.table' | translate }}</caption>
                             <thead>
                                 <tr>
-                                    <th scope="col" [columnName]="'code'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'code' | translate }}</th>
-                                    <th scope="col" [columnName]="'billCategoryName'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'category' | translate }}</th>
-                                    <th scope="col" [columnName]="'paid'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'paid' | translate }}</th>
-                                    <th scope="col" [columnName]="'description'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'description' | translate }}</th>
-                                    <th scope="col" [columnName]="'issuedOn'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'issued.on' | translate }}</th>
-                                    <th scope="col" [columnName]="'dueDate'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'due.date' | translate }}</th>
-                                    <th scope="col" [columnName]="'amount'" [active]="sort.name" sortable (ngModelChange)="getSort($event)">{{ 'amount' | translate }}</th>
+                                    <th scope="col" [columnName]="'code'" [sort]="sort" sortable (ngModelChange)="getSort($event)">{{ 'code' | translate }}</th>
+                                    <th scope="col" [columnName]="'billCategoryName'" [sort]="sort" sortable (ngModelChange)="getSort($event)">{{ 'category' | translate }}</th>
+                                    <th scope="col" [columnName]="'paid'" [sort]="sort" sortable (ngModelChange)="getSort($event)">{{ 'paid' | translate }}</th>
+                                    <th scope="col" [columnName]="'description'" [sort]="sort" sortable (ngModelChange)="getSort($event)">{{ 'description' | translate }}</th>
+                                    <th scope="col" [columnName]="'issuedOn'" [sort]="sort" sortable (ngModelChange)="getSort($event)">{{ 'issued.on' | translate }}</th>
+                                    <th scope="col" [columnName]="'dueDate'" [sort]="sort" sortable (ngModelChange)="getSort($event)">{{ 'due.date' | translate }}</th>
+                                    <th scope="col" [columnName]="'amount'" [sort]="sort" sortable (ngModelChange)="getSort($event)">{{ 'amount' | translate }}</th>
                                     <th scope="col" class="t-actions"></th>
                                 </tr>
                             </thead>

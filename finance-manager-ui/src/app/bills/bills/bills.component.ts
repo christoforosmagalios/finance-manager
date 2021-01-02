@@ -4,6 +4,7 @@ import { BillCategoryDTO } from 'src/app/dto/bill-category-dto';
 import { BillDTO } from 'src/app/dto/bill-dto';
 import { BillsFilter } from 'src/app/dto/bills-filter';
 import { PageDTO } from 'src/app/dto/page-dto';
+import { SortDTO } from 'src/app/dto/sort-dto';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { Constants } from 'src/app/shared/constants/constants';
 import { CRUDService } from 'src/app/shared/services/crud.service';
@@ -27,9 +28,9 @@ export class BillsComponent implements OnInit {
   // Bills per page.
   size: number = 10;
   // The sort options to be used in pagination.
-  sort = {
-    direction: "",
-    name: ""
+  sort: SortDTO = {
+    direction: Constants.ORDER.DESC,
+    name: "issuedOn"
   };
   // Items per page options
   itemsPerPage = [];

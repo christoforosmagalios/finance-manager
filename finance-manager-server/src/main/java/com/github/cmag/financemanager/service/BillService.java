@@ -20,9 +20,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.Criteria;
@@ -94,12 +92,6 @@ public class BillService extends BaseService<BillDTO, Bill> {
    * information.
    */
   public PageItem<BillDTO> findAllPaginated(Pageable pageable, BillFilterDTO filter) {
-    // If unsorted, set default sorting.
-    if (!pageable.getSort().isSorted()) {
-      pageable = PageRequest.of(pageable.getPageNumber(),
-          pageable.getPageSize(), Sort.by(AppConstants.B_ISSUED_ON).descending());
-    }
-
     // Get the search criteria.
     Criteria criteria = getCriteria(filter);
     // Initialize the search query with the criteria and the pageable.
