@@ -4,6 +4,7 @@ import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.BillDTO;
 import com.github.cmag.financemanager.dto.BillFilterDTO;
 import com.github.cmag.financemanager.dto.PageItem;
+import com.github.cmag.financemanager.dto.TransactionDTO;
 import com.github.cmag.financemanager.es.index.BillIndex;
 import com.github.cmag.financemanager.es.repository.BillEsRepository;
 import com.github.cmag.financemanager.mapper.BillMapper;
@@ -203,7 +204,12 @@ public class BillService extends BaseService<BillDTO, Bill> {
   @Override
   public void delete(String id) {
     Bill bill = billRepository.getOne(id);
-    if (bill.getUser().getId().equals(userService.getLoggedInUserId())) {
+    // Get transactions linked to this bill.
+    List<TransactionDTO> transactions = transactionService.findTransactionsByBillId(id, null);
+    // In case a transaction is linked to this bill, throw exception.
+    if (!transactions.isEmpty()) {
+      throw new FinanceManagerException(AppConstants.BILL_IS_LINKED, HttpStatus.BAD_REQUEST);
+    } else if (bill.getUser().getId().equals(userService.getLoggedInUserId())) {
       billRepository.deleteById(bill.getId());
     } else {
       throw new FinanceManagerException(AppConstants.NOT_ALLOWED, HttpStatus.FORBIDDEN);

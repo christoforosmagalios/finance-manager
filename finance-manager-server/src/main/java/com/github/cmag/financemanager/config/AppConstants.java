@@ -47,7 +47,9 @@ public class AppConstants {
   // Auth response header.
   public static final String AUTH_RESP_HEADER_STRING = "Authorization-User";
   // Not allowed response.
-  public static final String NOT_ALLOWED = "Not allowed!";
+  public static final String NOT_ALLOWED = "not.allowed";
+  // Delete is not possible because the Bill is linked with a transaction error response.
+  public static final String BILL_IS_LINKED = "error.delete.bill.is.linked";
   // Transaction type field name.
   public static final String T_TYPE = "type";
   // Transaction amount field name.

@@ -79,6 +79,8 @@
     "error.username.exists": "Αυτό το Username χρησιμοποιείται ήδη.",
     "error.email.exists": "Αυτό το Email χρησιμοποιείται ήδη.",
     "error.invalid.credetials": "Το Username ή το Password είναι λάθος.",
+    "error.delete.bill.is.linked": "Δεν είναι δυνατή η διαγραφή του λογαριασμού επειδή συνδέεται με μια συναλλαγή.",
+    "not.allowed": "Αυτή η ενέργεια δεν επιτρέπεται.",
 
     "paycheck": "Μισθός",
     "supermarket": "Super Market",
