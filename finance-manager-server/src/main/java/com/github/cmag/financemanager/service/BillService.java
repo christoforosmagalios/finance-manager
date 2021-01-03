@@ -83,6 +83,8 @@ public class BillService extends BaseService<BillDTO, Bill> {
     BillDTO bill = super.save(billDTO);
     if (bill.isPaid()) {
       transactionService.createTransactionForBill(bill);
+    } else {
+      transactionService.deleteLinkedTransactions(bill);
     }
     return bill;
   }

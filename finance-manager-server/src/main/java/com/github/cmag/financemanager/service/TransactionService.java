@@ -320,4 +320,16 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
       super.save(transaction);
     }
   }
+
+  /**
+   * Delete the transactions that are linked to the given bill.
+   *
+   * @param bill The Bill.
+   */
+  public void deleteLinkedTransactions(BillDTO bill) {
+    List<TransactionDTO> transactions = findTransactionsByBillId(bill.getId(), null);
+    for (TransactionDTO t : transactions) {
+      delete(t.getId());
+    }
+  }
 }
