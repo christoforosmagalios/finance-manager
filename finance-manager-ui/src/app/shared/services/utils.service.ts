@@ -158,4 +158,13 @@ export class UtilsService {
         return new Date(date.year + "-" + date.month + "-" + date.day);
     }
 
+    /**
+     * Check if the given date is before or equal to today.
+     * 
+     * @param date String date 
+     */
+    dateIfBeforeToday(date: string) {
+        return new Date(date) <= new Date();
+    }
+
 }

@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * A base Spring {@link Service}.
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
  * @param <E> An Entity that extends the BaseEntity.
  */
 @Service
+@Transactional
 public abstract class BaseService<D extends BaseDTO, E extends BaseEntity> {
 
   @Autowired

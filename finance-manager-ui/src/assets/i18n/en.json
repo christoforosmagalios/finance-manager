@@ -49,6 +49,7 @@
     "bill.image": "Bill image",
     "transactions.table": "Transactions table",
     "bills.table": "Bills table",
+    "bills.expire.soon.table": "Bills that expire soon table",
     "address.table": "Addresses table",
     "transaction.categories.table": "Transactions categories table",
     "bills.categories.table": "Bill categories table",
@@ -158,5 +159,11 @@
     "issue.date.from": "Issue date from",
     "issue.date.to": "Issue date to",
     "due.date.from": "Due date from",
-    "due.date.to": "Due date to"
+    "due.date.to": "Due date to",
+
+    "bills.expire.soon": "Bills that expire soon",
+    "set.to.paid.successfully": "The Bill status changed to \"Paid\" and a Transaction was created successfully.",
+    "set.to.paid": "Paid",
+    "expired": "Expired!",
+    "no.bills.expire.soon": "No Bills is expiring any time soon!"
 }

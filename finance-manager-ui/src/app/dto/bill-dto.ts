@@ -24,6 +24,7 @@ export class BillDTO extends BaseDTO {
 
     // To be used only in UI.
     public enableDelete: boolean;
+    public enablePay: boolean;
 
     constructor() {
         super();
@@ -31,6 +32,7 @@ export class BillDTO extends BaseDTO {
         this.paid = false;  
         this.actualBill = false;
         this.enableDelete = false;
+        this.enablePay = false;
         this.issuedOn = new Date();
         this.dueDate = new Date();
         this.consumptionFrom = new Date();

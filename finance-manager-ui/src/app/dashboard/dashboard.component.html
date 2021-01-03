@@ -47,7 +47,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                {{ 'pending' | translate }} ({{ 'monthly' | translate }})</div>
+                                {{ 'pending' | translate }}</div>
                             <div class="h5 mb-0 font-weight-bold text-gray" *ngIf="pending !== null">€ {{ pending | number:'1.2-2' }}</div>
                             <div *ngIf="pending === null"><span class="fas fa-spinner fa-spin" ></span></div>
                         </div>
@@ -60,7 +60,7 @@
         </div>
 
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card bl-danger shadow h-100 py-2">
+            <div class="card bl-danger shadow py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -79,8 +79,8 @@
     </div>
 
     <div class="row">
-        <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
+        <div class="col-xl-8 col-lg-7 mb-4">
+            <div class="card shadow h-100">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">{{ 'monthly.overview' | translate }}</h6>
@@ -105,8 +105,8 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
+        <div class="col-xl-4 col-lg-5 mb-4">
+            <div class="card shadow h-100">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">{{ 'expenditure.sources' | translate }}</h6>
@@ -127,6 +127,20 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <app-pie-chart [title]="pieChartTitle" [pieChartData]="pieChartData"></app-pie-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">{{ 'bills.expire.soon' | translate }}</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <app-bills-expire-soon></app-bills-expire-soon>
                 </div>
             </div>
         </div>

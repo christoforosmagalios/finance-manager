@@ -24,7 +24,7 @@ export class BillService {
      * @param text Text to search with. 
      */
     findByCode(text: string) {
-        return this.http.get(Constants.API + '/bill/findByCode/' + text);
+        return this.http.get(Constants.API + '/' + this.endpoint + '/findByCode/' + text);
     }
 
     /**
@@ -36,5 +36,21 @@ export class BillService {
         const formData: FormData = new FormData();
         formData.append('file', file, file.name);
         return this.http.post(Constants.API + '/' + this.endpoint + '/upload', formData);
+    }
+
+    /**
+     * Find the bills that expire soon.
+     */
+    expireSoon() {
+        return this.http.get(Constants.API + '/' + this.endpoint + '/expireSoon');
+    }
+
+    /**
+     * Set bill to paid.
+     * 
+     * @param bill The id of the Bill to be paid.
+     */
+    setToPaid(id: string) {
+        return this.http.post(Constants.API + '/' + this.endpoint + '/setToPaid', id);
     }
 }

@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -222,11 +223,35 @@ public class BillService extends BaseService<BillDTO, Bill> {
    * @return The pending amount.
    */
   public double getPendingAmount() {
-    LocalDate from = Utils.getFirstDayOfMonth();
     LocalDate to = Utils.getLastDayOfMonth();
 
     // Fetch bills and sum their amount.
-    return es.findByPaidFalseAndDueDateBetweenAndUserId(from, to, userService.getLoggedInUserId())
-        .stream().mapToDouble(o -> o.getAmount()).sum();
+    return es.findByPaidFalseAndDueDateLessThanEqualAndUserIdOrderByDueDateDesc(to,
+        userService.getLoggedInUserId()).stream().mapToDouble(o -> o.getAmount()).sum();
+  }
+
+  /**
+   * Get the bills that expire in the next 2 weeks.
+   *
+   * @return A list of bills.
+   */
+  public List<BillDTO> findBillsThatExpireSoon() {
+    // Find the bills that expire in the next 2 weeks.
+    List<BillIndex> bills = es.findByPaidFalseAndDueDateLessThanEqualAndUserIdOrderByDueDateDesc(
+        LocalDate.now().plusWeeks(2), userService.getLoggedInUserId());
+    // Convert them to DTOs and return the bills.
+    return bills.stream().map(b -> mapper.mapToDTO(b)).collect(Collectors.toList());
+  }
+
+  /**
+   * Set the given bill to paid and create a transaction.
+   *
+   * @param id The id of the Bill to be paid.
+   */
+  public void setToPaid(String id) {
+    BillDTO bill = findOne(id);
+    bill.setPaid(true);
+    save(bill);
+    transactionService.createTransactionForBill(bill);
   }
 }

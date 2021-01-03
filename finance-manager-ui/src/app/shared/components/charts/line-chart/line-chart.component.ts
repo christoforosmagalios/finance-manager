@@ -77,14 +77,14 @@ export class LineChartComponent implements OnInit {
   // Line chart colors.
   public colors: Color[] = [
     { 
-      backgroundColor: '#2f5e8720',
+      backgroundColor: '#1cc88a60',
       borderColor: '#1cc88a',
       pointBackgroundColor: 'rgba(148,159,177,1)',
       pointBorderColor: '#000',
       pointHoverBackgroundColor: '#000',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }, { 
-      backgroundColor: '#b83d5320',
+      backgroundColor: '#b83d5360',
       borderColor: '#b83d53',
       pointBackgroundColor: 'rgba(77,83,96,1)',
       pointBorderColor: '#000',

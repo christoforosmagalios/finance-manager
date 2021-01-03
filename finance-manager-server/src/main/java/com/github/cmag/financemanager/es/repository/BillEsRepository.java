@@ -22,11 +22,10 @@ public interface BillEsRepository extends ElasticsearchRepository<BillIndex, Str
   /**
    * Find the unpaid bills between the given dates.
    *
-   * @param from Date from.
    * @param to Date to.
    * @param userId The id of the logged in user.
    * @return List of Bills.
    */
-  List<BillIndex> findByPaidFalseAndDueDateBetweenAndUserId(LocalDate from, LocalDate to,
+  List<BillIndex> findByPaidFalseAndDueDateLessThanEqualAndUserIdOrderByDueDateDesc(LocalDate to,
       String userId);
 }

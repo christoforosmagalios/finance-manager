@@ -1,0 +1,50 @@
+<div class="table-responsive">
+    <table class="table table-striped" *ngIf="bills && bills.length > 0">
+        <caption>{{ 'bills.expire.soon.table' | translate }}</caption>
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">{{ 'code' | translate }}</th>
+                <th scope="col">{{ 'category' | translate }}</th>
+                <th scope="col">{{ 'description' | translate }}</th>
+                <th scope="col">{{ 'issued.on' | translate }}</th>
+                <th scope="col">{{ 'due.date' | translate }}</th>
+                <th scope="col">{{ 'amount' | translate }}</th>
+                <th scope="col" class="t-actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let b of bills; index as i;">
+                <td>
+                    <span *ngIf="utils.dateIfBeforeToday(b.dueDate);" class="fas fa-exclamation-triangle text-danger" ngbTooltip="{{ 'expired' | translate }}"></span>
+                </td>
+                <td> {{ b.code }}</td>
+                <td> {{ b.billCategory.name | translate }}</td>
+                <td> {{ b.description }}</td>
+                <td> {{ b.issuedOn | date:'dd/MM/yyyy' }}</td>
+                <td [ngClass]="{'text-danger': utils.dateIfBeforeToday(b.dueDate)}"> {{ b.dueDate | date:'dd/MM/yyyy' }}</td>
+                <td>
+                    {{ b.amount | currency:'EUR' }}
+                </td>
+                <td class="text-right">
+                    <button class="btn btn-sm btn-primary btn-square" routerLink="/bill/{{ b.id }}" *ngIf="!b.enablePay" ngbTooltip="{{ 'show' | translate }}">
+                        <span class="fas fa-search"></span>
+                    </button>
+                    <button class="btn btn-sm btn-danger btn-square ml-2" (click)="b.enablePay=true" *ngIf="!b.enablePay" ngbTooltip="{{ 'set.to.paid' | translate }}">
+                        <span class="fas fa-money-bill-wave"></span>
+                    </button>
+
+                    <button class="btn btn-sm btn-success btn-square ml-2" *ngIf="b.enablePay" (click)="setToPaid(b.id)" ngbTooltip="{{ 'yes' | translate }}">
+                        <span class="fas fa-check"></span>
+                    </button>
+                    <button class="btn btn-sm btn-secondary btn-square ml-2" *ngIf="b.enablePay" (click)="b.enablePay=false" ngbTooltip="{{ 'no' | translate }}">
+                        <span class="fas fa-times"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="bills && bills.length === 0" class="h5">
+        <span class="fas fa-check-circle text-primary"></span> {{ 'no.bills.expire.soon' | translate }}
+    </div>
+</div>

@@ -33,6 +33,10 @@ label {
   margin: 1rem 0;
 }
 
+.fm-bill-expired {
+  background-color: #f08080 !important;
+}
+
 .text-gray {
   color: #5a5c69;
 }

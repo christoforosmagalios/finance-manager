@@ -70,7 +70,7 @@ public class BillController extends BaseController<BillDTO, Bill> {
    */
   @PostMapping("/paginated")
   public PageItem findAll(Pageable pageable, @RequestBody BillFilterDTO filter) {
-    return billService.findAllPaginated(pageable ,filter);
+    return billService.findAllPaginated(pageable, filter);
   }
 
   /**
@@ -92,5 +92,25 @@ public class BillController extends BaseController<BillDTO, Bill> {
   @GetMapping("/pending")
   public double getPendingAmount() {
     return billService.getPendingAmount();
+  }
+
+  /**
+   * Find all the bills that expire soon.
+   *
+   * @return The List of Bills that expire soon.
+   */
+  @GetMapping("/expireSoon")
+  public List<BillDTO> findBillsThatExpireSoon() {
+    return billService.findBillsThatExpireSoon();
+  }
+
+  /**
+   * Set the Bill with the given id to paid.
+   *
+   * @param id The id of the Bill to be paid.
+   */
+  @PostMapping("/setToPaid")
+  public void setToPaid(@RequestBody String id) {
+    billService.setToPaid(id);
   }
 }

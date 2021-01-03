@@ -47,7 +47,7 @@ export class PieChartComponent implements OnInit {
     },
     responsive: true,
     legend: {
-      position: 'left',
+      position: 'bottom',
       labels: {
         fontColor: "#00000090",
         fontSize: 15
@@ -107,9 +107,9 @@ export class PieChartComponent implements OnInit {
     // Add the data.
     this.data.push(transactionInfo.amount);
     // Set the background color.
-    this.colors[0].backgroundColor.push(transactionInfo.color + "60");
+    this.colors[0].backgroundColor.push(transactionInfo.color + "90");
     // Set the border color.
-    this.colors[0].borderColor.push(transactionInfo.color);
+    this.colors[0].borderColor.push("#ffffff");
 
     this.total += transactionInfo.amount;
   }
@@ -122,12 +122,7 @@ export class PieChartComponent implements OnInit {
    * @returns The value to be displayed inside the pie.
    */
   private formatter(value: number, ctx: any) {          
-    let sum = 0;
-    let dataArr = ctx.chart.data.datasets[0].data;
-    for(let i = 0; i < dataArr.length; i++) {
-      sum += +dataArr[i];
-    }
-    return (value*100 / sum).toFixed(2)+"%";
+    return "";
   }
 
   /**

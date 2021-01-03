@@ -26,6 +26,7 @@ import { AuthRoutingModule } from './auth/auth.routing.module';
 import { SettingsModule } from './settings/settings.module';
 import { UserComponent } from './user/user.component';
 import { FormsModule } from '@angular/forms';
+import { BillsExpireSoonComponent } from './dashboard/bills-expire-soon/bills-expire-soon.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     PieChartComponent,
     LineChartComponent,
-    UserComponent
+    UserComponent,
+    BillsExpireSoonComponent
   ],
   imports: [
     BrowserModule,

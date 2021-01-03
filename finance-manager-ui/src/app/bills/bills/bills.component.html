@@ -153,11 +153,12 @@
                                     <td> {{ b.code }}</td>
                                     <td> {{ b.billCategory.name | translate }}</td>
                                     <td> 
+                                        <span *ngIf="!b.paid && utils.dateIfBeforeToday(b.dueDate);" class="fas fa-exclamation-triangle text-danger" ngbTooltip="{{ 'expired' | translate }}"></span>
                                         <span class="fas fa-check" *ngIf="b.paid"></span>
                                     </td>
                                     <td> {{ b.description }}</td>
                                     <td> {{ b.issuedOn | date:'dd/MM/yyyy' }}</td>
-                                    <td> {{ b.dueDate | date:'dd/MM/yyyy' }}</td>
+                                    <td [ngClass]="{'text-danger': !b.paid && utils.dateIfBeforeToday(b.dueDate)}"> {{ b.dueDate | date:'dd/MM/yyyy' }}</td>
                                     <td>
                                         {{ b.amount | currency:'EUR' }}
                                     </td>
