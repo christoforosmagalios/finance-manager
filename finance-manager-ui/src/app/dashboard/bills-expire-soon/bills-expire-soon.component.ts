@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BillService } from 'src/app/bills/bill.service';
 import { BillDTO } from 'src/app/dto/bill-dto';
+import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
@@ -10,15 +11,18 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 })
 export class BillsExpireSoonComponent implements OnInit {
 
+  // Event to be sent to the parent, in order to update the all the other child components.
+  @Output() billPaid: EventEmitter<string> = new EventEmitter<string>();
+  // List of bills that expire soon.
   bills: Array<BillDTO>;
 
   constructor(
     private billService: BillService,
-    public utils: UtilsService
+    public utils: UtilsService,
+    private loader: LoaderService
   ) { }
 
   ngOnInit(): void {
-    console.log("sadsd");
     this.findBills();
   }
 
@@ -37,8 +41,12 @@ export class BillsExpireSoonComponent implements OnInit {
    * @param id The id of the Bill to be paid.
    */
   setToPaid(id: string) {
+    this.loader.show();
     this.billService.setToPaid(id).subscribe(res => {
       this.utils.showSuccess("set.to.paid.successfully");
+      // Send event to the parent.
+      this.billPaid.emit();
+      this.loader.hide();
       this.findBills();
     });
   }

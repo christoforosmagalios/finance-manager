@@ -45,6 +45,13 @@ export class DashboardComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.init();
+  }
+
+  /**
+   * Initialize all the components.
+   */
+  init() {
     // Get the pending amount.
     this.dashboardService.getPending().subscribe(amount => {
       this.pending = amount;
@@ -59,7 +66,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getMonthlyTransactionAmount(false).subscribe(amount => {
       this.earnings = amount;
     });
-    
+
     // Get the annual balance.
     this.dashboardService.getAnnualBalance().subscribe(amount => {
       this.balance = amount;
