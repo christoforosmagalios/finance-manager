@@ -28,4 +28,12 @@ public interface BillEsRepository extends ElasticsearchRepository<BillIndex, Str
    */
   List<BillIndex> findByPaidFalseAndDueDateLessThanEqualAndUserIdOrderByDueDateDesc(LocalDate to,
       String userId);
+
+  /**
+   * Get the total number of bills for the user with the given id.
+   *
+   * @param userId The user id.
+   * @return The count.
+   */
+  long countByUserId(String userId);
 }

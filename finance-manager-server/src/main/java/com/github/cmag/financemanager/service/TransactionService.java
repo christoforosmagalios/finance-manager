@@ -332,4 +332,13 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
       delete(t.getId());
     }
   }
+
+  /**
+   * Get the total number of transactions for the logged in user.
+   *
+   * @return The transactions count.
+   */
+  public long getTotalNumberOfTransactions() {
+    return es.countByUserId(userService.getLoggedInUserId());
+  }
 }

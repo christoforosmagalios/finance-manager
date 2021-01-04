@@ -113,4 +113,14 @@ public class BillController extends BaseController<BillDTO, Bill> {
   public void setToPaid(@RequestBody String id) {
     billService.setToPaid(id);
   }
+
+  /**
+   * Get the total number of bills for the logged in user.
+   *
+   * @return The bills count.
+   */
+  @GetMapping("/totalNumberOfBills")
+  public long getTotalNumberOfBills() {
+    return billService.getTotalNumberOfBills();
+  }
 }

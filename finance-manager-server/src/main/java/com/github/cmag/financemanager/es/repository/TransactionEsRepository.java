@@ -52,4 +52,12 @@ public interface TransactionEsRepository extends ElasticsearchRepository<Transac
    * @return A List of transactions.
    */
   List<TransactionIndex> findByDateBetweenAndUserId(LocalDate from, LocalDate to, String userId);
+
+  /**
+   * Get the total number of transactions for the user with the given id.
+   *
+   * @param userId The user id.
+   * @return The count.
+   */
+  long countByUserId(String userId);
 }

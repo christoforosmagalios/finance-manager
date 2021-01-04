@@ -7,7 +7,7 @@
         <div class="address-action-container">
             <!-- Edit Button -->
             <button class="btn btn-sm btn-primary btn-square" (click)="address.enableEdit=true;" *ngIf="!address.enableDelete && !address.enableEdit" ngbTooltip="{{ 'edit' | translate }}">
-                <i class="fas fa-pen"></i>
+                <span class="fas fa-pen"></span>
             </button>
             <!-- Edit Actions -->
             <button class="btn btn-sm btn-success btn-square ml-2" *ngIf="address.enableEdit" (click)="save()" ngbTooltip="{{ 'yes' | translate }}">

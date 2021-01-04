@@ -256,4 +256,13 @@ public class BillService extends BaseService<BillDTO, Bill> {
     save(bill);
     transactionService.createTransactionForBill(bill);
   }
+
+  /**
+   * Get the total number of bills for the logged in user.
+   *
+   * @return The bills count.
+   */
+  public long getTotalNumberOfBills() {
+    return es.countByUserId(userService.getLoggedInUserId());
+  }
 }

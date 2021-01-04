@@ -53,4 +53,11 @@ export class BillService {
     setToPaid(id: string) {
         return this.http.post(Constants.API + '/' + this.endpoint + '/setToPaid', id);
     }
+
+    /**
+     * Get the total number of bills for the logged in user.
+     */
+    getTotalNumberOfBills() {
+        return this.http.get<number>(Constants.API + '/' + this.endpoint + '/totalNumberOfBills');
+    }
 }

@@ -85,4 +85,14 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
   public List<TransactionItemDTO> getTransactionsPerDay() {
     return this.transactionService.getTransactionsPerDay();
   }
+
+  /**
+   * Get the total number of transactions for the logged in user.
+   *
+   * @return The transactions count.
+   */
+  @GetMapping("/totalNumberOfTransactions")
+  public long getTotalNumberOfTransactions() {
+    return transactionService.getTotalNumberOfTransactions();
+  }
 }

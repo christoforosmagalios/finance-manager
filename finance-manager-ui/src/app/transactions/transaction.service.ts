@@ -15,4 +15,11 @@ export class TransactionService {
     getTransactionsPerDay() {
         return this.http.get(Constants.API + '/' + this.endpoint + '/transactionsPerDay');
     }
+
+    /**
+     * Get the total number of transactions for the logged in user.
+     */
+    getTotalNumberOfTransactions() {
+        return this.http.get<number>(Constants.API + '/' + this.endpoint + '/totalNumberOfTransactions');
+    }
 }

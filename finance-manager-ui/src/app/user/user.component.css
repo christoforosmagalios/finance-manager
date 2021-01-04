@@ -1,0 +1,9 @@
+.total-number {
+    font-size: 4rem;
+    font-family: "Nunito-Bold", sans-serif;
+}
+
+.total-number-container {
+    margin-top: auto;
+    margin-bottom: auto;
+}

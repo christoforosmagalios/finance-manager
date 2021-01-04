@@ -58,6 +58,7 @@
     "bill.description": "Bill description",
     "address": "Address",
     "new.address": "New Address",
+    "logo": "Logo",
 
     "success": "Success",
     "info": "Info",

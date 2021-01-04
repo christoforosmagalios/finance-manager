@@ -4,6 +4,8 @@ import { UserDetailsDTO } from '../dto/user-details-dto';
 import { LoaderService } from '../shared/components/loader/loader.service';
 import { UserService } from './user.service';
 import { UtilsService } from '../shared/services/utils.service';
+import { BillService } from '../bills/bill.service';
+import { TransactionService } from '../transactions/transaction.service';
 
 @Component({
   selector: 'app-user',
@@ -25,11 +27,17 @@ export class UserComponent implements OnInit {
     firstName: null,
     lastName: null
   };
+  // Number of bills.
+  bills: number = 0;
+  // Number of transactions.
+  transactions: number = 0;
 
   constructor(
     private userService: UserService,
     private loader: LoaderService,
-    public utils: UtilsService) { }
+    public utils: UtilsService,
+    private billService: BillService,
+    private transactionService: TransactionService) { }
 
   ngOnInit(): void {
     // Show Loader.
@@ -38,6 +46,14 @@ export class UserComponent implements OnInit {
       this.initUserObjects(user);
       // Hide the loader.
       this.loader.hide();
+    });
+
+    this.billService.getTotalNumberOfBills().subscribe(count => {
+      this.bills = count;
+    });
+
+    this.transactionService.getTotalNumberOfTransactions().subscribe(count => {
+      this.transactions = count;
     });
   }
 
