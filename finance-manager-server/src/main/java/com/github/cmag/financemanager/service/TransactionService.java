@@ -244,9 +244,9 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    *
    * @return A list of grouped expenses.
    */
-  public GroupedTransactionDTO getGroupedExpenses() {
-    LocalDate from = Utils.getFirstDayOfMonth();
-    LocalDate to = Utils.getLastDayOfMonth();
+  public GroupedTransactionDTO getGroupedExpenses(int month, int year) {
+    LocalDate from = Utils.getFirstDayOfMonth(month, year);
+    LocalDate to = Utils.getLastDayOfMonth(month, year);
     // Get the expense transactions.
     List<TransactionIndex> transactions = es.findByTypeAndDateBetweenAndUserId(true, from, to,
         userService.getLoggedInUserId());
@@ -262,9 +262,9 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     return new GroupedTransactionDTO(from, to, transactionInfos);
   }
 
-  public List<TransactionItemDTO> getTransactionsPerDay() {
-    LocalDate from = Utils.getFirstDayOfMonth();
-    LocalDate to = Utils.getLastDayOfMonth();
+  public List<TransactionItemDTO> getTransactionsPerDay(int month, int year) {
+    LocalDate from = Utils.getFirstDayOfMonth(month, year);
+    LocalDate to = Utils.getLastDayOfMonth(month, year);
 
     List<TransactionIndex> transactions = es.findByDateBetweenAndUserId(from, to,
         userService.getLoggedInUserId());

@@ -59,6 +59,7 @@
     "address": "Address",
     "new.address": "New Address",
     "logo": "Logo",
+    "overview": "Overview",
 
     "success": "Success",
     "info": "Info",
@@ -166,5 +167,8 @@
     "set.to.paid.successfully": "The Bill status changed to \"Paid\" and a Transaction was created successfully.",
     "set.to.paid": "Paid",
     "expired": "Expired!",
-    "no.bills.expire.soon": "No Bill is expiring any time soon!"
+    "no.bills.expire.soon": "No Bill is expiring any time soon!",
+
+    "select.date.monthly": "Select month and a year",
+    "select.date.annual": "Select year"
 }

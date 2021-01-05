@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from "ngx-toastr";
 import { ConfirmationModalComponent } from "../components/confirmation-modal/confirmation-modal.component";
 import { Location } from '@angular/common';
+import { Constants } from "../constants/constants";
 
 @Injectable({providedIn: 'root'})
 export class UtilsService {
@@ -165,6 +166,27 @@ export class UtilsService {
      */
     dateIfBeforeToday(date: string) {
         return new Date(date) <= new Date();
+    }
+
+    /**
+     * Extract the translated month word from the given date.
+     * 
+     * @param date The date.
+     * @returns The translated name of the month.
+     */
+    getMonth(date: Date) {
+        let monthIndex = new Date(date).getMonth();
+        return this.translate(Constants.MONTHS[monthIndex]);
+    }
+
+    /**
+     * Extract the translated month word from the given month index.
+     * 
+     * @param index The month index.
+     * @returns The translated name of the month.
+     */
+    getMonthByIndex(index: number) {
+        return this.translate(Constants.MONTHS[index]);
     }
 
 }

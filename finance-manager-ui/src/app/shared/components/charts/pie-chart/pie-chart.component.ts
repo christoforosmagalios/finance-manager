@@ -71,17 +71,17 @@ export class PieChartComponent implements OnInit {
    */
   private createChart() {
     this.clearChart();
-      let transactionInfo = this.pieChartData.transactions;
-      for (let i = 0; i < transactionInfo.length; i++) {
-        if (transactionInfo[i].amount > 0) {
-          // Add the grouped transaction info to the chart.
-          this.addDataToChart(transactionInfo[i]);
-        }
+    let transactionInfo = this.pieChartData.transactions;
+    for (let i = 0; i < transactionInfo.length; i++) {
+      if (transactionInfo[i].amount > 0) {
+        // Add the grouped transaction info to the chart.
+        this.addDataToChart(transactionInfo[i]);
       }
-      // Set the title.
-      this.options.title.text = this.title + ": € " + this.total;
-      // Refresh the chart.
-      this.chart.refresh();
+    }
+    // Set the title.
+    this.options.title.text = this.title + ": € " + this.total;
+    // Refresh the chart.
+    this.chart.refresh();
   }
 
   /**
@@ -133,7 +133,7 @@ export class PieChartComponent implements OnInit {
    */
   ngOnChanges(changes: SimpleChanges) {
     if ((changes.pieChartData || changes.title) && this.pieChartData 
-    && this.pieChartData.transactions && this.pieChartData.transactions.length > 0) {
+    && this.pieChartData.transactions) {
         this.createChart();
     }
   }

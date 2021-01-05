@@ -8,12 +8,12 @@ export class TransactionService {
 
     constructor(private http: HttpClient) {}
 
-    getGroupedExpenses() {
-        return this.http.get(Constants.API + '/' + this.endpoint + '/groupedExpenses');
+    getGroupedExpenses(month: number, year: number) {
+        return this.http.get(Constants.API + '/' + this.endpoint + '/groupedExpenses/' + month + '/' + year);
     }
 
-    getTransactionsPerDay() {
-        return this.http.get(Constants.API + '/' + this.endpoint + '/transactionsPerDay');
+    getTransactionsPerDay(month: number, year: number) {
+        return this.http.get(Constants.API + '/' + this.endpoint + '/transactionsPerDay/' + month + '/' + year);
     }
 
     /**

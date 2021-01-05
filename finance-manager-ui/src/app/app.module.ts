@@ -18,15 +18,15 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BillsModule } from './bills/bills.module';
 import { BillsRoutingModule } from './bills/bills.routing.module';
-import { ChartsModule } from 'ng2-charts';
-import { PieChartComponent } from './shared/components/charts/pie-chart/pie-chart.component';
-import { LineChartComponent } from './shared/components/charts/line-chart/line-chart.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthRoutingModule } from './auth/auth.routing.module';
 import { SettingsModule } from './settings/settings.module';
 import { UserComponent } from './user/user.component';
 import { FormsModule } from '@angular/forms';
 import { BillsExpireSoonComponent } from './dashboard/bills-expire-soon/bills-expire-soon.component';
+import { OverviewRoutingModule } from './overview/overview.routing.module';
+import { OverviewModule } from './overview/overview.module';
+import { SharedComponentsModule } from './shared/components/shared-components.module';
 
 @NgModule({
   declarations: [
@@ -35,8 +35,6 @@ import { BillsExpireSoonComponent } from './dashboard/bills-expire-soon/bills-ex
     LoaderComponent,
     DashboardComponent,
     HeaderComponent,
-    PieChartComponent,
-    LineChartComponent,
     UserComponent,
     BillsExpireSoonComponent
   ],
@@ -50,12 +48,14 @@ import { BillsExpireSoonComponent } from './dashboard/bills-expire-soon/bills-ex
     TransactionsRoutingModule,
     BillsRoutingModule,
     AuthRoutingModule,
+    OverviewRoutingModule,
     ToastrModule.forRoot(),
     TransactionsModule,
     BillsModule,
     AuthModule,
-    ChartsModule,
     SettingsModule,
+    OverviewModule,
+    SharedComponentsModule,
     TranslateModule.forRoot({
       loader: {
       provide: TranslateLoader,

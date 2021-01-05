@@ -85,27 +85,17 @@ export class DashboardComponent implements OnInit {
    */
   private updateCharts() {
     // Get the transaction data for the line chart.
-    this.transactionService.getTransactionsPerDay().subscribe((data: Array<TransactionItemDTO>) => {
+    this.transactionService.getTransactionsPerDay(new Date().getMonth() + 1, new Date().getFullYear())
+    .subscribe((data: Array<TransactionItemDTO>) => {
       this.lineChartData = data;
-      this.lineChartTitle = this.getMonth(new Date());
+      this.lineChartTitle = this.utils.getMonth(new Date());
     });
 
     // Get the grouped expenses.
-    this.transactionService.getGroupedExpenses().subscribe((data: GroupedTransactionDTO) => {
+    this.transactionService.getGroupedExpenses(new Date().getMonth() + 1, new Date().getFullYear())
+    .subscribe((data: GroupedTransactionDTO) => {
       this.pieChartData = data;
-      this.pieChartTitle = this.getMonth(new Date());
+      this.pieChartTitle = this.utils.getMonth(new Date());
     });
   }
-
-  /**
-   * Extract the translated month word from the given date.
-   * 
-   * @param date The date.
-   * @returns The translated name of the month.
-   */
-  private getMonth(date: Date) {
-    let monthIndex = new Date(date).getMonth();
-    return this.utils.translate(Constants.MONTHS[monthIndex]);
-  }
-
 }

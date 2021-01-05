@@ -11,7 +11,20 @@ import java.util.Calendar;
 public class Utils {
 
   /**
-   * Get the first day of the current month.
+   * Get the first day of the given month and year.
+   *
+   * @param month The month.
+   * @param year the year.
+   * @return The first day of the month.
+   */
+  public static LocalDate getFirstDayOfMonth(int month, int year) {
+    // Get first and last of the current month.
+    YearMonth yearMonth = YearMonth.of(year, month);
+    return yearMonth.atDay(1);
+  }
+
+  /**
+   * Get the first day of the current month and year.
    *
    * @return The first day of the month.
    */
@@ -20,13 +33,24 @@ public class Utils {
     int year = Calendar.getInstance().get(Calendar.YEAR);
     // Get current month.
     int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
-    // Get first and last of the current month.
-    YearMonth yearMonth = YearMonth.of(year, month);
-    return yearMonth.atDay(1);
+    return getFirstDayOfMonth(month, year);
   }
 
   /**
-   * Get the last day of the current month.
+   * Get the last day of the given month and year.
+   *
+   * @param month The month.
+   * @param year the year.
+   * @return The last day of the month.
+   */
+  public static LocalDate getLastDayOfMonth(int month, int year) {
+    // Get first and last of the current month.
+    YearMonth yearMonth = YearMonth.of(year, month);
+    return yearMonth.atEndOfMonth();
+  }
+
+  /**
+   * Get the last day of the current month and year.
    *
    * @return The last day of the month.
    */
@@ -35,9 +59,7 @@ public class Utils {
     int year = Calendar.getInstance().get(Calendar.YEAR);
     // Get current month.
     int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
-    // Get first and last of the current month.
-    YearMonth yearMonth = YearMonth.of(year, month);
-    return yearMonth.atEndOfMonth();
+    return getLastDayOfMonth(month, year);
   }
 
   /**

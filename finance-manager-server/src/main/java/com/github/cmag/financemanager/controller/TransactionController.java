@@ -76,14 +76,16 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
    *
    * @return A list of grouped expenses.
    */
-  @GetMapping("/groupedExpenses")
-  public GroupedTransactionDTO getGroupedExpenses() {
-    return this.transactionService.getGroupedExpenses();
+  @GetMapping("/groupedExpenses/{month}/{year}")
+  public GroupedTransactionDTO getGroupedExpenses(@PathVariable int month,
+      @PathVariable int year) {
+    return this.transactionService.getGroupedExpenses(month, year);
   }
 
-  @GetMapping("/transactionsPerDay")
-  public List<TransactionItemDTO> getTransactionsPerDay() {
-    return this.transactionService.getTransactionsPerDay();
+  @GetMapping("/transactionsPerDay/{month}/{year}")
+  public List<TransactionItemDTO> getTransactionsPerDay(@PathVariable int month,
+      @PathVariable int year) {
+    return this.transactionService.getTransactionsPerDay(month, year);
   }
 
   /**
