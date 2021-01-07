@@ -76,7 +76,7 @@
                                 <div class="form-group">
                                     <label for="amount">{{ 'amount' | translate }}</label>
                                     <input class="form-control" id="amount" name="amount" [ngModel]="transaction.amount | number:'1.2-2'" [disabled]="!editMode" 
-                                    (change)="utils.setTwoNumberDecimal($event)" (ngModelChange)="transaction.amount=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
+                                    (change)="utils.setTwoNumberDecimal($event.target.value)" (ngModelChange)="transaction.amount=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
                                     <span class="help-block text-danger" *ngIf="errors.amount" [innerHTML]="errors.amount | translate"></span>
                                 </div>
                             </div>

@@ -58,12 +58,14 @@ export class DashboardComponent implements OnInit {
     });
 
     // Get the spendings amount.
-    this.dashboardService.getMonthlyTransactionAmount(true).subscribe(amount => {
+    this.dashboardService.getMonthlyTransactionAmount(new Date().getMonth() + 1, new Date().getFullYear(), true)
+    .subscribe(amount => {
       this.spendings = amount;
     });
 
     // Get the earnings amount.
-    this.dashboardService.getMonthlyTransactionAmount(false).subscribe(amount => {
+    this.dashboardService.getMonthlyTransactionAmount(new Date().getMonth() + 1, new Date().getFullYear(), false)
+    .subscribe(amount => {
       this.earnings = amount;
     });
 

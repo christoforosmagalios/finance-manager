@@ -59,4 +59,38 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-12">
+            {{ 'select.date.annual' | translate }}
+        </div>
+    </div>
+    <div class="row no-gutters">
+        <div class="col-5 col-md-3 pl-1">
+            <div class="form-group">
+                <select class="form-control" id="annualOverviewYear" name="annualOverviewYear" [(ngModel)]="annualOverview">
+                    <option *ngFor="let y of years" [value]="y">
+                        {{ y }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-2 pl-1">
+            <button class="btn btn-primary" (click)="searchAnnually()"><span class="fas fa-search"></span></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card shadow h-100">
+                <!-- Card Header -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">{{ 'annual.overview' | translate }}</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <app-stacked-bar-chart [title]="stackedBarChartTitle" [stackedBarChartData]="stackedBarChartData"></app-stacked-bar-chart>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

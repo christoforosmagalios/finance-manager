@@ -114,10 +114,19 @@ export class UtilsService {
     /**
      * Set two decimals to the given target.
      * 
-     * @param $event The number to be parsed.
+     * @param n The number to be parsed.
      */
-    setTwoNumberDecimal($event) {
-        $event.target.value = parseFloat($event.target.value).toFixed(2);
+    setTwoNumberDecimal(n: string) {
+        n = parseFloat(n).toFixed(2);
+    }
+
+    /**
+     * Format the given number to x,xxx.xx.
+     * 
+     * @param n The number to be formated.
+     */
+    formatNumber(n: number) {
+        return n.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     }
 
     /**
@@ -188,5 +197,4 @@ export class UtilsService {
     getMonthByIndex(index: number) {
         return this.translate(Constants.MONTHS[index]);
     }
-
 }

@@ -18,9 +18,12 @@ export class DashboardService {
 
     /**
      * Get the current month's transaction amount based on the given type.
+     * 
+     * @param month The month.
+     * @param year The year.
      */
-    getMonthlyTransactionAmount(type: boolean) {
-        return this.http.get<number>(Constants.API + '/' + this.transactionEndopoint + '/monthlyTransactionsAmount/' + type);
+    getMonthlyTransactionAmount(month: number, year: number, type: boolean) {
+        return this.http.get<number>(Constants.API + '/' + this.transactionEndopoint + '/monthlyTransactionsAmount/' + month + '/' + year + '/' + type);
     }
 
     /**

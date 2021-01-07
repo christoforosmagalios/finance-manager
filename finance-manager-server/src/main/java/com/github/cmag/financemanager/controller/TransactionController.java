@@ -1,5 +1,6 @@
 package com.github.cmag.financemanager.controller;
 
+import com.github.cmag.financemanager.dto.ChartDataSetsDTO;
 import com.github.cmag.financemanager.dto.GroupedTransactionDTO;
 import com.github.cmag.financemanager.dto.PageItem;
 import com.github.cmag.financemanager.dto.TransactionDTO;
@@ -56,9 +57,10 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
    *
    * @return The monthly total earning amount.
    */
-  @GetMapping("/monthlyTransactionsAmount/{type}")
-  public double getMonthlyTransactionAmount(@PathVariable boolean type) {
-    return transactionService.getMonthlyTransactionAmount(type);
+  @GetMapping("/monthlyTransactionsAmount/{month}/{year}/{type}")
+  public double getMonthlyTransactionAmount(@PathVariable int month, @PathVariable int year,
+      @PathVariable boolean type) {
+    return transactionService.getMonthlyTransactionAmount(month, year, type);
   }
 
   /**
@@ -72,8 +74,10 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
   }
 
   /**
-   * Get expenses grouped by category.
+   * Get expenses grouped by category for the given month and year.
    *
+   * @param month The month.
+   * @param year The year.
    * @return A list of grouped expenses.
    */
   @GetMapping("/groupedExpenses/{month}/{year}")
@@ -82,6 +86,13 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
     return this.transactionService.getGroupedExpenses(month, year);
   }
 
+  /**
+   * Get grouped transaction per day for the given month and year.
+   *
+   * @param month The month.
+   * @param year The year.
+   * @return A list of grouped transactions.
+   */
   @GetMapping("/transactionsPerDay/{month}/{year}")
   public List<TransactionItemDTO> getTransactionsPerDay(@PathVariable int month,
       @PathVariable int year) {
@@ -96,5 +107,16 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
   @GetMapping("/totalNumberOfTransactions")
   public long getTotalNumberOfTransactions() {
     return transactionService.getTotalNumberOfTransactions();
+  }
+
+  /**
+   * Get the annual transactions amount grouped by month.
+   *
+   * @param year The year.
+   * @return A list of ChartDataSetsDTO.
+   */
+  @GetMapping("/annualTransactionsByMonth/{year}")
+  public List<ChartDataSetsDTO> getAnnualTransactionsByMonth(@PathVariable int year) {
+    return transactionService.getAnnualTransactionsByMonth(year);
   }
 }

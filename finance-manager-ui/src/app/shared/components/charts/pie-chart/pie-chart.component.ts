@@ -58,6 +58,16 @@ export class PieChartComponent implements OnInit {
         color: "#00000090",
         formatter: this.formatter
       }
+    },
+    tooltips: {
+      callbacks: {
+        label: (tooltipItem, data) => {
+          if (data.labels && data.labels[tooltipItem.index] && data.datasets[0] && data.datasets[0].data.length > 0) {
+            return data.labels[tooltipItem.index] + ": " + this.utils.formatNumber(+data.datasets[0].data[tooltipItem.index]) + " €";
+          }
+          return "";
+        }
+      }
     }
   };
 
@@ -79,7 +89,8 @@ export class PieChartComponent implements OnInit {
       }
     }
     // Set the title.
-    this.options.title.text = this.title + ": € " + this.total;
+    this.options.title.text = this.title + ": " + this.utils.formatNumber(this.total) + " €";
+
     // Refresh the chart.
     this.chart.refresh();
   }

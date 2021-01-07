@@ -24,19 +24,6 @@ public class Utils {
   }
 
   /**
-   * Get the first day of the current month and year.
-   *
-   * @return The first day of the month.
-   */
-  public static LocalDate getFirstDayOfMonth() {
-    // Get current year.
-    int year = Calendar.getInstance().get(Calendar.YEAR);
-    // Get current month.
-    int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
-    return getFirstDayOfMonth(month, year);
-  }
-
-  /**
    * Get the last day of the given month and year.
    *
    * @param month The month.

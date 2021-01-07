@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { ChartDataSets } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { GroupedTransactionDTO } from '../dto/grouped-transaction-dto';
 import { MonthOverviewDTO } from '../dto/month-overview-dto';
@@ -14,8 +15,10 @@ import { TransactionService } from '../transactions/transaction.service';
   styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent implements OnInit {
-  // Monthly overview object.
+  // Month overview object.
   monthOverview = new MonthOverviewDTO();
+  // Annual overview.
+  annualOverview = new Date().getFullYear();
   // Months.
   months: Array<string>;
   // Years.
@@ -28,6 +31,10 @@ export class OverviewComponent implements OnInit {
   pieChartTitle: string;
   // Pie chart data.
   pieChartData: GroupedTransactionDTO;
+  // Stacked Bar chart title.
+  stackedBarChartTitle: string;
+  // Stacked Bar data.
+  stackedBarChartData: ChartDataSets[];
   // Subscription.
   private subscription: Subscription;
   
@@ -38,16 +45,28 @@ export class OverviewComponent implements OnInit {
   ) {
     // Subscribe to transalte service in case language is changed.
     this.subscription = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.searchMonthly();
+      this.updateCharts();
     });
   }
 
   ngOnInit(): void {
     this.months = [...Constants.MONTHS];
     this.years = this.getYears();
-    this.searchMonthly();
+    this.updateCharts();
   }
 
+  updateCharts() {
+    this.searchMonthly();
+    this.searchAnnually();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  /**
+   * Get the monthly data in order to update the charts.
+   */
   searchMonthly() {
     // Get the transaction data for the line chart.
     this.transactionService.getTransactionsPerDay(+this.monthOverview.month + 1, this.monthOverview.year)
@@ -61,6 +80,18 @@ export class OverviewComponent implements OnInit {
     .subscribe((data: GroupedTransactionDTO) => {
       this.pieChartData = data;
       this.pieChartTitle = this.utils.getMonthByIndex(this.monthOverview.month) + " " + this.monthOverview.year;
+    });
+  }
+
+  /**
+   * Get the annual data in order to update the charts.
+   */
+  searchAnnually() {
+    // Get the transactions grouped by month for the given year.
+    this.transactionService.getAnnualTransactionsGroupedByMonth(this.annualOverview)
+    .subscribe(data => {
+      this.stackedBarChartData = data;
+      this.stackedBarChartTitle = this.annualOverview + "";
     });
   }
 

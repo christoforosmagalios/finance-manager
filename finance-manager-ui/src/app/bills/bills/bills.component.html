@@ -112,14 +112,14 @@
                                 <div class="form-group">
                                     <label for="amountFrom">{{ 'amount.from' | translate }}</label>
                                     <input class="form-control" id="amountFrom" name="amountFrom" [ngModel]="filter.amountFrom | number:'1.2-2'" 
-                                    (change)="utils.setTwoNumberDecimal($event)" (ngModelChange)="filter.amountFrom=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
+                                    (change)="utils.setTwoNumberDecimal($event.target.value)" (ngModelChange)="filter.amountFrom=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
                                 </div>
                             </div>
                             <div class="col-md-3 col-6">
                                 <div class="form-group">
                                     <label for="amountTo">{{ 'amount.to' | translate }}</label>
                                     <input class="form-control" id="amountTo" name="amountTo" [ngModel]="filter.amountTo | number:'1.2-2'"
-                                    (change)="utils.setTwoNumberDecimal($event)" (ngModelChange)="filter.amountTo=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
+                                    (change)="utils.setTwoNumberDecimal($event.target.value)" (ngModelChange)="filter.amountTo=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
                                 </div>
                             </div>
                         </div>

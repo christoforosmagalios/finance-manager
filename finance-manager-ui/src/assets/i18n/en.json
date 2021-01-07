@@ -169,6 +169,7 @@
     "expired": "Expired!",
     "no.bills.expire.soon": "No Bill is expiring any time soon!",
 
-    "select.date.monthly": "Select month and a year",
-    "select.date.annual": "Select year"
+    "select.date.monthly": "Select month and year",
+    "select.date.annual": "Select year",
+    "annual.overview": "Annual Overview"
 }

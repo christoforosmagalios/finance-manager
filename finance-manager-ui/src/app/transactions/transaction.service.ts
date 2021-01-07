@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
+import { ChartDataSets } from 'chart.js';
 import { Constants } from '../shared/constants/constants';
 
 @Injectable({providedIn: 'root'})
@@ -21,5 +22,9 @@ export class TransactionService {
      */
     getTotalNumberOfTransactions() {
         return this.http.get<number>(Constants.API + '/' + this.endpoint + '/totalNumberOfTransactions');
+    }
+    
+    getAnnualTransactionsGroupedByMonth(year: number) {
+        return this.http.get<ChartDataSets[]>(Constants.API + '/' + this.endpoint + '/annualTransactionsByMonth/' + year);
     }
 }

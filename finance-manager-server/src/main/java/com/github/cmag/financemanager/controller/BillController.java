@@ -69,7 +69,7 @@ public class BillController extends BaseController<BillDTO, Bill> {
    * @return The Page result.
    */
   @PostMapping("/paginated")
-  public PageItem findAll(Pageable pageable, @RequestBody BillFilterDTO filter) {
+  public PageItem<BillDTO> findAll(Pageable pageable, @RequestBody BillFilterDTO filter) {
     return billService.findAllPaginated(pageable, filter);
   }
 

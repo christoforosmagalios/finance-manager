@@ -17,12 +17,11 @@ export class LineChartComponent implements OnInit {
   @Input() title;
   // Chart data.
   @Input() lineChartData;
-
-  // Line chart data.
+  // Chart data.
   public data: ChartDataSets[] = [];
-  // Line chart labels.
+  // Chart labels.
   public labels: Label[] = [];
-  // Line chart options.
+  // Chart options.
   public options: (ChartOptions) = {
     responsive: true,
     maintainAspectRatio: false,
@@ -39,7 +38,7 @@ export class LineChartComponent implements OnInit {
           ticks: {
             fontColor: "#00000090",
             callback: (value, i, values) => {
-              return value + " €";
+              return this.utils.formatNumber(+value) + " €";
             }
           }
         }
@@ -70,7 +69,20 @@ export class LineChartComponent implements OnInit {
         color: "white",
         formatter: (value, ctx) => {
           return "";
+        }
+      }
+    },
+    tooltips: {
+      callbacks: {
+        label: (tooltipItem, data) => {
+            return this.utils.formatNumber(+tooltipItem.value) + " €";
         },
+        title: (item, data) => {
+          if (item && item[0]) {
+            return item[0].label + " " + this.title;
+          }
+          return "";
+        }
       }
     }
   };

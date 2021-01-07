@@ -5,6 +5,7 @@ import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StackedBarChartComponent } from './charts/stacked-bar-chart/stacked-bar-chart.component';
 
 
 
@@ -12,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     PieChartComponent,
     LineChartComponent,
+    StackedBarChartComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   exports: [
     PieChartComponent,
-    LineChartComponent
+    LineChartComponent,
+    StackedBarChartComponent
   ]
 })
 export class SharedComponentsModule { }

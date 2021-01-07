@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.toList;
 
 import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.BillDTO;
+import com.github.cmag.financemanager.dto.ChartDataSetsDTO;
 import com.github.cmag.financemanager.dto.GroupedTransactionDTO;
 import com.github.cmag.financemanager.dto.GroupedTransactionInfoDTO;
 import com.github.cmag.financemanager.dto.PageItem;
@@ -209,9 +210,9 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * @param type The transaction type.
    * @return The monthly total spending amount.
    */
-  public double getMonthlyTransactionAmount(boolean type) {
-    LocalDate from = Utils.getFirstDayOfMonth();
-    LocalDate to = Utils.getLastDayOfMonth();
+  public double getMonthlyTransactionAmount(int month, int year, boolean type) {
+    LocalDate from = Utils.getFirstDayOfMonth(month, year);
+    LocalDate to = Utils.getLastDayOfMonth(month, year);
 
     // Fetch transactions and sum their amount.
     return es.findByTypeAndDateBetweenAndUserId(type, from, to, userService.getLoggedInUserId())
@@ -240,8 +241,10 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
   }
 
   /**
-   * Get expenses grouped by category.
+   * Get expenses grouped by category for the given month and year.
    *
+   * @param month The month.
+   * @param year The year.
    * @return A list of grouped expenses.
    */
   public GroupedTransactionDTO getGroupedExpenses(int month, int year) {
@@ -262,6 +265,13 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     return new GroupedTransactionDTO(from, to, transactionInfos);
   }
 
+  /**
+   * Get the grouped transactions per day for the given month and year.
+   *
+   * @param month The month.
+   * @param year The year.
+   * @return A list of grouped transactions.
+   */
   public List<TransactionItemDTO> getTransactionsPerDay(int month, int year) {
     LocalDate from = Utils.getFirstDayOfMonth(month, year);
     LocalDate to = Utils.getLastDayOfMonth(month, year);
@@ -340,5 +350,26 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    */
   public long getTotalNumberOfTransactions() {
     return es.countByUserId(userService.getLoggedInUserId());
+  }
+
+  /**
+   * Get the transactions for the given year grouped by month and by type.
+   *
+   * @param year The year.
+   * @return The grouped transactions.
+   */
+  public List<ChartDataSetsDTO> getAnnualTransactionsByMonth(int year) {
+    List<ChartDataSetsDTO> result = new ArrayList<>();
+    result.add(new ChartDataSetsDTO("income", "#1cc88a"));
+    result.add(new ChartDataSetsDTO("expenses", "#b83d53"));
+
+    // Get income and expenses for each month.
+    for (int i = 1; i < 13; i++) {
+      // Get income.
+      result.get(0).getData().add(getMonthlyTransactionAmount(i, year, false));
+      // Get expenses.
+      result.get(1).getData().add(-1 * getMonthlyTransactionAmount(i, year, true));
+    }
+    return result;
   }
 }
