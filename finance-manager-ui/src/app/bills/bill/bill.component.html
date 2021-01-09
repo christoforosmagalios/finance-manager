@@ -41,7 +41,8 @@
                                             <label for="paidOn">{{ 'paid.on' | translate }}</label>
                                             <div class="input-group">
                                                 <input class="form-control" placeholder="DD/MM/YYYY" [value]="formatter.format(dates.paidOn)"
-                                                id="paidOn" name="paidOn"  ngbDatepicker #paidOn="ngbDatepicker" (dateSelect)="onDateSelection('paidOn', $event)" 
+                                                id="paidOn" name="paidOn"  ngbDatepicker #paidOn="ngbDatepicker" 
+                                                (dateSelect)="bill.paidOn = utils.onDateSelection($event); dates.paidOn = $event;" 
                                                 [disabled]="!editMode || !bill.paid" [readonly]="true" [ngClass]="{'fm-datepicker-readonly': editMode}">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-outline-secondary" (click)="paidOn.toggle()" type="button" [disabled]="!editMode || !bill.paid">
@@ -87,7 +88,7 @@
                                             <label for="issuedOn">{{ 'issued.on' | translate }}</label>
                                             <div class="input-group">
                                                 <input class="form-control" placeholder="DD/MM/YYYY" [value]="formatter.format(dates.issuedOn)"
-                                                id="issuedOn" name="issuedOn"  ngbDatepicker #issuedOn="ngbDatepicker" (dateSelect)="onDateSelection('issuedOn', $event)" 
+                                                id="issuedOn" name="issuedOn"  ngbDatepicker #issuedOn="ngbDatepicker" (dateSelect)="bill.issuedOn = utils.onDateSelection($event); dates.issuedOn = $event;" 
                                                 [disabled]="!editMode" [readonly]="true" [ngClass]="{'fm-datepicker-readonly': editMode}">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-outline-secondary" (click)="issuedOn.toggle()" type="button" [disabled]="!editMode">
@@ -105,7 +106,7 @@
                                             <label for="dueDate">{{ 'due.date' | translate }}</label>
                                             <div class="input-group">
                                                 <input class="form-control" placeholder="DD/MM/YYYY" [value]="formatter.format(dates.dueDate)"
-                                                id="dueDate" name="dueDate"  ngbDatepicker #dueDate="ngbDatepicker" (dateSelect)="onDateSelection('dueDate', $event)" 
+                                                id="dueDate" name="dueDate"  ngbDatepicker #dueDate="ngbDatepicker" (dateSelect)="bill.dueDate = utils.onDateSelection($event); dates.dueDate = $event;" 
                                                 [disabled]="!editMode" [readonly]="true" [ngClass]="{'fm-datepicker-readonly': editMode}">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-outline-secondary" (click)="dueDate.toggle()" type="button" [disabled]="!editMode">
@@ -154,7 +155,7 @@
                                             <label for="consumptionFrom">{{ 'consumption.from' | translate }}</label>
                                             <div class="input-group">
                                                 <input class="form-control" placeholder="DD/MM/YYYY" [value]="formatter.format(dates.consumptionFrom)"
-                                                id="consumptionFrom" name="consumptionFrom"  ngbDatepicker #consumptionFrom="ngbDatepicker" (dateSelect)="onDateSelection('consumptionFrom', $event)" 
+                                                id="consumptionFrom" name="consumptionFrom"  ngbDatepicker #consumptionFrom="ngbDatepicker" (dateSelect)="bill.consumptionFrom = utils.onDateSelection($event); dates.consumptionFrom = $event;" 
                                                 [disabled]="!editMode" [readonly]="true" [ngClass]="{'fm-datepicker-readonly': editMode}">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-outline-secondary" (click)="consumptionFrom.toggle()" type="button" [disabled]="!editMode">
@@ -172,7 +173,7 @@
                                             <label for="consumptionTo">{{ 'consumption.to' | translate }}</label>
                                             <div class="input-group">
                                                 <input class="form-control" placeholder="DD/MM/YYYY" [value]="formatter.format(dates.consumptionTo)"
-                                                id="consumptionTo" name="consumptionTo"  ngbDatepicker #consumptionTo="ngbDatepicker" (dateSelect)="onDateSelection('consumptionTo', $event)" 
+                                                id="consumptionTo" name="consumptionTo"  ngbDatepicker #consumptionTo="ngbDatepicker" (dateSelect)="bill.consumptionTo = utils.onDateSelection($event); dates.consumptionTo = $event;" 
                                                 [disabled]="!editMode" [readonly]="true" [ngClass]="{'fm-datepicker-readonly': editMode}">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-outline-secondary" (click)="consumptionTo.toggle()" type="button" [disabled]="!editMode">

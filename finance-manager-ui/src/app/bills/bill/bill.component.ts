@@ -28,9 +28,9 @@ export class BillComponent implements OnInit {
   // True if edit mode, false otherwise.
   editMode = false;
   // The bill.
-  bill = new BillDTO();
+  bill = new BillDTO(this.utils.getNewDate());
   // The original edited bill.
-  originalBill = new BillDTO();
+  originalBill = new BillDTO(this.utils.getNewDate());
   // Bill dates.
   dates = new BillDates();
   // List of bill categories.
@@ -118,16 +118,6 @@ export class BillComponent implements OnInit {
       this.dates[key] = new NgbDate(date.getFullYear(), date.getMonth() + 1,  date.getDate());
     }
     
-  }
-
-  /**
-   * Handle date selection.
-   * 
-   * @param date The new date.
-   */
-  onDateSelection(key: string, date: NgbDate) {
-    this.bill[key] = new Date(date.year + "-" + date.month + "-" + date.day);
-    this.dates[key] = date;
   }
 
   /**

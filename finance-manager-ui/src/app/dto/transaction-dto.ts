@@ -1,12 +1,13 @@
 import { BaseDTO } from './base-dto';
 import { TransactionCategoryDTO } from './transaction-category-dto';
 import { BillDTO } from './bill-dto';
+import { UtilsService } from '../shared/services/utils.service';
 
 export class TransactionDTO extends BaseDTO {
 
     public type: boolean;
     public transactionCategory: TransactionCategoryDTO;
-    public date: Date;
+    public date: string;
     public description: string;
     public notes: string;
     public amount: number;
@@ -15,12 +16,12 @@ export class TransactionDTO extends BaseDTO {
     // To be used only in UI.
     public enableDelete: boolean;
 
-    constructor() {
+    constructor(date: string) {
         super();
         // Default values.
         this.type = true;
         this.amount = 0;
         this.enableDelete = false;  
-        this.bill = new BillDTO();    
+        this.bill = new BillDTO(date);    
     }
 }

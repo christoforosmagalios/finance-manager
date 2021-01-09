@@ -165,7 +165,7 @@ export class UtilsService {
      * @param date The new date.
      */
     onDateSelection(date: NgbDate) {
-        return new Date(date.year + "-" + date.month + "-" + date.day);
+        return this.getDate(new Date(date.year + "-" + date.month + "-" + date.day));
     }
 
     /**
@@ -174,7 +174,7 @@ export class UtilsService {
      * @param date String date 
      */
     dateIfBeforeToday(date: string) {
-        return new Date(date) <= new Date();
+        return new Date(date).setHours(0,0,0,0) < new Date().setHours(0,0,0,0);
     }
 
     /**
@@ -196,5 +196,35 @@ export class UtilsService {
      */
     getMonthByIndex(index: number) {
         return this.translate(Constants.MONTHS[index]);
+    }
+
+    /**
+     * Get the date today as a string.
+     * Format: yyyy-mm-dd
+     * 
+     * @returns Date as string.
+     */
+    getNewDate() {
+        return this.getDate(new Date());
+    }
+
+    /**
+     * Convert the given date to a string.
+     * Format: yyyy-mm-dd
+     * 
+     * @returns Date as string.
+     */
+    getDate(d: Date) {
+        return d.getFullYear() + "-" + this.addLeadingZero(d.getMonth() + 1) + "-" + this.addLeadingZero(d.getDate());
+    }
+
+    /**
+     * Add a leading zero to the given number.
+     * 
+     * @param n The number.
+     * @returns The number with a leading zero needed.
+     */
+    addLeadingZero(n: number) {
+        return (n < 10) ? ("0" + n) : n;
     }
 }

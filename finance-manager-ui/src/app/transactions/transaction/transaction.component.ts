@@ -25,9 +25,9 @@ export class TransactionComponent implements OnInit {
   // True if edit mode, false otherwise.
   editMode = false;
   // The transaction.
-  transaction = new TransactionDTO();
+  transaction = new TransactionDTO(this.utils.getNewDate());
   // The original edited transaction.
-  originalTransaction = new TransactionDTO();
+  originalTransaction = new TransactionDTO(this.utils.getNewDate());
   // Transaction date.
   date: NgbDate;
   // List of transaction categories.
@@ -41,7 +41,7 @@ export class TransactionComponent implements OnInit {
   // A ngbTypeahead Formatter for the input display.
   billInputFormatter = (result: BillDTO) => result.code;
   // A bill object used as a model for the ngbTypeahead.
-  bill = new BillDTO();
+  bill = new BillDTO(this.utils.getNewDate());
   // Error object.
   errors = {
     transactionCategory: null,
@@ -83,8 +83,8 @@ export class TransactionComponent implements OnInit {
 
     // In case of edit mode fetch the transaction from the database.
     if (!this.id) {
-      this.transaction.date = new Date();
-      this.setDate(this.transaction.date);
+      this.transaction.date = this.utils.getNewDate();
+      this.setDate(new Date(this.transaction.date));
       this.editMode = true;
     } else {
       this.crudService.findOne(Constants.ENTITY.TRANSACTION, this.id)
@@ -104,15 +104,6 @@ export class TransactionComponent implements OnInit {
    */
   private setDate(date: Date) {
     this.date = new NgbDate(date.getFullYear(), date.getMonth() + 1,  date.getDate());
-  }
-
-  /**
-   * Handle date selection.
-   * 
-   * @param date The new date.
-   */
-  onDateSelection(date: NgbDate) {
-    this.transaction.date = new Date(date.year + "-" + date.month + "-" + date.day);
   }
 
   /**
@@ -161,7 +152,7 @@ export class TransactionComponent implements OnInit {
    */
   onBillChange() {
     if (!this.bill) {
-      this.bill = new BillDTO();
+      this.bill = new BillDTO(this.utils.getNewDate());
     }
   }
 

@@ -50,7 +50,7 @@
                                     <label for="date">{{ 'date' | translate }}</label>
                                     <div class="input-group">
                                         <input class="form-control" placeholder="DD/MM/YYYY" [value]="formatter.format(date)"
-                                        id="date" name="date"  ngbDatepicker #d="ngbDatepicker" (dateSelect)="onDateSelection($event)" 
+                                        id="date" name="date"  ngbDatepicker #d="ngbDatepicker" (dateSelect)="transaction.date = utils.onDateSelection($event)" 
                                         [disabled]="!editMode" [readonly]="true" [ngClass]="{'fm-datepicker-readonly': editMode}">
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button" [disabled]="!editMode">
