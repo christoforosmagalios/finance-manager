@@ -126,6 +126,10 @@ label {
   border-top: 1px solid #dee2e6;
 }
 
+.fm-bb-gray {
+  border-bottom: 1px solid #dee2e6;
+}
+
 /** Bootstrap buttons **/
 .btn-min-width {
   min-width: 5rem;

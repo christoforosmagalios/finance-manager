@@ -171,5 +171,10 @@
 
     "select.date.monthly": "Select month and year",
     "select.date.annual": "Select year",
-    "annual.overview": "Annual Overview"
+    "annual.overview": "Annual Overview",
+
+    "data": "Data",
+    "sync.all.data.with.elastic": "Synchronize all data in the Database with Elasticsearch",
+    "sync": "Synchronize",
+    "data.sync.completed": "Data synchronization completed."
 }

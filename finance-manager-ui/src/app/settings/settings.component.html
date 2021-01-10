@@ -36,6 +36,12 @@
                               <app-bill-categories></app-bill-categories>
                             </ng-template>
                           </li>
+                          <li ngbNavItem="data">
+                            <a ngbNavLink class="text-nowrap" routerLink="." fragment="data">{{ 'data' | translate }}</a>
+                            <ng-template ngbNavContent>
+                              <app-data></app-data>
+                            </ng-template>
+                          </li>
                         </ul>
                       
                         <div [ngbNavOutlet]="nav" class="ml-4 w-100"></div>

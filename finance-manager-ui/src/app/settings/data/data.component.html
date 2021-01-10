@@ -1,0 +1,10 @@
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-2 pb-2 fm-bb-gray">
+        <h4 class="h4 mb-0 text-gray">{{ 'data' | translate }}</h4>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {{ 'sync.all.data.with.elastic' | translate }}: <button class="btn btn-primary btn-sm" (click)="reindex()"><i class="fas fa-sync-alt"></i> {{ 'sync' | translate }}</button>
+        </div>
+    </div>
+</div>

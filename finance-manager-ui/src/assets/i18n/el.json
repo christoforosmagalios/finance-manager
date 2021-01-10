@@ -171,5 +171,10 @@
 
     "select.date.monthly": "Επιλέξτε μήνα και έτος",
     "select.date.annual": "Επιλέξτε έτος",
-    "annual.overview": "Ετήσια Επισκόπηση"
+    "annual.overview": "Ετήσια Επισκόπηση",
+
+    "data": "Δεδομένα",
+    "sync.all.data.with.elastic": "Συγχρονίστε όλα τα δεδομένα στη βάση δεδομένων με το Elasticsearch",
+    "sync": "Συγχρονισμός",
+    "data.sync.completed": "Ο συγχρονισμός δεδομένων ολοκληρώθηκε."
 }
