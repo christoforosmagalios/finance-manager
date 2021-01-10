@@ -12,18 +12,18 @@
   
     <div class="collapse navbar-collapse" id="navbarCollapse" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active"><span class="fas fa-th-large"></span> {{ 'dashboard' | translate }}</a>
+        <li class="nav-item nav-item-text">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active"><span class="fas fa-th-large"></span> <span class="nav-item-desc"> {{ 'dashboard' | translate }}</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item nav-item-text">
           <a class="nav-link" routerLink="/transactions" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
-            true}"><span class="fas fa-exchange-alt"></span> {{ 'transactions' | translate }}</a>
+            true}"><span class="fas fa-exchange-alt"></span> <span class="nav-item-desc"> {{ 'transactions' | translate }}</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/bills" routerLinkActive="active"><span class="far fa-folder-open"></span> {{ 'bills' | translate }}</a>
+        <li class="nav-item nav-item-text">
+          <a class="nav-link" routerLink="/bills" routerLinkActive="active"><span class="far fa-folder-open"></span> <span class="nav-item-desc"> {{ 'bills' | translate }}</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/overview" routerLinkActive="active"><span class="far fa-chart-bar"></span> {{ 'overview' | translate }}</a>
+        <li class="nav-item nav-item-text">
+          <a class="nav-link" routerLink="/overview" routerLinkActive="active"><span class="far fa-chart-bar"></span> <span class="nav-item-desc"> {{ 'overview' | translate }}</span></a>
         </li>
       </ul>
       <ul class="navbar-nav">

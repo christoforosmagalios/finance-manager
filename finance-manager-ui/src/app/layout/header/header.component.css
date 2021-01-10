@@ -1,6 +1,6 @@
 .navbar {
     box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
-    padding: 1.2rem 1rem;
+    padding: 1.2rem 2.5rem;
 }
 
 .navbar-brand {
@@ -35,5 +35,21 @@
 }
 
 .languages-item {
-    padding: 0.5rem 1rem;
+    padding-top: 0.5rem;
+}
+
+@media only screen and (max-width: 780px) {
+    .navbar {
+        padding: 1.2rem 1rem;
+    }
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 768px) {
+    .nav-item-desc {
+        display: none;
+    }
+
+    .nav-item-text {
+        font-size: 1.3rem;
+    }
 }
