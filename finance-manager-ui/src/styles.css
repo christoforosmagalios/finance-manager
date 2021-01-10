@@ -202,6 +202,14 @@ label {
   border-right: 1px solid #ddd;
 }
 
+@media only screen and (max-width: 780px) {
+  .nav-pills.nav.flex-column {
+    border-right: 0px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1.5rem;
+  }
+}
+
 .nav-pills .nav-link {
   color: #5a5c69;
 }

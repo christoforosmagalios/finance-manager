@@ -1,7 +1,13 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-2">
-        <h4 class="h4 mb-0 text-gray">{{ 'addresses' | translate }}</h4>
-        <button class="btn btn-primary float-right" (click)="addAddress()"><span class="fas fa-plus"></span> {{ 'address' | translate }}</button>
+        <div class="row w-100">
+            <div class="col-md-6 col-8">
+                <h4 class="h4 mb-0 text-gray">{{ 'addresses' | translate }}</h4>
+            </div>
+            <div class="col-md-6 col-4 text-right">
+                <button class="btn btn-primary" (click)="addAddress()"><span class="fas fa-plus"></span> <span class="address-add-text">{{ 'address' | translate }}</span></button>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-12">
@@ -10,7 +16,7 @@
                     <caption>{{ 'address.table' | translate }}</caption>
                     <thead>
                         <tr>
-                            <th scope="col">{{ 'description' | translate }}</th>
+                            <th scope="col">{{ 'description' | translate }}</th> 
                         </tr>
                     </thead>
                     <tbody>

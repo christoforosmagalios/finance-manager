@@ -16,7 +16,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     
-                    <div class="d-flex">
+                    <div class="nav-pills-container">
                         <ul ngbNav #nav="ngbNav" [activeId]="route.fragment | async" class="nav-pills" orientation="vertical">
                           <li ngbNavItem="addresses">
                             <a ngbNavLink class="text-nowrap" routerLink="." fragment="addresses">{{ 'addresses' | translate }}</a>
@@ -44,7 +44,7 @@
                           </li>
                         </ul>
                       
-                        <div [ngbNavOutlet]="nav" class="ml-4 w-100"></div>
+                        <div [ngbNavOutlet]="nav" class="w-100"></div>
                       </div>
 
                 </div>

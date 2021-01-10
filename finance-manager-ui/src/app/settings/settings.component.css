@@ -1,0 +1,9 @@
+.nav-pills-container {
+    display: flex;
+}
+
+@media only screen and (max-width: 780px) {
+    .nav-pills-container {
+        display: block;
+    }
+}
