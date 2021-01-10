@@ -50,7 +50,7 @@ export class AuthService {
         // Update the logged in user info.
         this.user.next(user);
         // Store the session info in the local storage.
-        localStorage.setItem(Constants.LOCAL_STORAGE_KEY, JSON.stringify(user));
+        localStorage.setItem(Constants.LOCAL_STORAGE.SESSION, JSON.stringify(user));
     }
 
     /**
@@ -58,7 +58,7 @@ export class AuthService {
      */
     logout() {
         // Remove the token stored in the browsers local storage.
-        localStorage.removeItem(Constants.LOCAL_STORAGE_KEY);
+        localStorage.removeItem(Constants.LOCAL_STORAGE.SESSION);
         // Set logged in user info to null.
         this.user.next(null);
         // Redirect to the Login page.
@@ -74,7 +74,7 @@ export class AuthService {
         const user: {
             fullname: string,
             token: string
-        } = JSON.parse(localStorage.getItem(Constants.LOCAL_STORAGE_KEY));
+        } = JSON.parse(localStorage.getItem(Constants.LOCAL_STORAGE.SESSION));
 
         // In case there are no data stored in the local storage, return.
         if (!user) {

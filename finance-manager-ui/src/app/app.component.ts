@@ -17,7 +17,12 @@ export class AppComponent implements OnInit {
     private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.translate.use(Constants.DEFAULT_LANGUAGE);
+    let language = localStorage.getItem(Constants.LOCAL_STORAGE.LANGUAGE);
+    if (language) {
+      this.translate.use(language);
+    } else {
+      this.translate.use(Constants.DEFAULT_LANGUAGE);
+    }
     this.auth.autoLogin();
   }
 

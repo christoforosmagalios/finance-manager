@@ -44,8 +44,12 @@ export const Constants = {
     // Transaction category - Bills code
     BILLS_TRANSACTION_CATEGORY: "TC011",
 
-    // Name of the Local storage key that keeps the user session info.
-    LOCAL_STORAGE_KEY: "finance-manager-session",
+    LOCAL_STORAGE: {
+        // Name of the Local storage key that keeps the user session info.
+        SESSION: "finance-manager-session",
+        // Name of the Local storage key that keeps the selected ui language.
+        LANGUAGE: "finance-manager-language",
+    },
 
     // Http headers.
     HEADERS: {

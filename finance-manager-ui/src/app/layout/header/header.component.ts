@@ -36,11 +36,21 @@ export class HeaderComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
+  /**
+   * Update the UI language and store it in the local storage.
+   * 
+   * @param language The selected language. 
+   */
   setLanguage(language: string) {
     this.translate.use(language);
     this.activeLanguage = language;
+    // Store the selected ui language in the local storage.
+    localStorage.setItem(Constants.LOCAL_STORAGE.LANGUAGE, language);
   }
 
+  /**
+   * Logout.
+   */
   logout() {
     this.auth.logout();
   }
