@@ -55,7 +55,7 @@ export class TransactionsComponent implements OnInit {
   ngOnInit(): void {
     this.itemsPerPage = Constants.ITEMS_PER_PAGE;
     // Find all the categories.
-    this.crudService.findAll(Constants.ENTITY.CATEGORY)
+    this.crudService.findAll(Constants.ENTITY.TRANSACTION_CATEGORY)
     .subscribe((categories: Array<TransactionCategoryDTO>) => {
       this.transactionCategories = categories;
     });

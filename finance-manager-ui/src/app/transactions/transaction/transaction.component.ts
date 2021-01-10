@@ -76,7 +76,7 @@ export class TransactionComponent implements OnInit {
    */
   private initForm() {
     // Find all the categories.
-    this.crudService.findAll(Constants.ENTITY.CATEGORY)
+    this.crudService.findAll(Constants.ENTITY.TRANSACTION_CATEGORY)
     .subscribe((categories: Array<TransactionCategoryDTO>) => {
       this.categories = categories;
     });

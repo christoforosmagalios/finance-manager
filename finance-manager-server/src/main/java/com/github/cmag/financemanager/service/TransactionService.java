@@ -205,15 +205,43 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
   }
 
   /**
-   * Get the current month's transaction amount based on the given type.
+   * Get the current transaction amount based on the given month, year and type.
    *
+   * @param month The Month.
+   * @param year The Year.
    * @param type The transaction type.
    * @return The monthly total spending amount.
    */
-  public double getMonthlyTransactionAmount(int month, int year, boolean type) {
+  public double getTransactionAmount(int month, int year, boolean type) {
     LocalDate from = Utils.getFirstDayOfMonth(month, year);
     LocalDate to = Utils.getLastDayOfMonth(month, year);
+    // Fetch transactions and sum their amount.
+    return findTransactionsSum(from, to, type);
+  }
 
+  /**
+   * Get the current transaction amount based on the given year and type.
+   *
+   * @param year The Year.
+   * @param type The transaction type.
+   * @return The monthly total spending amount.
+   */
+  public double getAnnualTransactionAmount(int year, boolean type) {
+    LocalDate from = Utils.getFirstDayOfYear(year);
+    LocalDate to = Utils.getLastDayOfYear(year);
+    // Fetch transactions and sum their amount.
+    return findTransactionsSum(from, to, type);
+  }
+
+  /**
+   * Find the transactions between the given dates based on the given type and return their sum.
+   *
+   * @param from Date from.
+   * @param to Date to.
+   * @param type The transaction type.
+   * @return The sum of the transactions.
+   */
+  private double findTransactionsSum(LocalDate from, LocalDate to, boolean type) {
     // Fetch transactions and sum their amount.
     return es.findByTypeAndDateBetweenAndUserId(type, from, to, userService.getLoggedInUserId())
         .stream().mapToDouble(o -> o.getAmount()).sum();
@@ -366,9 +394,9 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     // Get income and expenses for each month.
     for (int i = 1; i < 13; i++) {
       // Get income.
-      result.get(0).getData().add(getMonthlyTransactionAmount(i, year, false));
+      result.get(0).getData().add(getTransactionAmount(i, year, false));
       // Get expenses.
-      result.get(1).getData().add(-1 * getMonthlyTransactionAmount(i, year, true));
+      result.get(1).getData().add(-1 * getTransactionAmount(i, year, true));
     }
     return result;
   }

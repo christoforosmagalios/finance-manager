@@ -165,7 +165,7 @@
 
     "bills.expire.soon": "Bills that expire soon",
     "set.to.paid.successfully": "The Bill status changed to \"Paid\" and a Transaction was created successfully.",
-    "set.to.paid": "Paid",
+    "set.to.paid": "Mark as Paid",
     "expired": "Expired!",
     "no.bills.expire.soon": "No Bill is expiring any time soon!",
 

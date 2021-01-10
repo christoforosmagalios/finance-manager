@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { ChartDataSets } from 'chart.js';
 import { Subscription } from 'rxjs';
+import { DashboardService } from '../dashboard/dashboard.service';
 import { GroupedTransactionDTO } from '../dto/grouped-transaction-dto';
 import { MonthOverviewDTO } from '../dto/month-overview-dto';
 import { TransactionItemDTO } from '../dto/transaction-item-dto';
@@ -37,11 +38,20 @@ export class OverviewComponent implements OnInit {
   stackedBarChartData: ChartDataSets[];
   // Subscription.
   private subscription: Subscription;
+  // The monthly spending amount.
+  public monthlySpendings: number = null;
+  // The monthly earnings amount.
+  public monthlyEarnings: number = null;
+  // The annual spending amount.
+  public annualSpendings: number = null;
+  // The annual earnings amount.
+  public annualEarnings: number = null;
   
   constructor(
     private transactionService: TransactionService,
     private utils: UtilsService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private dashboardService: DashboardService
   ) {
     // Subscribe to transalte service in case language is changed.
     this.subscription = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -81,6 +91,19 @@ export class OverviewComponent implements OnInit {
       this.pieChartData = data;
       this.pieChartTitle = this.utils.getMonthByIndex(this.monthOverview.month) + " " + this.monthOverview.year;
     });
+
+    // Get the spendings amount.
+    this.dashboardService.getMonthlyTransactionAmount(+this.monthOverview.month + 1, this.monthOverview.year, true)
+    .subscribe(amount => {
+      this.monthlySpendings = amount;
+    });
+
+    // Get the earnings amount.
+    this.dashboardService.getMonthlyTransactionAmount(+this.monthOverview.month + 1, this.monthOverview.year, false)
+    .subscribe(amount => {
+      this.monthlyEarnings = amount;
+    });
+
   }
 
   /**
@@ -92,6 +115,18 @@ export class OverviewComponent implements OnInit {
     .subscribe(data => {
       this.stackedBarChartData = data;
       this.stackedBarChartTitle = this.annualOverview + "";
+    });
+
+    // Get the spendings amount.
+    this.dashboardService.getAnnualTransactionAmount(this.monthOverview.year, true)
+    .subscribe(amount => {
+      this.annualSpendings = amount;
+    });
+
+    // Get the earnings amount.
+    this.dashboardService.getAnnualTransactionAmount(this.monthOverview.year, false)
+    .subscribe(amount => {
+      this.annualEarnings = amount;
     });
   }
 

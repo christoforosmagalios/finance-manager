@@ -90,14 +90,14 @@ export class DashboardComponent implements OnInit {
     this.transactionService.getTransactionsPerDay(new Date().getMonth() + 1, new Date().getFullYear())
     .subscribe((data: Array<TransactionItemDTO>) => {
       this.lineChartData = data;
-      this.lineChartTitle = this.utils.getMonth(new Date());
+      this.lineChartTitle = this.utils.getMonth(new Date()) + " " + new Date().getFullYear();
     });
 
     // Get the grouped expenses.
     this.transactionService.getGroupedExpenses(new Date().getMonth() + 1, new Date().getFullYear())
     .subscribe((data: GroupedTransactionDTO) => {
       this.pieChartData = data;
-      this.pieChartTitle = this.utils.getMonth(new Date());
+      this.pieChartTitle = this.utils.getMonth(new Date()) + " " + new Date().getFullYear();
     });
   }
 }

@@ -58,6 +58,16 @@ public class Utils {
     // Get current year.
     int year = Calendar.getInstance().get(Calendar.YEAR);
     // Get first and last of the current month.
+    return getFirstDayOfYear(year);
+  }
+
+  /**
+   * Get the first day of the given year.
+   *
+   * @param year The year.
+   * @return The date.
+   */
+  public static LocalDate getFirstDayOfYear(int year) {
     YearMonth yearMonth = YearMonth.of(year, 1);
     return yearMonth.atDay(1);
   }
@@ -71,6 +81,16 @@ public class Utils {
     // Get current year.
     int year = Calendar.getInstance().get(Calendar.YEAR);
     // Get first and last of the current month.
+    return getLastDayOfYear(year);
+  }
+
+  /**
+   * Get the last day of the given year.
+   *
+   * @param year The year.
+   * @return The date.
+   */
+  public static LocalDate getLastDayOfYear(int year) {
     YearMonth yearMonth = YearMonth.of(year, 12);
     return yearMonth.atEndOfMonth();
   }

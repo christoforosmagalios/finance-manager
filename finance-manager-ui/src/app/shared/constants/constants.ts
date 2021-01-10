@@ -14,7 +14,7 @@ export const Constants = {
     // Entities.
     ENTITY: {
         TRANSACTION: "transaction",
-        CATEGORY: "transactionCategory",
+        TRANSACTION_CATEGORY: "transactionCategory",
         BILL: "bill",
         BILL_CATEGORY: "billCategory",
         ADDRESS: "address",

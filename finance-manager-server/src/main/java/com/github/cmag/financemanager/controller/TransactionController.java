@@ -53,14 +53,29 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
   }
 
   /**
-   * Get the current month's transaction amount based on the given type.
+   * Get the transaction amount based on the given type, month and year.
    *
+   * @param month The month.
+   * @param year The year.
+   * @param type The transaction type.
    * @return The monthly total earning amount.
    */
   @GetMapping("/monthlyTransactionsAmount/{month}/{year}/{type}")
   public double getMonthlyTransactionAmount(@PathVariable int month, @PathVariable int year,
       @PathVariable boolean type) {
-    return transactionService.getMonthlyTransactionAmount(month, year, type);
+    return transactionService.getTransactionAmount(month, year, type);
+  }
+
+  /**
+   * Get the transaction amount based on the given year and type.
+   *
+   * @param year The year.
+   * @param type The transaction type.
+   * @return The monthly total earning amount.
+   */
+  @GetMapping("/annualTransactionsAmount/{year}/{type}")
+  public double getAnnualTransactionAmount(@PathVariable int year, @PathVariable boolean type) {
+    return transactionService.getAnnualTransactionAmount(year, type);
   }
 
   /**

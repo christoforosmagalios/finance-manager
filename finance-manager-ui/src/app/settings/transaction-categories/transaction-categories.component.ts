@@ -15,7 +15,7 @@ export class TransactionCategoriesComponent implements OnInit {
   constructor(private crud: CRUDService) { }
 
   ngOnInit(): void {
-    this.crud.findAll(Constants.ENTITY.CATEGORY).subscribe((res: TransactionCategoryDTO[]) => {
+    this.crud.findAll(Constants.ENTITY.TRANSACTION_CATEGORY).subscribe((res: TransactionCategoryDTO[]) => {
       this.transactionCatogories = res;
     });
   }

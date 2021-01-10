@@ -33,6 +33,60 @@
     </div>
 
     <div class="row">
+        <div class="col-xl-3 col-md-4 mb-4">
+            <div class="card bl-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                {{ 'balance' | translate }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray" *ngIf="monthlyEarnings !== null && monthlySpendings !== null">{{ monthlyEarnings-monthlySpendings | number:'1.2-2' }} €</div>
+                            <div *ngIf="monthlyEarnings === null || monthlySpendings === null"><span class="fas fa-spinner fa-spin" ></span></div>
+                        </div>
+                        <div class="col-auto">
+                            <span class="fas fa-balance-scale fa-2x text-lightgray"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-4 mb-4">
+            <div class="card bl-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                {{ 'earnings' | translate }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray" *ngIf="monthlyEarnings !== null">{{ monthlyEarnings | number:'1.2-2' }} €</div>
+                            <div *ngIf="monthlyEarnings  === null"><span class="fas fa-spinner fa-spin" ></span></div>
+                        </div>
+                        <div class="col-auto">
+                            <span class="fas fa-calendar fa-2x text-lightgray"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-4 mb-4">
+            <div class="card bl-danger shadow py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                {{ 'spendings' | translate }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray" *ngIf="monthlySpendings !== null">{{ monthlySpendings | number:'1.2-2' }} €</div>
+                            <div *ngIf="monthlySpendings === null"><span class="fas fa-spinner fa-spin" ></span></div>
+                        </div>
+                        <div class="col-auto">
+                            <span class="fas fa-calendar fa-2x text-lightgray"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-xl-8 col-lg-7 mb-4">
             <div class="card shadow h-100">
                 <!-- Card Header -->
@@ -77,6 +131,60 @@
         </div>
         <div class="col-2 pl-1">
             <button class="btn btn-primary" (click)="searchAnnually()"><span class="fas fa-search"></span></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-3 col-md-4 mb-4">
+            <div class="card bl-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                {{ 'balance' | translate }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray" *ngIf="annualEarnings !== null && annualSpendings !== null">{{ annualEarnings-annualSpendings | number:'1.2-2' }} €</div>
+                            <div *ngIf="annualEarnings === null || annualSpendings === null"><span class="fas fa-spinner fa-spin" ></span></div>
+                        </div>
+                        <div class="col-auto">
+                            <span class="fas fa-balance-scale fa-2x text-lightgray"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-4 mb-4">
+            <div class="card bl-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                {{ 'earnings' | translate }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray" *ngIf="annualEarnings !== null">{{ annualEarnings | number:'1.2-2' }} €</div>
+                            <div *ngIf="annualEarnings  === null"><span class="fas fa-spinner fa-spin" ></span></div>
+                        </div>
+                        <div class="col-auto">
+                            <span class="fas fa-calendar fa-2x text-lightgray"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-4 mb-4">
+            <div class="card bl-danger shadow py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                {{ 'spendings' | translate }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray" *ngIf="annualSpendings !== null">{{ annualSpendings | number:'1.2-2' }} €</div>
+                            <div *ngIf="annualSpendings === null"><span class="fas fa-spinner fa-spin" ></span></div>
+                        </div>
+                        <div class="col-auto">
+                            <span class="fas fa-calendar fa-2x text-lightgray"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
