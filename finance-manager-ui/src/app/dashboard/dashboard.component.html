@@ -4,77 +4,17 @@
     </div>
 
     <div class="row">
-
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card bl-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                {{ 'balance' | translate }} ({{ 'annual' | translate }})</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray" *ngIf="balance !== null">{{ balance | number:'1.2-2' }} €</div>
-                            <div *ngIf="balance === null"><span class="fas fa-spinner fa-spin" ></span></div>
-                        </div>
-                        <div class="col-auto">
-                            <span class="fas fa-balance-scale fa-2x text-lightgray"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <app-amount-card type="primary" [amount]="balance" icon="fa-balance-scale" heading="annual.balance"></app-amount-card>
         </div>
-
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card bl-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                {{ 'earnings' | translate }} ({{ 'monthly' | translate }})</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray" *ngIf="earnings !== null">{{ earnings | number:'1.2-2' }} €</div>
-                            <div *ngIf="earnings  === null"><span class="fas fa-spinner fa-spin" ></span></div>
-                        </div>
-                        <div class="col-auto">
-                            <span class="fas fa-calendar fa-2x text-lightgray"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <app-amount-card type="success" [amount]="earnings" icon="fa-calendar" heading="monthly.earnings"></app-amount-card>
         </div>
-
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card bl-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                {{ 'pending' | translate }}</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray" *ngIf="pending !== null">{{ pending | number:'1.2-2' }} €</div>
-                            <div *ngIf="pending === null"><span class="fas fa-spinner fa-spin" ></span></div>
-                        </div>
-                        <div class="col-auto">
-                            <span class="fas fa-calendar fa-2x text-lightgray"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <app-amount-card type="warning" [amount]="pending" icon="fa-calendar" heading="pending"></app-amount-card>
         </div>
-
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card bl-danger shadow py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                {{ 'spendings' | translate }} ({{ 'monthly' | translate }})</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray" *ngIf="spendings !== null">{{ spendings | number:'1.2-2' }} €</div>
-                            <div *ngIf="spendings === null"><span class="fas fa-spinner fa-spin" ></span></div>
-                        </div>
-                        <div class="col-auto">
-                            <span class="fas fa-calendar fa-2x text-lightgray"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <app-amount-card type="danger" [amount]="spendings" icon="fa-calendar" heading="monthly.spendings"></app-amount-card>
         </div>
     </div>
 
