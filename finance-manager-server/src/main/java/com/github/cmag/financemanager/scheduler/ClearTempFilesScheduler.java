@@ -21,7 +21,7 @@ public class ClearTempFilesScheduler {
   /**
    * Delete all the files in the temp folder.
    */
-  @Scheduled(cron = "0 0 23 ? * *")
+  @Scheduled(cron = "${finance.manager.cron.clear.temp.files}")
   public void deleteTempFiles() throws IOException {
     File file = new File(tempFolder);
     try {

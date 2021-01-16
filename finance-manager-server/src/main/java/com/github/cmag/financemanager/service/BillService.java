@@ -233,14 +233,23 @@ public class BillService extends BaseService<BillDTO, Bill> {
   }
 
   /**
-   * Get the bills that expire in the next 2 weeks.
+   * Get the bills that expire in the next 2 weeks for the logged in user.
    *
    * @return A list of bills.
    */
   public List<BillDTO> findBillsThatExpireSoon() {
+    return findBillsThatExpireSoonByUserId(userService.getLoggedInUserId());
+  }
+
+  /**
+   * Get the bills that expire in the next 2 weeks for the user with the given id.
+   *
+   * @return A list of bills.
+   */
+  public List<BillDTO> findBillsThatExpireSoonByUserId(String userId) {
     // Find the bills that expire in the next 2 weeks.
     List<BillIndex> bills = es.findByPaidFalseAndDueDateLessThanEqualAndUserIdOrderByDueDateDesc(
-        LocalDate.now().plusWeeks(2), userService.getLoggedInUserId());
+        LocalDate.now().plusWeeks(2), userId);
     // Convert them to DTOs and return the bills.
     return bills.stream().map(b -> mapper.mapToDTO(b)).collect(Collectors.toList());
   }
