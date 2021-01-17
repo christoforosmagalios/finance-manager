@@ -1,0 +1,36 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<link th:href="@{classpath:templates/css/finance-manager.css}" rel="stylesheet" />
+	</head>
+  <body>
+	<div class="text-center">
+		<img width="50%;" alt="logo" th:src="@{classpath:templates/images/logo.png}" />
+	</div>
+  
+    <h2 class="header">
+      <span th:text="'Overview - ' + ${month} + ' ' + ${year}"></span>
+    </h2>
+	
+	<div class="text-center" style="margin-bottom: 10px;">
+		<div class="card primary">
+			<div class="card-text text-primary">BALANCE</div>
+			<div class="amount"><span th:text="${balance} + ' €'"></span></div>
+		</div>
+		
+		<div class="card warning">
+			<div class="card-text text-warning">PENDING</div>
+			<div class="amount"><span th:text="${pending} + ' €'"></span></div>
+		</div>
+	</div>
+	<div class="text-center">
+		<div class="card success">
+			<div class="card-text text-success">INCOME</div>
+			<div class="amount"><span th:text="${income} + ' €'"></span></div>
+		</div>
+		<div class="card danger">
+			<div class="card-text text-danger">EXPENSES</div>
+			<div class="amount"><span th:text="${expenses} + ' €'"></span></div>
+		</div>
+	</div>
+  </body>
+</html>

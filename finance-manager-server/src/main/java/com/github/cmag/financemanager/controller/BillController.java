@@ -36,7 +36,7 @@ public class BillController extends BaseController<BillDTO, Bill> {
   @Autowired
   private BillService billService;
 
-  @Value("${finance.manager.bill.images.temp.path}")
+  @Value("${finance.manager.temp.path}")
   private String tempPath;
 
   /**

@@ -205,6 +205,22 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
   }
 
   /**
+   * Get the current transaction amount based on the given month, year, type and user.
+   *
+   * @param month The Month.
+   * @param year The Year.
+   * @param type The transaction type.
+   * @param userId The Id of the user.
+   * @return The monthly total spending amount.
+   */
+  public double getTransactionAmount(int month, int year, boolean type, String userId) {
+    LocalDate from = Utils.getFirstDayOfMonth(month, year);
+    LocalDate to = Utils.getLastDayOfMonth(month, year);
+    // Fetch transactions and sum their amount.
+    return findTransactionsSum(from, to, type, userId);
+  }
+
+  /**
    * Get the current transaction amount based on the given month, year and type.
    *
    * @param month The Month.
@@ -213,10 +229,22 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * @return The monthly total spending amount.
    */
   public double getTransactionAmount(int month, int year, boolean type) {
-    LocalDate from = Utils.getFirstDayOfMonth(month, year);
-    LocalDate to = Utils.getLastDayOfMonth(month, year);
+    return getTransactionAmount(month, year, type, userService.getLoggedInUserId());
+  }
+
+  /**
+   * Get the current transaction amount based on the given year and type.
+   *
+   * @param year The Year.
+   * @param type The transaction type.
+   * @param userId The Id of the user.
+   * @return The monthly total spending amount.
+   */
+  public double getAnnualTransactionAmount(int year, boolean type, String userId) {
+    LocalDate from = Utils.getFirstDayOfYear(year);
+    LocalDate to = Utils.getLastDayOfYear(year);
     // Fetch transactions and sum their amount.
-    return findTransactionsSum(from, to, type);
+    return findTransactionsSum(from, to, type, userId);
   }
 
   /**
@@ -227,10 +255,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * @return The monthly total spending amount.
    */
   public double getAnnualTransactionAmount(int year, boolean type) {
-    LocalDate from = Utils.getFirstDayOfYear(year);
-    LocalDate to = Utils.getLastDayOfYear(year);
-    // Fetch transactions and sum their amount.
-    return findTransactionsSum(from, to, type);
+    return getAnnualTransactionAmount(year, type, userService.getLoggedInUserId());
   }
 
   /**
@@ -239,11 +264,12 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
    * @param from Date from.
    * @param to Date to.
    * @param type The transaction type.
+   * @param userId The Id of the user.
    * @return The sum of the transactions.
    */
-  private double findTransactionsSum(LocalDate from, LocalDate to, boolean type) {
+  private double findTransactionsSum(LocalDate from, LocalDate to, boolean type, String userId) {
     // Fetch transactions and sum their amount.
-    return es.findByTypeAndDateBetweenAndUserId(type, from, to, userService.getLoggedInUserId())
+    return es.findByTypeAndDateBetweenAndUserId(type, from, to, userId)
         .stream().mapToDouble(o -> o.getAmount()).sum();
   }
 

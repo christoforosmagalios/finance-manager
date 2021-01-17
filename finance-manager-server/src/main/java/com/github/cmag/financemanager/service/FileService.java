@@ -145,7 +145,7 @@ public class FileService {
    *
    * @param path The path.
    */
-  private void createDirectories(String path) {
+  public void createDirectories(String path) {
     File directory = new File(path);
     if (!directory.exists()) {
       directory.mkdirs();

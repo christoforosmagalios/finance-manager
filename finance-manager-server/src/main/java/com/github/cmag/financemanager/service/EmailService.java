@@ -1,6 +1,9 @@
 package com.github.cmag.financemanager.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.logging.Level;
 import javax.mail.Message;
@@ -47,7 +50,7 @@ public class EmailService {
    * @param body The email body.
    * @return true if the mail has been sent, false otherwise.
    */
-  public boolean send(String recipient, String subject, String body) {
+  public boolean send(String recipient, String subject, String body, File file) {
     try {
       Session session = getSession();
       Message message = getMessage(session, subject, recipient);
@@ -55,7 +58,14 @@ public class EmailService {
       Multipart multipart = new MimeMultipart();
       MimeBodyPart mimeBodyPart = new MimeBodyPart();
       mimeBodyPart.setContent(body, "text/html;charSet=UTF-8");
+
+      MimeBodyPart attachmentPart = new MimeBodyPart();
+      if (!Objects.isNull(file)) {
+        attachmentPart.attachFile(file);
+      }
+
       multipart.addBodyPart(mimeBodyPart);
+      multipart.addBodyPart(attachmentPart);
 
       message.setContent(multipart);
 
@@ -63,7 +73,7 @@ public class EmailService {
       transport.connect(host, username, password);
       transport.sendMessage(message, message.getAllRecipients());
       transport.close();
-    } catch (MessagingException | UnsupportedEncodingException e) {
+    } catch (IOException | MessagingException e) {
       log.error(e.getLocalizedMessage(), e);
       return false;
     }

@@ -1,0 +1,61 @@
+.header {
+	text-align: center;
+	color: #5a5c69;
+	margin-bottom: 60px;
+}
+
+.card {
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	width: 40%;
+	display: inline-block;
+	text-align: left;
+	padding: 10px 0px 10px 10px;
+}
+
+.card.success {
+	border-left: 3px solid #1cc88a;
+}
+
+.card.primary {
+	border-left: 3px solid #4e73df;
+}
+
+.card.danger {
+	border-left: 3px solid #e74a3b;
+}
+
+.card.warning {
+	border-left: 3px solid #f6c23e;
+}
+
+.text-success {
+	color: #1cc88a;
+}
+
+.text-primary {
+	color: #4e73df;
+}
+
+.text-danger {
+	color: #e74a3b;
+}
+
+.text-warning {
+	color: #f6c23e;
+}
+
+.amount {
+	font-weight: 700;
+	font-size: 20px;
+	color: #5a5c69;
+}
+
+.card-text {
+	font-size: 10px;
+}
+
+.text-center {
+	text-align: center;
+}

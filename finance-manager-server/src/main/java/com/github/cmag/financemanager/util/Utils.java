@@ -1,9 +1,11 @@
 package com.github.cmag.financemanager.util;
 
+import java.text.DateFormatSymbols;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Contains utility methods.
@@ -104,5 +106,32 @@ public class Utils {
   public static int getDateReversed(LocalDate date) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
     return Integer.parseInt(date.format(formatter));
+  }
+
+  /**
+   * Get the name of the given month.
+   *
+   * @param num The month index.
+   * @return The name of the month.
+   */
+  public static String getMonthName(int num) {
+    return getMonthName(num, new Locale("en"));
+  }
+
+  /**
+   * Get the name of the given month for the given Locale.
+   *
+   * @param num The month index.
+   * @param locale The Locale.
+   * @return The name of the month.
+   */
+  public static String getMonthName(int num, Locale locale) {
+    String month = "";
+    DateFormatSymbols dfs = new DateFormatSymbols(locale);
+    String[] months = dfs.getMonths();
+    if (num >= 0 && num <= 11) {
+      month = months[num];
+    }
+    return month;
   }
 }

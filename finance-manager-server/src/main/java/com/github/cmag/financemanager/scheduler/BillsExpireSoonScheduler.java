@@ -9,7 +9,6 @@ import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Component;
 /**
  * Scheduler that sends a mail to every user with the bills that expire soon.
  */
-@Slf4j
 @Component
 public class BillsExpireSoonScheduler {
 
@@ -73,7 +71,7 @@ public class BillsExpireSoonScheduler {
     // Fill in the body template.
     body = MessageFormat.format(body, user.getFirstName(), user.getLastName(), table);
     // Send the email.
-    emailService.send(user.getEmail(), SUBJECT, body);
+    emailService.send(user.getEmail(), SUBJECT, body, null);
   }
 
   /**

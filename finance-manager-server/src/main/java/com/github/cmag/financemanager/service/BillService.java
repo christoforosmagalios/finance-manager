@@ -225,11 +225,21 @@ public class BillService extends BaseService<BillDTO, Bill> {
    * @return The pending amount.
    */
   public double getPendingAmount() {
+    return getPendingAmount(userService.getLoggedInUserId());
+  }
+
+  /**
+   * Get the current month's pending amount for the unpaid bills.
+   *
+   * @param userId The id of the User.
+   * @return The pending amount.
+   */
+  public double getPendingAmount(String userId) {
     LocalDate to = Utils.getLastDayOfMonth();
 
     // Fetch bills and sum their amount.
     return es.findByPaidFalseAndDueDateLessThanEqualAndUserIdOrderByDueDateDesc(to,
-        userService.getLoggedInUserId()).stream().mapToDouble(o -> o.getAmount()).sum();
+        userId).stream().mapToDouble(o -> o.getAmount()).sum();
   }
 
   /**

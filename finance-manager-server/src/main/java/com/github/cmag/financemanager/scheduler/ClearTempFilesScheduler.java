@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClearTempFilesScheduler {
 
-  @Value("${finance.manager.bill.images.temp.path}")
+  @Value("${finance.manager.temp.path}")
   private String tempFolder;
 
   /**
