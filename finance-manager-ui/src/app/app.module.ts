@@ -27,6 +27,7 @@ import { BillsExpireSoonComponent } from './dashboard/bills-expire-soon/bills-ex
 import { OverviewRoutingModule } from './overview/overview.routing.module';
 import { OverviewModule } from './overview/overview.module';
 import { SharedComponentsModule } from './shared/components/shared-components.module';
+import { SearchComponent } from './layout/header/search/search.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SharedComponentsModule } from './shared/components/shared-components.mo
     DashboardComponent,
     HeaderComponent,
     UserComponent,
-    BillsExpireSoonComponent
+    BillsExpireSoonComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

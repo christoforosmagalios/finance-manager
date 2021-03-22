@@ -1,7 +1,5 @@
 package com.github.cmag.financemanager.util.aspect;
 
-import com.github.cmag.financemanager.dto.BillDTO;
-import com.github.cmag.financemanager.dto.TransactionDTO;
 import com.github.cmag.financemanager.es.repository.BillEsRepository;
 import com.github.cmag.financemanager.es.repository.TransactionEsRepository;
 import com.github.cmag.financemanager.mapper.BillMapper;
@@ -18,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Index/Unidex after performing CRUD operation in the Database.
+ * Index/Unindex after performing CRUD operation in the Database.
  */
 @Aspect
 @Component

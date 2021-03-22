@@ -1,0 +1,17 @@
+.search-input {
+    width: unset;
+    display: inline;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0;
+    transition: width .5s ease;
+    width: 105px;
+}
+
+.search-input:focus {
+    border-color: inherit !important;
+    outline: none !important;
+    box-shadow: none !important;
+    width: 200px;
+}

@@ -1,6 +1,7 @@
 package com.github.cmag.financemanager.mapper;
 
 import com.github.cmag.financemanager.dto.BillDTO;
+import com.github.cmag.financemanager.dto.SearchResultDTO;
 import com.github.cmag.financemanager.es.index.BillIndex;
 import com.github.cmag.financemanager.model.Bill;
 import com.github.cmag.financemanager.service.FileService;
@@ -48,6 +49,16 @@ public abstract class BillMapper extends BaseMapper<BillDTO, Bill> {
   @Mapping(source = "billCategory.id", target = "categoryId")
   @Mapping(source = "user.id", target = "userId")
   public abstract BillIndex mapToIndex(BillDTO billDTO);
+
+  /**
+   * Map a BillIndex to a SearchResultDTO.
+   *
+   * @param billIndex The BillIndex.
+   * @param score The search score.
+   * @return The mapped SearchResultDTO.
+   */
+  @Mapping(expression = "java(true)", target = "bill")
+  public abstract SearchResultDTO mapToSearchResult(BillIndex billIndex, float score);
 
   /**
    * Get the bill image and convert it to base64.

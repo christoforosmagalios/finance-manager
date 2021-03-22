@@ -19,7 +19,8 @@ export const Constants = {
         BILL_CATEGORY: "billCategory",
         ADDRESS: "address",
         AUTH: "auth",
-        USER: "user"
+        USER: "user",
+        ELASTICSEARCH: "elasticsearch"
     },
 
     // Items per page for tables.

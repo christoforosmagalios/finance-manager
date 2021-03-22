@@ -52,4 +52,7 @@ public class BillIndex {
 
   private Date createdOn;
   private Date updatedOn;
+
+  @Field(type = FieldType.Text, fielddata = true)
+  private String notes;
 }

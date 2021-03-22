@@ -186,9 +186,9 @@ label {
 }
 
 .dropdown-item.active, .dropdown-item:active {
-  color:rgba(0, 0, 0, 0.9);
+  color: #16181b;
   text-decoration: none;
-  background-color: #fff;
+  background-color: #f8f9fa;
 }
 
 /** Bootstrap pagination **/

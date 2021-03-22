@@ -1,0 +1,9 @@
+<ng-template #resultsTpl let-r="result" let-t="term">
+    <div class="pt-2 pb-2" [routerLink]="(r.bill ? ['/bill/'] : ['/transaction/']) + r.id">
+        <span class="far fa-folder-open" *ngIf="r.bill"></span>
+        <span class="fas fa-exchange-alt" *ngIf="!r.bill"></span>
+        <ngb-highlight [result]="r.description" [term]="t" class="ml-1"></ngb-highlight>
+    </div>
+</ng-template>
+
+<input id="typeahead-template" type="text" class="form-control search-input" [ngbTypeahead]="search" [resultTemplate]="resultsTpl" [inputFormatter]="formatter" placeholder="{{'search' | translate}}" />

@@ -1,5 +1,6 @@
 package com.github.cmag.financemanager.mapper;
 
+import com.github.cmag.financemanager.dto.SearchResultDTO;
 import com.github.cmag.financemanager.dto.TransactionDTO;
 import com.github.cmag.financemanager.es.index.TransactionIndex;
 import com.github.cmag.financemanager.model.Transaction;
@@ -49,4 +50,14 @@ public abstract class TransactionMapper extends BaseMapper<TransactionDTO, Trans
   @Mapping(source = "categoryId", target = "transactionCategory.id")
   @Mapping(source = "categoryName", target = "transactionCategory.name")
   public abstract TransactionDTO mapToDTO(TransactionIndex transactionIndex);
+
+  /**
+   * Map a TransactionIndex to a SearchResultDTO.
+   *
+   * @param transactionIndex The TransactionIndex.
+   * @param score The search score.
+   * @return The mapped SearchResultDTO.
+   */
+  @Mapping(expression = "java(false)", target = "bill")
+  public abstract SearchResultDTO mapToSearchResult(TransactionIndex transactionIndex, float score);
 }
