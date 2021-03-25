@@ -143,6 +143,11 @@
       <artifactId>flying-saucer-pdf</artifactId>
       <version>${flying-saucer-pdf.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20180130</version>
+    </dependency>
   </dependencies>
 
   <build>

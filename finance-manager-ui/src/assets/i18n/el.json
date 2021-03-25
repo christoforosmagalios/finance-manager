@@ -63,6 +63,7 @@
     "new.address": "Νέα Διεύθυνση",
     "logo": "Λογότυπο",
     "overview": "Επισκόπηση",
+    "notifications": "Ειδοποιήσεις",
 
     "success": "Επιτυχία",
     "info": "Info",
@@ -116,7 +117,7 @@
     "rent": "Ενοίκιο",
     "other": "Άλλο",
 
-    "january": "Ιανουάριος", 
+    "january": "Ιανουάριος",
     "february": "Φεβρουάριος",
     "march": "Μάρτιος",
     "april": "Απρίλιος",
@@ -179,5 +180,17 @@
     "data": "Δεδομένα",
     "sync.all.data.with.elastic": "Συγχρονίστε όλα τα δεδομένα στη βάση δεδομένων με το Elasticsearch",
     "sync": "Συγχρονισμός",
-    "data.sync.completed": "Ο συγχρονισμός δεδομένων ολοκληρώθηκε."
+    "data.sync.completed": "Ο συγχρονισμός δεδομένων ολοκληρώθηκε.",
+
+    "now": "τώρα",
+    "minute": "λεπτό",
+    "minutes": "λεπτά",
+    "hour": "ώρα",
+    "hours": "ώρες",
+    "day": "μέρα",
+    "days": "μέρες",
+    "notifications.nothing.new": "Δεν υπάρχουν ακόμη ειδοποιήσεις",
+    "notifications.you.will.see.them.here": "Όταν λαμβάνετε ειδοποιήσεις, θα εμφανίζονται εδώ",
+    "notification.time.ago": "Πριν από {{time}}",
+    "notification.bill.expire.soon": "Ο λογαριασμός με κωδικό: <b>{{code}}</b> θα λήξει στις <em>{{date}}</em>."
 }

@@ -48,6 +48,9 @@
                 </span>
             </li>
             <li class="nav-item dropdown nav-items-text">
+                <app-notifications></app-notifications>
+            </li>
+            <li class="nav-item dropdown nav-items-text">
                 <div ngbDropdown class="d-inline-block" display="dynamic">
                     <div class="nav-link cursor-pointer" id="userActions" ngbDropdownToggle> {{ isLoggedInUser.fullname }} </div>
                     <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="userActions">

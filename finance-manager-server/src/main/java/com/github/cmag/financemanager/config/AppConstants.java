@@ -11,6 +11,8 @@ public class AppConstants {
 
   // The name of the "updated on" field in the BaseEntity.
   public static final String UPDATED_ON = "updatedOn";
+  // The name of the "created on" field in the BaseEntity.
+  public static final String CREATED_ON = "createdOn";
 
   // Invalid file size error message key.
   public static final String INVALID_FILE_SIZE = "invalid.file.size";
@@ -76,4 +78,16 @@ public class AppConstants {
   public static final String B_ISSUE_DATE = "issuedOn";
   // Bill dueDate field name.
   public static final String B_DUE_DATE = "dueDate";
+
+  //Font Awesome icons
+  // Bill icon
+  public static final String FONT_AWESOME_BILL_ICON = "far fa-folder-open";
+
+  // Notifications
+  public static final String NOTIFICATION_DESC_BILL_EXPIRE = "The Bill with code {{code}} will expire on {{date}}.";
+
+  // Entity Endpoints
+  // Bill endpoint
+  public static final String BILL_ENDPOINT = "bill";
+
 }

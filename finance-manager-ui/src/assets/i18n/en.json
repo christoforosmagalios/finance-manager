@@ -63,6 +63,7 @@
     "new.address": "New Address",
     "logo": "Logo",
     "overview": "Overview",
+    "notifications": "Notifications",
 
     "success": "Success",
     "info": "Info",
@@ -116,7 +117,7 @@
     "rent": "Rent",
     "other": "Other",
 
-    "january": "January", 
+    "january": "January",
     "february": "February",
     "march": "March",
     "april": "April",
@@ -179,5 +180,17 @@
     "data": "Data",
     "sync.all.data.with.elastic": "Synchronize all data in the Database with Elasticsearch",
     "sync": "Synchronize",
-    "data.sync.completed": "Data synchronization completed."
+    "data.sync.completed": "Data synchronization completed.",
+
+    "now": "now",
+    "minute": "minute",
+    "minutes": "minutes",
+    "hour": "hour",
+    "hours": "hours",
+    "day": "day",
+    "days": "days",
+    "notifications.nothing.new": "No Notifications yet",
+    "notifications.you.will.see.them.here": "When you get notifications, they'll show up here",
+    "notification.time.ago": "{{time}} ago",
+    "notification.bill.expire.soon": "The Bill with code <b>{{code}}</b> will expire on <em>{{date}}</em>."
 }

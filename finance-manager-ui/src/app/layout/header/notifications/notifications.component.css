@@ -1,0 +1,48 @@
+.dropdown-toggle::after {
+    border: none;
+}
+
+.notifications-dd .dropdown-menu {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.notifications-dd .dropdown-item {
+    padding: 0.25rem 0.25rem;
+    white-space: initial;
+    min-width: 320px;
+    cursor: default;
+}
+
+.notifications-dd .notification-icon {
+    font-size: 1.3rem;
+}
+
+.notifications-dd .notification-time {
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.bell-icon {
+    font-size: 1.2rem;
+}
+
+.notification-count {
+    border-radius: 9px;
+    font-size: 12px;
+    background: #e74a3b;
+    color: #fff;
+    padding: 1px 5px;
+    vertical-align: top;
+    margin-left: -5px;
+    margin-top: -3px;
+}
+
+.no-notifications {
+    padding: 10px;
+}
+
+.no-notifications .title {
+    font-size: 1.2rem;
+    margin: 1rem;
+}

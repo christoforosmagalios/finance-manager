@@ -1,5 +1,6 @@
-html, body {
-	height: 100%;
+html,
+body {
+    height: 100%;
 }
 
 body {
@@ -12,216 +13,226 @@ body {
 }
 
 textarea {
-  resize: none;
+    resize: none;
 }
 
 caption {
-  display: none;
+    display: none;
 }
 
 label {
-  font-family: "Nunito-SemiBold", sans-serif;
+    font-family: "Nunito-SemiBold", sans-serif;
 }
 
-.fm-logo > img {
-  width: 350px;
-  margin-top: 3rem;
-  margin-bottom: 2rem;
+.fm-logo>img {
+    width: 350px;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
 }
 
 .form-footer {
-  margin: 1rem 0;
+    margin: 1rem 0;
 }
 
 .fm-bill-expired {
-  background-color: #f08080 !important;
+    background-color: #f08080 !important;
 }
 
 .text-gray {
-  color: #5a5c69;
+    color: #5a5c69;
 }
 
 .text-xs {
-  font-size: .7rem;
+    font-size: .7rem;
 }
 
 .text-primary {
-  color: #4e73df !important;
+    color: #4e73df !important;
 }
 
 .text-danger {
-  color: #e74a3b;
+    color: #e74a3b;
 }
 
 .text-warning {
-  color: #f6c23e;
+    color: #f6c23e;
 }
 
 .text-success {
-  color: #1cc88a;
+    color: #1cc88a;
 }
 
 .text-lightgray {
-  color: #dddfeb;
+    color: #dddfeb;
 }
 
 .bl-primary {
-  border-left: .25rem solid #4e73df;
+    border-left: .25rem solid #4e73df;
 }
 
 .bl-danger {
-  border-left: .25rem solid #e74a3b;
+    border-left: .25rem solid #e74a3b;
 }
 
 .bl-warning {
-  border-left: .25rem solid #f6c23e;
+    border-left: .25rem solid #f6c23e;
 }
 
 .bl-success {
-  border-left: .25rem solid #1cc88a;
+    border-left: .25rem solid #1cc88a;
 }
 
 .card-header {
-  background-color: #f8f9fc;
-  border-bottom: 1px solid #e3e6f0;
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
 }
 
 .no-arrow .dropdown-toggle::after {
-  display:none;
+    display: none;
 }
 
 .cursor-pointer {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .cursor-pointer-underline {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .cursor-pointer-underline:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .dropdown .dropdown-menu .dropdown-header {
-  font-weight: 800;
-  font-size: .65rem;
-  color: #b7b9cc;
-  text-transform: uppercase;
+    font-weight: 800;
+    font-size: .65rem;
+    color: #b7b9cc;
+    text-transform: uppercase;
 }
 
 .dropdown-item {
-  font-size: .85rem;
+    font-size: .85rem;
 }
 
-.custom-control-input:checked ~ .custom-control-label::before {
-  border-color: #4e73df;
-  background-color: #4e73df;
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: #4e73df;
+    background-color: #4e73df;
 }
 
 .fm-datepicker-readonly:not([disabled]) {
-  background-color: #fff !important;
+    background-color: #fff !important;
 }
 
 .fm-bt-gray {
-  border-top: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
 }
 
 .fm-bb-gray {
-  border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
 }
 
+
 /** Bootstrap buttons **/
+
 .btn-min-width {
-  min-width: 5rem;
+    min-width: 5rem;
 }
 
 .btn-outline-secondary {
-  border-color: #ced4da;
+    border-color: #ced4da;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+    color: #fff;
+    background-color: #4e73df;
+    border-color: #4e73df;
 }
 
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus {
-  color: #fff;
-  background-color: #2e59d9 !important;
-  border-color: #2653d4 !important;
+    color: #fff;
+    background-color: #2e59d9 !important;
+    border-color: #2653d4 !important;
 }
 
 .btn-secondary {
-  color: #fff;
-  background-color: #858796;
-  border-color: #858796;
+    color: #fff;
+    background-color: #858796;
+    border-color: #858796;
 }
 
 .btn-secondary:hover,
 .btn-secondary:active,
 .btn-secondary:focus {
-  color: #fff;
-  background-color: #717384 !important;
-  border-color: #6b6d7d !important;
+    color: #fff;
+    background-color: #717384 !important;
+    border-color: #6b6d7d !important;
 }
 
 .btn-info {
-  color: #fff;
-  background-color: #36b9cc;
-  border-color: #36b9cc;
+    color: #fff;
+    background-color: #36b9cc;
+    border-color: #36b9cc;
 }
 
 .btn-info:hover,
 .btn-info:active,
 .btn-info:focus {
-  color: #fff;
-  background-color: #2c9faf !important;
-  border-color: #2a96a5 !important;
+    color: #fff;
+    background-color: #2c9faf !important;
+    border-color: #2a96a5 !important;
 }
 
 .btn-square {
-  min-width: 32px;
+    min-width: 32px;
 }
 
-.dropdown-item.active, .dropdown-item:active {
-  color: #16181b;
-  text-decoration: none;
-  background-color: #f8f9fa;
+.dropdown-item.active,
+.dropdown-item:active {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
 }
+
 
 /** Bootstrap pagination **/
+
 .page-item.active .page-link {
-  background-color: #2e59d9;
-  border-color: #2e59d9;
+    background-color: #2e59d9;
+    border-color: #2e59d9;
 }
 
+
 /** Pills */
+
 .nav-pills.nav.flex-column {
-  border-right: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 }
 
 @media only screen and (max-width: 780px) {
-  .nav-pills.nav.flex-column {
-    border-right: 0px;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 1.5rem;
-  }
+    .nav-pills.nav.flex-column {
+        border-right: 0px;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 1.5rem;
+    }
 }
 
 .nav-pills .nav-link {
-  color: #5a5c69;
+    color: #5a5c69;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #5a5c69;
-  background: #f9f9f9;
-  border-left: 4px solid #4e73df;
-  border-radius: 0;
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    color: #5a5c69;
+    background: #f9f9f9;
+    border-left: 4px solid #4e73df;
+    border-radius: 0;
 }
+
 
 /** Table Sort Directive CSS **/
+
 [sortable]:hover {
     cursor: pointer;
 }
@@ -242,90 +253,149 @@ label {
     margin-left: 5px;
 }
 
+
 /** Tables **/
+
 .t-actions {
-  width: 8rem;
-  min-width: 8rem;
+    width: 8rem;
+    min-width: 8rem;
 }
 
 .items-per-page {
-  width: 6rem;
+    width: 6rem;
 }
 
 @media only screen and (max-width: 780px) {
-  .items-per-page-container {
-      text-align: center;
-      padding: 20px 0px;
-  }
+    .items-per-page-container {
+        text-align: center;
+        padding: 20px 0px;
+    }
 }
 
+
+/** Dots **/
+
+.fm-dot {
+    height: 20px;
+    width: 20px;
+    background: #1cc88a;
+    border-radius: 50%;
+    border: 3px solid #d1d3e2 !important;
+}
+
+.fm-income-dot {
+    background: #1cc88a;
+}
+
+.fm-expense-dot {
+    background: #e74a3b;
+}
+
+.fm-info-dot {
+    background: #4e73df;
+}
+
+
+/** Srollbar **/
+
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 50px;
+}
+
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
 /** Fonts **/
+
 @font-face {
     font-family: Nunito-Black;
     src: url(assets/fonts/nunito/Nunito-Black.ttf) format("opentype");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: Nunito-BlackItalic;
     src: url(assets/fonts/nunito/Nunito-BlackItalic.ttf) format("opentype");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: Nunito-Bold;
     src: url(assets/fonts/nunito/Nunito-Bold.ttf) format("opentype");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: Nunito-BoldItalic;
     src: url(assets/fonts/nunito/Nunito-BoldItalic.ttf) format("opentype");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: Nunito-ExtraBold;
     src: url(assets/fonts/nunito/Nunito-ExtraBold.ttf) format("opentype");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: Nunito-ExtraBoldItalic;
     src: url(assets/fonts/nunito/Nunito-ExtraBoldItalic.ttf) format("opentype");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: Nunito-ExtraLight;
     src: url(assets/fonts/nunito/Nunito-ExtraLight.ttf) format("opentype");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: Nunito-ExtraLightItalic;
     src: url(assets/fonts/nunito/Nunito-ExtraLightItalic.ttf) format("opentype");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: Nunito-Italic;
     src: url(assets/fonts/nunito/Nunito-Italic.ttf) format("opentype");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: Nunito-Light;
     src: url(assets/fonts/nunito/Nunito-Light.ttf) format("opentype");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: Nunito-LightItalic;
     src: url(assets/fonts/nunito/Nunito-LightItalic.ttf) format("opentype");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: Nunito-Regular;
     src: url(assets/fonts/nunito/Nunito-Regular.ttf) format("opentype");
-  }
+}
 
-  @font-face {
+@font-face {
     font-family: Nunito-SemiBold;
     src: url(assets/fonts/nunito/Nunito-SemiBold.ttf) format("opentype");
-  }
+}
 
-  @font-face {
+@font-face {
     font-family: Nunito-SemiBoldItalic;
     src: url(assets/fonts/nunito/Nunito-SemiBoldItalic.ttf) format("opentype");
-  }
+}

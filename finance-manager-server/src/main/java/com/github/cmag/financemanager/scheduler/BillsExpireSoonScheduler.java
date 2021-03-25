@@ -1,9 +1,13 @@
 package com.github.cmag.financemanager.scheduler;
 
+import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.BillDTO;
 import com.github.cmag.financemanager.dto.UserDTO;
+import com.github.cmag.financemanager.model.Notification;
+import com.github.cmag.financemanager.model.NotificationDescriptionParameter;
 import com.github.cmag.financemanager.service.BillService;
 import com.github.cmag.financemanager.service.EmailService;
+import com.github.cmag.financemanager.service.NotificationService;
 import com.github.cmag.financemanager.service.UserService;
 import java.text.MessageFormat;
 import java.time.LocalDate;
@@ -28,9 +32,13 @@ public class BillsExpireSoonScheduler {
   @Autowired
   private UserService userService;
 
+  @Autowired
+  private NotificationService notificationService;
+
   private static final String SUBJECT = "Some Bills will expire soon";
   private static final String PADDING = "padding:7px;";
   private static final String TH_STYLE = "border-bottom: 1px solid #cccccc;color:#4e73df;";
+  private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
   /**
    * Send email report about the bills that are going to expire soon for each user.
@@ -44,7 +52,30 @@ public class BillsExpireSoonScheduler {
       List<BillDTO> bills = billService.findBillsThatExpireSoonByUserId(user.getId());
       if (!bills.isEmpty()) {
         sendExpiringReport(user, bills);
+        addNotifications(bills);
       }
+    }
+  }
+
+  /**
+   * Construct and add a notification about the Bills that will expire soon.
+   *
+   * @param bills The bills that will expire soon.
+   */
+  private void addNotifications(List<BillDTO> bills) {
+    // Iterate through each Bill.
+    for(BillDTO bill: bills) {
+      // Construct a new notification about the Bill.
+      Notification notification = new Notification();
+      notification.setDescription(AppConstants.NOTIFICATION_DESC_BILL_EXPIRE);
+      notification.setIcon(AppConstants.FONT_AWESOME_BILL_ICON);
+      notification.setUrl("/" + AppConstants.BILL_ENDPOINT + "/" + bill.getId());
+      // Add description parameters.
+      NotificationDescriptionParameter code = new NotificationDescriptionParameter("code", bill.getCode());
+      NotificationDescriptionParameter date = new NotificationDescriptionParameter("date", bill.getDueDate().format(formatter));
+      notification.setParams(List.of(code, date));
+      // Save the notification.
+      notificationService.save(notification);
     }
   }
 
@@ -83,8 +114,6 @@ public class BillsExpireSoonScheduler {
   private String generateTableRows(List<BillDTO> bills) {
     // Initialize a string builder.
     StringBuilder rows = new StringBuilder();
-    // Initialize the date formatter.
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     for (BillDTO bill : bills) {
       // Initialize the expired bill style.
       String expired = "";

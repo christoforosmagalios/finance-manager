@@ -108,6 +108,31 @@
 				  CONSTRAINT `FK_TRANSACTION_BILL` FOREIGN KEY (`FK_BILL_ID`) REFERENCES `bill` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
           CONSTRAINT `FK_TRANSACTION_USER` FOREIGN KEY (`FK_USER_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 				) DEFAULT CHARSET=utf8 COMMENT='Information about a transaction.';
+
+				DROP TABLE IF EXISTS `notification`;
+				CREATE TABLE IF NOT EXISTS `notification` (
+				`ID` varchar(36) NOT NULL COMMENT 'The Notification Id',
+				`DESCRIPTION` varchar(255) NOT NULL COMMENT 'The description of the notification',
+				`ICON` VARCHAR(50) NOT NULL COMMENT 'The icon of the notification (font-awesome)',
+				`URL` varchar(255) NOT NULL COMMENT 'The URL of the notification',
+				`SEEN` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 stands for new notification, 1 stands for old notification',
+				`CREATED_ON` datetime NOT NULL COMMENT 'Created on',
+				`UPDATED_ON` datetime NOT NULL COMMENT 'Updated on',
+				PRIMARY KEY (`ID`)
+				) DEFAULT CHARSET=utf8 COMMENT='Information about a Notification.';
+
+				DROP TABLE IF EXISTS `notification_description_parameter`;
+				CREATE TABLE IF NOT EXISTS `notification_description_parameter` (
+				`ID` varchar(36) NOT NULL COMMENT 'The Id',
+				`NAME` VARCHAR(100) NOT NULL COMMENT 'The name of the parameter',
+				`VALUE` VARCHAR(100) NOT NULL COMMENT 'The value of the parameter',
+				`FK_NOTIFICATION_ID` varchar(36) COMMENT 'Foreign key to the Notification table',
+				`CREATED_ON` datetime NOT NULL COMMENT 'Created on',
+				`UPDATED_ON` datetime NOT NULL COMMENT 'Updated on',
+				PRIMARY KEY (`ID`),
+				KEY `FK_NOTIFICATION` (`FK_NOTIFICATION_ID`),
+				CONSTRAINT `FK_NOTIFICATION_ID` FOREIGN KEY (`FK_NOTIFICATION_ID`) REFERENCES `notification` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+				) DEFAULT CHARSET=utf8 COMMENT='Notification Description Parameter.';
             </sql>
         </changeSet>
 </databaseChangeLog>

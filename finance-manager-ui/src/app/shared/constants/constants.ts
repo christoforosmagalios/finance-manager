@@ -20,7 +20,8 @@ export const Constants = {
         ADDRESS: "address",
         AUTH: "auth",
         USER: "user",
-        ELASTICSEARCH: "elasticsearch"
+        ELASTICSEARCH: "elasticsearch",
+        NOTIFICATION: "notification"
     },
 
     // Items per page for tables.

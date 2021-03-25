@@ -28,6 +28,8 @@ import { OverviewRoutingModule } from './overview/overview.routing.module';
 import { OverviewModule } from './overview/overview.module';
 import { SharedComponentsModule } from './shared/components/shared-components.module';
 import { SearchComponent } from './layout/header/search/search.component';
+import { NotificationsComponent } from './layout/header/notifications/notifications.component';
+import { PipesModule } from './shared/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { SearchComponent } from './layout/header/search/search.component';
     HeaderComponent,
     UserComponent,
     BillsExpireSoonComponent,
-    SearchComponent
+    SearchComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { SearchComponent } from './layout/header/search/search.component';
     SettingsModule,
     OverviewModule,
     SharedComponentsModule,
+    PipesModule,
     TranslateModule.forRoot({
       loader: {
       provide: TranslateLoader,
