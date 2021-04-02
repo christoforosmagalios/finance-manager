@@ -4,6 +4,7 @@ import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.BillDTO;
 import com.github.cmag.financemanager.dto.UserDTO;
 import com.github.cmag.financemanager.mapper.NotificationMapper;
+import com.github.cmag.financemanager.mapper.UserMapper;
 import com.github.cmag.financemanager.model.Notification;
 import com.github.cmag.financemanager.model.NotificationDescriptionParameter;
 import com.github.cmag.financemanager.service.BillService;
@@ -43,6 +44,9 @@ public class BillsExpireSoonScheduler {
   @Autowired
   private NotificationMapper notificationMapper;
 
+  @Autowired
+  private UserMapper userMapper;
+
   private static final String SUBJECT = "Some Bills will expire soon";
   private static final String PADDING = "padding:7px;";
   private static final String TH_STYLE = "border-bottom: 1px solid #cccccc;color:#4e73df;";
@@ -78,6 +82,7 @@ public class BillsExpireSoonScheduler {
       notification.setDescription(AppConstants.NOTIFICATION_DESC_BILL_EXPIRE);
       notification.setIcon(AppConstants.FONT_AWESOME_BILL_ICON);
       notification.setUrl("/" + AppConstants.BILL_ENDPOINT + "/" + bill.getId());
+      notification.setUser(userMapper.map(user));
       // Add description parameters.
       NotificationDescriptionParameter code = new NotificationDescriptionParameter("code",
           bill.getCode());

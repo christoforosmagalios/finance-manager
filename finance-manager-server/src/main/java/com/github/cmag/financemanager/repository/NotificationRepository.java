@@ -11,5 +11,18 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NotificationRepository extends BaseRepository<Notification> {
 
-  List<Notification> deleteBySeenTrueAndCreatedOnBefore(Instant date);
+  /**
+   * Delete the seen notifications that are older than the given date.
+   *
+   * @param date The Date.
+   */
+  void deleteBySeenTrueAndCreatedOnBefore(Instant date);
+
+  /**
+   * Find the notifications that belong to the user with the given id.
+   *
+   * @param userId The User id.
+   * @return A list of Notifications.
+   */
+  List<Notification> findByUserIdOrderByCreatedOnDesc(String userId);
 }

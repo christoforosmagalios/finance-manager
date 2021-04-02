@@ -116,9 +116,12 @@
 				`ICON` VARCHAR(50) NOT NULL COMMENT 'The icon of the notification (font-awesome)',
 				`URL` varchar(255) NOT NULL COMMENT 'The URL of the notification',
 				`SEEN` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 stands for new notification, 1 stands for old notification',
+				`FK_USER_ID` varchar(36) NOT NULL COMMENT 'Foreign key to the User table',
 				`CREATED_ON` datetime NOT NULL COMMENT 'Created on',
 				`UPDATED_ON` datetime NOT NULL COMMENT 'Updated on',
-				PRIMARY KEY (`ID`)
+				PRIMARY KEY (`ID`),
+				KEY `FK_NOTIFICATION_USER` (`FK_USER_ID`),
+				CONSTRAINT `FK_NOTIFICATION_USER` FOREIGN KEY (`FK_USER_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 				) DEFAULT CHARSET=utf8 COMMENT='Information about a Notification.';
 
 				DROP TABLE IF EXISTS `notification_description_parameter`;

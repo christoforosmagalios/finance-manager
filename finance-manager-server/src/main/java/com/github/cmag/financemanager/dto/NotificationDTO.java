@@ -13,5 +13,6 @@ public class NotificationDTO extends BaseDTO {
   private String icon;
   private String url;
   private boolean seen;
+  private UserDTO user;
   private Map<String, Object> parameters;
 }

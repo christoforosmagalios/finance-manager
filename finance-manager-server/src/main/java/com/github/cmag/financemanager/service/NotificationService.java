@@ -1,6 +1,5 @@
 package com.github.cmag.financemanager.service;
 
-import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.NotificationDTO;
 import com.github.cmag.financemanager.mapper.NotificationMapper;
 import com.github.cmag.financemanager.model.Notification;
@@ -9,7 +8,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,11 +20,14 @@ public class NotificationService extends BaseService<NotificationDTO, Notificati
   private NotificationRepository notificationRepository;
 
   @Autowired
+  private UserService userService;
+
+  @Autowired
   private NotificationMapper mapper;
 
   public List<NotificationDTO> getNotifications() {
     return mapper
-        .mapToDTOs(notificationRepository.findAll(Sort.by(AppConstants.CREATED_ON).descending()));
+        .mapToDTOs(notificationRepository.findByUserIdOrderByCreatedOnDesc(userService.getLoggedInUserId()));
   }
 
   /**
