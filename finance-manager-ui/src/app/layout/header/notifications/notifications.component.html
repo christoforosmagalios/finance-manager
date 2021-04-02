@@ -5,18 +5,16 @@
     </div>
     <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="notifications">
         <div class="dropdown-item" *ngFor="let n of notifications">
-            <div class="container">
-                <div class="row" (mouseleave)="markAsSeen(n)" [routerLink]="n.url ? [n.url] : []" [ngClass]="{'cursor-pointer': n.url}">
-                    <div class="col-2 my-auto notification-icon">
-                        <span class="{{n.icon}}"></span>
-                    </div>
-                    <div class="col-8">
-                        <div innerHtml="{{ n.description | translate:n.parameters }}"></div>
-                        <div class="notification-time text-primary">{{ n.createdOn | timeAgo }}</div>
-                    </div>
-                    <div class="col-2 my-auto">
-                        <div *ngIf="!n.seen" class="fm-dot fm-info-dot"></div>
-                    </div>
+            <div class="row" (mouseleave)="markAsSeen(n)" [routerLink]="n.url ? [n.url] : []" [ngClass]="{'cursor-pointer': n.url}">
+                <div class="col-2 my-auto notification-icon">
+                    <span class="{{n.icon}}"></span>
+                </div>
+                <div class="col-8">
+                    <div innerHtml="{{ n.description | translate:n.parameters }}"></div>
+                    <div class="notification-time text-primary">{{ n.createdOn | timeAgo }}</div>
+                </div>
+                <div class="col-2 my-auto">
+                    <div *ngIf="!n.seen" class="fm-dot fm-info-dot"></div>
                 </div>
             </div>
         </div>

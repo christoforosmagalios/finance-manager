@@ -7,6 +7,7 @@ import { AuthDTO } from '../dto/auth-dto';
 import { LoginDTO } from '../dto/login-dto';
 import { UserDetailsDTO } from '../dto/user-details-dto';
 import { Constants } from '../shared/constants/constants';
+import { MessageService } from '../shared/socket/message.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -15,7 +16,8 @@ export class AuthService {
 
     constructor(
         private http: HttpClient,
-        private router: Router) {}
+        private router: Router,
+        private messageService: MessageService) {}
 
     /**
      * Register the user with the given information.
@@ -51,6 +53,8 @@ export class AuthService {
         this.user.next(user);
         // Store the session info in the local storage.
         localStorage.setItem(Constants.LOCAL_STORAGE.SESSION, JSON.stringify(user));
+        // Connect to the WebSocket.
+        this.messageService.connect();
     }
 
     /**
@@ -61,6 +65,8 @@ export class AuthService {
         localStorage.removeItem(Constants.LOCAL_STORAGE.SESSION);
         // Set logged in user info to null.
         this.user.next(null);
+        // Close the WebSocket.
+        this.messageService.disconnect();
         // Redirect to the Login page.
         this.router.navigate(['/login']);
     }
@@ -85,6 +91,8 @@ export class AuthService {
         const loadedUser = new AuthDTO(user.fullname, user.token);
         if (loadedUser.token) {
             this.user.next(loadedUser);
+            // Connect to the WebSocket.
+            this.messageService.connect();
         }
     }
 }

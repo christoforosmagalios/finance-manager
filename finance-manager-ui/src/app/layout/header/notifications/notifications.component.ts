@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationDTO } from 'src/app/dto/notification-dto';
+import { MessageService } from 'src/app/shared/socket/message.service';
 import { NotificationService } from './notification.service';
 
 @Component({
@@ -13,13 +14,23 @@ export class NotificationsComponent implements OnInit {
   // The number of new notifications.
   newNotifications = 0;
 
-  constructor(private notificationService: NotificationService) { }
+  constructor(
+    private notificationService: NotificationService,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.notificationService.getLatestNotifications().subscribe(notifications => {
       this.notifications = notifications;
       this.calculateNewNotifications();
     });
+
+    this.messageService.notification.subscribe(notification => {
+      if (notification !== null) {
+        this.notifications.unshift(notification);
+        this.calculateNewNotifications();
+      }
+    });
+
   }
 
   /**

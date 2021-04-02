@@ -24,6 +24,13 @@ export const Constants = {
         NOTIFICATION: "notification"
     },
 
+    // WebSocket
+    WS: {
+        // The base endpoint of the Websocket topics.
+        ENDPOINT: "/notifications",
+        // Websocket user broker.
+        USER_BROKER: "/user/queue/specific-user"
+    },
     // Items per page for tables.
     ITEMS_PER_PAGE: [5, 10, 20, 50, 100],
 

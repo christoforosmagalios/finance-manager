@@ -3,6 +3,7 @@ package com.github.cmag.financemanager.scheduler;
 import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.BillDTO;
 import com.github.cmag.financemanager.dto.UserDTO;
+import com.github.cmag.financemanager.mapper.NotificationMapper;
 import com.github.cmag.financemanager.model.Notification;
 import com.github.cmag.financemanager.model.NotificationDescriptionParameter;
 import com.github.cmag.financemanager.service.BillService;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +37,12 @@ public class BillsExpireSoonScheduler {
   @Autowired
   private NotificationService notificationService;
 
+  @Autowired
+  private SimpMessagingTemplate messageSender;
+
+  @Autowired
+  private NotificationMapper notificationMapper;
+
   private static final String SUBJECT = "Some Bills will expire soon";
   private static final String PADDING = "padding:7px;";
   private static final String TH_STYLE = "border-bottom: 1px solid #cccccc;color:#4e73df;";
@@ -52,7 +60,7 @@ public class BillsExpireSoonScheduler {
       List<BillDTO> bills = billService.findBillsThatExpireSoonByUserId(user.getId());
       if (!bills.isEmpty()) {
         sendExpiringReport(user, bills);
-        addNotifications(bills);
+        addNotifications(user, bills);
       }
     }
   }
@@ -62,20 +70,25 @@ public class BillsExpireSoonScheduler {
    *
    * @param bills The bills that will expire soon.
    */
-  private void addNotifications(List<BillDTO> bills) {
+  private void addNotifications(UserDTO user, List<BillDTO> bills) {
     // Iterate through each Bill.
-    for(BillDTO bill: bills) {
+    for (BillDTO bill : bills) {
       // Construct a new notification about the Bill.
       Notification notification = new Notification();
       notification.setDescription(AppConstants.NOTIFICATION_DESC_BILL_EXPIRE);
       notification.setIcon(AppConstants.FONT_AWESOME_BILL_ICON);
       notification.setUrl("/" + AppConstants.BILL_ENDPOINT + "/" + bill.getId());
       // Add description parameters.
-      NotificationDescriptionParameter code = new NotificationDescriptionParameter("code", bill.getCode());
-      NotificationDescriptionParameter date = new NotificationDescriptionParameter("date", bill.getDueDate().format(formatter));
+      NotificationDescriptionParameter code = new NotificationDescriptionParameter("code",
+          bill.getCode());
+      NotificationDescriptionParameter date = new NotificationDescriptionParameter("date",
+          bill.getDueDate().format(formatter));
       notification.setParams(List.of(code, date));
       // Save the notification.
       notificationService.save(notification);
+      // Send a notification to the UI.
+      messageSender
+          .convertAndSendToUser(user.getUsername(), AppConstants.WS_BROKER, notificationMapper.map(notification));
     }
   }
 
@@ -124,16 +137,16 @@ public class BillsExpireSoonScheduler {
 
       rows.append(
           "<tr>"
-        + "<td style=\"" + PADDING + "\">" + bill.getCode() + "</td>"
-        + "<td style=\"" + PADDING + "\">" + bill.getDescription() + "</td>"
-        + "<td style=\"" + PADDING + "\">" + bill.getIssuedOn().format(formatter) + "</td>"
-        + "<td style=\"" + PADDING + expired + "\">" + bill.getDueDate().format(formatter) + "</td>"
-        + "<td style=\"" + PADDING + "text-align:right;\">" + bill.getAmount() + " €</td>"
-        + "</tr>");
+              + "<td style=\"" + PADDING + "\">" + bill.getCode() + "</td>"
+              + "<td style=\"" + PADDING + "\">" + bill.getDescription() + "</td>"
+              + "<td style=\"" + PADDING + "\">" + bill.getIssuedOn().format(formatter) + "</td>"
+              + "<td style=\"" + PADDING + expired + "\">" + bill.getDueDate().format(formatter)
+              + "</td>"
+              + "<td style=\"" + PADDING + "text-align:right;\">" + bill.getAmount() + " €</td>"
+              + "</tr>");
     }
     return rows.toString();
   }
-
 
 
 }

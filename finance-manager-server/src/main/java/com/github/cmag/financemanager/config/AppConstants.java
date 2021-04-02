@@ -83,11 +83,21 @@ public class AppConstants {
   // Bill icon
   public static final String FONT_AWESOME_BILL_ICON = "far fa-folder-open";
 
-  // Notifications
-  public static final String NOTIFICATION_DESC_BILL_EXPIRE = "The Bill with code {{code}} will expire on {{date}}.";
+  // Notification Descriptions
+  // Bill will expire soon description.
+  public static final String NOTIFICATION_DESC_BILL_EXPIRE = "notification.bill.expire.soon";
 
   // Entity Endpoints
   // Bill endpoint
   public static final String BILL_ENDPOINT = "bill";
+
+  // WebSockets
+  // WebSocket endpoint.
+  public static final String WS_ENDPOINT = "/notifications";
+  // WebSocket user prefix.
+  public static final String WS_USER_PREFIX = "/user";
+  // WebSocket broker.
+  public static final String WS_BROKER = "/user/queue/specific-user";
+
 
 }
