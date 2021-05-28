@@ -6,9 +6,12 @@
     </a>
 
     <!-- Sandwich responsive button. -->
-    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <div>
+        <app-notifications class="notifications-responsive"></app-notifications>
+        <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
 
     <div class="collapse navbar-collapse" id="navbarCollapse" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
         <ul class="navbar-nav mr-auto">
@@ -47,7 +50,7 @@
                 <span *ngIf="!isLast">|</span>
                 </span>
             </li>
-            <li class="nav-item dropdown nav-items-text">
+            <li class="nav-item dropdown nav-items-text notifications-menu-item">
                 <app-notifications></app-notifications>
             </li>
             <li class="nav-item dropdown nav-items-text">

@@ -1,23 +1,27 @@
 .navbar {
-    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .15);
     padding: 1.2rem 2.5rem;
 }
 
 .navbar-brand {
     color: #4e73df;
-    font-family: "Nunito-Bold", sans-serif;
+    font-family: "Roboto-Bold", sans-serif;
     font-size: 1.5rem;
     padding-top: 0;
     padding-bottom: 0;
 }
 
-.navbar-brand > img {
+.navbar-brand>img {
     height: 42px;
 }
 
 .nav-item {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+}
+
+#userActions {
+    user-select: none;
 }
 
 .languageKey {
@@ -42,14 +46,22 @@
     .navbar {
         padding: 1.2rem 1rem;
     }
+    .notifications-menu-item {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 1000px) and (min-width: 768px) {
     .nav-item-desc {
         display: none;
     }
-
     .nav-item-text {
         font-size: 1.3rem;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .notifications-responsive {
+        display: none;
     }
 }

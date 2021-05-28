@@ -9,7 +9,7 @@ body {
     line-height: 1.5;
     color: #858796;
     font-weight: 400;
-    font-family: "Nunito-Regular", sans-serif;
+    font-family: "Roboto-Regular", sans-serif;
 }
 
 textarea {
@@ -21,7 +21,7 @@ caption {
 }
 
 label {
-    font-family: "Nunito-SemiBold", sans-serif;
+    font-family: "Roboto-Medium", sans-serif;
 }
 
 .fm-logo>img {
@@ -331,71 +331,51 @@ label {
 /** Fonts **/
 
 @font-face {
-    font-family: Nunito-Black;
-    src: url(assets/fonts/nunito/Nunito-Black.ttf) format("opentype");
+    font-family: Roboto-Black;
+    src: url(assets/fonts/roboto/Roboto-Black.ttf) format("opentype");
 }
 
 @font-face {
-    font-family: Nunito-BlackItalic;
-    src: url(assets/fonts/nunito/Nunito-BlackItalic.ttf) format("opentype");
+    font-family: Roboto-BlackItalic;
+    src: url(assets/fonts/roboto/Roboto-BlackItalic.ttf) format("opentype");
 }
 
 @font-face {
-    font-family: Nunito-Bold;
-    src: url(assets/fonts/nunito/Nunito-Bold.ttf) format("opentype");
+    font-family: Roboto-Bold;
+    src: url(assets/fonts/roboto/Roboto-Bold.ttf) format("opentype");
 }
 
 @font-face {
-    font-family: Nunito-BoldItalic;
-    src: url(assets/fonts/nunito/Nunito-BoldItalic.ttf) format("opentype");
+    font-family: Roboto-BoldItalic;
+    src: url(assets/fonts/roboto/Roboto-BoldItalic.ttf) format("opentype");
 }
 
 @font-face {
-    font-family: Nunito-ExtraBold;
-    src: url(assets/fonts/nunito/Nunito-ExtraBold.ttf) format("opentype");
+    font-family: Roboto-Italic;
+    src: url(assets/fonts/roboto/Roboto-Italic.ttf) format("opentype");
 }
 
 @font-face {
-    font-family: Nunito-ExtraBoldItalic;
-    src: url(assets/fonts/nunito/Nunito-ExtraBoldItalic.ttf) format("opentype");
+    font-family: Roboto-Light;
+    src: url(assets/fonts/roboto/Roboto-Light.ttf) format("opentype");
 }
 
 @font-face {
-    font-family: Nunito-ExtraLight;
-    src: url(assets/fonts/nunito/Nunito-ExtraLight.ttf) format("opentype");
+    font-family: Roboto-LightItalic;
+    src: url(assets/fonts/roboto/Roboto-LightItalic.ttf) format("opentype");
 }
 
 @font-face {
-    font-family: Nunito-ExtraLightItalic;
-    src: url(assets/fonts/nunito/Nunito-ExtraLightItalic.ttf) format("opentype");
+    font-family: Roboto-Regular;
+    src: url(assets/fonts/roboto/Roboto-Regular.ttf) format("opentype");
 }
 
 @font-face {
-    font-family: Nunito-Italic;
-    src: url(assets/fonts/nunito/Nunito-Italic.ttf) format("opentype");
+    font-family: Roboto-Medium;
+    src: url(assets/fonts/roboto/Roboto-Medium.ttf) format("opentype");
 }
 
 @font-face {
-    font-family: Nunito-Light;
-    src: url(assets/fonts/nunito/Nunito-Light.ttf) format("opentype");
-}
-
-@font-face {
-    font-family: Nunito-LightItalic;
-    src: url(assets/fonts/nunito/Nunito-LightItalic.ttf) format("opentype");
-}
-
-@font-face {
-    font-family: Nunito-Regular;
-    src: url(assets/fonts/nunito/Nunito-Regular.ttf) format("opentype");
-}
-
-@font-face {
-    font-family: Nunito-SemiBold;
-    src: url(assets/fonts/nunito/Nunito-SemiBold.ttf) format("opentype");
-}
-
-@font-face {
-    font-family: Nunito-SemiBoldItalic;
-    src: url(assets/fonts/nunito/Nunito-SemiBoldItalic.ttf) format("opentype");
+    font-family: Roboto-MediumItalic;
+    src: url(assets/fonts/roboto/Roboto-MediumItalic.ttf) format("opentype");
 }
