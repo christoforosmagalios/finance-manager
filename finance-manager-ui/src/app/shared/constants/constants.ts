@@ -65,5 +65,8 @@ export const Constants = {
     HEADERS: {
         AUTH : "authorization",
         AUTH_USER : "authorization-user"
-    }
+    },
+    
+    // Images folder.
+    IMAGES: '/images'
 };

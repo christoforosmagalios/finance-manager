@@ -88,6 +88,7 @@
     "error.invalid.credetials": "Το Username ή το Password είναι λάθος.",
     "error.delete.bill.is.linked": "Δεν είναι δυνατή η διαγραφή του λογαριασμού επειδή συνδέεται με μια συναλλαγή.",
     "not.allowed": "Αυτή η ενέργεια δεν επιτρέπεται.",
+    "bill.not.found": "Ο Λογαριασμός δεν υπάρχει!",
 
     "paycheck": "Μισθός",
     "supermarket": "Super Market",

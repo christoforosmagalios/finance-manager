@@ -3,17 +3,15 @@ package com.github.cmag.financemanager.controller;
 import com.github.cmag.financemanager.dto.BillDTO;
 import com.github.cmag.financemanager.dto.BillFilterDTO;
 import com.github.cmag.financemanager.dto.PageItem;
-import com.github.cmag.financemanager.dto.UploadDTO;
 import com.github.cmag.financemanager.model.Bill;
 import com.github.cmag.financemanager.service.BillService;
 import com.github.cmag.financemanager.service.FileService;
-import java.io.IOException;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,9 +34,6 @@ public class BillController extends BaseController<BillDTO, Bill> {
   @Autowired
   private BillService billService;
 
-  @Value("${finance.manager.temp.path}")
-  private String tempPath;
-
   /**
    * Save the given image and return the URL, the base64 and image type.
    *
@@ -46,9 +41,18 @@ public class BillController extends BaseController<BillDTO, Bill> {
    * @return UploadDTO
    */
   @PostMapping(path = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-  public UploadDTO upload(@RequestParam("file") MultipartFile multipartFile)
-      throws IOException {
-    return fileService.upload(multipartFile, tempPath);
+  public String upload(@RequestParam("file") MultipartFile multipartFile) {
+    return fileService.upload(multipartFile);
+  }
+
+  /**
+   * Delete the image of the Bill with the given id.
+   *
+   * @param id The Bill id.
+   */
+  @DeleteMapping(path = "/deleteBillImage/{id}")
+  public void deleteImage(@PathVariable String id) {
+    billService.deleteBillImage(id);
   }
 
   /**
@@ -58,7 +62,7 @@ public class BillController extends BaseController<BillDTO, Bill> {
    * @return The saved bill.
    */
   @PostMapping(path = "/save")
-  public BillDTO saveBill(@Valid @RequestBody BillDTO billDTO) throws IOException {
+  public BillDTO saveBill(@Valid @RequestBody BillDTO billDTO) {
     return billService.saveBill(billDTO);
   }
 

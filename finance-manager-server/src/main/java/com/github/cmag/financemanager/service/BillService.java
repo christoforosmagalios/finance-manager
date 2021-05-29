@@ -12,7 +12,6 @@ import com.github.cmag.financemanager.model.Bill;
 import com.github.cmag.financemanager.repository.BillRepository;
 import com.github.cmag.financemanager.util.Utils;
 import com.github.cmag.financemanager.util.exception.FinanceManagerException;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,26 +57,19 @@ public class BillService extends BaseService<BillDTO, Bill> {
   @Autowired
   private ElasticsearchOperations elasticsearchOperations;
 
-  @Value("${finance.manager.bill.images.path}")
-  private String imagesPath;
-
   /**
    * Copy the bill image file and save the bill.
    *
    * @param billDTO The bill to be saved.
    * @return The saved billDTO.
    */
-  public BillDTO saveBill(BillDTO billDTO) throws IOException {
+  public BillDTO saveBill(BillDTO billDTO) {
 
-    // Find the old image path.
-    String existingImg = null;
-    if (StringUtils.isNotEmpty(billDTO.getId())) {
-      existingImg = billRepository.getImgUrl(billDTO.getId());
-    } else {
+    if (StringUtils.isEmpty(billDTO.getId())) {
       billDTO.setCode(RandomStringUtils.randomAlphanumeric(6).toUpperCase());
     }
     // Replace the new image with the old one.
-    billDTO.setImgPath(fileService.copy(billDTO.getImgPath(), existingImg, imagesPath));
+    billDTO.setImgPath(fileService.createFile(billDTO.getImgPath(), billDTO.getBase64()));
 
     billDTO.setUser(userService.getLoggedInUserDTO());
     BillDTO bill = super.save(billDTO);
@@ -283,5 +275,20 @@ public class BillService extends BaseService<BillDTO, Bill> {
    */
   public long getTotalNumberOfBills() {
     return es.countByUserId(userService.getLoggedInUserId());
+  }
+
+  /**
+   * Delete the image of the Bill with the given id.
+   *
+   * @param id The id of the Bill.
+   */
+  public void deleteBillImage(String id) {
+    BillDTO bill = findOne(id);
+    if (Objects.isNull(bill)) {
+      throw new FinanceManagerException(AppConstants.BILL_NOT_FOUND, HttpStatus.BAD_REQUEST);
+    }
+    fileService.delete(bill.getImgPath());
+    bill.setImgPath(null);
+    save(bill);
   }
 }

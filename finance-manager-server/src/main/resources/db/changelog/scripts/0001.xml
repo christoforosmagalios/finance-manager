@@ -74,7 +74,6 @@
 				`PAID` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 stands for not paid, 1 stands for paid',
 				`ACTUAL_BILL` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 stands for not actual, 1 stands for actual',
 				`IMG_PATH` varchar(1024) COMMENT 'The Image path.',
-				`IMG_TYPE` varchar(100) COMMENT 'The Image type.',
 				`CREATED_ON` datetime NOT NULL COMMENT 'Created on',
 				`UPDATED_ON` datetime NOT NULL COMMENT 'Updated on',
 				PRIMARY KEY (`ID`),

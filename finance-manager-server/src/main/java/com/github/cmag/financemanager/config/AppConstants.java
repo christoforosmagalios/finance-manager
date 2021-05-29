@@ -20,6 +20,8 @@ public class AppConstants {
   public static final String INVALID_FILE_TYPE = "invalid.file.type";
   // Generic Error message key.
   public static final String GENERIC_ERROR = "generic.error";
+  // Bill not found message key.
+  public static final String BILL_NOT_FOUND = "bill.not.found";
   // Not null error message key.
   public static final String NOT_NULL = "error.not.null";
   // Max size 250 error message key.

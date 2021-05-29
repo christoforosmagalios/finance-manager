@@ -10,7 +10,6 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 import { NgbDateFRParserFormatter } from 'src/app/shared/services/datepicker.formatter.service';
 import { BillDates } from 'src/app/dto/bill-dates-dto';
 import { BillService } from '../bill.service';
-import { UploadDTO } from 'src/app/dto/upload-dto';
 import { AddressDTO } from 'src/app/dto/address-dto';
 
 @Component({
@@ -37,6 +36,8 @@ export class BillComponent implements OnInit {
   billCategories: Array<BillCategoryDTO>;
   // List of bill addresses.
   addresses: Array<AddressDTO>;
+  // Image location prefix.
+  imagePathPrefix = Constants.API+Constants.IMAGES+"/";
   // Error object.
   errors = {
     consumptionFrom: null,
@@ -170,10 +171,8 @@ export class BillComponent implements OnInit {
    */
   upload(files: FileList) {
     if(files.length > 0) {
-      this.billService.upload(files.item(0)).subscribe((uploadDTO : UploadDTO) => {
-        this.bill.imgPath = uploadDTO.imgPath;
-        this.bill.imgType = uploadDTO.imgType;
-        this.bill.base64 = uploadDTO.base64;
+      this.billService.upload(files.item(0)).subscribe((base64 : string) => {
+        this.bill.base64 = base64;
       });
     }
   }
@@ -182,9 +181,14 @@ export class BillComponent implements OnInit {
    * Clear the bill image.
    */
   clearImage() {
-    this.bill.imgPath = null;
-    this.bill.imgType = null;
-    this.bill.base64 = null;
-    this.uploader.nativeElement.value = "";
+    // If the bill has an image path delete it from the file system.
+    if (this.bill.imgPath) {
+      this.billService.deleteImage(this.bill.id).subscribe(res => {
+        this.bill.imgPath = null;
+      });
+    } else {
+      this.bill.base64 = null;
+      this.uploader.nativeElement.value = "";
+    }
   }
 }

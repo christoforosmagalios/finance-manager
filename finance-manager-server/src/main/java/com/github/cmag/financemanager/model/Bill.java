@@ -60,9 +60,6 @@ public class Bill extends BaseEntity {
   @Column(name = "img_path")
   private String imgPath;
 
-  @Column(name = "img_type")
-  private String imgType;
-
   @ManyToOne
   @JoinColumn(name = "fk_bill_address_id")
   private Address address;

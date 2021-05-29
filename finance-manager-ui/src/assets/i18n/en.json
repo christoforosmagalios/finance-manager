@@ -88,6 +88,7 @@
     "error.invalid.credetials": "Wrong Username or Password.",
     "error.delete.bill.is.linked": "Unable to delete Bill because it is linked to a Transaction.",
     "not.allowed": "This action is not allowed.",
+    "bill.not.found": "The Bill does not exist!",
 
     "paycheck": "Paycheck",
     "supermarket": "Supermarket",

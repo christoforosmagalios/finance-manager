@@ -49,7 +49,6 @@ public class BillDTO extends BaseDTO {
   @NotNull(message = AppConstants.NOT_NULL)
   private boolean actualBill;
   private String imgPath;
-  private String imgType;
   private String base64;
   private AddressDTO address;
   private UserDTO user;

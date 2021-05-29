@@ -35,7 +35,16 @@ export class BillService {
     upload(file: File) {
         const formData: FormData = new FormData();
         formData.append('file', file, file.name);
-        return this.http.post(Constants.API + '/' + this.endpoint + '/upload', formData);
+        return this.http.post(Constants.API + '/' + this.endpoint + '/upload', formData, {responseType: 'text'});
+    }
+
+    /**
+     * Delete the image of the Bill with the given id.
+     * 
+     * @param id The Bill id.
+     */
+    deleteImage(id: string) {
+        return this.http.delete(Constants.API + '/' + this.endpoint + '/deleteBillImage/' + id);
     }
 
     /**
