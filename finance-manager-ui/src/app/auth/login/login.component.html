@@ -1,9 +1,9 @@
-<div class="container-fluid"> 
+<div class="container-fluid">
     <div class="row justify-content-center">
-        
+
         <div class="col-lg-4 col-md-8 col-12">
             <div class="container-fluid">
-                
+
                 <!-- Logo -->
                 <div class="row">
                     <div class="col-12 fm-logo text-center">
@@ -27,8 +27,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="username">{{ 'username.email' | translate }}</label>
-                                                <input class="form-control" id="username" name="username" [(ngModel)]="username" 
-                                                required #u="ngModel"/>
+                                                <input class="form-control" id="username" name="username" [(ngModel)]="username" required #u="ngModel" />
                                                 <span class="help-block text-danger" *ngIf="!u.valid && u.dirty">{{ 'error.enter.username.email' | translate }}</span>
                                             </div>
                                         </div>
@@ -38,8 +37,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="password">{{ 'password' | translate }}</label>
-                                                <input class="form-control" type="password" id="password" name="password" [(ngModel)]="password"
-                                                required #p="ngModel"/>
+                                                <input class="form-control" type="password" id="password" name="password" [(ngModel)]="password" required #p="ngModel" />
                                                 <span class="help-block text-danger" *ngIf="!p.valid && p.dirty">{{ 'error.enter.password' | translate }}</span>
                                                 <span class="help-block text-danger" *ngIf="invlaidCredentials">{{ 'error.invalid.credetials' | translate }}</span>
                                             </div>
@@ -54,7 +52,7 @@
                                 </form>
                                 <div class="row">
                                     <div class="col-12 text-center">
-                                        <span routerLink="/register" class="cursor-pointer-underline">{{ 'forgot.password' | translate }}</span>
+                                        <span routerLink="/forgot-password" class="cursor-pointer-underline">{{ 'forgot.password' | translate }}</span>
                                     </div>
                                 </div>
                                 <div class="row">

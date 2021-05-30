@@ -1,9 +1,9 @@
-<div class="container-fluid"> 
+<div class="container-fluid">
     <div class="row justify-content-center">
-        
+
         <div class="col-lg-4 col-md-7 col-12">
             <div class="container-fluid">
-                
+
                 <!-- Logo -->
                 <div class="row">
                     <div class="col-12 fm-logo text-center">
@@ -27,8 +27,7 @@
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group">
                                                 <label for="firstName">{{ 'firstName' | translate }}</label>
-                                                <input class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName" 
-                                                required #fn="ngModel"/>
+                                                <input class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName" required #fn="ngModel" />
                                                 <div class="help-block text-danger" *ngIf="!fn.valid && fn.dirty">{{ 'must not be blank' | translate }}</div>
                                                 <div class="help-block text-danger" *ngIf="errors.firstName" [innerHTML]="errors.firstName | translate"></div>
                                             </div>
@@ -37,8 +36,7 @@
                                         <div class="col-lg-6 col-12">
                                             <div class="form-group">
                                                 <label for="lastName">{{ 'lastName' | translate }}</label>
-                                                <input class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName" 
-                                                required #ln="ngModel"/>
+                                                <input class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName" required #ln="ngModel" />
                                                 <div class="help-block text-danger" *ngIf="!ln.valid && ln.dirty">{{ 'must not be blank' | translate }}</div>
                                                 <div class="help-block text-danger" *ngIf="errors.lastName" [innerHTML]="errors.lastName | translate"></div>
                                             </div>
@@ -49,8 +47,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="username">{{ 'username' | translate }}</label>
-                                                <input class="form-control" id="username" name="username" [(ngModel)]="user.username" 
-                                                required #u="ngModel"/>
+                                                <input class="form-control" id="username" name="username" [(ngModel)]="user.username" required #u="ngModel" />
                                                 <div class="help-block text-danger" *ngIf="!u.valid && u.dirty">{{ 'must not be blank' | translate }}</div>
                                                 <div class="help-block text-danger" *ngIf="errors.username" [innerHTML]="errors.username | translate"></div>
                                             </div>
@@ -61,8 +58,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="username">{{ 'email' | translate }}</label>
-                                                <input class="form-control" id="email" name="email" [(ngModel)]="user.email" 
-                                                required #e="ngModel"/>
+                                                <input class="form-control" id="email" name="email" [(ngModel)]="user.email" required #e="ngModel" />
                                                 <div class="help-block text-danger" *ngIf="!e.valid && e.dirty">{{ 'must not be blank' | translate }}</div>
                                                 <div class="help-block text-danger" *ngIf="errors.email" [innerHTML]="errors.email | translate"></div>
                                             </div>
@@ -73,8 +69,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="password">{{ 'password' | translate }}</label>
-                                                <input class="form-control" type="password" id="password" name="password" [(ngModel)]="user.password"
-                                                required #p="ngModel"/>
+                                                <input class="form-control" type="password" id="password" name="password" [(ngModel)]="user.password" required #p="ngModel" />
                                                 <div class="help-block text-danger" *ngIf="!p.valid && p.dirty">{{ 'error.enter.password' | translate }}</div>
                                                 <div class="help-block text-danger" *ngIf="errors.password" [innerHTML]="errors.password | translate"></div>
                                             </div>
@@ -85,8 +80,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="confirmPassword">{{ 'confirm.password' | translate }}</label>
-                                                <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="user.confirmPassword"
-                                                required #c="ngModel"/>
+                                                <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="user.confirmPassword" required #c="ngModel" />
                                                 <div class="help-block text-danger" *ngIf="!c.valid && c.dirty">{{ 'error.enter.confirm.password' | translate }}</div>
                                                 <div class="help-block text-danger" *ngIf="errors.password" [innerHTML]="errors.password | translate"></div>
                                             </div>

@@ -85,6 +85,7 @@
     "must not be blank": "Αυτό το πεδίο δεν μπορεί να είναι κενό.",
     "error.username.exists": "Αυτό το Username χρησιμοποιείται ήδη.",
     "error.email.exists": "Αυτό το Email χρησιμοποιείται ήδη.",
+    "error.email.does.not.exist": "Αυτό το Email δεν υπάρχει.",
     "error.invalid.credetials": "Το Username ή το Password είναι λάθος.",
     "error.delete.bill.is.linked": "Δεν είναι δυνατή η διαγραφή του λογαριασμού επειδή συνδέεται με μια συναλλαγή.",
     "not.allowed": "Αυτή η ενέργεια δεν επιτρέπεται.",
@@ -146,6 +147,9 @@
     "lastName": "Επίθετο",
     "my.account": "Ο λογαριασμός μου",
     "settings": "Ρυθμίσεις",
+    "forgot.password.title": "Ξεχάσα τον κωδικό μου",
+    "forgot.password.description": "Συμπληρώστε το email σας ώστε να σας σταλεί αίτημα νέου κωδικού.",
+    "request.new.password": "Αίτημα νέου κωδικού",
 
     "addresses": "Διευθύνσεις",
     "bill.categories": "Kατηγορίες λογαριασμών",

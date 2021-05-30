@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.List;
+import javax.mail.internet.MimeBodyPart;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -76,7 +77,7 @@ public class PdfReportScheduler {
         File pdf = generatePdf(template, filename);
         // Send the PDF as an attachment.
         emailService
-            .send(user.getEmail(), "Overview - " + Utils.getMonthName(month) + " " + year, "", pdf);
+            .send(user.getEmail(), "Overview - " + Utils.getMonthName(month) + " " + year, "", pdf, MimeBodyPart.ATTACHMENT);
         // Delete the PDF.
         pdf.delete();
       } catch (IOException | DocumentException e) {

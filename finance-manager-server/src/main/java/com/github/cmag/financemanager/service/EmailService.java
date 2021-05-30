@@ -6,6 +6,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.logging.Level;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -48,9 +51,11 @@ public class EmailService {
    * @param recipient The email recipient.
    * @param subject The email subject.
    * @param body The email body.
+   * @param file The file to be attached.
+   * @param attachmentPosition The position of the attachment (e.g. Inline).
    * @return true if the mail has been sent, false otherwise.
    */
-  public boolean send(String recipient, String subject, String body, File file) {
+  public boolean send(String recipient, String subject, String body, File file, String attachmentPosition) {
     try {
       Session session = getSession();
       Message message = getMessage(session, subject, recipient);
@@ -59,13 +64,14 @@ public class EmailService {
       MimeBodyPart mimeBodyPart = new MimeBodyPart();
       mimeBodyPart.setContent(body, "text/html;charSet=UTF-8");
 
-      MimeBodyPart attachmentPart = new MimeBodyPart();
-      if (!Objects.isNull(file)) {
-        attachmentPart.attachFile(file);
-      }
-
       multipart.addBodyPart(mimeBodyPart);
-      multipart.addBodyPart(attachmentPart);
+      if (!Objects.isNull(file)) {
+        MimeBodyPart attachmentPart = new MimeBodyPart();
+        attachmentPart.attachFile(file);
+        attachmentPart.setContentID("<attachment>");
+        attachmentPart.setDisposition(attachmentPosition);
+        multipart.addBodyPart(attachmentPart);
+      }
 
       message.setContent(multipart);
 

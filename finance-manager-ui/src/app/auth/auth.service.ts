@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthDTO } from '../dto/auth-dto';
+import { ForgotPasswordDTO } from '../dto/forgot-password-dto';
 import { LoginDTO } from '../dto/login-dto';
 import { UserDetailsDTO } from '../dto/user-details-dto';
 import { Constants } from '../shared/constants/constants';
@@ -94,5 +95,14 @@ export class AuthService {
             // Connect to the WebSocket.
             this.messageService.connect();
         }
+    }
+
+    /**
+     * Send a new password request email.
+     * 
+     * @param forgotPassword ForgotPasswordDTO which contains the email and language.
+     */
+    forgotPassword(forgotPassword: ForgotPasswordDTO) {
+        return this.http.post(Constants.API + '/' + this.endpoint + '/forgotPassword', forgotPassword);
     }
 }

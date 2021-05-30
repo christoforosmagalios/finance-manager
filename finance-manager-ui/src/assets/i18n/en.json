@@ -85,6 +85,7 @@
     "must not be blank": "This field may not be blank.",
     "error.username.exists": "This Username already exists.",
     "error.email.exists": "This Email already exists.",
+    "error.email.does.not.exist": "This Email does not exist.",
     "error.invalid.credetials": "Wrong Username or Password.",
     "error.delete.bill.is.linked": "Unable to delete Bill because it is linked to a Transaction.",
     "not.allowed": "This action is not allowed.",
@@ -146,6 +147,9 @@
     "lastName": "Last Name",
     "my.account": "My Account",
     "settings": "Settings",
+    "forgot.password.title": "Forgot my Password",
+    "forgot.password.description": "Fill in your email to receive a new password request.",
+    "request.new.password": "Request a new password",
 
     "addresses": "Addresses",
     "bill.categories": "Bill categories",

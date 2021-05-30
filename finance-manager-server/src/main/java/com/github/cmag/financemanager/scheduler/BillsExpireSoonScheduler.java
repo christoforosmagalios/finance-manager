@@ -120,7 +120,7 @@ public class BillsExpireSoonScheduler {
     // Fill in the body template.
     body = MessageFormat.format(body, user.getFirstName(), user.getLastName(), table);
     // Send the email.
-    emailService.send(user.getEmail(), SUBJECT, body, null);
+    emailService.send(user.getEmail(), SUBJECT, body, null, null);
   }
 
   /**

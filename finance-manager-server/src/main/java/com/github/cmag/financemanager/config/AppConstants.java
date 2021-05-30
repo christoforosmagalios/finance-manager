@@ -14,6 +14,9 @@ public class AppConstants {
   // The name of the "created on" field in the BaseEntity.
   public static final String CREATED_ON = "createdOn";
 
+  // Base64 jpg prefix.
+  public static final String DATA_IMAGE = "data:image/jpeg;base64,";
+
   // Invalid file size error message key.
   public static final String INVALID_FILE_SIZE = "invalid.file.size";
   // Invalid file type error message key.
@@ -42,6 +45,8 @@ public class AppConstants {
   public static final String USERNAME_EXISTS = "error.username.exists";
   // Email already exists error message key.
   public static final String EMAIL_EXISTS = "error.email.exists";
+  // Email does not exist error message key.
+  public static final String EMAIL_NOT_EXIST = "error.email.does.not.exist";
   // The code of the bills transaction category.
   public static final String BILLS_TRANSACTION_CATEGORY_CODE = "TC011";
   // Token prefix.

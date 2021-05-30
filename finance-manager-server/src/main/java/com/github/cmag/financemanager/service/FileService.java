@@ -28,7 +28,6 @@ public class FileService {
 
   private static final String PNG_CONTENT = "image/png";
   private static final String JPG_CONTENT = "image/jpeg";
-  private static final String DATA_IMAGE = "data:image/jpeg;base64,";
   private static final String JPG_EXT = ".jpg";
 
   @Value("${finance.manager.max.image.size}")
@@ -53,7 +52,7 @@ public class FileService {
         .equals(JPG_CONTENT)) {
       throw new FinanceManagerException(AppConstants.INVALID_FILE_TYPE);
     }
-    return DATA_IMAGE + encodeToBase64(file);
+    return AppConstants.DATA_IMAGE + encodeToBase64(file);
   }
 
   /**
