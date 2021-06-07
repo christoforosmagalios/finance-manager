@@ -1,5 +1,6 @@
 package com.github.cmag.financemanager.config;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,7 @@ public class TranslationConfig {
     var source = new ResourceBundleMessageSource();
     source.setBasenames("messages/translation");
     source.setUseCodeAsDefaultMessage(false);
-    source.setDefaultEncoding("UTF-8");
+    source.setDefaultEncoding(StandardCharsets.UTF_8.name());
     source.setDefaultLocale(new Locale(defaultLanguage));
 
     return source;

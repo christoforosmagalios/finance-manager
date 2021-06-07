@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { AuthDTO } from '../dto/auth-dto';
 import { ForgotPasswordDTO } from '../dto/forgot-password-dto';
 import { LoginDTO } from '../dto/login-dto';
+import { ResetPasswordDTO } from '../dto/reset-password-dto';
 import { UserDetailsDTO } from '../dto/user-details-dto';
 import { Constants } from '../shared/constants/constants';
 import { MessageService } from '../shared/socket/message.service';
@@ -85,7 +86,6 @@ export class AuthService {
 
         // In case there are no data stored in the local storage, return.
         if (!user) {
-            this.router.navigate(['/login']);
             return;
         }
         // Init a Auth object and update the logged in user info.
@@ -104,5 +104,23 @@ export class AuthService {
      */
     forgotPassword(forgotPassword: ForgotPasswordDTO) {
         return this.http.post(Constants.API + '/' + this.endpoint + '/forgotPassword', forgotPassword);
+    }
+
+    /**
+     * Validate the given reset password id.
+     * 
+     * @param id The encrypted id to be validated.
+     */
+    validateResetPasswordRequest(id: string) {
+        return this.http.get(Constants.API + '/' + this.endpoint + '/validateResetPassword?id=' + encodeURIComponent(id));
+    }
+
+    /**
+     * Change the user's password.
+     * 
+     * @param resetPassword Contains the info about the new password.
+     */
+    changePassword(resetPassword: ResetPasswordDTO) {
+        return this.http.post(Constants.API + '/' + this.endpoint + '/changePassword', resetPassword);
     }
 }

@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
         // Get logged in user info.
         let user = this.auth.user;
         // If the logged in user info are available return true.
-        if (user) {
+        if (user && user.getValue()) {
             return true;
         }
         // User is not logged in. Redirect to the login page.

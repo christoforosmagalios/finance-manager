@@ -1,7 +1,7 @@
 package com.github.cmag.financemanager.util.validation;
 
 import com.github.cmag.financemanager.config.AppConstants;
-import com.github.cmag.financemanager.dto.UserDetailsDTO;
+import com.github.cmag.financemanager.dto.UserPasswordDetailsDTO;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  * Custom Constrain Validator. Check that the password and the confirmation password match.
  */
 public class PasswordsMatchValidator implements
-    ConstraintValidator<PasswordsMatch, UserDetailsDTO> {
+    ConstraintValidator<PasswordsMatch, UserPasswordDetailsDTO> {
 
   private String field;
   private String message;
@@ -30,12 +30,12 @@ public class PasswordsMatchValidator implements
    * Perform the validation check. If the password does not match with the confirmation password
    * return false.
    *
-   * @param user UserDetailsDTO.
+   * @param user UserPasswordDetailsDTO.
    * @param context The validator context.
    * @return true if valid, false otherwise.
    */
   @Override
-  public boolean isValid(UserDetailsDTO user, ConstraintValidatorContext context) {
+  public boolean isValid(UserPasswordDetailsDTO user, ConstraintValidatorContext context) {
 
     boolean isChangePassword = user.isChangePassword();
     boolean isNewUser = StringUtils.isBlank(user.getId());

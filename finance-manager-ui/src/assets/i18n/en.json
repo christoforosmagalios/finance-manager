@@ -150,6 +150,9 @@
     "forgot.password.title": "Forgot my Password",
     "forgot.password.description": "Fill in your email to receive a new password request.",
     "request.new.password": "Request a new password",
+    "reset.password.title": "Reset password",
+    "new.password": "New password",
+    "confirm.new.password": "Confirm new password",
 
     "addresses": "Addresses",
     "bill.categories": "Bill categories",

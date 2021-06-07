@@ -150,6 +150,9 @@
     "forgot.password.title": "Ξεχάσα τον κωδικό μου",
     "forgot.password.description": "Συμπληρώστε το email σας ώστε να σας σταλεί αίτημα νέου κωδικού.",
     "request.new.password": "Αίτημα νέου κωδικού",
+    "reset.password.title": "Αλλαγή κωδικού πρόσβασης",
+    "new.password": "Νέος κωδικός πρόσβασης",
+    "confirm.new.password": "Επιβεβαίωση Νέου κωδικού πρόσβασης",
 
     "addresses": "Διευθύνσεις",
     "bill.categories": "Kατηγορίες λογαριασμών",

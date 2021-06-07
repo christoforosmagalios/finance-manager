@@ -13,10 +13,9 @@ import lombok.Data;
  * Contains info about the user.
  */
 @Data
-@PasswordsMatch
 @UniqueUsername
 @UniqueEmail
-public class UserDetailsDTO extends BaseDTO {
+public class UserDetailsDTO extends UserPasswordDetailsDTO {
 
   @NotBlank
   @Size(min = 3, message = AppConstants.MIN_SIZE_3)
@@ -33,8 +32,4 @@ public class UserDetailsDTO extends BaseDTO {
   @NotBlank
   @Email(message = AppConstants.INVALID_EMAIL, regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
   private String email;
-
-  private String password;
-  private String confirmPassword;
-  private boolean changePassword;
 }

@@ -19,7 +19,7 @@
     click below to reset your password.
   </div>
   <div style="text-align: center;">
-    <button style="color: #fff;
+    <a th:href="${link}" style="color: #fff;
                 background-color: #2e59d9 !important;
                 border-color: #2653d4 !important;
                 display: inline-block;
@@ -34,9 +34,10 @@
                 line-height: 1.5;
                 border-radius: 0.25rem;
                 margin: 25px;
-                cursor: pointer;">
+                cursor: pointer;
+                text-decoration: none;">
       Reset my Password
-    </button>
+    </a>
   </div>
   <div>
     If you did not forgot your password you can safely ignore this email.
