@@ -118,6 +118,7 @@ export class UtilsService {
      */
     setTwoNumberDecimal(n: string) {
         n = parseFloat(n).toFixed(2);
+        return n;
     }
 
     /**

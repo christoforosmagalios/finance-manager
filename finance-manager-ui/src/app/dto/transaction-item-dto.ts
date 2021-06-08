@@ -3,5 +3,7 @@ export class TransactionItemDTO {
     public expense: number;
     public label: string;
 
-    constructor() {}
+    constructor() {
+        // Default constructor.
+    }
 }

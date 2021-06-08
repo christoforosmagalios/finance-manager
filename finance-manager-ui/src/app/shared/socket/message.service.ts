@@ -14,14 +14,19 @@ export class MessageService {
     stompClient;
     notification = new BehaviorSubject<NotificationDTO>(null);
 
-    constructor() {}
+    constructor() {
+        // Default constructor.
+    }
 
     /**
      * Initialize a SockJS instance and connect to the WebSocket.
      */
     connect() {
+        const crypto = window.crypto;
+        let array = new Uint32Array(1);
+        let rand = crypto.getRandomValues(array)[0];
         // Create a random session Id.
-        let sessionId = Math.random().toString(36).substring(7);
+        let sessionId = rand.toString(36).substring(1);
         // Initialize the Sockjs instance.
         this.socket = new SockJS(Constants.API + Constants.WS.ENDPOINT, [], {
             sessionId: () => {

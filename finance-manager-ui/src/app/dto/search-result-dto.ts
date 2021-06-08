@@ -4,5 +4,7 @@ export class SearchResultDTO {
     public description: string;
     public bill: boolean;
 
-    constructor() {}
+    constructor() {
+        // Default constructor.
+    }
 }
