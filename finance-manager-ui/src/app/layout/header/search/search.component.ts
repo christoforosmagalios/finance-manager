@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { SearchResultDTO } from 'src/app/dto/search-result-dto';
 import { DataService } from 'src/app/settings/data/data.service';
 
@@ -22,6 +22,7 @@ export class SearchComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    // Do nothing.
   }
 
   /**

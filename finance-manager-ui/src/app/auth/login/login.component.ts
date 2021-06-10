@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
     private loader: LoaderService) { }
 
   ngOnInit(): void {
+    // Do nothing.
   }
   
   /**

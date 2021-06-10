@@ -16,6 +16,7 @@ export class ConfirmationModalComponent implements OnInit {
   constructor(public modal: NgbActiveModal) {}
 
   ngOnInit(): void {
+    // Do nothing.
   }
 
 }

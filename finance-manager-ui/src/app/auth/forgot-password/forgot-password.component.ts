@@ -29,6 +29,7 @@ export class ForgotPasswordComponent implements OnInit {
     private translate: TranslateService) { }
 
   ngOnInit(): void {
+    // Do nothing.
   }
 
   /**

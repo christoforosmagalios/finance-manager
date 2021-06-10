@@ -13,5 +13,6 @@ export class BillsFilter {
     public amountTo: number;
 
     constructor() {
+        // Do nothing.
     }
 }

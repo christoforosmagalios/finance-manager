@@ -74,6 +74,7 @@ export class PieChartComponent implements OnInit {
   constructor(private utils: UtilsService) { }
 
   ngOnInit(): void {
+    // Do nothing.
   }
 
   /**

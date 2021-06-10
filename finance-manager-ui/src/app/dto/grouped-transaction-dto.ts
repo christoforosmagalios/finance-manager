@@ -7,5 +7,6 @@ export class GroupedTransactionDTO {
     public transactions: Array<GroupedTransactionInfoDTO>;
 
     constructor() {
+        // Do nothing.
     }
 }

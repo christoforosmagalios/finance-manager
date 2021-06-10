@@ -11,5 +11,6 @@ export class TransactionsFilter {
     public transactionCategory: TransactionCategoryDTO;
 
     constructor() {
+        // Do nothing.
     }
 }

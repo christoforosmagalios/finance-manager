@@ -3,7 +3,6 @@ import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { GroupedTransactionDTO } from '../dto/grouped-transaction-dto';
 import { TransactionItemDTO } from '../dto/transaction-item-dto';
-import { Constants } from '../shared/constants/constants';
 import { UtilsService } from '../shared/services/utils.service';
 import { TransactionService } from '../transactions/transaction.service';
 import { DashboardService } from './dashboard.service';

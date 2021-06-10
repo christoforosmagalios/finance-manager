@@ -112,6 +112,7 @@ export class LineChartComponent implements OnInit {
   constructor(private utils: UtilsService) { }
 
   ngOnInit(): void {
+    // Do nothing.
   }
 
   /**

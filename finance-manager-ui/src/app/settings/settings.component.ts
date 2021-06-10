@@ -11,6 +11,7 @@ export class SettingsComponent implements OnInit {
   constructor(public route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    // Do nothing.
   }
 
 }

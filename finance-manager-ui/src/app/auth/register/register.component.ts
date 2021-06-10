@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
     private utils: UtilsService) { }
 
   ngOnInit(): void {
+    // Do nothing.
   }
 
   /**

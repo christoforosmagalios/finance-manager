@@ -4,5 +4,6 @@ export class SortDTO {
     public direction: string;
 
     constructor() {
+        // Do nothing.
     }
 }

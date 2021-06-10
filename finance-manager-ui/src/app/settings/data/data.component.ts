@@ -16,7 +16,7 @@ export class DataComponent implements OnInit {
     private utils: UtilsService) { }
 
   ngOnInit(): void {
-    
+    // Do nothing.
   }
 
   reindex() {

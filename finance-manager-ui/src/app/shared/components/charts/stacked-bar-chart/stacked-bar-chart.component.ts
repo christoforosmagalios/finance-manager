@@ -77,6 +77,7 @@ export class StackedBarChartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Do nothing.
   }
 
   /**

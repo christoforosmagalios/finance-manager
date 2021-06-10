@@ -5,5 +5,6 @@ export class GroupedTransactionInfoDTO {
     public amount: number;
 
     constructor() {
+        // Do nothing.
     }
 }

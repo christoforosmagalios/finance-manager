@@ -20,6 +20,7 @@ export class SortableDirective implements OnInit {
     }
 
     ngOnInit() {
+        // Do nothing.
     }
 
     ngOnChanges(changes: SimpleChanges) {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ForgotPasswordDTO } from 'src/app/dto/forgot-password-dto';
 import { ResetPasswordDTO } from 'src/app/dto/reset-password-dto';
 import { LoaderService } from 'src/app/shared/components/loader/loader.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';

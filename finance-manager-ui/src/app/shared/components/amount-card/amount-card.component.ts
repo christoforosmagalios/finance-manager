@@ -15,9 +15,12 @@ export class AmountCardComponent implements OnInit {
   // The amount.
   @Input() amount: number;
 
-  constructor() { }
+  constructor() { 
+    // Do nothing.
+  }
 
   ngOnInit(): void {
+    // Do nothing.
   }
 
 }

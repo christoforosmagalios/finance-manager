@@ -1,7 +1,6 @@
 import { BaseDTO } from './base-dto';
 import { TransactionCategoryDTO } from './transaction-category-dto';
 import { BillDTO } from './bill-dto';
-import { UtilsService } from '../shared/services/utils.service';
 
 export class TransactionDTO extends BaseDTO {
 
