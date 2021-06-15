@@ -27,6 +27,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ import org.springframework.stereotype.Service;
  * The Transaction Service.
  */
 @Service
+@Slf4j
 public class TransactionService extends BaseService<TransactionDTO, Transaction> {
 
   @Autowired
@@ -200,6 +202,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     if (transaction.getUser().getId().equals(userService.getLoggedInUserId())) {
       transactionRepository.deleteById(transaction.getId());
     } else {
+      log.error("User " + userService.getLoggedInUserId() + " is not allowed to delete this transaction.");
       throw new FinanceManagerException(AppConstants.NOT_ALLOWED, HttpStatus.FORBIDDEN);
     }
   }
