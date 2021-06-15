@@ -5,8 +5,7 @@ import { CRUDService } from 'src/app/shared/services/crud.service';
 
 @Component({
   selector: 'app-bill-categories',
-  templateUrl: './bill-categories.component.html',
-  styleUrls: ['./bill-categories.component.css']
+  templateUrl: './bill-categories.component.html'
 })
 export class BillCategoriesComponent implements OnInit {
   // List of bill categories.

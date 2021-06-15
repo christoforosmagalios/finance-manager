@@ -33,11 +33,18 @@ export class AddressItemComponent implements OnInit {
     // Show the loader.
     this.loader.show();
     this.crud.delete(Constants.ENTITY.ADDRESS, this.address.id).subscribe(res => {
-      // Hide the loader.
-      this.loader.hide();
-      // Send event to the parent in order to reload the address list.
-      this.updateAddresses.emit();
+      this.hideLoaderAndEmitEvent();
     });
+  }
+
+  /**
+   * Hide the loader and emit the update Addresses event.
+   */
+  hideLoaderAndEmitEvent() {
+    // Hide the loader.
+    this.loader.hide();
+    // Send event to the parent in order to reload the address list.
+    this.updateAddresses.emit();
   }
 
   /**
@@ -47,10 +54,7 @@ export class AddressItemComponent implements OnInit {
     // Show the loader.
     this.loader.show();
     this.crud.save(Constants.ENTITY.ADDRESS, this.address).subscribe(res => {
-      // Hide the loader.
-      this.loader.hide();
-      // Send event to the parent in order to reload the address list.
-      this.updateAddresses.emit();
+      this.hideLoaderAndEmitEvent();
     });
   }
 

@@ -6,8 +6,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-bills-expire-soon',
-  templateUrl: './bills-expire-soon.component.html',
-  styleUrls: ['./bills-expire-soon.component.css']
+  templateUrl: './bills-expire-soon.component.html'
 })
 export class BillsExpireSoonComponent implements OnInit {
 

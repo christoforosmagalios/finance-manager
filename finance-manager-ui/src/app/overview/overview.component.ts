@@ -12,8 +12,7 @@ import { TransactionService } from '../transactions/transaction.service';
 
 @Component({
   selector: 'app-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.css']
+  templateUrl: './overview.component.html'
 })
 export class OverviewComponent implements OnInit {
   // Month overview object.

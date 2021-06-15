@@ -7,8 +7,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-stacked-bar-chart',
-  templateUrl: './stacked-bar-chart.component.html',
-  styleUrls: ['./stacked-bar-chart.component.css']
+  templateUrl: './stacked-bar-chart.component.html'
 })
 export class StackedBarChartComponent implements OnInit {
   // Chart Object.

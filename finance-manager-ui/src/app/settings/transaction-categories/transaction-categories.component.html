@@ -9,9 +9,9 @@
                     <caption>{{ 'transaction.categories.table' | translate }}</caption>
                     <thead>
                         <tr>
-                            <th scope="col" width="5%">{{ 'order' | translate }}</th>
-                            <th scope="col" width="10%">{{ 'code' | translate }}</th>
-                            <th scope="col" width="7%">{{ 'color' | translate }}</th>
+                            <th scope="col" style="width: 5%;">{{ 'order' | translate }}</th>
+                            <th scope="col" style="width: 10%;">{{ 'code' | translate }}</th>
+                            <th scope="col" style="width: 7%;">{{ 'color' | translate }}</th>
                             <th scope="col">{{ 'description' | translate }}</th>
                         </tr>
                     </thead>
@@ -19,7 +19,9 @@
                         <tr *ngFor="let tc of transactionCatogories; index as i;">
                             <td>{{ tc.order }}</td>
                             <td>{{ tc.code }}</td>
-                            <td><div class="color-circle" [ngStyle]="{'background': tc.color}" ngbTooltip="{{ tc.color }}"></div></td>
+                            <td>
+                                <div class="color-circle" [ngStyle]="{'background': tc.color}" ngbTooltip="{{ tc.color }}"></div>
+                            </td>
                             <td>{{ tc.name | translate }}</td>
                         </tr>
                     </tbody>

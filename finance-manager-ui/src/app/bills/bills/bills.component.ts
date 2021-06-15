@@ -14,7 +14,6 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 @Component({
   selector: 'app-bills',
   templateUrl: './bills.component.html',
-  styleUrls: ['./bills.component.css'],
   providers: [{provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter}]
 })
 export class BillsComponent implements OnInit {

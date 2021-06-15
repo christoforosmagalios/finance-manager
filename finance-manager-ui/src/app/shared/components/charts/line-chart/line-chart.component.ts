@@ -7,8 +7,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-line-chart',
-  templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.css']
+  templateUrl: './line-chart.component.html'
 })
 export class LineChartComponent implements OnInit {
   // Chart object.

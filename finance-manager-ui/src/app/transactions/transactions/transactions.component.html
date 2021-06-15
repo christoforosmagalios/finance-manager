@@ -9,8 +9,7 @@
                 <div class="container-fluid">
                     <div class="row mt-4">
                         <div class="col-6">
-                            <button type="button" class="btn btn-secondary btn-sm" (click)="filterIsCollapsed = !filterIsCollapsed"
-                            [attr.aria-expanded]="!filterIsCollapsed" aria-controls="transactionsFilter">
+                            <button type="button" class="btn btn-secondary btn-sm" (click)="filterIsCollapsed = !filterIsCollapsed" [attr.aria-expanded]="!filterIsCollapsed" aria-controls="transactionsFilter">
                                 <span class="fas fa-filter"></span>
                             </button>
                         </div>
@@ -37,8 +36,7 @@
                                 <!-- Transaction Category -->
                                 <div class="form-group">
                                     <label for="transactionCategory">{{ 'category' | translate }}</label>
-                                    <select class="form-control" id="transactionCategory" name="transactionCategory" [(ngModel)]="filter.transactionCategory"
-                                    [compareWith]="utils.compareById">
+                                    <select class="form-control" id="transactionCategory" name="transactionCategory" [(ngModel)]="filter.transactionCategory" [compareWith]="utils.compareById">
                                         <option [ngValue]="null"></option>
                                         <option *ngFor="let transactionCategory of transactionCategories;" [ngValue]="transactionCategory">
                                             {{ transactionCategory.name | translate }}
@@ -49,7 +47,7 @@
                             <div class="col-md-3 col-12">
                                 <div class="form-group">
                                     <label for="billCode">{{ 'bill.code' | translate }}</label>
-                                    <input class="form-control" id="billCode" name="billCode" [(ngModel)]="filter.billCode"/>
+                                    <input class="form-control" id="billCode" name="billCode" [(ngModel)]="filter.billCode" />
                                 </div>
                             </div>
                         </div>
@@ -57,9 +55,8 @@
                             <div class="col-md-3 col-6">
                                 <label for="dateFrom">{{ 'date.from' | translate }}</label>
                                 <div class="input-group">
-                                    <input class="form-control fm-datepicker-readonly" placeholder="DD/MM/YYYY" [value]="formatter.format(dateFrom)"
-                                    id="dateFrom" name="dateFrom" ngbDatepicker #df="ngbDatepicker" (dateSelect)="filter.dateFrom = utils.onDateSelection($event)" 
-                                    [readonly]="true" [(ngModel)]="dateFrom">
+                                    <input class="form-control fm-datepicker-readonly" placeholder="DD/MM/YYYY" [value]="formatter.format(dateFrom)" id="dateFrom" name="dateFrom" ngbDatepicker #df="ngbDatepicker" (dateSelect)="filter.dateFrom = utils.onDateSelection($event)" [readonly]="true"
+                                        [(ngModel)]="dateFrom">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" (click)="df.toggle()" type="button">
                                             <span class="far fa-calendar-alt"></span>
@@ -70,9 +67,7 @@
                             <div class="col-md-3 col-6">
                                 <label for="dateTo">{{ 'date.to' | translate }}</label>
                                 <div class="input-group">
-                                    <input class="form-control fm-datepicker-readonly" placeholder="DD/MM/YYYY" [value]="formatter.format(dateTo)"
-                                    id="dateTo" name="dateTo" ngbDatepicker #dt="ngbDatepicker" (dateSelect)="filter.dateTo = utils.onDateSelection($event)" 
-                                    [readonly]="true" [(ngModel)]="dateTo">
+                                    <input class="form-control fm-datepicker-readonly" placeholder="DD/MM/YYYY" [value]="formatter.format(dateTo)" id="dateTo" name="dateTo" ngbDatepicker #dt="ngbDatepicker" (dateSelect)="filter.dateTo = utils.onDateSelection($event)" [readonly]="true" [(ngModel)]="dateTo">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" (click)="dt.toggle()" type="button">
                                             <span class="far fa-calendar-alt"></span>
@@ -83,15 +78,13 @@
                             <div class="col-md-3 col-6">
                                 <div class="form-group">
                                     <label for="amountFrom">{{ 'amount.from' | translate }}</label>
-                                    <input class="form-control" id="amountFrom" name="amountFrom" [ngModel]="filter.amountFrom | number:'1.2-2'" 
-                                    (change)="utils.setTwoNumberDecimal($event.target.value)" (ngModelChange)="filter.amountFrom=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
+                                    <input class="form-control" id="amountFrom" name="amountFrom" [ngModel]="filter.amountFrom | number:'1.2-2'" (change)="utils.setTwoNumberDecimal($event.target.value)" (ngModelChange)="filter.amountFrom=$event" [ngModelOptions]="{updateOn: 'blur'}" />
                                 </div>
                             </div>
                             <div class="col-md-3 col-6">
                                 <div class="form-group">
                                     <label for="amountTo">{{ 'amount.to' | translate }}</label>
-                                    <input class="form-control" id="amountTo" name="amountTo" [ngModel]="filter.amountTo | number:'1.2-2'"
-                                    (change)="utils.setTwoNumberDecimal($event.target.value)" (ngModelChange)="filter.amountTo=$event" [ngModelOptions]="{updateOn: 'blur'}"/>
+                                    <input class="form-control" id="amountTo" name="amountTo" [ngModel]="filter.amountTo | number:'1.2-2'" (change)="utils.setTwoNumberDecimal($event.target.value)" (ngModelChange)="filter.amountTo=$event" [ngModelOptions]="{updateOn: 'blur'}" />
                                 </div>
                             </div>
                         </div>
@@ -129,8 +122,8 @@
                                     <td> {{ t.description }}</td>
                                     <td> {{ t.date | date:'dd/MM/yyyy' }}</td>
                                     <td> {{ t.amount | currency:'EUR' }} </td>
-                                    <td> 
-                                        <a *ngIf="t.bill" routerLink="/bill/{{t.bill.id}}">{{ t.bill.code }}</a> 
+                                    <td>
+                                        <a *ngIf="t.bill" routerLink="/bill/{{t.bill.id}}">{{ t.bill.code }}</a>
                                     </td>
                                     <td class="text-right">
                                         <button class="btn btn-sm btn-primary btn-square" routerLink="/transaction/{{ t.id }}" *ngIf="!t.enableDelete" ngbTooltip="{{ 'show' | translate }}">
@@ -154,18 +147,14 @@
 
                     <div class="row  mt-5">
                         <div class="col-md-3 col-12 items-per-page-container">
-                            <div class="d-inline-block mr-2">{{ 'items' | translate }}:</div> 
+                            <div class="d-inline-block mr-2">{{ 'items' | translate }}:</div>
                             <select class="form-control d-inline-block items-per-page" [(ngModel)]="size" (change)="findAll()">
                                 <option *ngFor="let item of itemsPerPage;">{{ item }}</option>
                             </select>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="d-flex justify-content-center" *ngIf="transactions.length > 0">
-                                <ngb-pagination
-                                [collectionSize]="collectionSize"
-                                [(page)]="page"
-                                [pageSize]="size"
-                                (pageChange)="findAll()"></ngb-pagination>
+                                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="size" (pageChange)="findAll()"></ngb-pagination>
                             </div>
                         </div>
                         <div class="col-md-3 col-12"></div>

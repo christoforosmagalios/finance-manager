@@ -8,8 +8,7 @@ import { GroupedTransactionInfoDTO } from 'src/app/dto/grouped-transaction-info-
 
 @Component({
   selector: 'app-pie-chart',
-  templateUrl: './pie-chart.component.html',
-  styleUrls: ['./pie-chart.component.css']
+  templateUrl: './pie-chart.component.html'
 })
 export class PieChartComponent implements OnInit {
   // Chart Object.

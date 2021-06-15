@@ -2,8 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-amount-card',
-  templateUrl: './amount-card.component.html',
-  styleUrls: ['./amount-card.component.css']
+  templateUrl: './amount-card.component.html'
 })
 export class AmountCardComponent implements OnInit {
   // The header.

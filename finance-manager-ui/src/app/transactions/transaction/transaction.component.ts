@@ -16,7 +16,6 @@ import { BillDTO } from '../../dto/bill-dto';
 @Component({
   selector: 'app-transaction',
   templateUrl: './transaction.component.html',
-  styleUrls: ['./transaction.component.css'],
   providers: [{provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter}]
 })
 export class TransactionComponent implements OnInit {
