@@ -9,14 +9,15 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>com.github.cmag</groupId>
   <artifactId>finance-manager-ui</artifactId>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
   <properties>
     <frontend-maven-plugin.version>1.7.6</frontend-maven-plugin.version>
     <node.version>v12.16.0</node.version>
     <npm.version>6.13.4</npm.version>
+    <sonar.sources>src/app</sonar.sources>
   </properties>
 
   <build>
