@@ -2,7 +2,6 @@ package com.github.cmag.financemanager.model;
 
 import com.github.cmag.financemanager.model.master.data.TransactionCategory;
 import java.time.LocalDate;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;

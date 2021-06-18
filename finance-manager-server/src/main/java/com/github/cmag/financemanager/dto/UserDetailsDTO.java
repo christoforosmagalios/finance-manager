@@ -1,7 +1,6 @@
 package com.github.cmag.financemanager.dto;
 
 import com.github.cmag.financemanager.config.AppConstants;
-import com.github.cmag.financemanager.util.validation.PasswordsMatch;
 import com.github.cmag.financemanager.util.validation.UniqueEmail;
 import com.github.cmag.financemanager.util.validation.UniqueUsername;
 import javax.validation.constraints.Email;

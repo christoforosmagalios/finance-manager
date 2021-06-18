@@ -1,7 +1,6 @@
 package com.github.cmag.financemanager.dto;
 
 import com.github.cmag.financemanager.dto.master.data.BillCategoryDTO;
-import com.github.cmag.financemanager.dto.master.data.TransactionCategoryDTO;
 import java.time.LocalDate;
 import lombok.Data;
 
