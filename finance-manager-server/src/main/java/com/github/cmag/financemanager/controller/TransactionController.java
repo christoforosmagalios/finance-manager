@@ -48,7 +48,7 @@ public class TransactionController extends BaseController<TransactionDTO, Transa
    * @return The Page result.
    */
   @PostMapping("/paginated")
-  public PageItem findAll(Pageable pageable, @RequestBody TransactionFilterDTO filter) {
+  public PageItem<TransactionDTO> findAll(Pageable pageable, @RequestBody TransactionFilterDTO filter) {
     return transactionService.findAllPaginated(pageable, filter);
   }
 

@@ -16,6 +16,8 @@ public class AppConstants {
 
   // Base64 jpg prefix.
   public static final String DATA_IMAGE = "data:image/jpeg;base64,";
+  // Money format.
+  public static final String MONEY_FORMAT = "%,.2f";
 
   // Invalid file size error message key.
   public static final String INVALID_FILE_SIZE = "invalid.file.size";

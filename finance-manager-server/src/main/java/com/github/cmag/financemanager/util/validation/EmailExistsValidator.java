@@ -42,9 +42,6 @@ public class EmailExistsValidator implements ConstraintValidator<EmailExists, Fo
         .disableDefaultConstraintViolation();
 
     UserDTO userDTO = userService.findByEmail(forgotPassword.getEmail());
-    if (Objects.isNull(userDTO)) {
-      return false;
-    }
-    return true;
+    return !Objects.isNull(userDTO);
   }
 }

@@ -2,7 +2,6 @@ package com.github.cmag.financemanager.controller;
 
 import com.github.cmag.financemanager.dto.SearchResultDTO;
 import com.github.cmag.financemanager.service.ElasticSearchService;
-import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +24,7 @@ public class ElasticSearchController {
    * Perform a full reindex.
    */
   @PostMapping(path = "/reindex")
-  public void reindex() throws IOException {
+  public void reindex() {
     elasticSearchService.reindex();
   }
 

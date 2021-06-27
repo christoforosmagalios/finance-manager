@@ -5,6 +5,6 @@ import com.github.cmag.financemanager.model.master.data.TransactionCategory;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public abstract class TransactionCategoryMapper extends BaseMapper<TransactionCategoryDTO, TransactionCategory> {
+public interface TransactionCategoryMapper extends BaseMapper<TransactionCategoryDTO, TransactionCategory> {
 
 }

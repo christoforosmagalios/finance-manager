@@ -4,16 +4,11 @@ import com.github.cmag.financemanager.dto.BillDTO;
 import com.github.cmag.financemanager.dto.SearchResultDTO;
 import com.github.cmag.financemanager.es.index.BillIndex;
 import com.github.cmag.financemanager.model.Bill;
-import com.github.cmag.financemanager.service.FileService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(componentModel = "spring")
-public abstract class BillMapper extends BaseMapper<BillDTO, Bill> {
-
-  @Autowired
-  private FileService fileService;
+public interface BillMapper extends BaseMapper<BillDTO, Bill> {
 
   /**
    * Map a BillIndex to a BillDTO.
@@ -23,7 +18,7 @@ public abstract class BillMapper extends BaseMapper<BillDTO, Bill> {
    */
   @Mapping(source = "categoryName", target = "billCategory.name")
   @Mapping(source = "userId", target = "user.id")
-  public abstract BillDTO mapToDTO(BillIndex billIndex);
+  BillDTO mapToDTO(BillIndex billIndex);
 
   /**
    * Map a Bill to a BillIndex.
@@ -34,7 +29,7 @@ public abstract class BillMapper extends BaseMapper<BillDTO, Bill> {
   @Mapping(source = "billCategory.name", target = "categoryName")
   @Mapping(source = "billCategory.id", target = "categoryId")
   @Mapping(source = "user.id", target = "userId")
-  public abstract BillIndex mapToIndex(Bill bill);
+  BillIndex mapToIndex(Bill bill);
 
   /**
    * Map a BillDTO to a BillIndex.
@@ -45,7 +40,7 @@ public abstract class BillMapper extends BaseMapper<BillDTO, Bill> {
   @Mapping(source = "billCategory.name", target = "categoryName")
   @Mapping(source = "billCategory.id", target = "categoryId")
   @Mapping(source = "user.id", target = "userId")
-  public abstract BillIndex mapToIndex(BillDTO billDTO);
+  BillIndex mapToIndex(BillDTO billDTO);
 
   /**
    * Map a BillIndex to a SearchResultDTO.
@@ -55,5 +50,5 @@ public abstract class BillMapper extends BaseMapper<BillDTO, Bill> {
    * @return The mapped SearchResultDTO.
    */
   @Mapping(expression = "java(true)", target = "bill")
-  public abstract SearchResultDTO mapToSearchResult(BillIndex billIndex, float score);
+  SearchResultDTO mapToSearchResult(BillIndex billIndex, float score);
 }

@@ -45,10 +45,7 @@ public class UniqueUsernameValidator implements
         .disableDefaultConstraintViolation();
 
     UserDTO userDTO = userService.findByUsername(user.getUsername());
-    if (Objects.isNull(userDTO)
-        || !StringUtils.isEmpty(user.getId()) && userDTO.getId().equals(user.getId())) {
-      return true;
-    }
-    return false;
+    return Objects.isNull(userDTO)
+        || !StringUtils.isEmpty(user.getId()) && userDTO.getId().equals(user.getId());
   }
 }

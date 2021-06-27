@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public abstract class TransactionMapper extends BaseMapper<TransactionDTO, Transaction> {
+public interface TransactionMapper extends BaseMapper<TransactionDTO, Transaction> {
 
   /**
    * Map a Transaction to a TransactionIndex.
@@ -22,7 +22,7 @@ public abstract class TransactionMapper extends BaseMapper<TransactionDTO, Trans
   @Mapping(source = "transactionCategory.name", target = "categoryName")
   @Mapping(source = "transactionCategory.color", target = "categoryColor")
   @Mapping(source = "user.id", target = "userId")
-  public abstract TransactionIndex mapToIndex(Transaction transaction);
+  TransactionIndex mapToIndex(Transaction transaction);
 
   /**
    * Map a TransactionDTO to a TransactionIndex.
@@ -36,7 +36,7 @@ public abstract class TransactionMapper extends BaseMapper<TransactionDTO, Trans
   @Mapping(source = "transactionCategory.name", target = "categoryName")
   @Mapping(source = "transactionCategory.color", target = "categoryColor")
   @Mapping(source = "user.id", target = "userId")
-  public abstract TransactionIndex mapToIndex(TransactionDTO transactionDTO);
+  TransactionIndex mapToIndex(TransactionDTO transactionDTO);
 
   /**
    * Map a TransactionIndex to a TransactionDTO.
@@ -49,7 +49,7 @@ public abstract class TransactionMapper extends BaseMapper<TransactionDTO, Trans
   @Mapping(source = "userId", target = "user.id")
   @Mapping(source = "categoryId", target = "transactionCategory.id")
   @Mapping(source = "categoryName", target = "transactionCategory.name")
-  public abstract TransactionDTO mapToDTO(TransactionIndex transactionIndex);
+  TransactionDTO mapToDTO(TransactionIndex transactionIndex);
 
   /**
    * Map a TransactionIndex to a SearchResultDTO.
@@ -59,5 +59,5 @@ public abstract class TransactionMapper extends BaseMapper<TransactionDTO, Trans
    * @return The mapped SearchResultDTO.
    */
   @Mapping(expression = "java(false)", target = "bill")
-  public abstract SearchResultDTO mapToSearchResult(TransactionIndex transactionIndex, float score);
+  SearchResultDTO mapToSearchResult(TransactionIndex transactionIndex, float score);
 }

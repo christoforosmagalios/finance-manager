@@ -96,9 +96,7 @@ public class BillService extends BaseService<BillDTO, Bill> {
 
     List<BillDTO> bills = new ArrayList<>();
     // Map the bills to dto representations.
-    result.getSearchHits().forEach(hit -> {
-      bills.add(mapper.mapToDTO(hit.getContent()));
-    });
+    result.getSearchHits().forEach(hit -> bills.add(mapper.mapToDTO(hit.getContent())));
     // Create a new page item based on the results.
     return new PageItem<>(bills, result.getTotalHits());
   }
@@ -230,7 +228,7 @@ public class BillService extends BaseService<BillDTO, Bill> {
 
     // Fetch bills and sum their amount.
     return es.findByPaidFalseAndDueDateLessThanEqualAndUserIdOrderByDueDateDesc(to,
-        userId).stream().mapToDouble(o -> o.getAmount()).sum();
+        userId).stream().mapToDouble(BillIndex::getAmount).sum();
   }
 
   /**

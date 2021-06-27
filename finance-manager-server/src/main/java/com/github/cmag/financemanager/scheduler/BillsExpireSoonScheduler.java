@@ -50,6 +50,9 @@ public class BillsExpireSoonScheduler {
   private static final String SUBJECT = "Some Bills will expire soon";
   private static final String PADDING = "padding:7px;";
   private static final String TH_STYLE = "border-bottom: 1px solid #cccccc;color:#4e73df;";
+  private static final String TH = "th";
+  private static final String TD = "th";
+  private static final String STYLE = "style";
   private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
   /**
@@ -109,11 +112,11 @@ public class BillsExpireSoonScheduler {
         + "will expire soon:</p><div>{2}</div><p>Finance Manager.</p></body></html>";
     // The bills table template.
     String table = "<table style=\"border-collapse: collapse;margin: 25px 0px 25px 10px;\"><tr>"
-        + "<th style=\"" + PADDING + TH_STYLE + "\">CODE</th>"
-        + "<th style=\"" + PADDING + TH_STYLE + "\">DESCRIPTION</th>"
-        + "<th style=\"" + PADDING + TH_STYLE + "\">ISSUED ON</th>"
-        + "<th style=\"" + PADDING + TH_STYLE + "\">DUE DATE</th>"
-        + "<th style=\"" + PADDING + TH_STYLE + "\">AMOUNT</th>"
+        + "<" + TH + " " + STYLE +"=\"" + PADDING + TH_STYLE + "\">CODE</" + TH + ">"
+        + "<" + TH + " " + STYLE +"=\"" + PADDING + TH_STYLE + "\">DESCRIPTION</" + TH + ">"
+        + "<" + TH + " " + STYLE +"=\"" + PADDING + TH_STYLE + "\">ISSUED ON</" + TH + ">"
+        + "<" + TH + " " + STYLE +"=\"" + PADDING + TH_STYLE + "\">DUE DATE</" + TH + ">"
+        + "<" + TH + " " + STYLE +"=\"" + PADDING + TH_STYLE + "\">AMOUNT</" + TH + ">"
         + "</tr>{0}</table>";
     // Generate the rows and add them to the table.
     table = MessageFormat.format(table, generateTableRows(bills));
@@ -142,12 +145,12 @@ public class BillsExpireSoonScheduler {
 
       rows.append(
           "<tr>"
-              + "<td style=\"" + PADDING + "\">" + bill.getCode() + "</td>"
-              + "<td style=\"" + PADDING + "\">" + bill.getDescription() + "</td>"
-              + "<td style=\"" + PADDING + "\">" + bill.getIssuedOn().format(formatter) + "</td>"
-              + "<td style=\"" + PADDING + expired + "\">" + bill.getDueDate().format(formatter)
-              + "</td>"
-              + "<td style=\"" + PADDING + "text-align:right;\">" + bill.getAmount() + " €</td>"
+              + "<" + TD + " " + STYLE +"=\"" + PADDING + "\">" + bill.getCode() + "</" + TD + ">"
+              + "<" + TD + " " + STYLE +"=\"" + PADDING + "\">" + bill.getDescription() + "</" + TD + ">"
+              + "<" + TD + " " + STYLE +"=\"" + PADDING + "\">" + bill.getIssuedOn().format(formatter) + "</" + TD + ">"
+              + "<" + TD + " " + STYLE +"=\"" + PADDING + expired + "\">" + bill.getDueDate().format(formatter)
+              + "</" + TD + ">"
+              + "<" + TD + " " + STYLE +"=\"" + PADDING + "text-align:right;\">" + bill.getAmount() + " €</" + TD + ">"
               + "</tr>");
     }
     return rows.toString();

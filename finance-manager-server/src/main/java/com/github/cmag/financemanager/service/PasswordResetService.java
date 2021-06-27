@@ -89,7 +89,7 @@ public class PasswordResetService {
     String subject = translationService.translate("password.reset.mail.subject", language);
     // Send the email.
     boolean sent = emailService
-        .send(email, subject, body, getFinanceManagerLogo(), MimeBodyPart.INLINE);
+        .send(email, subject, body, getFinanceManagerLogo(), javax.mail.Part.INLINE);
     // In case the email could not be sent, throw an exception.
     if (!sent) {
       throw new FinanceManagerException(AppConstants.GENERIC_ERROR, HttpStatus.BAD_REQUEST);

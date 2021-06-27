@@ -55,6 +55,6 @@ public class NotAlreadyLinkedValidator implements
     // Find the transactions that are linked with the bill.
     List<TransactionDTO> transactionDTOS = transactionService
         .findTransactionsByBillId(transactionDTO.getBill().getId(), transactionDTO.getId());
-    return transactionDTOS.size() == 0;
+    return transactionDTOS.isEmpty();
   }
 }

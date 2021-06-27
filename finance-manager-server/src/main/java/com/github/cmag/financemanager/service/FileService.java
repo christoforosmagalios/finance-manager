@@ -48,8 +48,7 @@ public class FileService {
       throw new FinanceManagerException(AppConstants.INVALID_FILE_SIZE);
     }
     // Check the file type.
-    if (!file.getContentType().equals(PNG_CONTENT) && !file.getContentType()
-        .equals(JPG_CONTENT)) {
+    if (!PNG_CONTENT.equals(file.getContentType()) && !JPG_CONTENT.equals(file.getContentType())) {
       throw new FinanceManagerException(AppConstants.INVALID_FILE_TYPE);
     }
     return AppConstants.DATA_IMAGE + encodeToBase64(file);

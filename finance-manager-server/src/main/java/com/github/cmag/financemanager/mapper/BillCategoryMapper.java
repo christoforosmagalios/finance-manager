@@ -5,6 +5,6 @@ import com.github.cmag.financemanager.model.master.data.BillCategory;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public abstract class BillCategoryMapper extends BaseMapper<BillCategoryDTO, BillCategory> {
+public interface BillCategoryMapper extends BaseMapper<BillCategoryDTO, BillCategory> {
 
 }

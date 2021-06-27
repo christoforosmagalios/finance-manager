@@ -12,6 +12,10 @@ import java.util.Locale;
  */
 public class Utils {
 
+  private Utils() {
+    // default constructor.
+  }
+
   /**
    * Get the first day of the given month and year.
    *

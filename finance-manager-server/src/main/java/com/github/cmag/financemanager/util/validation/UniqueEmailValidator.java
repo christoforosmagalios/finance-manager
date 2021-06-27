@@ -43,10 +43,7 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, Us
         .disableDefaultConstraintViolation();
     
     UserDTO userDTO = userService.findByEmail(user.getEmail());
-    if (Objects.isNull(userDTO)
-        || !StringUtils.isEmpty(user.getId()) && userDTO.getId().equals(user.getId())) {
-      return true;
-    }
-    return false;
+    return Objects.isNull(userDTO)
+        || !StringUtils.isEmpty(user.getId()) && userDTO.getId().equals(user.getId());
   }
 }

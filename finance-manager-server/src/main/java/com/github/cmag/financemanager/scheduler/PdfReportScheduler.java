@@ -1,5 +1,6 @@
 package com.github.cmag.financemanager.scheduler;
 
+import com.github.cmag.financemanager.config.AppConstants;
 import com.github.cmag.financemanager.dto.UserDTO;
 import com.github.cmag.financemanager.service.BillService;
 import com.github.cmag.financemanager.service.EmailService;
@@ -77,9 +78,9 @@ public class PdfReportScheduler {
         File pdf = generatePdf(template, filename);
         // Send the PDF as an attachment.
         emailService
-            .send(user.getEmail(), "Overview - " + Utils.getMonthName(month) + " " + year, "", pdf, MimeBodyPart.ATTACHMENT);
+            .send(user.getEmail(), "Overview - " + Utils.getMonthName(month) + " " + year, "", pdf, javax.mail.Part.ATTACHMENT);
         // Delete the PDF.
-        pdf.delete();
+        java.nio.file.Files.delete(pdf.toPath());
       } catch (IOException | DocumentException e) {
         log.error(e.getLocalizedMessage(), e);
       }
@@ -130,10 +131,10 @@ public class PdfReportScheduler {
     Context context = new Context();
     context.setVariable("month", Utils.getMonthName(month));
     context.setVariable("year", year);
-    context.setVariable("balance", String.format("%,.2f", balance));
-    context.setVariable("income", String.format("%,.2f", income));
-    context.setVariable("expenses", String.format("%,.2f", expenses));
-    context.setVariable("pending", String.format("%,.2f", pending));
+    context.setVariable("balance", String.format(AppConstants.MONEY_FORMAT, balance));
+    context.setVariable("income", String.format(AppConstants.MONEY_FORMAT, income));
+    context.setVariable("expenses", String.format(AppConstants.MONEY_FORMAT, expenses));
+    context.setVariable("pending", String.format(AppConstants.MONEY_FORMAT, pending));
     return context;
   }
 

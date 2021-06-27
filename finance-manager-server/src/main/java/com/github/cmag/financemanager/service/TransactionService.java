@@ -121,9 +121,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
 
     List<TransactionDTO> transactions = new ArrayList<>();
     // Map the transactions to dto representations.
-    result.getSearchHits().forEach(hit -> {
-      transactions.add(mapper.mapToDTO(hit.getContent()));
-    });
+    result.getSearchHits().forEach(hit -> transactions.add(mapper.mapToDTO(hit.getContent())));
     // Create a new page item based on the results.
     return new PageItem<>(transactions, result.getTotalHits());
   }
@@ -273,7 +271,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
   private double findTransactionsSum(LocalDate from, LocalDate to, boolean type, String userId) {
     // Fetch transactions and sum their amount.
     return es.findByTypeAndDateBetweenAndUserId(type, from, to, userId)
-        .stream().mapToDouble(o -> o.getAmount()).sum();
+        .stream().mapToDouble(TransactionIndex::getAmount).sum();
   }
 
   /**
@@ -288,11 +286,11 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     // Get the annual earnings.
     double earnings = es
         .findByTypeAndDateBetweenAndUserId(false, from, to, userService.getLoggedInUserId())
-        .stream().mapToDouble(o -> o.getAmount()).sum();
+        .stream().mapToDouble(TransactionIndex::getAmount).sum();
     // Get teh annual spendings.
     double spendings = es
         .findByTypeAndDateBetweenAndUserId(true, from, to, userService.getLoggedInUserId())
-        .stream().mapToDouble(o -> o.getAmount()).sum();
+        .stream().mapToDouble(TransactionIndex::getAmount).sum();
 
     return earnings - spendings;
   }
@@ -360,7 +358,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
       final boolean type) {
     return transactions.stream()
         .filter(t -> (t.getDate().equals(date) && t.isType() == type))
-        .mapToDouble(o -> o.getAmount()).sum();
+        .mapToDouble(TransactionIndex::getAmount).sum();
   }
 
   /**

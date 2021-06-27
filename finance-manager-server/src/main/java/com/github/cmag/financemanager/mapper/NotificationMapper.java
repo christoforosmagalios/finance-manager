@@ -9,7 +9,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-public abstract class NotificationMapper extends BaseMapper<NotificationDTO, Notification> {
+public interface NotificationMapper extends BaseMapper<NotificationDTO, Notification> {
 
   /**
    * Get the notification description parameters and convert them into a map.
@@ -18,7 +18,7 @@ public abstract class NotificationMapper extends BaseMapper<NotificationDTO, Not
    * @param notificationDTO The NotificationDTO target.
    */
   @AfterMapping
-  public void mapNotificationParams(Notification notification,
+  default void mapNotificationParams(Notification notification,
       @MappingTarget NotificationDTO notificationDTO) {
 
     JSONObject obj = new JSONObject();
