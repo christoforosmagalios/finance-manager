@@ -37,14 +37,14 @@ export class TimeAgoPipe implements PipeTransform {
         }
 
         // Iterate though the defined time units.
-        for (let i = 0; i < this.times.length; i++) {
-            let counter = Math.floor(seconds / this.times[i].seconds);
+        for (let value of this.times) {
+            let counter = Math.floor(seconds / value.seconds);
             if (counter > 0) {
                 if (counter === 1) {
-                    let unit = this.translateService.instant(this.times[i].unit);
+                    let unit = this.translateService.instant(value.unit);
                     return this.translateService.instant("notification.time.ago", { time: counter + " " + unit})
                 } else {
-                    let unit = this.translateService.instant(this.times[i].unit + "s");
+                    let unit = this.translateService.instant(value.unit + "s");
                     return this.translateService.instant("notification.time.ago", { time: counter + " " + unit})
                 }
             }

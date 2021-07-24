@@ -124,10 +124,10 @@ export class LineChartComponent implements OnInit {
     let expenses = [];
     let labels = [];
     // Iterate through the data.
-    for(let i = 0; i < this.lineChartData.length; i++) {
-      incomes.push(this.lineChartData[i].income);
-      expenses.push(this.lineChartData[i].expense);
-      labels.push(this.lineChartData[i].label);
+    for(let value of this.lineChartData) {
+      incomes.push(value.income);
+      expenses.push(value.expense);
+      labels.push(value.label);
     }
 
     // Add the lables.

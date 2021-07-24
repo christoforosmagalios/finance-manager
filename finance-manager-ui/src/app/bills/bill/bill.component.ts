@@ -37,7 +37,7 @@ export class BillComponent implements OnInit {
   // List of bill addresses.
   addresses: Array<AddressDTO>;
   // Image location prefix.
-  imagePathPrefix = Constants.API+Constants.IMAGES+"/";
+  imagePathPrefix = Constants.API+Constants.IMAGES;
   // Error object.
   errors = {
     consumptionFrom: null,

@@ -5,6 +5,7 @@ import com.github.cmag.financemanager.util.validation.UniqueEmail;
 import com.github.cmag.financemanager.util.validation.UniqueUsername;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.Data;
 
@@ -29,6 +30,7 @@ public class UserDetailsDTO extends UserPasswordDetailsDTO {
   private String lastName;
 
   @NotBlank
-  @Email(message = AppConstants.INVALID_EMAIL, regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+  @Email(message = AppConstants.INVALID_EMAIL)
+  @Pattern(regexp=".+@.+\\..+", message = AppConstants.INVALID_EMAIL)
   private String email;
 }

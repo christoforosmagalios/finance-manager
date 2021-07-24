@@ -14,6 +14,7 @@ import liquibase.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,9 @@ public class FileService {
 
   @Value("${finance.manager.bill.images.path}")
   private String imagesPath;
+
+  @Autowired
+  private UserService userService;
 
   /**
    * Validate and convert the given file to Base64.
@@ -87,9 +91,8 @@ public class FileService {
     byte[] data = base64ToBytes(base64);
     // Create a random file name.
     String fileName = UUID.randomUUID() + JPG_EXT;
-    // Get the username of the logged in user.
-    String username = File.separator
-        + SecurityContextHolder.getContext().getAuthentication().getName();
+    // Get the id of the logged in user.
+    String username = File.separator + userService.getLoggedInUserId();
     String directoryName = imagesPath + username;
     // Create directory if not already in place.
     createDirectories(directoryName);

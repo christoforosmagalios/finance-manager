@@ -13,6 +13,7 @@ import java.util.Objects;
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,6 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * Authentication Filter.
  */
+@Slf4j
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
   private AuthenticationManager authenticationManager;
@@ -62,7 +64,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
       user = new ObjectMapper().readValue(req.getInputStream(),
           com.github.cmag.financemanager.model.User.class);
     } catch (IOException e) {
-      e.printStackTrace();
+      log.error("Could not Read/Bind User", e);
     }
 
     if (Objects.isNull(user)) {

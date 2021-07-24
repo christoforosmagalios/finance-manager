@@ -82,10 +82,10 @@ export class PieChartComponent implements OnInit {
   private createChart() {
     this.clearChart();
     let transactionInfo = this.pieChartData.transactions;
-    for (let i = 0; i < transactionInfo.length; i++) {
-      if (transactionInfo[i].amount > 0) {
+    for (let value of transactionInfo) {
+      if (value.amount > 0) {
         // Add the grouped transaction info to the chart.
-        this.addDataToChart(transactionInfo[i]);
+        this.addDataToChart(value);
       }
     }
     // Set the title.
