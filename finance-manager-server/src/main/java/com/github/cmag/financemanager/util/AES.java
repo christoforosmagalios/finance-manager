@@ -5,9 +5,11 @@ import com.github.cmag.financemanager.util.exception.FinanceManagerException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Base64;
 import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.MessageDigestAlgorithms;
@@ -18,8 +20,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AES {
 
-  private static final String AES_ECB_PKCS_5_PADDING = "AES/ECB/PKCS5Padding";
+  private static final String AES_CFB_PKCS_5_PADDING = "AES/CFB/PKCS5Padding";
   private static final String ALGORITHM = "AES";
+  private static SecureRandom random = new SecureRandom();
+  private static IvParameterSpec iv = new IvParameterSpec(random.generateSeed(16));
 
   @Value("${finance.manager.aes.secret}")
   private String secret;
@@ -51,8 +55,8 @@ public class AES {
   public String encrypt(String str) {
     try {
       SecretKeySpec secretKey = getKey(secret);
-      Cipher cipher = Cipher.getInstance(AES_ECB_PKCS_5_PADDING);
-      cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+      Cipher cipher = Cipher.getInstance(AES_CFB_PKCS_5_PADDING);
+      cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
       return Base64.getEncoder()
           .encodeToString(cipher.doFinal(str.getBytes(StandardCharsets.UTF_8)));
     } catch (Exception e) {
@@ -70,8 +74,8 @@ public class AES {
   public String decrypt(String str) {
     try {
       SecretKeySpec secretKey = getKey(secret);
-      Cipher cipher = Cipher.getInstance(AES_ECB_PKCS_5_PADDING);
-      cipher.init(Cipher.DECRYPT_MODE, secretKey);
+      Cipher cipher = Cipher.getInstance(AES_CFB_PKCS_5_PADDING);
+      cipher.init(Cipher.DECRYPT_MODE, secretKey, iv);
       return new String(cipher.doFinal(Base64.getDecoder().decode(str)));
     } catch (Exception e) {
       log.error("Error while decrypting: " + e.toString());

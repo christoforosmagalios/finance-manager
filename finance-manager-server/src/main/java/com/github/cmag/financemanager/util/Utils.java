@@ -1,5 +1,6 @@
 package com.github.cmag.financemanager.util;
 
+import java.security.SecureRandom;
 import java.text.DateFormatSymbols;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -11,6 +12,9 @@ import java.util.Locale;
  * Contains utility methods.
  */
 public class Utils {
+
+  private static SecureRandom random = new SecureRandom();
+  private static final String CHARACTER_SET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   private Utils() {
     // default constructor.
@@ -137,5 +141,20 @@ public class Utils {
       month = months[num];
     }
     return month;
+  }
+
+  /**
+   * Generate a random alphanumeric string with the given length.
+   *
+   * @param len The length.
+   * @return The alphanumeric.
+   */
+  public static String generateCode(int len) {
+    StringBuilder sb = new StringBuilder(len);
+    for (int i = 0; i < len; i++) {
+      int offset = random.nextInt(CHARACTER_SET.length());
+      sb.append(CHARACTER_SET, offset, offset + 1);
+    }
+    return sb.toString();
   }
 }

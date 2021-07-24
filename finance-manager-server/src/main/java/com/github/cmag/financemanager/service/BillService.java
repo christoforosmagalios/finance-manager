@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -65,7 +64,7 @@ public class BillService extends BaseService<BillDTO, Bill> {
   public BillDTO saveBill(BillDTO billDTO) {
 
     if (StringUtils.isEmpty(billDTO.getId())) {
-      billDTO.setCode(RandomStringUtils.randomAlphanumeric(6).toUpperCase());
+      billDTO.setCode(Utils.generateCode(6));
     }
     // Replace the new image with the old one.
     billDTO.setImgPath(fileService.createFile(billDTO.getImgPath(), billDTO.getBase64()));
