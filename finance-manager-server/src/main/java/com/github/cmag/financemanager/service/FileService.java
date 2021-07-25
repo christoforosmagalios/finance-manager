@@ -48,10 +48,13 @@ public class FileService {
   public String upload(MultipartFile file) {
     // Check the file size.
     if (file.getSize() > maxSize) {
+      log.error("The size of the given file is " + file.getSize()
+          + " which is more than the allowed one: " + maxSize);
       throw new FinanceManagerException(AppConstants.INVALID_FILE_SIZE);
     }
     // Check the file type.
     if (!PNG_CONTENT.equals(file.getContentType()) && !JPG_CONTENT.equals(file.getContentType())) {
+      log.error("The given file type " + file.getContentType() + " is not supported.");
       throw new FinanceManagerException(AppConstants.INVALID_FILE_TYPE);
     }
     return AppConstants.DATA_IMAGE + encodeToBase64(file);
@@ -68,6 +71,7 @@ public class FileService {
       byte[] bytes = file.getBytes();
       return new String(Base64.encodeBase64(bytes), StandardCharsets.UTF_8);
     } catch (IOException e) {
+      log.error("Error while encoding the file to Base64.", e);
       throw new FinanceManagerException(AppConstants.GENERIC_ERROR);
     }
   }
@@ -99,6 +103,7 @@ public class FileService {
     try (OutputStream stream = new FileOutputStream(directoryName + File.separator + fileName)) {
       stream.write(data);
     } catch (IOException e) {
+      log.error("Could not create the file: " + directoryName + File.separator + fileName, e);
       throw new FinanceManagerException(AppConstants.GENERIC_ERROR);
     }
     return username + File.separator + fileName;
@@ -116,6 +121,7 @@ public class FileService {
         java.nio.file.Files.delete(Path.of(imagesPath + File.separator + path));
       }
     } catch (IOException e) {
+      log.error("Could not delete the file: " + path, e);
       throw new FinanceManagerException(AppConstants.GENERIC_ERROR);
     }
   }
@@ -141,11 +147,14 @@ public class FileService {
   private byte[] base64ToBytes(String base64) {
     String[] split = base64.split(",");
     if (split.length <= 1 || BooleanUtils.isFalse(Base64.isBase64(split[1]))) {
+      log.error("The Base64 is invalid.");
       throw new FinanceManagerException(AppConstants.INVALID_FILE_TYPE);
     }
     byte[] data = Base64.decodeBase64(split[1].trim());
     // Check the size of the image.
     if (data.length > maxSize) {
+      log.error("The size of the given file is " + data.length
+          + " which is more than the allowed one: " + maxSize);
       throw new FinanceManagerException(AppConstants.INVALID_FILE_SIZE);
     }
     return data;

@@ -24,6 +24,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,6 +42,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
  */
 @Service
 @Transactional
+@Slf4j
 public class PasswordResetService {
 
   @Autowired
@@ -91,6 +93,7 @@ public class PasswordResetService {
         .send(email, subject, body, getFinanceManagerLogo(), javax.mail.Part.INLINE);
     // In case the email could not be sent, throw an exception.
     if (!sent) {
+      log.error("Could not send email.");
       throw new FinanceManagerException(AppConstants.GENERIC_ERROR, HttpStatus.BAD_REQUEST);
     }
   }
@@ -123,6 +126,7 @@ public class PasswordResetService {
           .encode(encryptedInfo, StandardCharsets.UTF_8.toString()));
       return uri.toURL().toString();
     } catch (MalformedURLException | UnsupportedEncodingException | URISyntaxException e){
+      log.error("Error while creating the button link of the forgot password mail.", e);
       throw new FinanceManagerException(AppConstants.GENERIC_ERROR, HttpStatus.BAD_REQUEST);
     }
   }
@@ -150,6 +154,7 @@ public class PasswordResetService {
       URL resource = getClass().getClassLoader().getResource("templates/images/logo.png");
       return new File(resource.toURI());
     } catch (URISyntaxException e) {
+      log.error("Could not fetch the logo from resources.", e);
       throw new FinanceManagerException(AppConstants.GENERIC_ERROR, HttpStatus.BAD_REQUEST);
     }
   }
@@ -214,6 +219,7 @@ public class PasswordResetService {
     // Validate the reset password id and fetch the user.
     UserDTO userDTO = validateResetPasswordId(userPasswordDetailsDTO.getResetPasswordId());
     if (Objects.isNull(userDTO)) {
+      log.error("The reset password id is invalid.");
       throw new FinanceManagerException(AppConstants.GENERIC_ERROR);
     }
     User user = userMapper.map(userDTO);

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +33,7 @@ import org.springframework.stereotype.Service;
  * The Bill Service.
  */
 @Service
+@Slf4j
 public class BillService extends BaseService<BillDTO, Bill> {
 
   @Autowired
@@ -199,10 +201,12 @@ public class BillService extends BaseService<BillDTO, Bill> {
     List<TransactionDTO> transactions = transactionService.findTransactionsByBillId(id, null);
     // In case a transaction is linked to this bill, throw exception.
     if (!transactions.isEmpty()) {
+      log.error("A Transaction is linked to the Bill with id: " + id);
       throw new FinanceManagerException(AppConstants.BILL_IS_LINKED, HttpStatus.BAD_REQUEST);
     } else if (bill.getUser().getId().equals(userService.getLoggedInUserId())) {
       billRepository.deleteById(bill.getId());
     } else {
+      log.error("The User with id : " + userService.getLoggedInUserId() + "is not allowed to delete the Bill " + id);
       throw new FinanceManagerException(AppConstants.NOT_ALLOWED, HttpStatus.FORBIDDEN);
     }
   }
@@ -281,6 +285,7 @@ public class BillService extends BaseService<BillDTO, Bill> {
   public void deleteBillImage(String id) {
     BillDTO bill = findOne(id);
     if (Objects.isNull(bill)) {
+      log.error("The Bill with id : " + id + "does not exist.");
       throw new FinanceManagerException(AppConstants.BILL_NOT_FOUND, HttpStatus.BAD_REQUEST);
     }
     fileService.delete(bill.getImgPath());
