@@ -14,6 +14,23 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     networks:
       - finance-manager
+  elasticsearch:
+      image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+      container_name: finance-manager-elasticsearch
+      environment:
+            - node.name=finance-manager-elasticsearch
+            - cluster.name=finance-manager
+            - cluster.initial_master_nodes=finance-manager-elasticsearch
+            - bootstrap.memory_lock=true
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      ulimits:
+        memlock:
+          soft: -1
+          hard: -1
+      ports:
+        - 9200:9200
+      networks:
+        - finance-manager
   server:
     build:
       context: .
