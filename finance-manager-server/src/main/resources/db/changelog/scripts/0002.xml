@@ -28,7 +28,8 @@
 							('97ad74d6-3237-11eb-adc1-0242ac120018', 'travel', 'TC019', '#f2e59b', 18, NOW(), NOW()),
 							('97ad74d6-3237-11eb-adc1-0242ac120019', 'car.bike.tax', 'TC020', '#c3b188', 19, NOW(), NOW()),
 							('97ad74d6-3237-11eb-adc1-0242ac120020', 'car.bike.mot', 'TC021', '#4d4d4c', 20, NOW(), NOW()),
-							('97ad74d6-3237-11eb-adc1-0242ac120021', 'home', 'TC022', '#804a47', 21, NOW(), NOW());
+							('97ad74d6-3237-11eb-adc1-0242ac120021', 'home', 'TC022', '#804a47', 21, NOW(), NOW()),
+							('97ad74d6-3237-11eb-adc1-0242ac120022', 'tolls', 'TC023', '#a7253f', 22, NOW(), NOW());
 
 							INSERT INTO `bill_category` (`ID`, `NAME`, `CODE`, `ORDER`, `CREATED_ON`, `UPDATED_ON`) VALUES
 							('97ad74d6-3237-11eb-adc1-0242ac130000', 'electricity', 'BC001', 0, NOW(), NOW()),
