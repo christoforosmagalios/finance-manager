@@ -76,8 +76,9 @@ export class TransactionComponent implements OnInit {
   private initForm() {
     // Find all the categories.
     this.crudService.findAll(Constants.ENTITY.TRANSACTION_CATEGORY)
-    .subscribe((categories: Array<TransactionCategoryDTO>) => {
-      this.categories = categories.sort((a, b) => this.utils.translate(a.name).localeCompare(this.utils.translate(b.name)));;
+    .subscribe((c: Array<TransactionCategoryDTO>) => {
+      this.categories = c;
+      this.categories.sort((a, b) => this.utils.translate(a.name).localeCompare(this.utils.translate(b.name)));
     });
 
     // In case of edit mode fetch the transaction from the database.
