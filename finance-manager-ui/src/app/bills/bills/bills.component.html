@@ -181,7 +181,7 @@
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="d-flex justify-content-center" *ngIf="bills.length > 0">
-                                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="size" (pageChange)="findAll()"></ngb-pagination>
+                                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="size" [maxSize]="maxSize" (pageChange)="findAll()"></ngb-pagination>
                             </div>
                         </div>
                         <div class="col-md-3 col-12"></div>

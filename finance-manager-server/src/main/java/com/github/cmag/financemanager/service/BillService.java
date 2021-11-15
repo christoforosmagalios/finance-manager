@@ -14,6 +14,7 @@ import com.github.cmag.financemanager.util.Utils;
 import com.github.cmag.financemanager.util.exception.FinanceManagerException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -179,12 +180,13 @@ public class BillService extends BaseService<BillDTO, Bill> {
    * Update the given bill to paid.
    *
    * @param billDTO The bill to be updated.
+   * @param date The payment date.
    */
-  public void updateToPaid(BillDTO billDTO) {
+  public void updateToPaid(BillDTO billDTO, LocalDate date) {
     Bill bill = billRepository.getOne(billDTO.getId());
     if (!bill.isPaid()) {
       bill.setPaid(true);
-      bill.setPaidOn(LocalDate.now());
+      bill.setPaidOn(date);
       save(mapper.map(bill));
     }
   }

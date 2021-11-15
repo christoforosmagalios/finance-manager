@@ -77,7 +77,7 @@ export class TransactionComponent implements OnInit {
     // Find all the categories.
     this.crudService.findAll(Constants.ENTITY.TRANSACTION_CATEGORY)
     .subscribe((categories: Array<TransactionCategoryDTO>) => {
-      this.categories = categories;
+      this.categories = categories.sort((a, b) => this.utils.translate(a.name).localeCompare(this.utils.translate(b.name)));;
     });
 
     // In case of edit mode fetch the transaction from the database.
@@ -152,6 +152,15 @@ export class TransactionComponent implements OnInit {
   onBillChange() {
     if (!this.bill) {
       this.bill = new BillDTO(this.utils.getNewDate());
+    }
+  }
+
+  /**
+   * If the description of the Transaction is empty add the name of the selected Category.
+   */
+  onCategoryChange() {
+    if (!this.transaction.description && this.transaction.transactionCategory) {
+      this.transaction.description = this.utils.translate(this.transaction.transactionCategory.name);
     }
   }
 

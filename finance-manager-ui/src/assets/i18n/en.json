@@ -99,7 +99,7 @@
     "food.dining": "Food/Dining",
     "car.bike.fuel": "Car/Bike Fuel",
     "others": "Other",
-    "public.transportation": "Public Transportation",
+    "public.transportation": "Transportation",
     "car.bike.insurance": "Car/Bike Insurance",
     "hobbies": "Hobbies",
     "health": "Health",
@@ -113,6 +113,7 @@
     "car.bike.mot": "Car/Bike MOT",
     "home": "Home",
     "tolls": "Tolls",
+    "coffee": "Coffee",
 
     "electricity": "Electricity",
     "water": "Water",

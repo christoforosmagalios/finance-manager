@@ -97,7 +97,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
     transactionDTO.setUser(userService.getLoggedInUserDTO());
     TransactionDTO transaction = super.save(transactionDTO);
     if (!Objects.isNull(transactionDTO.getBill())) {
-      this.billService.updateToPaid(transactionDTO.getBill());
+      this.billService.updateToPaid(transactionDTO.getBill(), transaction.getDate());
     }
     return transaction;
   }

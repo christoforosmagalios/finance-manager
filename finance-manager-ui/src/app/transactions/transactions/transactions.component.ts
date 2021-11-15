@@ -27,6 +27,8 @@ export class TransactionsComponent implements OnInit {
   collectionSize: number = 0;
   // Transactions per page.
   size: number = 10;
+  // Max number of pages
+  maxSize: number = 5;
   // The sort options to be used in pagination.
   sort: SortDTO = {
     direction: Constants.ORDER.DESC,
