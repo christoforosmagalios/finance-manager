@@ -38,7 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/auth/register",
             "/auth/forgotPassword",
             "/auth/validateResetPassword/**",
-            "/auth/changePassword").permitAll()
+            "/auth/changePassword",
+            "/swagger-ui/**",
+            "/v2/api-docs",
+            "/swagger-resources/**").permitAll()
         .anyRequest().authenticated()
         .and()
         .addFilter(new AuthenticationFilter(authenticationManager(),secret, expires, userRepository))
