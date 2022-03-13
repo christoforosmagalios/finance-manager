@@ -379,7 +379,7 @@ public class TransactionService extends BaseService<TransactionDTO, Transaction>
       transaction.setTransactionCategory(category);
       transaction.setAmount(billDTO.getAmount());
       transaction.setBill(billDTO);
-      transaction.setDate(LocalDate.now());
+      transaction.setDate(billDTO.getPaidOn());
       transaction.setDescription(billDTO.getDescription());
       transaction.setType(true);
       super.save(transaction);

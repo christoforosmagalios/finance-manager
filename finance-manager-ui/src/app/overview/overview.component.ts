@@ -117,13 +117,13 @@ export class OverviewComponent implements OnInit {
     });
 
     // Get the spendings amount.
-    this.dashboardService.getAnnualTransactionAmount(this.monthOverview.year, true)
+    this.dashboardService.getAnnualTransactionAmount(this.annualOverview, true)
     .subscribe(amount => {
       this.annualSpendings = amount;
     });
 
     // Get the earnings amount.
-    this.dashboardService.getAnnualTransactionAmount(this.monthOverview.year, false)
+    this.dashboardService.getAnnualTransactionAmount(this.annualOverview, false)
     .subscribe(amount => {
       this.annualEarnings = amount;
     });
